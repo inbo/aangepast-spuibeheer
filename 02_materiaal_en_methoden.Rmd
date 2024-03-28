@@ -1,1 +1,39 @@
 # Materiaal en methoden
+
+## Studiegebied
+
+### De Ganzepoot
+
+Glasaalmigratie werd bestudeerd aan de monding van de 76 km lange IJzer, een bevaarbare rivier in zuidwest Vlaanderen (Figuur 2) met een debiet dat in 2022 varieerde tussen -8,20 m³/s en 48,60 m³/s (gemiddeld 3,6 m³/s). Het afvoerdebiet (hoge resolutie / waterinfo.be) van de IJzer is beschikbaar van meetstation Keiem (ca. 4,5 km stroomopwaarts van de spuisluizen). Het IJzerbekken heeft een oppervlakte van 1101 km² en bevindt zich voor 33 % in Frankrijk. Aan de IJzermonding komen zes verschillende waterlopen samen in een kunstmatig bekken, de Ganzepoot, op ca. 4 km van de zee (Figuur 2). Elke waterloop wordt afgesloten door drie tot acht spuistuwen om de instroom van zout water te vermijden bij hoogwater. Op die manier wordt de verzilting van de achterliggende landbouwgronden tegengegaan, het hinterland beschermd tegen overstromingen en zijn sommige waterlopen bevaarbaar. Bij laag tij worden de spuien geopend om overtollig polderwater af te voeren en deze worden opnieuw gesloten wanneer het zeewaterniveau het peil van de waterloop stroomopwaarts van het spuicomplex benadert. Het volume van de zoetwateruitstroom hangt af van de buffercapaciteit nodig om overstromingen te vermijden op basis van de voorspelde watertoevoer verder stroomopwaarts van het spuicomplex. Verschillende zoetwatervolumes worden dus gespuid ter hoogte van de zes riviermondingen in functie van de (voorspelde) neerslag. 
+
+```{r ganzepoot, fig.cap = "Ligging van de spuiconstructies aan de Ganzepoot in de IJzermonding", fig.show = "hold", out.width = "50%", fig.align = "center"}
+include_graphics(path = "./media/ganzepoot.png")
+```
+
+### Sas Slijkens
+
+Het Kanaal Gent-Brugge wordt samen met het Kanaal Brugge-Oostende aangeduid als KGO. In Brugge staat het Kanaal Brugge-Oostende in verbinding met het Kanaal Gent-Brugge, de Damse Vaart en het Boudewijnkanaal van Brugge naar Zeebrugge. Tussen Oudenburg en Oostende sluit het Kanaal Brugge-Oostende aan met het Kanaal Plassendale-Nieuwpoort. Het KGO bevindt zich deels in het bekken van de Brugse Polders en deels in het bekken van de Gentse kanalen. Stroomopwaarts van Brugge, ter hoogte van Oostkamp, mondt onder andere de Rivierbeek uit in het KGO. ’Sas Slijkens’ is de benaming voor de sluizen of sassen die het Kanaal Brugge-Oostende met de voorhaven van Oostende en de Noordzee verbinden (Figuur 3). Het Sas Slijkens bezit twee spuisluizen met dubbele schuiven van ongeveer 4 m breed. Er zijn tevens vier spuikokers en een gronddam aanwezig. Debietmetingen in het KGO tussen Brugge en Oostende werden tot in 2020 gemeten en geregistreerd in Varsenare (Bron: HIC, Hydrologisch Informatie Centrum). Vanaf 2021 wordt het debiet gemeten in Oostkamp. Het gemiddelde debiet in Oostkamp in 2022 was 4,58 m³/s, terwijl het debiet varieerde tussen -9,43 m³/s en 38,75 m³/s. Op het kanaal wordt in functie van de binnenscheepvaart getracht een constant peil na te streven van 3,94 mTAW. 
+
+```{r sas, fig.cap = "Situering van het KGO, de Ringvaart in Brugge, de Damse Vaart (DV), het Boudewijnkanaal (BZ) en het Kanaal Plassendale-Nieuwpoort (PN). De locatie van de spuiconstructie ‘Sas Slijkens’ is rood omcirkeld (rechts onderaan).", fig.show = "hold", out.width = "50%", fig.align = "center"}
+include_graphics(path = "./media/sas_slijkens.png")
+```
+
+### Uitwatering Zeebrugge
+
+Het Leopoldkanaal (LK) en het Afleidingskanaal van de Leie (AKL, ook Schipdonkkanaal genoemd) monden uit in een gemeenschappelijke constructie in de voorhaven van Zeebrugge (Figuur 4). Het LK loost in de Brugse voorhaven via een ondergrondse koker die afgesloten wordt door drie schuiven. Het gemiddelde debiet van het LK tijdens 2022 was 0,98 m³/s, met een minimum van -5,83 m³/s en een maximum van 25,47 m³/s. Debietreeksen van het LK worden gemeten en geregistreerd in Damme (Bron: HIC, Hydrologisch Informatie Centrum). Het AKL loost in de Brugse voorhaven via twee ondergrondse kokers die elk afgesloten worden door drie schuiven. De beschikbare debietsgegevens van het AKL (minimumwaarde -2,01 m³/s, maximumwaarde 34,43 m³/s en gemiddelde waarde 0,20 m³/s) zijn afkomstig van Zomergem (HIC), een flink eind verder stroomopwaarts ten opzichte van de conductiviteitsmeetpunten van Zeebrugge, Ramskapelle en Moerkerke waardoor de door ons gemeten conductiviteit moeilijk in relatie te brengen is met deze debietwaarden.
+
+```{r AKLLK, fig.cap = "Situering van het Afleidingskanaal van de Leie (AKL) en het Leopoldkanaal (LK). Rood omcirkeld is de spuiconstructie van deze kanalen in Zeebrugge.", fig.show = "hold", out.width = "50%", fig.align = "center"}
+include_graphics(path = "./media/AKL_LK.png")
+```
+
+## Dataverzameling
+
+Conductiviteitsmetingen werden uitgevoerd met CTD Divers (SWS Technology) en/of ‘HOBO U24 Fresh Water Conductivity Data Logger’. Aangezien zout water een hogere densiteit heeft, en dus zwaarder is dan zoet water, werden de divers in een metalen kooi een tiental centimeter boven de bodem bevestigd (Figuur 5). Op basis van debietsgegevens (afkomstig van het Hydrologisch Informatie Centrum) kon de relatie tussen afvoer en conductiviteit opgevolgd worden. 
+
+```{r CTD, fig.cap = "Monitoringsconstructie voor het opvolgen van de  conductiviteit (links) met behulp van HOBO U24 Fresh Water Conductivity Data Logger.", fig.show = "hold", out.width = "50%", fig.align = "default"}
+include_graphics(path = c("./media/CTD1.jpg","./media/CTD2.jpg"))
+```
+
+### Ijzer
+
+Gelet op de klimaatsverandering en gezien de kans op verzilting het grootst blijkt op de IJzer (Intern Rapport INBO, 2019) werd besloten dat vanaf maart 2020 het netwerk van divers uitgebreid werd zodat de potentieel landinwaarts opschuivende zoutlens beter gemonitord kon worden en het alternatief spuibeheer tijdig kon worden stopgezet. Het eerste conductiviteitsmeetpunt bevond zich direct stroomopwaarts van de spuien, ter hoogte van de Ysermonde steiger. Het tweede meetpunt lag stroomopwaarts van het spaarbekken, ter hoogte van de Uniebrug. Het derde meetpunt lag ter hoogte van de Schoorbakkebrug, het vierde aan de staketsels van de vroegere Tervatebrug en het vijfde net stroomafwaarts van Diksmuide. Deze vijf locaties bevonden zich respectievelijk 0,2 km, 3,3 km, 7,3 km, 10,6 km en 17 km stroomopwaarts van de spuiconstructies in de IJzer (Figuur 6). 
