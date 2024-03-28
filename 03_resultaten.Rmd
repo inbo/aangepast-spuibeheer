@@ -45,3 +45,41 @@ ggplot(data, aes(x = date_utc, y = value)) +
 ## CTD
 
 ## Omgekeerd spuibeheer
+
+```{r}
+files<-list.files(path="./data/spuibeheer/extern/verwerkt_in_excel/")
+```
+
+```{r}
+for (i in 1:length(files)){
+  path<-paste0("./data/spuibeheer/extern/verwerkt_in_excel/",files[i])
+  file_name<-gsub(".xlsx","",files[i])
+  if (str_split(file_name,"_")[[1]][2]=="AKL&LK"){
+    temp<-f.read_excel_allsheets(path,skip=5)
+    if (length(temp)!=1){temp=rbind(temp)}else{temp=temp[[1]]}
+    temp <- temp[,colSums(is.na(temp))<nrow(temp)]
+    AKL<-temp[,c(1:3)]
+    colnames(AKL)=c("datum","open","dicht")
+    AKL$site="AKL"
+    LK<-temp[,c(4:6)]
+    colnames(LK)=c("datum","open","dicht")
+    LK$site="LK"
+    AKLLK<-rbind(AKL,LK)
+    AKLLK$open[which(grepl("[0-9]" , AKLLK$open)==FALSE)]=NA
+    AKLLK$dicht[which(grepl("[0-9]" , AKLLK$dicht)==FALSE)]=NA
+    AKLLK<-AKLLK[-which(is.na(AKLLK$open)==TRUE | is.na(AKLLK$dicht)==TRUE),]
+    AKLLK$open<-str_replace(AKLLK$open,"u",":")
+    AKLLK$dicht<-str_replace(AKLLK$dicht,"u",":")
+    AKLLK$open<-parse_date_time(paste(AKLLK$datum,AKLLK$open), c("ymd HM", "ymd H"))
+    AKLLK$dicht<-parse_date_time(paste(AKLLK$datum,AKLLK$dicht), c("ymd HM", "ymd H"))
+  }
+  
+  colnames(temp)<-c("date","value")
+  temp$loc<-str_split_1(file_name,"_")[1]
+  temp$regio<-str_split_1(file_name,"_")[2]
+  temp$var<-str_split_1(file_name,"_")[3]
+  temp$value<-as.numeric(sub(",", ".", temp$value, fixed = TRUE))
+  if (i==1){data=temp} else {data=rbind(data,temp)}
+}
+```
+
