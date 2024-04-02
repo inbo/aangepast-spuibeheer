@@ -20,7 +20,7 @@ for (i in 1:length(files)){
   temp<-read.csv(path,sep=';',skip=8)[,1:2]
   colnames(temp)<-c("date","value")
   temp$loc<-str_split_1(file_name,"_")[1]
-  temp$regio<-str_split_1(file_name,"_")[2]
+  temp$site<-str_split_1(file_name,"_")[2]
   temp$var<-str_split_1(file_name,"_")[3]
   temp$value<-as.numeric(sub(",", ".", temp$value, fixed = TRUE))
   if (i==1){data=temp} else {data=rbind(data,temp)}
@@ -28,13 +28,14 @@ for (i in 1:length(files)){
 
 data$date=substr(gsub("T", " ", as.character(data$date)),1,19)
 data$date_brussels = as.POSIXct(data$date,format='%Y-%m-%d %H:%M:%S',tz="Europe/Brussels")
-data$date_utc = data$date_brussels; attr(data$date_utc, "tzone") <- "GMT"
+data$datum = data$date_brussels; attr(data$datum, "tzone") <- "GMT"
+data <- data %>% dplyr::select(-date,-date_brussels)
 
 remove(files,path,file_name,temp)
 ```
 
 ```{r tijdsreeksen, fig.height=10, fig.width=10, fig.cap="Overzicht van metingen van afvoer (m³/s) voor relevante meetstations doorheen de tijd"}
-ggplot(data, aes(x = date_utc, y = value)) + 
+ggplot(data, aes(x = datum, y = value)) + 
   geom_line() +
   xlab("Datum") + ylab("Waarde") +
   facet_wrap(~ var + loc,scales="free_y") + 
@@ -44,42 +45,242 @@ ggplot(data, aes(x = date_utc, y = value)) +
 
 ## CTD
 
-## Omgekeerd spuibeheer
-
 ```{r}
-files<-list.files(path="./data/spuibeheer/extern/verwerkt_in_excel/")
+path="./data/ctd/"
+jaren<-list.files(path=path)
+counter=0
+for (i in jaren){
+  dir.name1<-paste0(path,i,"/")
+  gebied<-list.files(path=dir.name1)
+  for (j in gebied){
+    dir.name2<-paste0(dir.name1,j,"/")
+    dagen<-list.files(path=dir.name2)
+    for (k in dagen){
+      dir.name3<-paste0(dir.name2,k,"/")
+      files<-list.files(path=dir.name3)
+      for (l in files){
+        dir.name4<-paste0(dir.name3,l)
+        counter=counter+1
+        if("try-error" %in% class(try(read.csv(dir.name4)))){
+          ctd.temp<-read.csv(dir.name4,skip=1)[,c(2:4)]
+          colnames(ctd.temp)<-c("datum","temperatuur","geleidbaarheid")
+          ctd.temp$datum<-parse_date_time(ctd.temp$datum, c("mdy HMS p"))
+          ctd.temp$sensor<-"small header"
+        } else{
+          ctd.temp<-read.csv(dir.name4,skip=65,sep=";",header=FALSE)
+          ctd.temp<-ctd.temp[-nrow(ctd.temp),]
+          colnames(ctd.temp)<-c("datum","druk","temperatuur","geleidbaarheid")
+          ctd.temp<-as.data.frame(lapply(ctd.temp, function(y) gsub(",", ".", y)))
+          ctd.temp$datum<-parse_date_time(ctd.temp$datum, c("ymd HMS"))
+          ctd.temp$sensor<-"large header"
+        }
+        ctd.temp$site<-j
+        ctd.temp$retrieval<-k
+        ctd.temp$filename<-l
+        if (counter==1){ctd=ctd.temp} else{ctd=smartbind(ctd,ctd.temp)}
+      }
+    }
+  }
+}
 ```
 
 ```{r}
-for (i in 1:length(files)){
-  path<-paste0("./data/spuibeheer/extern/verwerkt_in_excel/",files[i])
-  file_name<-gsub(".xlsx","",files[i])
-  if (str_split(file_name,"_")[[1]][2]=="AKL&LK"){
-    temp<-f.read_excel_allsheets(path,skip=5)
-    if (length(temp)!=1){temp=rbind(temp)}else{temp=temp[[1]]}
-    temp <- temp[,colSums(is.na(temp))<nrow(temp)]
-    AKL<-temp[,c(1:3)]
-    colnames(AKL)=c("datum","open","dicht")
-    AKL$site="AKL"
-    LK<-temp[,c(4:6)]
-    colnames(LK)=c("datum","open","dicht")
-    LK$site="LK"
-    AKLLK<-rbind(AKL,LK)
-    AKLLK$open[which(grepl("[0-9]" , AKLLK$open)==FALSE)]=NA
-    AKLLK$dicht[which(grepl("[0-9]" , AKLLK$dicht)==FALSE)]=NA
-    AKLLK<-AKLLK[-which(is.na(AKLLK$open)==TRUE | is.na(AKLLK$dicht)==TRUE),]
-    AKLLK$open<-str_replace(AKLLK$open,"u",":")
-    AKLLK$dicht<-str_replace(AKLLK$dicht,"u",":")
-    AKLLK$open<-parse_date_time(paste(AKLLK$datum,AKLLK$open), c("ymd HM", "ymd H"))
-    AKLLK$dicht<-parse_date_time(paste(AKLLK$datum,AKLLK$dicht), c("ymd HM", "ymd H"))
-  }
-  
-  colnames(temp)<-c("date","value")
-  temp$loc<-str_split_1(file_name,"_")[1]
-  temp$regio<-str_split_1(file_name,"_")[2]
-  temp$var<-str_split_1(file_name,"_")[3]
-  temp$value<-as.numeric(sub(",", ".", temp$value, fixed = TRUE))
-  if (i==1){data=temp} else {data=rbind(data,temp)}
-}
+ctd$filename<-tolower(ctd$filename)
+ctd[c("druk","temperatuur","geleidbaarheid")] <- sapply(ctd[c("druk","temperatuur","geleidbaarheid")],as.numeric)
+ctd <- ctd %>% mutate(loc= case_when(str_detect(filename, 'akl ramskapelle|akl rampskapelle') ~ 'akl ramskapelle',
+                                   str_detect(filename, 'lk ramskapelle|lk rampskapelle') ~ 'lk ramskapelle',
+                                   str_detect(filename, 'akl moerkerke') ~ 'akl moerkerke',
+                                   str_detect(filename, 'sk zeebrugge|schipdonkkanaal_zeebrugge') ~ 'sk zeebrugge',
+                                   str_detect(filename, 'blinker moerkerke') ~ 'blinker moerkerke',
+                                   str_detect(filename, 'diksmuide') ~ 'diksmuide',
+                                   str_detect(filename, 'schoorbakkebrug') ~ 'schoorbakkebrug',
+                                   str_detect(filename, 'tervate') ~ 'tervate',
+                                   str_detect(filename, 'uniebrug') ~ 'uniebrug',
+                                   str_detect(filename, 'yserstar') ~ 'yserstar',
+                                   str_detect(filename, 'nieuwpoort-plassendale|nieuwpoort_plassendal') ~ 'nieuwpoort-plassendale',
+                                   str_detect(filename, 'brugge') ~ 'brugge',
+                                   str_detect(filename, 'plassendale') ~ 'plassendale',
+                                   str_detect(filename, 'sas slijkens') ~ 'sas slijkens',
+                                   str_detect(filename, 'oude_veurne_vaart') ~ 'oude veurne vaart',
+                                   str_detect(filename, 'blauwe sluis') ~ 'blauwe sluis',
+                                   str_detect(filename, 'maertensas') ~ 'maertensas',
+                                   str_detect(filename, 'clemensheule') ~ 'clemensheule'
+                                   ))
+```
+
+```{r}
+## Grafieken zoutintrusie - conductiviteit en debiet ##
+# Lore Vandamme
+
+library(tidyverse)
+library(data.table)
+
+### Zoutintrusie combineren van conductiviteit en debiet data
+
+set_A <- read.csv2("./volledig jaar Noord-Ede 2022 - blauwe sluis.CSV")
+set_A <- read.csv2("./volledig jaar Noord-Ede 2022 - Clemensheule.CSV")
+set_A <- read.csv2("./volledig jaar Noord-Ede 2022 - Maertensas.CSV")
+
+set_A <- read.csv2("./Noord-Ede 2022 enkel tijdens spuibeheer- blauwe sluis.csv")
+
+#set_A <- read.table("./volledig jaar Noord-Ede 2022 - blauwe sluis.csv", sep=",", header=TRUE)
+set_B <- read.csv2("./Bredene_Noordede_Waterpeil.CSV")
+set_A$Date.time <- as.POSIXct(set_A$Day.time, format = "%d/%m/%Y %H:%M")
+set_B$Time <- as.POSIXct(set_B$Time, format = "%d/%m/%Y %H:%M")
+
+setDT(set_A)
+setDT(set_B)
+setkey(set_A, Date.time)
+setkey(set_B, Time)
+
+set_A[, time := Date.time]
+set_B[, time := Time]
+
+### Kolommen verwijderen die we niet meer gaan gebruiken
+
+Merged <- set_A[set_B, roll = "nearest"]
+#Merged$timec <- NULL
+Merged$time <- NULL
+Merged$timed <- NULL
+Merged$i.time <- NULL
+
+Merged$datum <- as.Date(Merged$Date.time)
+Merged$Debiet <- Merged$Value
+
+max_cond <- max(Merged$Geleidbaarheid)
+min_cond <- min(Merged$Geleidbaarheid)
+
+library(magrittr)
+library(dplyr)
+library(ggplot2)
+
+cond_df <- Merged %>%
+  dplyr::select(Geleidbaarheid, Date.time) %>%
+  rename("value_raw" = Geleidbaarheid) %>%
+  mutate(meting = "conductiviteit") %>%
+  mutate(value = (value_raw - min_cond) / ((max_cond - min_cond)  / 5))
+
+debiet_df <- Merged %>%
+  dplyr::select(Debiet, Date.time) %>%
+  rename("value" = Debiet) %>%
+  mutate(meting = "debiet")
+
+bind_rows(cond_df, debiet_df) %>%
+  mutate(meting = factor(meting, levels = c("debiet", "conductiviteit"))) %>%
+  ggplot() +
+    annotate("rect", xmin = as.POSIXct("2022-02-28 00:00:00"),
+                  xmax = as.POSIXct("2022-05-15 00:00:00"),
+                  ymin = -Inf, ymax = Inf,
+              fill = "orange", alpha = 0.3) +
+    geom_line(aes(x = Date.time, y = value, colour = meting)) +
+    scale_y_continuous(name = "Debiet (m³/s)",
+                       sec.axis = sec_axis(~ . * ((max_cond - min_cond) / 5)
+                                           + min_cond,
+                                           name = "Waterhoogte (mTAW)")) +
+    scale_color_manual(breaks = c("debiet", "conductiviteit"),
+                       values = c("debiet" = "lightcyan3",
+                                  "conductiviteit" = "red")) +
+
+    labs(title = "Waterhoogte en conductiviteit Maertensas 2022", x = "",
+         colour = "") +
+    theme_bw() +
+    theme(
+      legend.position='top', 
+      legend.justification='left',
+      legend.direction='horizontal'
+    )
+
+#theme(legend.position = c(1, 1),
+#legend.justification = c(1, 1),
+#legend.background = element_rect(fill = "white", color = "darkgrey"),
+#legend.margin = margin(2, 2, 2, 2))
+```
+
+## Omgekeerd spuibeheer
+
+```{r}
+AKLLK <- f.read_excel_allsheets("./data/spuibeheer/extern/verwerkt_in_excel/os_AKL&LK_2023.xlsx",skip=5)
+AKLLK <- AKLLK[[1]]
+AKLLK <- AKLLK[,colSums(is.na(AKLLK))<nrow(AKLLK)]
+AKL <- AKLLK[,c(1:3)]
+colnames(AKL)=c("datum","open","dicht")
+AKL$site="AKL"
+LK<-AKLLK[,c(4:6)]
+colnames(LK)=c("datum","open","dicht")
+LK$site="LK"
+AKLLK<-rbind(AKL,LK)
+AKLLK$open[which(grepl("[0-9]" , AKLLK$open)==FALSE)]=NA
+AKLLK$dicht[which(grepl("[0-9]" , AKLLK$dicht)==FALSE)]=NA
+AKLLK<-AKLLK[-which(is.na(AKLLK$open)==TRUE | is.na(AKLLK$dicht)==TRUE),]
+AKLLK$open<-str_replace(AKLLK$open,"u",":")
+AKLLK$dicht<-str_replace(AKLLK$dicht,"u",":")
+AKLLK$open<-parse_date_time(paste(AKLLK$datum,AKLLK$open), c("ymd HM", "ymd H"))
+AKLLK$dicht<-parse_date_time(paste(AKLLK$datum,AKLLK$dicht), c("ymd HM", "ymd H"))
+AKLLK$datum<-NULL
+remove(AKL,LK)
+```
+
+```{r}
+Ijzer<-f.read_excel_allsheets("./data/spuibeheer/extern/verwerkt_in_excel/os_Ijzer_2023.xlsx",skip=7)
+Ijzer<-rbindlist(Ijzer)
+Ijzer=Ijzer[,c(1,2,14)]
+Ijzer<-Ijzer[rowSums(is.na(Ijzer)) != ncol(Ijzer), ]
+colnames(Ijzer)<-c("datum","tijd","opmerking")
+Ijzer$datum<-zoo::na.locf(Ijzer$datum)
+Ijzer$tijd <- format(Ijzer$tijd,"%H:%M:%S")
+Ijzer$datum <- format(Ijzer$datum,"%y-%m-%d")
+Ijzer$tijd <- parse_date_time(paste(Ijzer$datum,Ijzer$tijd), c("ymd HMS"))
+Ijzer$datum<-NULL
+Ijzer$opmerking[which(Ijzer$opmerking %in% c("omgekeerd spuien",
+                                             "omgekeerd spuibeheer",
+                                             "omgekeerd spuibeheer opgestart in opdracht van Tim Wolff",
+                                             "en start omgekeerd spuibeheer"))]="open"
+Ijzer$opmerking[which(Ijzer$opmerking %in% c("einde omgekeerd spuien",
+                                             "einde OS iov Dré Maes",
+                                             "einde omgekeerd spuibeheer",
+                                             "einde omgekeerde spuibeheer"))]="dicht"
+Ijzer$opmerking[(which(!Ijzer$opmerking %in% c("open","dicht")))]=NA
+#Ijzer <- Ijzer[-which((format(Ijzer$tijd,"%H:%M:%S") %in% c("08:00:00","18:00:00")) & (is.na(Ijzer$opmerking)==TRUE)),]
+
+Ijzer$opmerking.lag<-dplyr::lag(Ijzer$opmerking)
+Ijzer$opmerking.lead<-lead(Ijzer$opmerking)
+Ijzer$opmerking.lag<-zoo::na.locf(Ijzer$opmerking.lag,na.rm=FALSE,fromLast = TRUE)
+Ijzer$opmerking.lead<-zoo::na.locf(Ijzer$opmerking.lead,na.rm=FALSE,fromLast = TRUE)
+Ijzer$opmerking[which(Ijzer$opmerking=="open" & Ijzer$opmerking.lag=="open" & Ijzer$opmerking.lead=="open")+1]="dicht"
+
+Ijzer$opmerking.lag<-dplyr::lag(Ijzer$opmerking)
+Ijzer$opmerking.lead<-lead(Ijzer$opmerking)
+Ijzer$opmerking.lag<-zoo::na.locf(Ijzer$opmerking.lag,na.rm=FALSE,fromLast = FALSE)
+Ijzer$opmerking.lead<-zoo::na.locf(Ijzer$opmerking.lead,na.rm=FALSE,fromLast = FALSE)
+Ijzer$opmerking[which(Ijzer$opmerking=="dicht" & Ijzer$opmerking.lag=="dicht" & Ijzer$opmerking.lead=="dicht")-1]="open"
+
+Ijzer<-Ijzer[-which(is.na(Ijzer$opmerking)==TRUE),c("tijd","opmerking")]
+Ijzer <- Ijzer %>%
+  group_by(opmerking) %>%
+  mutate(row = row_number()) %>%
+  tidyr::pivot_wider(names_from = opmerking, values_from = tijd) %>%
+  dplyr::select(-row)
+Ijzer$site="Ijzer"
+```
+
+```{r}
+KGO<-read_excel("./data/spuibeheer/extern/verwerkt_in_excel/os_KGO_2023.xlsx")
+KGO$open[which(grepl("[0-9]", KGO$open)==FALSE)]=NA
+KGO$dicht[which(grepl("[0-9]", KGO$dicht)==FALSE)]=NA
+KGO<-KGO[-which(is.na(KGO$open)==TRUE | is.na(KGO$dicht)==TRUE),]
+KGO$open<-parse_date_time(paste(KGO$datum,KGO$open), c("ymd HM", "ymd H"))
+KGO$dicht<-parse_date_time(paste(KGO$datum,KGO$dicht), c("ymd HM", "ymd H"))
+KGO$datum<-NULL
+KGO$site="KGO"
+```
+
+```{r}
+NE<-read.csv("./data/spuibeheer/intern/os_NE_2023_cleaned.csv")[,c(2:4)]
+```
+
+```{r}
+os<-rbind(AKLLK,Ijzer,KGO,NE)
+remove(AKLLK,Ijzer,KGO,NE)
+write.csv(os,"./data/spuibeheer/intern/os_cleaned.csv")
 ```
 
