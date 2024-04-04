@@ -10,196 +10,7 @@ source("./code/functions/f.pairwise.adonis.R")
 source("./code/functions/f.plot.habitat.spatial.R")
 ```
 
-## Debiet
-
-```{r}
-files<-list.files(path="./data/debiet/",pattern = ".csv")
-for (i in 1:length(files)){
-  path<-paste0("./data/debiet/",files[i])
-  file_name<-gsub(".csv","",files[i])
-  temp<-read.csv(path,sep=';',skip=8)[,1:2]
-  colnames(temp)<-c("date","value")
-  temp$loc<-str_split_1(file_name,"_")[1]
-  temp$site<-str_split_1(file_name,"_")[2]
-  temp$var<-str_split_1(file_name,"_")[3]
-  temp$value<-as.numeric(sub(",", ".", temp$value, fixed = TRUE))
-  if (i==1){data=temp} else {data=rbind(data,temp)}
-}
-
-data$date=substr(gsub("T", " ", as.character(data$date)),1,19)
-data$date_brussels = as.POSIXct(data$date,format='%Y-%m-%d %H:%M:%S',tz="Europe/Brussels")
-data$datum = data$date_brussels; attr(data$datum, "tzone") <- "GMT"
-data <- data %>% dplyr::select(-date,-date_brussels)
-
-remove(files,path,file_name,temp)
-```
-
-```{r tijdsreeksen, fig.height=10, fig.width=10, fig.cap="Overzicht van metingen van afvoer (m³/s) voor relevante meetstations doorheen de tijd"}
-ggplot(data, aes(x = datum, y = value)) + 
-  geom_line() +
-  xlab("Datum") + ylab("Waarde") +
-  facet_wrap(~ var + loc,scales="free_y") + 
-  theme(axis.text.x = element_text(angle = 45, vjust = 0.5, hjust=1)) +
-  scale_x_datetime(date_labels = "%d-%m-%Y", date_breaks = "6 months") 
-```
-
-## CTD
-
-```{r}
-path="./data/ctd/"
-jaren<-list.files(path=path)
-counter=0
-for (i in jaren){
-  dir.name1<-paste0(path,i,"/")
-  gebied<-list.files(path=dir.name1)
-  for (j in gebied){
-    dir.name2<-paste0(dir.name1,j,"/")
-    dagen<-list.files(path=dir.name2)
-    for (k in dagen){
-      dir.name3<-paste0(dir.name2,k,"/")
-      files<-list.files(path=dir.name3)
-      for (l in files){
-        dir.name4<-paste0(dir.name3,l)
-        counter=counter+1
-        if("try-error" %in% class(try(read.csv(dir.name4)))){
-          ctd.temp<-read.csv(dir.name4,skip=1)[,c(2:4)]
-          colnames(ctd.temp)<-c("datum","temperatuur","geleidbaarheid")
-          ctd.temp$datum<-parse_date_time(ctd.temp$datum, c("mdy HMS p"))
-          ctd.temp$sensor<-"small header"
-        } else{
-          ctd.temp<-read.csv(dir.name4,skip=65,sep=";",header=FALSE)
-          ctd.temp<-ctd.temp[-nrow(ctd.temp),]
-          colnames(ctd.temp)<-c("datum","druk","temperatuur","geleidbaarheid")
-          ctd.temp<-as.data.frame(lapply(ctd.temp, function(y) gsub(",", ".", y)))
-          ctd.temp$datum<-parse_date_time(ctd.temp$datum, c("ymd HMS"))
-          ctd.temp$sensor<-"large header"
-        }
-        ctd.temp$site<-j
-        ctd.temp$retrieval<-k
-        ctd.temp$filename<-l
-        if (counter==1){ctd=ctd.temp} else{ctd=smartbind(ctd,ctd.temp)}
-      }
-    }
-  }
-}
-```
-
-```{r}
-ctd$filename<-tolower(ctd$filename)
-ctd[c("druk","temperatuur","geleidbaarheid")] <- sapply(ctd[c("druk","temperatuur","geleidbaarheid")],as.numeric)
-ctd <- ctd %>% distinct()
-ctd <- ctd %>% mutate(loc= case_when(str_detect(filename, 'akl ramskapelle|akl rampskapelle') ~ 'akl ramskapelle',
-                                   str_detect(filename, 'lk ramskapelle|lk rampskapelle') ~ 'lk ramskapelle',
-                                   str_detect(filename, 'akl moerkerke') ~ 'akl moerkerke',
-                                   str_detect(filename, 'sk zeebrugge|schipdonkkanaal_zeebrugge') ~ 'sk zeebrugge',
-                                   str_detect(filename, 'blinker moerkerke') ~ 'blinker moerkerke',
-                                   str_detect(filename, 'diksmuide') ~ 'diksmuide',
-                                   str_detect(filename, 'schoorbakkebrug') ~ 'schoorbakkebrug',
-                                   str_detect(filename, 'tervate') ~ 'tervate',
-                                   str_detect(filename, 'uniebrug') ~ 'uniebrug',
-                                   str_detect(filename, 'yserstar') ~ 'yserstar',
-                                   str_detect(filename, 'nieuwpoort-plassendale|nieuwpoort_plassendal') ~ 'nieuwpoort-plassendale',
-                                   str_detect(filename, 'brugge') ~ 'brugge',
-                                   str_detect(filename, 'plassendale') ~ 'plassendale',
-                                   str_detect(filename, 'sas slijkens') ~ 'sas slijkens',
-                                   str_detect(filename, 'oude_veurne_vaart') ~ 'oude veurne vaart',
-                                   str_detect(filename, 'blauwe sluis') ~ 'blauwe sluis',
-                                   str_detect(filename, 'maertensas') ~ 'maertensas',
-                                   str_detect(filename, 'clemensheule') ~ 'clemensheule'
-                                   ))
-```
-
-```{r eval=FALSE}
-## Grafieken zoutintrusie - conductiviteit en debiet ##
-# Lore Vandamme
-
-library(tidyverse)
-library(data.table)
-
-### Zoutintrusie combineren van conductiviteit en debiet data
-
-set_A <- read.csv2("./volledig jaar Noord-Ede 2022 - blauwe sluis.CSV")
-set_A <- read.csv2("./volledig jaar Noord-Ede 2022 - Clemensheule.CSV")
-set_A <- read.csv2("./volledig jaar Noord-Ede 2022 - Maertensas.CSV")
-
-set_A <- read.csv2("./Noord-Ede 2022 enkel tijdens spuibeheer- blauwe sluis.csv")
-
-#set_A <- read.table("./volledig jaar Noord-Ede 2022 - blauwe sluis.csv", sep=",", header=TRUE)
-set_B <- read.csv2("./Bredene_Noordede_Waterpeil.CSV")
-set_A$Date.time <- as.POSIXct(set_A$Day.time, format = "%d/%m/%Y %H:%M")
-set_B$Time <- as.POSIXct(set_B$Time, format = "%d/%m/%Y %H:%M")
-
-setDT(set_A)
-setDT(set_B)
-setkey(set_A, Date.time)
-setkey(set_B, Time)
-
-set_A[, time := Date.time]
-set_B[, time := Time]
-
-### Kolommen verwijderen die we niet meer gaan gebruiken
-
-Merged <- set_A[set_B, roll = "nearest"]
-#Merged$timec <- NULL
-Merged$time <- NULL
-Merged$timed <- NULL
-Merged$i.time <- NULL
-
-Merged$datum <- as.Date(Merged$Date.time)
-Merged$Debiet <- Merged$Value
-
-max_cond <- max(Merged$Geleidbaarheid)
-min_cond <- min(Merged$Geleidbaarheid)
-
-library(magrittr)
-library(dplyr)
-library(ggplot2)
-
-cond_df <- Merged %>%
-  dplyr::select(Geleidbaarheid, Date.time) %>%
-  rename("value_raw" = Geleidbaarheid) %>%
-  mutate(meting = "conductiviteit") %>%
-  mutate(value = (value_raw - min_cond) / ((max_cond - min_cond)  / 5))
-
-debiet_df <- Merged %>%
-  dplyr::select(Debiet, Date.time) %>%
-  rename("value" = Debiet) %>%
-  mutate(meting = "debiet")
-
-bind_rows(cond_df, debiet_df) %>%
-  mutate(meting = factor(meting, levels = c("debiet", "conductiviteit"))) %>%
-  ggplot() +
-    annotate("rect", xmin = as.POSIXct("2022-02-28 00:00:00"),
-                  xmax = as.POSIXct("2022-05-15 00:00:00"),
-                  ymin = -Inf, ymax = Inf,
-              fill = "orange", alpha = 0.3) +
-    geom_line(aes(x = Date.time, y = value, colour = meting)) +
-    scale_y_continuous(name = "Debiet (m³/s)",
-                       sec.axis = sec_axis(~ . * ((max_cond - min_cond) / 5)
-                                           + min_cond,
-                                           name = "Waterhoogte (mTAW)")) +
-    scale_color_manual(breaks = c("debiet", "conductiviteit"),
-                       values = c("debiet" = "lightcyan3",
-                                  "conductiviteit" = "red")) +
-
-    labs(title = "Waterhoogte en conductiviteit Maertensas 2022", x = "",
-         colour = "") +
-    theme_bw() +
-    theme(
-      legend.position='top', 
-      legend.justification='left',
-      legend.direction='horizontal'
-    )
-
-#theme(legend.position = c(1, 1),
-#legend.justification = c(1, 1),
-#legend.background = element_rect(fill = "white", color = "darkgrey"),
-#legend.margin = margin(2, 2, 2, 2))
-```
-
 ## Omgekeerd spuibeheer
-
-### Schuifwerking
 
 ```{r}
 AKLLK <- f.read_excel_allsheets("./data/spuibeheer/extern/verwerkt_in_excel/os_AKL&LK_2023.xlsx",skip=5)
@@ -287,8 +98,6 @@ remove(AKLLK,Ijzer,KGO,NE)
 write.csv(os,"./data/spuibeheer/intern/os_cleaned.csv")
 ```
 
-### Glasaalintrek op basis van data 2023
-
 Op basis van de tijdregistratie van het omgekeerd spuibeheer (OS) van 2023 in combinatie met eerder verkregen inzichten in het aantal glasaal dat gebruik maakt van het OS om stroomopwaarts te bewegen kan een inschatting gemaakt worden van het aantal glasalen dat in 2023 stroomopwaarts heeft kunnen bewegen langsheen de sluizen van de Ijzer, het Leopoldkanaal (LK), het Afleidingskanaal van de Leie (AKL), Het kanaal Gent-Oostende (KGO) en de Noordede.
 
 Er werd gebruik gemaakt van het gemiddeld aantal glasalen dat langsheen de sluizen kan passeren bij een OS event in combinatie met het aantal OS events. De resultaten van de studies van het LK, AKL en KGO lieten niet toe om een meer geavanceerde inschatting te maken op basis van:
@@ -309,7 +118,7 @@ Er werd gebruik gemaakt van het gemiddeld aantal glasalen dat langsheen de sluiz
 
 De studie van de Ijzer beschouwde meerdere variabelen maar concludeerde dat de hoeveelheid glasalen die zich aanmeldt te variabel is om de hoeveelheid glasalen die passeert in te schatten. Het belang van het aantal dieren voor de schuiven kwam ook tot uiting bij de analyse van het effect dat het aantal open schuiven heeft: Op het eerste zicht bleek er geen effect te zijn van het aantal open schuiven, maar wanneer een onderscheid werd gemaakt tussen OS events met een grote versus kleine densiteit aan glasaal, bleek dat meer schuiven een significant effect had op het aantal glasalen dat passeert. Een meer informatief model zou daarom ofwel het aandeel glasalen dat succesvol passeert als respons moeten gebruiken of het aantal dieren voor de sluis meenemen als interactiefactor. Deze data is echter niet voorhanden, noch is er een model beschikbaar dat inschat wat het aantal dieren zou zijn dat zich aanmeldt voor de schuiven op basis van beschikbare omgevingsdata zoals windrichting, neerslag en debiet.
 
-Door bovengemelde limitaties blijft de huidige inschatting bijzonder ruw en dient met de nodige voorzichtigheid geïnterpreteerd te worden.
+Door bovengemelde limitaties blijft de huidige inschatting bijzonder ruw en dient deze met de nodige voorzichtigheid geïnterpreteerd te worden.
 
 ```{r}
 os$dicht[which(os$open>os$dicht)]<-os$dicht[which(os$open>os$dicht)]+lubridate::days(1)
@@ -344,16 +153,190 @@ colnames(tos.summary)<-os.summary$site
 rownames(tos.summary)=c("start os", 
                        "stop os", 
                        "periode (dagen)", 
-                       "aantal dagen waarop effectief os plaatsvond", 
-                       "aantal keer os tijdens periode", 
-                       "aantal keer os per dag", 
+                       "# dagen effectief os", 
+                       "# events os tijdens periode", 
+                       "# events os per dag", 
                        "mediaan duur event os (min)", 
                        "mediaan duur os per dag (min)", 
-                       "totale duur os tijdens periode (min)", 
-                       "verwachte # glasaal die passeert per os event", 
-                       "verwachte # glasaal die passeert tijdens periode")
+                       "totale duur os periode (min)", 
+                       "verwachte # glasaal per os event", 
+                       "verwachte # glasaal periode")
 ```
 
 ```{r}
 tos.summary %>% kable() 
 ```
+
+## Debiet
+
+```{r}
+files<-list.files(path="./data/debiet/",pattern = ".csv")
+for (i in 1:length(files)){
+  path<-paste0("./data/debiet/",files[i])
+  file_name<-gsub(".csv","",files[i])
+  temp<-read.csv(path,sep=';',skip=8)[,1:2]
+  colnames(temp)<-c("date","value")
+  temp$loc.debiet<-str_split_1(file_name,"_")[1]
+  temp$site.debiet<-str_split_1(file_name,"_")[2]
+  temp$debiet<-as.numeric(sub(",", ".", temp$value, fixed = TRUE))
+  if (i==1){debiet=temp} else {debiet=rbind(debiet,temp)}
+}
+
+debiet$date=substr(gsub("T", " ", as.character(debiet$date)),1,19)
+debiet$date_brussels = as.POSIXct(debiet$date,format='%Y-%m-%d %H:%M:%S',tz="Europe/Brussels")
+debiet$datum.debiet = debiet$date_brussels; attr(debiet$datum.debiet, "tzone") <- "GMT"
+debiet <- debiet %>% dplyr::select(-date,-date_brussels,-value)
+
+remove(files,path,file_name,temp)
+```
+
+```{r tijdsreeksen, fig.height=10, fig.width=10, fig.cap="Overzicht van metingen van afvoer (m³/s) voor relevante meetstations doorheen de tijd"}
+ggplot(debiet, aes(x = datum.debiet, y = value)) + 
+  geom_line() +
+  xlab("Datum") + ylab("Waarde") +
+  facet_wrap(~ var + loc.debiet,scales="free_y") + 
+  theme(axis.text.x = element_text(angle = 45, vjust = 0.5, hjust=1)) +
+  scale_x_datetime(date_labels = "%d-%m-%Y", date_breaks = "6 months") 
+```
+
+## CTD
+
+```{r}
+path="./data/ctd/"
+jaren<-list.files(path=path)
+counter=0
+for (i in jaren){
+  dir.name1<-paste0(path,i,"/")
+  gebied<-list.files(path=dir.name1)
+  for (j in gebied){
+    dir.name2<-paste0(dir.name1,j,"/")
+    dagen<-list.files(path=dir.name2)
+    for (k in dagen){
+      dir.name3<-paste0(dir.name2,k,"/")
+      files<-list.files(path=dir.name3)
+      for (l in files){
+        dir.name4<-paste0(dir.name3,l)
+        counter=counter+1
+        if("try-error" %in% class(try(read.csv(dir.name4)))){
+          ctd.temp<-read.csv(dir.name4,skip=1)[,c(2:4)]
+          colnames(ctd.temp)<-c("datum.ctd","temperatuur","geleidbaarheid")
+          ctd.temp$datum.ctd<-parse_date_time(ctd.temp$datum.ctd, c("mdy HMS p"))
+          ctd.temp$sensor<-"small header"
+        } else{
+          ctd.temp<-read.csv(dir.name4,skip=65,sep=";",header=FALSE)
+          ctd.temp<-ctd.temp[-nrow(ctd.temp),]
+          colnames(ctd.temp)<-c("datum.ctd","druk","temperatuur","geleidbaarheid")
+          ctd.temp<-as.data.frame(lapply(ctd.temp, function(y) gsub(",", ".", y)))
+          ctd.temp$datum.ctd<-parse_date_time(ctd.temp$datum.ctd, c("ymd HMS"))
+          ctd.temp$sensor<-"large header"
+        }
+        ctd.temp$site<-j
+        ctd.temp$retrieval<-k
+        ctd.temp$filename<-tolower(l)
+        if (counter==1){ctd=ctd.temp} else{ctd=smartbind(ctd,ctd.temp)}
+      }
+    }
+  }
+}
+remove(ctd.temp)
+```
+
+```{r}
+ctd$datum.ctd<-as.POSIXct(ctd$datum.ctd,format='%Y-%m-%d %H:%M:%S')
+ctd[c("druk","temperatuur","geleidbaarheid")] <- sapply(ctd[c("druk","temperatuur","geleidbaarheid")],as.numeric)
+ctd <- ctd %>% distinct()
+ctd <- ctd %>% mutate(loc.ctd= case_when(str_detect(filename, 'akl ramskapelle|akl rampskapelle') ~ 'akl ramskapelle',
+                                   str_detect(filename, 'lk ramskapelle|lk rampskapelle') ~ 'lk ramskapelle',
+                                   str_detect(filename, 'akl moerkerke') ~ 'akl moerkerke',
+                                   str_detect(filename, 'sk zeebrugge|schipdonkkanaal_zeebrugge') ~ 'sk zeebrugge',
+                                   str_detect(filename, 'blinker moerkerke') ~ 'blinker moerkerke',
+                                   str_detect(filename, 'diksmuide') ~ 'diksmuide',
+                                   str_detect(filename, 'schoorbakkebrug') ~ 'schoorbakkebrug',
+                                   str_detect(filename, 'tervate') ~ 'tervate',
+                                   str_detect(filename, 'uniebrug') ~ 'uniebrug',
+                                   str_detect(filename, 'yserstar') ~ 'yserstar',
+                                   str_detect(filename, 'nieuwpoort-plassendale|nieuwpoort_plassendal') ~ 'nieuwpoort-plassendale',
+                                   str_detect(filename, 'brugge') ~ 'brugge',
+                                   str_detect(filename, 'plassendale') ~ 'plassendale',
+                                   str_detect(filename, 'sas slijkens') ~ 'sas slijkens',
+                                   str_detect(filename, 'oude_veurne_vaart') ~ 'oude veurne vaart',
+                                   str_detect(filename, 'blauwe sluis') ~ 'blauwe sluis',
+                                   str_detect(filename, 'maertensas') ~ 'maertensas',
+                                   str_detect(filename, 'clemensheule') ~ 'clemensheule'
+                                   ))
+```
+
+```{r}
+link.ctd.debiet<-read.csv("./data/link_debiet_ctd.csv",sep=";")
+ctd<-left_join(ctd,link.ctd.debiet,by="loc.ctd")
+ctd$datum.debiet<-round_date(ctd$datum.ctd, unit="15 mins")
+ctd <- left_join(ctd,debiet, by=c("loc.debiet","datum.debiet"),relationship = "many-to-many")
+```
+
+```{r eval=FALSE}
+k=0
+for (i in unique(ctd$loc.ctd)){
+  k=k+1
+  ctd.temp=ctd[which(ctd$loc.ctd==i),]
+  max_cond <- max(ctd.temp$geleidbaarheid,na.rm=TRUE)
+  min_cond <- min(ctd.temp$geleidbaarheid,na.rm=TRUE)
+  
+  cond_df <- ctd.temp %>%
+    dplyr::select(geleidbaarheid, datum.ctd) %>%
+    rename("value_raw" = geleidbaarheid) %>%
+    mutate(meting = "conductiviteit",na.rm=TRUE) %>%
+    mutate(value = (value_raw - min_cond) / ((max_cond - min_cond)  / 5),na.rm=TRUE)
+  
+  debiet_df <- ctd.temp %>%
+    dplyr::select(debiet, datum.ctd) %>%
+    rename("value" = debiet) %>%
+    mutate(meting = "debiet")
+  
+  df<-bind_rows(cond_df, debiet_df) %>%
+    mutate(meting = factor(meting, levels = c("debiet", "conductiviteit"))) 
+  
+  g<-ggplot(df) +
+      annotate("rect", xmin = as.POSIXct("2023-03-01 00:00:00"),
+                    xmax = as.POSIXct("2023-05-26 00:00:00"),
+                    ymin = -Inf, ymax = Inf,
+                fill = "orange", alpha = 0.3) +
+      geom_line(aes(x = datum.ctd, y = value, colour = meting)) +
+      scale_y_continuous(name = "Debiet (m³/s)",
+                         sec.axis = sec_axis(~ . * ((max_cond - min_cond) / 5)
+                                             + min_cond,
+                                             name = "Waterhoogte (mTAW)")) +
+      scale_color_manual(breaks = c("debiet", "conductiviteit"),
+                         values = c("debiet" = "lightcyan3",
+                                    "conductiviteit" = "red")) +
+  
+      labs(title = "Waterhoogte en conductiviteit Maertensas 2022", x = "",
+           colour = "") +
+      theme_bw() +
+      theme(
+        legend.position='top', 
+        legend.justification='left',
+        legend.direction='horizontal'
+      )
+}
+```
+
+```{r}
+ctd.long <- ctd %>% pivot_longer(cols=where(is.numeric),names_to="parameter",values_to="value")
+k=0
+p.list<-list()
+for (i in unique(ctd$loc.ctd)){
+  k=k+1
+  p.list[[k]]<-ggplot(ctd.long[which(ctd.long$loc.ctd==i),], aes(x = datum.ctd, y = value)) + 
+  geom_line() + geom_smooth() +
+  annotate("rect", xmin = as.POSIXct("2023-03-01 00:00:00"), xmax = as.POSIXct("2023-05-26 00:00:00"), ymin = -Inf, ymax = Inf, fill = "orange", alpha = 0.3) +
+  xlab("Datum") + ylab("Waarde") +
+  facet_wrap(~ parameter,scales="free_y") + 
+  theme(axis.text.x = element_text(angle = 45, vjust = 0.5, hjust=1)) +
+  scale_x_datetime(limits=c(as.POSIXct("2023-02-01 00:00:00"), as.POSIXct("2023-07-01 00:00:00")),date_labels = "%d-%m-%Y", date_breaks = "1 month") + ggtitle(i)
+}
+```
+
+```{r}
+p.list[[14]]
+```
+
