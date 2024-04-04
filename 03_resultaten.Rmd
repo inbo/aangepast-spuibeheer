@@ -87,6 +87,7 @@ for (i in jaren){
 ```{r}
 ctd$filename<-tolower(ctd$filename)
 ctd[c("druk","temperatuur","geleidbaarheid")] <- sapply(ctd[c("druk","temperatuur","geleidbaarheid")],as.numeric)
+ctd <- ctd %>% distinct()
 ctd <- ctd %>% mutate(loc= case_when(str_detect(filename, 'akl ramskapelle|akl rampskapelle') ~ 'akl ramskapelle',
                                    str_detect(filename, 'lk ramskapelle|lk rampskapelle') ~ 'lk ramskapelle',
                                    str_detect(filename, 'akl moerkerke') ~ 'akl moerkerke',
@@ -108,7 +109,7 @@ ctd <- ctd %>% mutate(loc= case_when(str_detect(filename, 'akl ramskapelle|akl r
                                    ))
 ```
 
-```{r}
+```{r eval=FALSE}
 ## Grafieken zoutintrusie - conductiviteit en debiet ##
 # Lore Vandamme
 
@@ -198,6 +199,8 @@ bind_rows(cond_df, debiet_df) %>%
 
 ## Omgekeerd spuibeheer
 
+### Schuifwerking
+
 ```{r}
 AKLLK <- f.read_excel_allsheets("./data/spuibeheer/extern/verwerkt_in_excel/os_AKL&LK_2023.xlsx",skip=5)
 AKLLK <- AKLLK[[1]]
@@ -284,3 +287,73 @@ remove(AKLLK,Ijzer,KGO,NE)
 write.csv(os,"./data/spuibeheer/intern/os_cleaned.csv")
 ```
 
+### Glasaalintrek op basis van data 2023
+
+Op basis van de tijdregistratie van het omgekeerd spuibeheer (OS) van 2023 in combinatie met eerder verkregen inzichten in het aantal glasaal dat gebruik maakt van het OS om stroomopwaarts te bewegen kan een inschatting gemaakt worden van het aantal glasalen dat in 2023 stroomopwaarts heeft kunnen bewegen langsheen de sluizen van de Ijzer, het Leopoldkanaal (LK), het Afleidingskanaal van de Leie (AKL), Het kanaal Gent-Oostende (KGO) en de Noordede.
+
+Er werd gebruik gemaakt van het gemiddeld aantal glasalen dat langsheen de sluizen kan passeren bij een OS event in combinatie met het aantal OS events. De resultaten van de studies van het LK, AKL en KGO lieten niet toe om een meer geavanceerde inschatting te maken op basis van:
+
+-   Het aantal geopende binnenschuiven
+
+-   Het aantal geopende buitenschuiven
+
+-   De opening van de schuiven
+
+-   De duur van het os event
+
+-   Het debiet
+
+-   Het waterpeil
+
+-   De watertemperatuur
+
+De studie van de Ijzer beschouwde meerdere variabelen maar concludeerde dat de hoeveelheid glasalen die zich aanmeldt te variabel is om de hoeveelheid glasalen die passeert in te schatten. Het belang van het aantal dieren voor de schuiven kwam ook tot uiting bij de analyse van het effect dat het aantal open schuiven heeft: Op het eerste zicht bleek er geen effect te zijn van het aantal open schuiven, maar wanneer een onderscheid werd gemaakt tussen OS events met een grote versus kleine densiteit aan glasaal, bleek dat meer schuiven een significant effect had op het aantal glasalen dat passeert. Een meer informatief model zou daarom ofwel het aandeel glasalen dat succesvol passeert als respons moeten gebruiken of het aantal dieren voor de sluis meenemen als interactiefactor. Deze data is echter niet voorhanden, noch is er een model beschikbaar dat inschat wat het aantal dieren zou zijn dat zich aanmeldt voor de schuiven op basis van beschikbare omgevingsdata zoals windrichting, neerslag en debiet.
+
+Door bovengemelde limitaties blijft de huidige inschatting bijzonder ruw en dient met de nodige voorzichtigheid geïnterpreteerd te worden.
+
+```{r}
+os$dicht[which(os$open>os$dicht)]<-os$dicht[which(os$open>os$dicht)]+lubridate::days(1)
+os$duration<-os$dicht-os$open
+os$jaar<-lubridate::year(os$open)
+os$datum<-as.Date(os$open)
+os$glasaal<-NA
+os$glasaal[which(os$site=="AKL")]=mean(1351+976+5093+935+82+1461+704+200)
+os$glasaal[which(os$site=="LK")]=mean(1351+976+5093+935+82+1461+704+200) #metingen van AKL gebruikt
+os$glasaal[which(os$site=="Ijzer")]=7500 #tussen min en max
+os$glasaal[which(os$site=="NE")]=NA
+os$glasaal[which(os$site=="KGO")]=964.2
+```
+
+```{r}
+os.summary <- os %>% 
+  dplyr::filter(jaar==2023) %>% 
+  group_by(site) %>%
+  summarize(start=as.Date(min(open)),
+            stop=as.Date(max(dicht)),
+            periode=as.numeric(round(stop-start)),
+            aantal.dagen.effectief.os=n_distinct(datum),
+            events=n(),
+            events.per.dag=round(events/aantal.dagen.effectief.os,digits = 2),
+            mediaan.duur.per.event=as.numeric(round(median(duration))),
+            mediaan.duur.per.dag=round(mediaan.duur.per.event*events.per.dag),
+            totale.duur.os=as.numeric(sum(duration)),
+            glasaal.per.event=round(mean(glasaal)),
+            glasaal.totaal=sum(glasaal))
+tos.summary<-as.data.frame(t(os.summary[,-1]))
+colnames(tos.summary)<-os.summary$site
+rownames(tos.summary)=c("start os", 
+                       "stop os", 
+                       "periode (dagen)", 
+                       "aantal dagen waarop effectief os plaatsvond", 
+                       "aantal keer os tijdens periode", 
+                       "aantal keer os per dag", 
+                       "mediaan duur event os (min)", 
+                       "mediaan duur os per dag (min)", 
+                       "totale duur os tijdens periode (min)", 
+                       "verwachte # glasaal die passeert per os event", 
+                       "verwachte # glasaal die passeert tijdens periode")
+```
+
+```{r}
+tos.summary %>% kable() 
+```
