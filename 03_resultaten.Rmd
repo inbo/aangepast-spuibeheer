@@ -98,7 +98,7 @@ remove(AKLLK,Ijzer,KGO,NE)
 write.csv(os,"./data/spuibeheer/intern/os_cleaned.csv")
 ```
 
-Op basis van de tijdregistratie van het omgekeerd spuibeheer (OS) van 2023 in combinatie met eerder verkregen inzichten in het aantal glasaal dat gebruik maakt van het OS om stroomopwaarts te bewegen kan een inschatting gemaakt worden van het aantal glasalen dat in 2023 stroomopwaarts heeft kunnen bewegen langsheen de sluizen van de Ijzer, het Leopoldkanaal (LK), het Afleidingskanaal van de Leie (AKL), Het kanaal Gent-Oostende (KGO) en de Noordede.
+Op basis van de tijdregistratie van het omgekeerd spuibeheer (OS) van 2023 in combinatie met eerder verkregen inzichten in het aantal glasaal dat gebruik maakt van het OS om stroomopwaarts te bewegen kan een inschatting gemaakt worden van het aantal glasalen dat in 2023 stroomopwaarts heeft kunnen bewegen langsheen de sluizen van de Ijzer, het Leopoldkanaal (LK), het Afleidingskanaal van de Leie (AKL), Het kanaal Gent-Oostende (KGO) en de Noordede (NE).
 
 Er werd gebruik gemaakt van het gemiddeld aantal glasalen dat langsheen de sluizen kan passeren bij een OS event in combinatie met het aantal OS events. De resultaten van de studies van het LK, AKL en KGO lieten niet toe om een meer geavanceerde inschatting te maken op basis van:
 
@@ -167,8 +167,6 @@ rownames(tos.summary)=c("start os",
 tos.summary %>% kable() 
 ```
 
-## Debiet
-
 ```{r}
 files<-list.files(path="./data/debiet/",pattern = ".csv")
 for (i in 1:length(files)){
@@ -190,18 +188,18 @@ debiet <- debiet %>% dplyr::select(-date,-date_brussels,-value)
 remove(files,path,file_name,temp)
 ```
 
-```{r tijdsreeksen, fig.height=10, fig.width=10, fig.cap="Overzicht van metingen van afvoer (m³/s) voor relevante meetstations doorheen de tijd"}
-ggplot(debiet, aes(x = datum.debiet, y = value)) + 
+```{r eval=FALSE, tijdsreeksen, fig.height=10, fig.width=10, fig.cap="Overzicht van metingen van afvoer (m³/s) voor relevante meetstations doorheen de tijd"}
+ggplot(debiet, aes(x = datum.debiet, y = debiet)) + 
   geom_line() +
   xlab("Datum") + ylab("Waarde") +
-  facet_wrap(~ var + loc.debiet,scales="free_y") + 
+  facet_wrap(~ loc.debiet,scales="free_y") + 
   theme(axis.text.x = element_text(angle = 45, vjust = 0.5, hjust=1)) +
   scale_x_datetime(date_labels = "%d-%m-%Y", date_breaks = "6 months") 
 ```
 
 ## CTD
 
-```{r}
+```{r message=FALSE, error=FALSE, warning=FALSE, include=FALSE}
 path="./data/ctd/"
 jaren<-list.files(path=path)
 counter=0
@@ -334,9 +332,91 @@ for (i in unique(ctd$loc.ctd)){
   theme(axis.text.x = element_text(angle = 45, vjust = 0.5, hjust=1)) +
   scale_x_datetime(limits=c(as.POSIXct("2023-02-01 00:00:00"), as.POSIXct("2023-07-01 00:00:00")),date_labels = "%d-%m-%Y", date_breaks = "1 month") + ggtitle(i)
 }
+names(p.list)=unique(ctd$loc.ctd)
+```
+
+### Afleidingskanaal van de Leie
+
+```{r}
+p.list$`akl moerkerke`
 ```
 
 ```{r}
-p.list[[14]]
+p.list$`akl ramskapelle`
 ```
 
+### Leopoldskanaal
+
+```{r}
+p.list$`sk zeebrugge`
+```
+
+```{r}
+p.list$`blinker moerkerke`
+```
+
+```{r}
+p.list$`lk ramskapelle`
+```
+
+### Kanaal Gent-Oostende
+
+```{r}
+p.list$`sas slijkens`
+```
+
+```{r}
+p.list$plassendale
+```
+
+```{r}
+p.list$brugge
+```
+
+### Ijzer
+
+```{r}
+p.list$yserstar
+```
+
+```{r}
+p.list$uniebrug
+```
+
+```{r}
+p.list$schoorbakkebrug
+```
+
+```{r}
+p.list$tervate
+```
+
+```{r}
+p.list$diksmuide
+```
+
+### Kanaal Nieuwpoort-Plasendale
+
+```{r}
+p.list$`nieuwpoort-plassendale`
+```
+
+### Kanaal Nieuwpoort-Duinkerke
+
+```{r}
+p.list$`oude veurne vaart`
+```
+
+### Noordede
+
+```{r}
+p.list$maertensas
+```
+
+```{r}
+p.list$`blauwe sluis`
+```
+
+```{r}
+p.list$clemensheule
+```
