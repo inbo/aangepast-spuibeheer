@@ -164,7 +164,7 @@ rownames(tos.summary)=c("start os",
 ```
 
 ```{r}
-tos.summary %>% kable() 
+tos.summary %>% kable(caption="Beleidstabel") 
 ```
 
 ```{r}

@@ -1,6 +1,6 @@
 ---
 title: "Opvolging van de zoutintrusie in de Ijzer, het kanaal Gent-Oostende, het Leopoldkanaal en het afleidingskanaal van de Leie"
-subtitle: Aangepast spuibeheer in 2022 in functie van glasaalmigratie
+subtitle: Aangepast spuibeheer in 2023 in functie van glasaalmigratie
 author:
   - name:
       given: "Lore"
@@ -9,6 +9,48 @@ author:
     orcid: "0009-0000-0500-9547"
     affiliation: "Instituut voor Natuur- en Bosonderzoek (INBO)"
     corresponding: true
+  - name:
+      given: "Stijn"
+      family: "Bruneel"
+    email: "stijn.bruneel@inbo.be"
+    orcid: "0000-0002-8226-8080"
+    affiliation: "Instituut voor Natuur- en Bosonderzoek (INBO)"
+  - name:
+      given: "David"
+      family: "Buysse"
+    email: "david.buysse@inbo.be"
+    orcid: "0000-0002-4437-5678"
+    affiliation: "Instituut voor Natuur- en Bosonderzoek (INBO)"
+  - name:
+      given: "Sarah"
+      family: "Broos"
+    email: "sarah.broos@inbo.be"
+    orcid: "0000-0001-9742-6224"
+    affiliation: "Instituut voor Natuur- en Bosonderzoek (INBO)"
+  - name:
+      given: "Simon"
+      family: "Plaetinck"
+    email: "simon.plaetinck@inbo.be"
+    orcid: "0009-0002-5970-1517"
+    affiliation: "Instituut voor Natuur- en Bosonderzoek (INBO)"
+  - name:
+      given: "Diederik"
+      family: "Rosseel"
+    email: "diederik.rosseel@inbo.be"
+    orcid: "?"
+    affiliation: "Instituut voor Natuur- en Bosonderzoek (INBO)"
+  - name:
+      given: "Sebastien"
+      family: "Pieters"
+    email: "sebastien.pieters@inbo.be"
+    orcid: "?"
+    affiliation: "Instituut voor Natuur- en Bosonderzoek (INBO)"
+  - name:
+      given: "Nico"
+      family: "Demaerteleire"
+    email: "nico.demaerteleire@inbo.be"
+    orcid: "?"
+    affiliation: "Instituut voor Natuur- en Bosonderzoek (INBO)"
 reviewer:
   - name:
       given: "Stijn"
@@ -42,24 +84,22 @@ output:
   bookdown::dontrun: default
 ---
 
-# Dankwoord {-}
+# Dankwoord {.unnumbered}
 
 De tekst voor het optionele dankwoord.
 
-# Voorwoord {-}
+# Voorwoord {.unnumbered}
 
 De tekst voor het optionele voorwoord.
 
-# Samenvatting {-}
+# Samenvatting {.unnumbered}
 
 <!-- description: start -->
-De tekst voor de verplichte samenvatting.
-Hou het [Heerlijk Helder](https://overheid.vlaanderen.be/communicatie/heerlijk-helder).
+
+
 <!-- description: end -->
 
-# Aanbevelingen voor beheer en/of beleid {-}
-
-Verplicht wanneer relevant.
+# Aanbevelingen voor beheer en/of beleid {.unnumbered}
 
 ```{r setup, include = FALSE}
 library(knitr)
@@ -67,9 +107,9 @@ opts_chunk$set(
   echo = FALSE,
   eval = TRUE,
   cache = FALSE,
-  warning = TRUE,
+  warning = FALSE,
   error = FALSE,
-  message = TRUE
+  message = FALSE
 )
 library(tidyverse)
 library(INBOtheme)
