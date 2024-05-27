@@ -2,24 +2,22 @@
 source("./code/not_functions/libraries.R")
 source("./code/functions/f.read_excel_allsheets.R")
 source("./code/functions/f.duplicate.removal.R")
-source("./code/functions/f.datetime.cleansing.R")
 ```
 
 ```{r include=FALSE, warning=FALSE, error=FALSE}
 #Data inlezen en opschonen
-data <- f.read_excel_allsheets("./data/spuibeheer/extern/verwerkt_in_excel/os_NE_2023.xlsx",col_names=TRUE)
+dir="./data/spuibeheer/extern/verwerkt_in_excel/NE/"
+files<-list.files(dir)
+for (i in 1:length(files)){
+  data=read.csv(paste0(dir,files[i]),sep=";")
+  if (i==1){df=data}
+  else{df=rbind(df,data)}
+}
 
-df<-data$Blad1
-
-df$Tijd<-str_split_fixed(df$Tijd, ' ', 2)[,2] #Enkel tijd weerhouden want jaartal wordt verkeerd ingelezen
-df$Time...5<-str_split_fixed(df$Time...5, ' ', 2)[,2]
-df$Time...8<-str_split_fixed(df$Time...8, ' ', 2)[,2]
-df$Time...11<-str_split_fixed(df$Time...11, ' ', 2)[,2]
-
-df<-datetime_cleansing(df,"Opwaartse peilmeting","Tijd","%Y-%m-%d %H:%M:%S") #Zet datum-tijd juist
-df<-datetime_cleansing(df,"Afwaartse Peilmeting","Time...5","%Y-%m-%d %H:%M:%S")
-df<-datetime_cleansing(df,"Schuifstand Schuif 13","Time...8","%Y-%m-%d %H:%M:%S")
-df<-datetime_cleansing(df,"Schuifstand Schuif 14","Time...11","%Y-%m-%d %H:%M:%S")
+df$Opwaartse.Peilmeting.Time<-as.POSIXct(df$Opwaartse.Peilmeting.Time,format="%d/%m/%Y %H:%M:%S")
+df$Afwaartse.Peilmeting.Time<-as.POSIXct(df$Afwaartse.Peilmeting.Time,format="%d/%m/%Y %H:%M:%S")
+df$Schuifstand.Schuif.13.Time<-as.POSIXct(df$Schuifstand.Schuif.13.Time,format="%d/%m/%Y %H:%M:%S")
+df$Schuifstand.Schuif.14.Time<-as.POSIXct(df$Schuifstand.Schuif.14.Time,format="%d/%m/%Y %H:%M:%S")
 
 remove(data) #Verwijder vars die niet meer gebruikt worden
 ```
