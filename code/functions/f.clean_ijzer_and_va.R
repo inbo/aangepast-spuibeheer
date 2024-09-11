@@ -1,4 +1,4 @@
-clean_data_and_va<-function(file,skip,datum,tijd,opmerking,site){
+clean_ijzer_and_va<-function(file,skip,datum,tijd,opmerking,site){
   data<-f.read_excel_allsheets(file,skip=skip)
   data<-rbindlist(data)
   variable.select<-c(datum,tijd,opmerking)
@@ -21,7 +21,7 @@ clean_data_and_va<-function(file,skip,datum,tijd,opmerking,site){
                                                "einde omgekeerde spuibeheer"))]="dicht"
   data$opmerking[(which(!data$opmerking %in% c("open","dicht")))]=NA
   #data <- data[-which((format(data$tijd,"%H:%M:%S") %in% c("08:00:00","18:00:00")) & (is.na(data$opmerking)==TRUE)),]
-  
+
   data$opmerking.lag<-dplyr::lag(data$opmerking)
   data$opmerking.lead<-lead(data$opmerking)
   data$opmerking.lag<-zoo::na.locf(data$opmerking.lag,na.rm=FALSE,fromLast = TRUE)
