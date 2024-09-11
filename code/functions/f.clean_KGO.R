@@ -7,5 +7,6 @@ clean_KGO <- function(file){
   data$dicht <- parse_date_time(paste(data$datum,data$dicht), c("ymd HM", "ymd H"))
   data$datum <- NULL
   data$site = "KGO"
+  data$dicht[which(data$dicht - data$open < 0)] = data$dicht[which(data$dicht - data$open < 0)] + lubridate::days(1)
   return(data)
 }
