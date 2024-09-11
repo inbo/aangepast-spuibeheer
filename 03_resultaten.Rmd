@@ -8,119 +8,87 @@ source("./code/functions/f.transformation.R")
 source("./code/functions/f.dispersie.R")
 source("./code/functions/f.pairwise.adonis.R")
 source("./code/functions/f.plot.habitat.spatial.R")
+source("./code/functions/f.clean_ijzer_and_va.R")
+source("./code/functions/f.clean_KGO.R")
 ```
 
-## Omgekeerd spuibeheer
+## Aangepast spuibeheer ter hoogte van de zout-zoetovergangen aan de Belgische kust – effect op de intrek van glasaal
 
 ```{r}
-AKLLK <- f.read_excel_allsheets("./data/spuibeheer/extern/verwerkt_in_excel/os_AKL&LK_2023.xlsx",skip=5)
-AKLLK <- AKLLK[[1]]
-AKLLK <- AKLLK[,colSums(is.na(AKLLK))<nrow(AKLLK)]
-AKL <- AKLLK[,c(1:3)]
-colnames(AKL)=c("datum","open","dicht")
-AKL$site="AKL"
-LK<-AKLLK[,c(4:6)]
-colnames(LK)=c("datum","open","dicht")
-LK$site="LK"
-AKLLK<-rbind(AKL,LK)
-AKLLK$open[which(grepl("[0-9]" , AKLLK$open)==FALSE)]=NA
-AKLLK$dicht[which(grepl("[0-9]" , AKLLK$dicht)==FALSE)]=NA
-AKLLK<-AKLLK[-which(is.na(AKLLK$open)==TRUE | is.na(AKLLK$dicht)==TRUE),]
-AKLLK$open<-str_replace(AKLLK$open,"u",":")
-AKLLK$dicht<-str_replace(AKLLK$dicht,"u",":")
-AKLLK$open<-parse_date_time(paste(AKLLK$datum,AKLLK$open), c("ymd HM", "ymd H"))
-AKLLK$dicht<-parse_date_time(paste(AKLLK$datum,AKLLK$dicht), c("ymd HM", "ymd H"))
-AKLLK$datum<-NULL
-remove(AKL,LK)
-```
-
-```{r}
-clean_ijzer_and_va<-function(file,skip,datum,tijd,opmerking,site){
-  Ijzer<-f.read_excel_allsheets(file,skip=skip)
-  Ijzer<-rbindlist(Ijzer)
-  variable.select<-c(datum,tijd,opmerking)
-  Ijzer<-Ijzer[,..variable.select]
-  Ijzer<-Ijzer[rowSums(is.na(Ijzer)) != ncol(Ijzer), ]
-  colnames(Ijzer)<-c("datum","tijd","opmerking")
-  Ijzer$datum<-zoo::na.locf(Ijzer$datum)
-  Ijzer$tijd <- format(Ijzer$tijd,"%H:%M:%S")
-  Ijzer$datum <- format(Ijzer$datum,"%y-%m-%d")
-  Ijzer$tijd <- parse_date_time(paste(Ijzer$datum,Ijzer$tijd), c("ymd HMS"))
-  Ijzer$datum<-NULL
-  Ijzer$opmerking<-tolower((Ijzer$opmerking))
-  Ijzer$opmerking[which(Ijzer$opmerking %in% c("omgekeerd spuien",
-                                               "omgekeerd spuibeheer",
-                                               "omgekeerd spuibeheer opgestart in opdracht van tim wolff",
-                                               "en start omgekeerd spuibeheer"))]="open"
-  Ijzer$opmerking[which(Ijzer$opmerking %in% c("einde omgekeerd spuien",
-                                               "einde os iov dré maes",
-                                               "einde omgekeerd spuibeheer",
-                                               "einde omgekeerde spuibeheer"))]="dicht"
-  Ijzer$opmerking[(which(!Ijzer$opmerking %in% c("open","dicht")))]=NA
-  #Ijzer <- Ijzer[-which((format(Ijzer$tijd,"%H:%M:%S") %in% c("08:00:00","18:00:00")) & (is.na(Ijzer$opmerking)==TRUE)),]
-  
-  Ijzer$opmerking.lag<-dplyr::lag(Ijzer$opmerking)
-  Ijzer$opmerking.lead<-lead(Ijzer$opmerking)
-  Ijzer$opmerking.lag<-zoo::na.locf(Ijzer$opmerking.lag,na.rm=FALSE,fromLast = TRUE)
-  Ijzer$opmerking.lead<-zoo::na.locf(Ijzer$opmerking.lead,na.rm=FALSE,fromLast = TRUE)
-  Ijzer$opmerking[which(Ijzer$opmerking=="open" & Ijzer$opmerking.lag=="open" & Ijzer$opmerking.lead=="open")+1]="dicht"
-  
-  Ijzer$opmerking.lag<-dplyr::lag(Ijzer$opmerking)
-  Ijzer$opmerking.lead<-lead(Ijzer$opmerking)
-  Ijzer$opmerking.lag<-zoo::na.locf(Ijzer$opmerking.lag,na.rm=FALSE,fromLast = FALSE)
-  Ijzer$opmerking.lead<-zoo::na.locf(Ijzer$opmerking.lead,na.rm=FALSE,fromLast = FALSE)
-  Ijzer$opmerking[which(Ijzer$opmerking=="dicht" & Ijzer$opmerking.lag=="dicht" & Ijzer$opmerking.lead=="dicht")-1]="open"
-  
-  Ijzer<-Ijzer[-which(is.na(Ijzer$opmerking)==TRUE),c("tijd","opmerking")]
-  Ijzer <- Ijzer %>%
-    group_by(opmerking) %>%
-    mutate(row = row_number()) %>%
-    tidyr::pivot_wider(names_from = opmerking, values_from = tijd) %>%
-    dplyr::select(-row)
-  Ijzer$site=site
-  return(Ijzer)
+clean_AKLLK <- function(file){
+  AKLLK <- f.read_excel_allsheets(file, skip = 5)
+  AKLLK <- AKLLK[[1]]
+  AKLLK <- AKLLK[, colSums(is.na(AKLLK)) < nrow(AKLLK)]
+  AKL <- AKLLK[, c(1:3)]
+  colnames(AKL) = c("datum","open","dicht")
+  AKL$site = "AKL"
+  LK <- AKLLK[,c(4:6)]
+  colnames(LK) = c("datum","open","dicht")
+  LK$site = "LK"
+  AKLLK <- rbind(AKL,LK)
+  AKLLK$open[which(grepl("[0-9]" , AKLLK$open) == FALSE)] = NA
+  AKLLK$dicht[which(grepl("[0-9]" , AKLLK$dicht) == FALSE)] = NA
+  AKLLK <- AKLLK[-which(is.na(AKLLK$open) == TRUE | is.na(AKLLK$dicht) == TRUE),]
+  AKLLK$open <- str_replace(AKLLK$open,"u",":")
+  AKLLK$dicht <- str_replace(AKLLK$dicht,"u",":")
+  AKLLK$open <- parse_date_time(paste(AKLLK$datum,AKLLK$open), c("ymd HM", "ymd H"))
+  AKLLK$dicht <- parse_date_time(paste(AKLLK$datum,AKLLK$dicht), c("ymd HM", "ymd H"))
+  AKLLK$datum <- NULL
+  return(AKLLK)
 }
+AKLLK2023 <- clean_AKLLK("./data/spuibeheer/extern/verwerkt_in_excel/os_AKL&LK_2023.xlsx")
+AKLLK2024 <- clean_AKLLK("./data/spuibeheer/extern/verwerkt_in_excel/os_AKL&LK_2024.xlsx")
 ```
 
 ```{r}
-Ijzer<-clean_ijzer_and_va(file="./data/spuibeheer/extern/verwerkt_in_excel/os_Ijzer_2023.xlsx",
-                   skip=7,
-                   datum=1,
-                   tijd=2,
-                   opmerking=14,
-                   site="Ijzer")
-VA<-clean_ijzer_and_va(file="./data/spuibeheer/extern/verwerkt_in_excel/os_VA_2023.xlsx",
-                   skip=6,
-                   datum=1,
-                   tijd=2,
-                   opmerking=8,
-                   site="VA")
+Ijzer2023 <- clean_ijzer_and_va(file = "./data/spuibeheer/extern/verwerkt_in_excel/os_Ijzer_2023.xlsx",
+                   skip = 7,
+                   datum = 1,
+                   tijd = 2,
+                   opmerking = 14,
+                   site = "Ijzer")
+Ijzer2024 <- clean_ijzer_and_va(file = "./data/spuibeheer/extern/verwerkt_in_excel/os_Ijzer_2024.xlsx",
+                   skip = 7,
+                   datum = 1,
+                   tijd = 2,
+                   opmerking = 14,
+                   site = "Ijzer")
+VA2023 <- clean_ijzer_and_va(file = "./data/spuibeheer/extern/verwerkt_in_excel/os_VA_2023.xlsx",
+                   skip = 6,
+                   datum = 1,
+                   tijd = 2,
+                   opmerking = 8,
+                   site = "VA")
+VA2024 <- clean_ijzer_and_va(file = "./data/spuibeheer/extern/verwerkt_in_excel/os_VA_2024.xlsx",
+                   skip = 6,
+                   datum = 1,
+                   tijd = 2,
+                   opmerking = 8,
+                   site = "VA")
 ```
 
 ```{r}
-KGO<-read_excel("./data/spuibeheer/extern/verwerkt_in_excel/os_KGO_2023.xlsx")
-KGO$open[which(grepl("[0-9]", KGO$open)==FALSE)]=NA
-KGO$dicht[which(grepl("[0-9]", KGO$dicht)==FALSE)]=NA
-KGO<-KGO[-which(is.na(KGO$open)==TRUE | is.na(KGO$dicht)==TRUE),]
-KGO$open<-parse_date_time(paste(KGO$datum,KGO$open), c("ymd HM", "ymd H"))
-KGO$dicht<-parse_date_time(paste(KGO$datum,KGO$dicht), c("ymd HM", "ymd H"))
-KGO$datum<-NULL
-KGO$site="KGO"
+KGO2023 <- clean_KGO("./data/spuibeheer/extern/verwerkt_in_excel/os_KGO_2023.xlsx")
+KGO2024 <- clean_KGO("./data/spuibeheer/extern/verwerkt_in_excel/os_KGO_2024.xlsx")
 ```
 
 ```{r}
-NE<-read.csv("./data/spuibeheer/intern/os_NE_2023_cleaned.csv")[,c(2:4)]
+NE <- read.csv("./data/spuibeheer/intern/os_NE_2023_cleaned.csv")[,c(2:4)]
 ```
 
 ```{r}
-os<-rbind(AKLLK,Ijzer,KGO,NE)
-remove(AKLLK,Ijzer,KGO,NE)
-write.csv(os,"./data/spuibeheer/intern/os_cleaned.csv")
+os <- rbind(AKLLK2023, AKLLK2024, Ijzer2023, Ijzer2024, KGO2023, KGO2024, NE, VA2023, VA2024)
+remove(AKLLK2023, AKLLK2024, Ijzer2023, Ijzer2024, KGO2023, KGO2024, NE)
+write.csv(os, "./data/spuibeheer/intern/os_cleaned.csv")
 ```
 
-Op basis van de tijdregistratie van het omgekeerd spuibeheer (OS) van 2023 in combinatie met eerder verkregen inzichten in het aantal glasaal dat gebruik maakt van het OS om stroomopwaarts te bewegen kan een inschatting gemaakt worden van het aantal glasalen dat in 2023 stroomopwaarts heeft kunnen bewegen langsheen de sluizen van de Ijzer, het Leopoldkanaal (LK), het Afleidingskanaal van de Leie (AKL), Het kanaal Gent-Oostende (KGO) en de Noordede (NE).
+Op basis van de tijdregistratie van het **aangepast spuibeheer (AS)** van 2023 en 2024 in combinatie met eerder verkregen inzichten in het aantal glasaal dat gebruik maakt van het AS om stroomopwaarts te migreren, kan een inschatting gemaakt worden van het aantal glasalen dat in 2023 en 2024 stroomopwaarts heeft kunnen trekken door de spuiopeningen. Voor het inschatten van het aantal glasalen dat per getijdencyclus stroomopwaarts migreert via de spuisluizen bij AS wordt gebruik gemaakt van volgende studies: De **Ijzer** thv Ganzepoot [@mouton2010; @mouton2013], het **Leopoldkanaal (LK)** thv de voorhaven van Zeebrugge[@buysse2015], het **Afleidingskanaal van de Leie (AKL)** thv de voorhaven van Zeebrugge [@buysse2015], Het **kanaal Gent-Oostende (KGO)** thv Sas Slijkens [@buysse2012] en de **Noordede (NE)** thv Maertensas [@vandamme2020]. Voor het perskanaal **Veurne-Ambacht (VA)** is jaarlijks het effectief aantal ingetrokken glasalen beschikbaar via de gegevens van de twee glasaal goten die opgesteld staan bij het pompgemaal VA [@vandamme2020].
 
-Er werd gebruik gemaakt van het gemiddeld aantal glasalen dat langsheen de sluizen kan passeren bij een OS event in combinatie met het aantal OS events. De resultaten van de studies van het LK, AKL en KGO lieten niet toe om een meer geavanceerde inschatting te maken op basis van:
+De berekening van het totaal aantal glasalen dat in een bepaald jaar door de spuiopeningen kan passeren tijdens de periode dat AS toegepast wordt, gebeurt door het gemiddeld aantal glasalen dat passeert per AS event te vermenigvuldigen met het aantal AS events per migratieseizoen (met uitzondering van VA waar het totaal aantal optrekkende glasalen in de glasaalgoten in het betreffende jaar wordt weergegeven).
+
+De berekening van het gemiddeld aantal intrekkende glasalen per AS event gebeurde voor KGO, LK, AKL en NE door het gemiddeld aantal intrekkende dieren te berekenen over de verschillende bemonsteringsmomenten van de spuisluis tijdens het glasaalmigratieseizoen van 2012 (KGO), 2014 (LK & AKL), en 2019 (NE). Voor berekening van het aantal intrekkende glasalen per AS event aan de Ijzer werd gebruik gemaakt van het gemiddelde van de bemonsteringsdata uit twee onderzoeksjaren (2010 en 2013), waarbij alle data gebruikt werden waarbij één of twee spuien 20 cm geopend werden.
+
+Door de beperkte data en grote onzekerheden mbt het aantal glasaal dat zich aanmeldt thv de gesloten spuien (zowel wat betreft het verschil tussen de jaren alsook de schommelingen binnen 1 migratieseizoen), laten de resultaten van de studies van de Ijzer, LK, AKL, KGO en NE niet toe om een meer geavanceerde inschatting te maken op basis van variabelen zoals:
 
 -   Het aantal geopende binnenschuiven
 
@@ -128,7 +96,7 @@ Er werd gebruik gemaakt van het gemiddeld aantal glasalen dat langsheen de sluiz
 
 -   De opening van de schuiven
 
--   De duur van het os event
+-   De duur van het AS event
 
 -   Het debiet
 
@@ -136,59 +104,103 @@ Er werd gebruik gemaakt van het gemiddeld aantal glasalen dat langsheen de sluiz
 
 -   De watertemperatuur
 
-De studie van de Ijzer beschouwde meerdere variabelen maar concludeerde dat de hoeveelheid glasalen die zich aanmeldt te variabel is om de hoeveelheid glasalen die passeert in te schatten. Het belang van het aantal dieren voor de schuiven kwam ook tot uiting bij de analyse van het effect dat het aantal open schuiven heeft: Op het eerste zicht bleek er geen effect te zijn van het aantal open schuiven, maar wanneer een onderscheid werd gemaakt tussen OS events met een grote versus kleine densiteit aan glasaal, bleek dat meer schuiven een significant effect had op het aantal glasalen dat passeert. Een meer informatief model zou daarom ofwel het aandeel glasalen dat succesvol passeert als respons moeten gebruiken of het aantal dieren voor de sluis meenemen als interactiefactor. Deze data is echter niet voorhanden, noch is er een model beschikbaar dat inschat wat het aantal dieren zou zijn dat zich aanmeldt voor de schuiven op basis van beschikbare omgevingsdata zoals windrichting, neerslag en debiet.
+```{r}
+# De meest recente studie van de Ijzer [@mouton2013] was relatief uitgebreid en beschouwde meerdere variabelen maar concludeerde ook hier dat de hoeveelheid glasalen die zich aanmeldt te variabel is om de hoeveelheid glasalen die passeert eenduidig in te schatten. Het belang van het aantal dieren voor de schuiven kwam ook tot uiting bij de analyse van het effect dat het aantal open schuiven heeft: Op het eerste zicht bleek er geen effect te zijn van het aantal open schuiven, maar wanneer een onderscheid werd gemaakt tussen AS events met een grote versus kleine densiteit aan glasaal, bleek dat meer schuiven een significant effect had op het aantal glasalen dat passeert. Een meer informatief model zou daarom ofwel het aandeel glasalen dat succesvol passeert als respons moeten gebruiken of het aantal dieren voor de sluis meenemen als interactiefactor. De benodigde data is daarvoor echter niet voorhanden, noch is er een model beschikbaar dat inschat wat het aantal dieren zou zijn dat zich aanmeldt voor de schuiven op basis van beschikbare omgevingsdata zoals windrichting, neerslag en debiet. Voor het gemiddeld aantal glasaal per event werd gebruik gemaakt van het gemiddelde van de bemonsteringen in 2010 (1 schuif open op 10 cm, lineair geëxtrapoleerd naar 2 schuiven open op 20 cm) [@mouton2010] en 2013 (gemiddeld aantal bij 2 schuiven open op 20 cm) [@mouton2013].
+```
 
-Door bovengemelde limitaties blijft de huidige inschatting bijzonder ruw en dient deze met de nodige voorzichtigheid geïnterpreteerd te worden.
+Door bovengemelde beperkingen blijft de huidige inschatting bijzonder ruw en dient deze met de nodige voorzichtigheid geïnterpreteerd te worden.
+
+De inschattingen geven aan dat in **2023 en 2024 respectievelijk 550.392 en 671.014 glasalen** voordeel hebben ondervonden van het aangepast spuibeheer tijdens hun stroomopwaartse migratie.
 
 ```{r}
-os$dicht[which(os$open>os$dicht)]<-os$dicht[which(os$open>os$dicht)]+lubridate::days(1)
-os$duration<-os$dicht-os$open
-os$jaar<-lubridate::year(os$open)
-os$datum<-as.Date(os$open)
-os$glasaal<-NA
-os$glasaal[which(os$site=="AKL")]=mean(1351+976+5093+935+82+1461+704+200)
-os$glasaal[which(os$site=="LK")]=mean(1351+976+5093+935+82+1461+704+200) #metingen van AKL gebruikt
-os$glasaal[which(os$site=="Ijzer")]=7500 #tussen min en max
-os$glasaal[which(os$site=="NE")]=NA
-os$glasaal[which(os$site=="KGO")]=964.2
+os$dicht[which(os$open > os$dicht)] <- os$dicht[which(os$open > os$dicht)] + lubridate::days(1)
+os$duration <- os$dicht - os$open
+os$jaar <- lubridate::year(os$open)
+os$datum <- as.Date(os$open)
+os$glasaal <- NA
+os$glasaal[which(os$site == "AKL")] = mean(c(1351, 976, 5093, 935, 82, 1461, 704, 200))
+os$glasaal[which(os$site == "LK")] = mean(c(1351, 976, 5093, 935, 82, 1461, 704, 200)) #metingen van AKL gebruikt
+os$glasaal[which(os$site == "Ijzer")] = mean(c(1200, 3242)) #tussen min en max
+os$glasaal[which(os$site == "NE")] = mean(c(8, 56,31,1,2167,9,26,309,3750,17,3827,21,69,88,2014,40,300,12,39,9,60))
+os$glasaal[which(os$site == "KGO")] = 964.2
 ```
 
 ```{r}
 os.summary <- os %>% 
-  dplyr::filter(jaar==2023) %>% 
+  dplyr::filter(jaar == 2023 & datum < as.POSIXct("2023-05-15 12:00:00", tz = "Europe/Brussels")) %>% 
   group_by(site) %>%
-  summarize(start=as.Date(min(open)),
-            stop=as.Date(max(dicht)),
-            periode=as.numeric(round(stop-start)),
-            aantal.dagen.effectief.os=n_distinct(datum),
-            events=n(),
-            events.per.dag=round(events/aantal.dagen.effectief.os,digits = 2),
-            mediaan.duur.per.event=as.numeric(round(median(duration))),
-            mediaan.duur.per.dag=round(mediaan.duur.per.event*events.per.dag),
-            totale.duur.os=as.numeric(sum(duration)),
-            glasaal.per.event=round(mean(glasaal)),
-            glasaal.totaal=sum(glasaal))
-tos.summary<-as.data.frame(t(os.summary[,-1]))
-colnames(tos.summary)<-os.summary$site
-rownames(tos.summary)=c("start os", 
-                       "stop os", 
+  summarize(start = as.Date(min(open)),
+            stop = as.Date(max(dicht)),
+            periode = as.numeric(round(stop - start)),
+            aantal.dagen.effectief.os = n_distinct(datum),
+            events = n(),
+            events.per.dag = round(events/aantal.dagen.effectief.os, digits = 2),
+            mediaan.duur.per.event = as.numeric(round(median(duration))),
+            mediaan.duur.per.dag = round(mediaan.duur.per.event * events.per.dag),
+            totale.duur.os = round(as.numeric(sum(duration))),
+            glasaal.per.event = round(mean(glasaal)),
+            glasaal.totaal = round(sum(glasaal)))
+os.summary$glasaal.totaal[which(os.summary$site == "VA")] = "75690*"
+os.summary$start <- format(strptime(as.character(as.Date(os.summary$start)), "%Y-%m-%d"), "%d-%m-%Y")
+os.summary$stop <- format(strptime(as.character(as.Date(os.summary$stop)), "%Y-%m-%d"), "%d-%m-%Y")
+tos.summary <- as.data.frame(t(os.summary[,-1]))
+colnames(tos.summary) <- os.summary$site
+rownames(tos.summary) = c("start as", 
+                       "stop as", 
                        "periode (dagen)", 
-                       "# dagen effectief os", 
-                       "# events os tijdens periode", 
-                       "# events os per dag", 
-                       "mediaan duur event os (min)", 
-                       "mediaan duur os per dag (min)", 
-                       "totale duur os periode (min)", 
-                       "verwachte # glasaal per os event", 
+                       "# dagen effectief as", 
+                       "# events as tijdens periode", 
+                       "# events as per dag", 
+                       "mediaan duur event as (min)", 
+                       "mediaan duur as per dag (min)", 
+                       "totale duur as periode (min)", 
+                       "verwachte # glasaal per as event", 
                        "verwachte # glasaal periode")
+
+tos.summary %>% kable(caption = "2023 beleidstabel voor het aangepast spuibeheer (as) in het afleidingskanaal van de Leie (AKL), Ijzer, kanaal Gent-Oostende (KGO), Leopoldskanaal (LK), Noordede (NE) en Veurne-Ambacht (VA) met inschatting van het aantal glasaal dat de betreffende sluizen kon passeren dankzij as. * Het verwachte aantal glasaal voor de studieperiode in VA geeft het totaal van 2023 weer en is niet dus gelinkt aan het aantal as events.") %>% kable_styling(latex_options = "scale_down")
+write.csv(tos.summary,"./data/spuibeheer/intern/as_summary_2023.csv")
 ```
 
 ```{r}
-tos.summary %>% kable(caption="Beleidstabel voor het omgekeer spuibeheer (os) in het afleidingskanaal van de Leie (AKL), Ijzer, kanaal Gent-Oostende (KGO), Leopoldskanaal (LK) en Noordede (NE) met inschatting van het aantal glasaal dat de betreffende sluizen kon passeren dankzij os.") 
+os.summary <- os %>% 
+  dplyr::filter(jaar == 2024 & datum < as.POSIXct("2024-05-15 12:00:00", tz = "Europe/Brussels")) %>% 
+  group_by(site) %>%
+  summarize(start = as.Date(min(open)),
+            stop = as.Date(max(dicht)),
+            periode = as.numeric(round(stop - start)),
+            aantal.dagen.effectief.os = n_distinct(datum),
+            events = n(),
+            events.per.dag = round(events/aantal.dagen.effectief.os, digits = 2),
+            mediaan.duur.per.event = as.numeric(round(median(duration))),
+            mediaan.duur.per.dag = round(mediaan.duur.per.event * events.per.dag),
+            totale.duur.os = round(as.numeric(sum(duration))),
+            glasaal.per.event = round(mean(glasaal)),
+            glasaal.totaal = round(sum(glasaal)))
+os.summary$glasaal.totaal[which(os.summary$site == "VA")] = "176649*"
+os.summary$start <- format(strptime(as.character(as.Date(os.summary$start)), "%Y-%m-%d"), "%d-%m-%Y")
+os.summary$stop <- format(strptime(as.character(as.Date(os.summary$stop)), "%Y-%m-%d"), "%d-%m-%Y")
+tos.summary <- as.data.frame(t(os.summary[,-1]))
+colnames(tos.summary) <- os.summary$site
+rownames(tos.summary) = c("start as", 
+                       "stop as", 
+                       "periode (dagen)", 
+                       "# dagen effectief as", 
+                       "# events as tijdens periode", 
+                       "# events as per dag", 
+                       "mediaan duur event as (min)", 
+                       "mediaan duur as per dag (min)", 
+                       "totale duur as periode (min)", 
+                       "verwachte # glasaal per as event", 
+                       "verwachte # glasaal periode")
+
+tos.summary %>% kable(caption = "2024 beleidstabel voor het aangepast spuibeheer (as) in het afleidingskanaal van de Leie (AKL), Ijzer, kanaal Gent-Oostende (KGO), Leopoldskanaal (LK), Noordede (NE) en Veurne-Ambacht (VA) met inschatting van het aantal glasaal dat de betreffende sluizen kon passeren dankzij as. * Het verwachte aantal glasaal voor de studieperiode in VA geeft het totaal van 2024 weer en is niet dus gelinkt aan het aantal as events. Het aangepast spuibeheer in VA werd verder toegepast tot 28/6/2024 maar leverde slechts 2865 extra glasalen (1.6 %) op omdat de grootste migratire reeds had plaatsgevonden.") %>% kable_styling(latex_options = "scale_down")
+write.csv(tos.summary,"./data/spuibeheer/intern/as_summary_2024.csv")
 ```
 
+\pagebreak
+
 ```{r}
-files<-list.files(path="./data/debiet/",pattern = ".csv")
+files <- list.files(path="./data/debiet/",pattern = ".csv")
 for (i in 1:length(files)){
   path<-paste0("./data/debiet/",files[i])
   file_name<-gsub(".csv","",files[i])
@@ -203,7 +215,7 @@ for (i in 1:length(files)){
 debiet$date=substr(gsub("T", " ", as.character(debiet$date)),1,19)
 debiet$date_brussels = as.POSIXct(debiet$date,format='%Y-%m-%d %H:%M:%S',tz="Europe/Brussels")
 debiet$datum.debiet = debiet$date_brussels; attr(debiet$datum.debiet, "tzone") <- "GMT"
-debiet <- debiet %>% dplyr::select(-date,-date_brussels,-value)
+debiet <- debiet %>% dplyr::select(-date, -date_brussels, -value)
 
 remove(files,path,file_name,temp)
 ```
@@ -217,9 +229,11 @@ ggplot(debiet, aes(x = datum.debiet, y = debiet)) +
   scale_x_datetime(date_labels = "%d-%m-%Y", date_breaks = "6 months") 
 ```
 
+\pagebreak
+
 ## CTD
 
-CTD werden geplaatst op deze locaties: [link](https://rpubs.com/spbruneel-INBO/1170130). 
+CTD werden geplaatst op deze locaties: [link](https://rpubs.com/spbruneel-INBO/1170130).
 
 ```{r message=FALSE, error=FALSE, warning=FALSE, include=FALSE}
 path="./data/ctd/"
