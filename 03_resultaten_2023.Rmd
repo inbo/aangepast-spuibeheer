@@ -16,6 +16,7 @@ source("./code/functions/f.clean_AKLLK.R")
 ## Aangepast spuibeheer ter hoogte van de zout-zoetovergangen aan de Belgische kust – effect op de intrek van glasaal
 
 ```{r warning=FALSE, message=FALSE, include=FALSE}
+source("./code/not_functions/combine_as_NE.R")
 source("./code/not_functions/combine_as_data.R")
 ```
 
