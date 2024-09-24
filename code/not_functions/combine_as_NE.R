@@ -1,10 +1,7 @@
-```{r}
 source("./code/not_functions/libraries.R")
 source("./code/functions/f.read_excel_allsheets.R")
 source("./code/functions/f.duplicate.removal.R")
-```
 
-```{r include=FALSE, warning=FALSE, error=FALSE}
 #Data inlezen en opschonen
 dir="./data/spuibeheer/extern/verwerkt_in_excel/NE/"
 files<-list.files(dir)
@@ -20,9 +17,7 @@ df$Schuifstand.Schuif.13.Time<-as.POSIXct(df$Schuifstand.Schuif.13.Time,format="
 df$Schuifstand.Schuif.14.Time<-as.POSIXct(df$Schuifstand.Schuif.14.Time,format="%d/%m/%Y %H:%M:%S")
 
 remove(data) #Verwijder vars die niet meer gebruikt worden
-```
 
-```{r include=FALSE, warning=FALSE, error=FALSE}
 #Creer 4 nieuwe datasets
 opwaarts_peil<-df[,c(1,2)]
 colnames(opwaarts_peil)<-c("Tijd","Opwaarts_peil")
@@ -39,46 +34,34 @@ schuifstand13<-duplicate_removal(schuifstand13)
 schuifstand14<-df[,c(7,8)]
 colnames(schuifstand14)<-c("Tijd","Schuifstand14")
 schuifstand14<-duplicate_removal(schuifstand14)
-```
 
-```{r include=FALSE, warning=FALSE, error=FALSE}
 g<-ggplot(opwaarts_peil,aes(x=Tijd,y=Opwaarts_peil))+geom_line()+theme_minimal()
 ggplotly(g)
-```
 
-```{r include=FALSE, warning=FALSE, error=FALSE}
 g<-ggplot(afwaarts_peil,aes(x=Tijd,y=Afwaarts_peil))+geom_line()+theme_minimal()
 ggplotly(g)
-```
 
-```{r include=FALSE, warning=FALSE, error=FALSE}
 g<-ggplot(schuifstand13,aes(x=Tijd,y=Schuifstand13))+geom_line()+theme_minimal()
 ggplotly(g)
-```
 
-```{r include=FALSE, warning=FALSE, error=FALSE}
 g<-ggplot(schuifstand14,aes(x=Tijd,y=Schuifstand14))+geom_line()+theme_minimal()
 ggplotly(g)
-```
 
-```{r include=FALSE, warning=FALSE, error=FALSE}
 hist(schuifstand14$Schuifstand14,freq=FALSE)
 p <- ggplot(schuifstand14, aes(x=Schuifstand14)) + geom_density()
 ggplotly(p)
-```
 
-```{r include=FALSE, warning=FALSE, error=FALSE}
 #Determine the time interval by determining the earliest and latest measurement
 start<-min(c(min(opwaarts_peil$Tijd,na.rm=TRUE),
              min(afwaarts_peil$Tijd,na.rm=TRUE),
              min(schuifstand13$Tijd,na.rm=TRUE),
              min(schuifstand14$Tijd,na.rm=TRUE)
-             ))
+))
 stop<-max(c(max(opwaarts_peil$Tijd,na.rm=TRUE),
             max(afwaarts_peil$Tijd,na.rm=TRUE),
             max(schuifstand13$Tijd,na.rm=TRUE),
             max(schuifstand14$Tijd,na.rm=TRUE)
-            ))
+))
 seq=as.data.frame(seq(start,stop,by=1)) #Time interval with steps of one second
 colnames(seq)="Tijd"
 opwaarts_peil <- left_join(seq,opwaarts_peil, by=c("Tijd")) #Merge all data with this time interval
@@ -91,9 +74,6 @@ afwaarts_peil$Afwaarts_peil <- na_interpolation(afwaarts_peil$Afwaarts_peil, opt
 schuifstand13$Schuifstand13 <- na_interpolation(schuifstand13$Schuifstand13, option ="linear")
 schuifstand14$Schuifstand14 <- na_interpolation(schuifstand14$Schuifstand14, option ="linear")
 
-```
-
-```{r include=FALSE, warning=FALSE, error=FALSE}
 #Combine all vars, this can be done now since they all have the same rows and temporal resolutions
 df_list <- list(opwaarts_peil, afwaarts_peil, schuifstand13, schuifstand14)      
 df_list <- df_list %>% reduce(full_join, by='Tijd')
@@ -110,9 +90,7 @@ df_list$Glasaal[which(df_list$verschil_af_op>=0 & df_list$schuif_open==TRUE)]<-"
 df_list$Glasaal[which(df_list$verschil_af_op<0 & df_list$schuif_open==TRUE)]<-"UIT" #When the schuif is open and waterlevel downstream is lower than upstream, upstream-moving glass eel are blown out
 
 df_list$Date<-as.Date(df_list$Tijd)
-```
 
-```{r eval=FALSE, warning=FALSE, error=FALSE}
 x=df_list[c(1000000:1200000),] #Take a subset otherwise it takes too long to run
 df_long <- gather(df_list[c(1000000:1200000),], type, peil, Opwaarts_peil:diff_Schuifstand14, factor_key=TRUE) #Change it to a long format to distinguish between vars
 
@@ -126,33 +104,22 @@ df_long$line_type="solid"
 
 g<-ggplot(df_long,aes(x=Tijd,y=peil,group=type,colour=type))+geom_line()+theme_minimal()
 ggplotly(g)
-```
 
-```{r include=FALSE, warning=FALSE, error=FALSE}
 #Beschouw enkel dagen waarin de schuif heeft open gestaan
 df_list <- df_list %>% group_by(Date) %>% dplyr::filter(any(Glasaal == "IN" | Glasaal == "UIT")) %>% ungroup()
 #spuibeheer_per_dag$Date[!(spuibeheer_per_dag$Date %in% spuibeheer_per_dag_new$Date)]
-```
 
-```{r include=FALSE, warning=FALSE, error=FALSE}
 #Totaal aantal dagen aangepast spuibeheer
 length(unique(df_list$Date))
-```
 
-```{r include=FALSE, warning=FALSE, error=FALSE}
 #Totaal aantal uur dat aangepast spuibeheer werd toegepast in 2023
 spuibeheer_totaal <- df_list %>% count(Glasaal)
 spuibeheer_totaal$n <- spuibeheer_totaal$n/(60*60)
 spuibeheer_totaal
-```
 
-
-```{r include=FALSE, warning=FALSE, error=FALSE}
 #Gemiddelde duur (in uur) dat aangepast gespuid werd per 24 u
 spuibeheer_totaal %>% mutate(n=n/length(unique(df_list$Date)))
-```
 
-```{r include=FALSE, warning=FALSE, error=FALSE}
 #Gemiddelde duur (in uur) dat aangepast gespuid werd
 df_list$schuif_open_lag<-dplyr::lag(df_list$schuif_open)
 schuif<-which(df_list$schuif_open!=df_list$schuif_open_lag)
@@ -170,14 +137,10 @@ spuibeheer <- spuibeheer[which(spuibeheer$n>1),]
 spuibeheer_tijd <- spuibeheer %>% group_by(Glasaal) %>% summarize(n=mean(n))
 spuibeheer_tijd$n <- spuibeheer_tijd$n/(60*60)
 spuibeheer_tijd
-```
 
-```{r include=FALSE, warning=FALSE, error=FALSE}
 #Gemiddeld aantal keer schuif open per dag
 spuibeheer %>% count(Glasaal) %>% mutate(n=n/length(unique(df_list$Date)))
-```
 
-```{r include=FALSE, warning=FALSE, error=FALSE}
 os<-df_list %>%
   dplyr::select(Glasaal,schuifperiode,Tijd) %>%
   dplyr::filter(Glasaal=="IN") %>%
@@ -191,5 +154,3 @@ os<-df_list %>%
   mutate(site="NE")
 if (file.exists("./data/spuibeheer/intern/")==FALSE){dir.create("./data/spuibeheer/intern/")}
 write.csv(os,"./data/spuibeheer/intern/os_NE_2023_cleaned.csv")
-```
-
