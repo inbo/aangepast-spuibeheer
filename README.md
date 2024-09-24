@@ -15,7 +15,7 @@ Opvolging van het aangepast spuibeheer in combinatie met de zoutintrusie in de i
     * f.process_ctd_for_plotting.R
     * f.read_excel_allsheets.R
     * f.transformation.R
-	* not_functions:
+  * not_functions:
     * combine_as_data.R
     * combine_as_NE.R
     * combine_ctd.R
