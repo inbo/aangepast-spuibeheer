@@ -1,4 +1,4 @@
-book_filename: "Rapport_Zoutintrusie_INBO.Rmd"
+book_filename: "as-2024.Rmd"
 output_dir: "./output"
 delete_merged_file: TRUE
 language:
@@ -14,3 +14,4 @@ language:
     ex:     'Voorbeeld '
     proof:  'Bewijs. '
     remark: 'Opmerking. '
+rmd.files: ["index.Rmd", "000_abstract.Rmd", "001_resume.Rmd", "01_inleiding.Rmd", "02_materiaal_en_methoden.Rmd", "03_resultaten_2024.Rmd", "zzz_references_and_appendix.Rmd"]
