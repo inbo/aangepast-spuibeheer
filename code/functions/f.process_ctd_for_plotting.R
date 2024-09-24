@@ -2,7 +2,7 @@
 process_ctd_for_plotting<-function(date.min,date.max){
   ctd.long <- ctd %>% 
     pivot_longer(cols=where(is.numeric),names_to="parameter",values_to="value") %>%
-    dplyr::filter(is.na(value)==FALSE & datum.ctd>=date.min-lubridate::days(30) & datum.ctd<=date.max+lubridate::days(30))
+    dplyr::filter(datum.ctd>=date.min-lubridate::days(30) & datum.ctd<=date.max+lubridate::days(30))
   k=0
   p.list<-list()
   for (i in unique(ctd$loc.ctd)){
