@@ -92,7 +92,7 @@ write.csv(tos.summary,"./data/spuibeheer/intern/as_summary_2023.csv")
 source("./code/not_functions/combine_debiet.R")
 ```
 
-```{r eval=FALSE, tijdsreeksen, fig.height=10, fig.width=10, fig.cap="Overzicht van metingen van afvoer (m³/s) voor relevante meetstations doorheen de tijd"}
+```{r tijdsreeksen, eval=FALSE, fig.height=10, fig.width=10, fig.cap="Overzicht van metingen van afvoer (m³/s) voor relevante meetstations doorheen de tijd"}
 ggplot(debiet[which(lubridate::year(debiet$datum.debiet)==2023),], aes(x = datum.debiet, y = debiet)) + 
   geom_line() +
   xlab("Datum") + ylab("Waarde") +
