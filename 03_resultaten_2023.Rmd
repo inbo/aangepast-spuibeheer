@@ -15,7 +15,7 @@ source("./code/functions/f.clean_AKLLK.R")
 
 ## Aangepast spuibeheer ter hoogte van de zout-zoetovergangen aan de Belgische kust – effect op de intrek van glasaal
 
-```{r}
+```{r warning=FALSE, message=FALSE, include=FALSE}
 source("./code/not_functions/combine_as_data.R")
 ```
 
@@ -47,7 +47,7 @@ Door de beperkte data en grote onzekerheden mbt het aantal glasaal dat zich aanm
 
 Door bovengemelde beperkingen blijft de huidige inschatting bijzonder ruw en dient deze met de nodige voorzichtigheid geïnterpreteerd te worden.
 
-De inschattingen geven aan dat in **2023 en 2024 respectievelijk 550.392 en 671.014 glasalen** voordeel hebben ondervonden van het aangepast spuibeheer tijdens hun stroomopwaartse migratie.
+De inschattingen geven aan dat in **2023 550.392 glasalen** voordeel hebben ondervonden van het aangepast spuibeheer tijdens hun stroomopwaartse migratie.
 
 ```{r}
 os.summary <- os %>% 
@@ -85,42 +85,6 @@ tos.summary %>% kable(caption = "2023 beleidstabel voor het aangepast spuibeheer
 write.csv(tos.summary,"./data/spuibeheer/intern/as_summary_2023.csv")
 ```
 
-```{r}
-os.summary <- os %>% 
-  dplyr::filter(jaar == 2024 & datum < as.POSIXct("2024-05-15 12:00:00", tz = "Europe/Brussels")) %>% 
-  group_by(site) %>%
-  summarize(start = as.Date(min(open)),
-            stop = as.Date(max(dicht)),
-            periode = as.numeric(round(stop - start)),
-            aantal.dagen.effectief.os = n_distinct(datum),
-            events = n(),
-            events.per.dag = round(events/aantal.dagen.effectief.os, digits = 2),
-            mediaan.duur.per.event = as.numeric(round(median(duration))),
-            mediaan.duur.per.dag = round(mediaan.duur.per.event * events.per.dag),
-            totale.duur.os = round(as.numeric(sum(duration))),
-            glasaal.per.event = round(mean(glasaal)),
-            glasaal.totaal = round(sum(glasaal)))
-os.summary$glasaal.totaal[which(os.summary$site == "VA")] = "176649*"
-os.summary$start <- format(strptime(as.character(as.Date(os.summary$start)), "%Y-%m-%d"), "%d-%m-%Y")
-os.summary$stop <- format(strptime(as.character(as.Date(os.summary$stop)), "%Y-%m-%d"), "%d-%m-%Y")
-tos.summary <- as.data.frame(t(os.summary[,-1]))
-colnames(tos.summary) <- os.summary$site
-rownames(tos.summary) = c("start as", 
-                       "stop as", 
-                       "periode (dagen)", 
-                       "# dagen effectief as", 
-                       "# events as tijdens periode", 
-                       "# events as per dag", 
-                       "mediaan duur event as (min)", 
-                       "mediaan duur as per dag (min)", 
-                       "totale duur as periode (min)", 
-                       "verwachte # glasaal per as event", 
-                       "verwachte # glasaal periode")
-
-tos.summary %>% kable(caption = "2024 beleidstabel voor het aangepast spuibeheer (as) in het afleidingskanaal van de Leie (AKL), Ijzer, kanaal Gent-Oostende (KGO), Leopoldskanaal (LK), Noordede (NE) en Veurne-Ambacht (VA) met inschatting van het aantal glasaal dat de betreffende sluizen kon passeren dankzij as. * Het verwachte aantal glasaal voor de studieperiode in VA geeft het totaal van 2024 weer en is niet dus gelinkt aan het aantal as events. Het aangepast spuibeheer in VA werd verder toegepast tot 28/6/2024 maar leverde slechts 2865 extra glasalen (1.6 %) op omdat de grootste migratire reeds had plaatsgevonden.") %>% kable_styling(latex_options = "scale_down")
-write.csv(tos.summary,"./data/spuibeheer/intern/as_summary_2024.csv")
-```
-
 \pagebreak
 
 ```{r warning=FALSE, message=FALSE, include=FALSE}
@@ -128,12 +92,12 @@ source("./code/not_functions/combine_debiet.R")
 ```
 
 ```{r eval=FALSE, tijdsreeksen, fig.height=10, fig.width=10, fig.cap="Overzicht van metingen van afvoer (m³/s) voor relevante meetstations doorheen de tijd"}
-ggplot(debiet, aes(x = datum.debiet, y = debiet)) + 
+ggplot(debiet[which(lubridate::year(debiet$datum.debiet)==2023),], aes(x = datum.debiet, y = debiet)) + 
   geom_line() +
   xlab("Datum") + ylab("Waarde") +
   facet_wrap(~ loc.debiet,scales="free_y") + 
   theme(axis.text.x = element_text(angle = 45, vjust = 0.5, hjust=1)) +
-  scale_x_datetime(date_labels = "%d-%m-%Y", date_breaks = "6 months") 
+  scale_x_datetime(date_labels = "%d-%m-%Y", date_breaks = "3 months") 
 ```
 
 \pagebreak
@@ -194,7 +158,8 @@ for (i in unique(ctd$loc.ctd)){
 ```
 
 ```{r warning=FALSE, message=FALSE, include=FALSE}
-source("./code/not_functions/process_ctd_for_plotting.R")
+source("./code/functions/f.process_ctd_for_plotting.R")
+p.list<-process_ctd_for_plotting(as.POSIXct("2023-03-01 00:00:00"),as.POSIXct("2023-05-15 00:00:00"))
 ```
 
 ### Afleidingskanaal van de Leie
