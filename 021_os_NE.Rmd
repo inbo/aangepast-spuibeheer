@@ -189,6 +189,7 @@ os<-df_list %>%
   dplyr::filter(n>1) %>%
   dplyr::select(-schuifperiode,-n) %>%
   mutate(site="NE")
+if (file.exists("./data/spuibeheer/intern/")==FALSE){dir.create("./data/spuibeheer/intern/")}
 write.csv(os,"./data/spuibeheer/intern/os_NE_2023_cleaned.csv")
 ```
 
