@@ -10,76 +10,13 @@ source("./code/functions/f.pairwise.adonis.R")
 source("./code/functions/f.plot.habitat.spatial.R")
 source("./code/functions/f.clean_ijzer_and_va.R")
 source("./code/functions/f.clean_KGO.R")
+source("./code/functions/f.clean_AKLLK.R")
 ```
 
 ## Aangepast spuibeheer ter hoogte van de zout-zoetovergangen aan de Belgische kust – effect op de intrek van glasaal
 
 ```{r}
-clean_AKLLK <- function(file){
-  AKLLK <- f.read_excel_allsheets(file, skip = 5)
-  AKLLK <- AKLLK[[1]]
-  AKLLK <- AKLLK[, colSums(is.na(AKLLK)) < nrow(AKLLK)]
-  AKL <- AKLLK[, c(1:3)]
-  colnames(AKL) = c("datum","open","dicht")
-  AKL$site = "AKL"
-  LK <- AKLLK[,c(4:6)]
-  colnames(LK) = c("datum","open","dicht")
-  LK$site = "LK"
-  AKLLK <- rbind(AKL,LK)
-  AKLLK$open[which(grepl("[0-9]" , AKLLK$open) == FALSE)] = NA
-  AKLLK$dicht[which(grepl("[0-9]" , AKLLK$dicht) == FALSE)] = NA
-  AKLLK <- AKLLK[-which(is.na(AKLLK$open) == TRUE | is.na(AKLLK$dicht) == TRUE),]
-  AKLLK$open <- str_replace(AKLLK$open,"u",":")
-  AKLLK$dicht <- str_replace(AKLLK$dicht,"u",":")
-  AKLLK$open <- parse_date_time(paste(AKLLK$datum,AKLLK$open), c("ymd HM", "ymd H"))
-  AKLLK$dicht <- parse_date_time(paste(AKLLK$datum,AKLLK$dicht), c("ymd HM", "ymd H"))
-  AKLLK$datum <- NULL
-  return(AKLLK)
-}
-AKLLK2023 <- clean_AKLLK("./data/spuibeheer/extern/verwerkt_in_excel/os_AKL&LK_2023.xlsx")
-AKLLK2024 <- clean_AKLLK("./data/spuibeheer/extern/verwerkt_in_excel/os_AKL&LK_2024.xlsx")
-```
-
-```{r}
-Ijzer2023 <- clean_ijzer_and_va(file = "./data/spuibeheer/extern/verwerkt_in_excel/os_Ijzer_2023.xlsx",
-                   skip = 7,
-                   datum = 1,
-                   tijd = 2,
-                   opmerking = 14,
-                   site = "Ijzer")
-Ijzer2024 <- clean_ijzer_and_va(file = "./data/spuibeheer/extern/verwerkt_in_excel/os_Ijzer_2024.xlsx",
-                   skip = 7,
-                   datum = 1,
-                   tijd = 2,
-                   opmerking = 14,
-                   site = "Ijzer")
-VA2023 <- clean_ijzer_and_va(file = "./data/spuibeheer/extern/verwerkt_in_excel/os_VA_2023.xlsx",
-                   skip = 6,
-                   datum = 1,
-                   tijd = 2,
-                   opmerking = 8,
-                   site = "VA")
-VA2024 <- clean_ijzer_and_va(file = "./data/spuibeheer/extern/verwerkt_in_excel/os_VA_2024.xlsx",
-                   skip = 6,
-                   datum = 1,
-                   tijd = 2,
-                   opmerking = 8,
-                   site = "VA")
-```
-
-```{r}
-KGO2023 <- clean_KGO("./data/spuibeheer/extern/verwerkt_in_excel/os_KGO_2023.xlsx")
-KGO2024 <- clean_KGO("./data/spuibeheer/extern/verwerkt_in_excel/os_KGO_2024.xlsx")
-```
-
-```{r}
-NE <- read.csv("./data/spuibeheer/intern/os_NE_2023_cleaned.csv")[,c(2:4)]
-```
-
-```{r}
-os <- rbind(AKLLK2023, AKLLK2024, Ijzer2023, Ijzer2024, KGO2023, KGO2024, NE, VA2023, VA2024)
-remove(AKLLK2023, AKLLK2024, Ijzer2023, Ijzer2024, KGO2023, KGO2024, NE)
-write.csv(os, "./data/spuibeheer/intern/os_cleaned.csv")
+source("./code/not_functions/combine_as_data.R")
 ```
 
 Op basis van de tijdregistratie van het **aangepast spuibeheer (AS)** van 2023 en 2024 in combinatie met eerder verkregen inzichten in het aantal glasaal dat gebruik maakt van het AS om stroomopwaarts te migreren, kan een inschatting gemaakt worden van het aantal glasalen dat in 2023 en 2024 stroomopwaarts heeft kunnen trekken door de spuiopeningen. Voor het inschatten van het aantal glasalen dat per getijdencyclus stroomopwaarts migreert via de spuisluizen bij AS wordt gebruik gemaakt van volgende studies: De **Ijzer** thv Ganzepoot [@mouton2010; @mouton2013], het **Leopoldkanaal (LK)** thv de voorhaven van Zeebrugge[@buysse2015], het **Afleidingskanaal van de Leie (AKL)** thv de voorhaven van Zeebrugge [@buysse2015], Het **kanaal Gent-Oostende (KGO)** thv Sas Slijkens [@buysse2012] en de **Noordede (NE)** thv Maertensas [@vandamme2020]. Voor het perskanaal **Veurne-Ambacht (VA)** is jaarlijks het effectief aantal ingetrokken glasalen beschikbaar via de gegevens van de twee glasaal goten die opgesteld staan bij het pompgemaal VA [@vandamme2020].
@@ -111,19 +48,6 @@ Door de beperkte data en grote onzekerheden mbt het aantal glasaal dat zich aanm
 Door bovengemelde beperkingen blijft de huidige inschatting bijzonder ruw en dient deze met de nodige voorzichtigheid geïnterpreteerd te worden.
 
 De inschattingen geven aan dat in **2023 en 2024 respectievelijk 550.392 en 671.014 glasalen** voordeel hebben ondervonden van het aangepast spuibeheer tijdens hun stroomopwaartse migratie.
-
-```{r}
-os$dicht[which(os$open > os$dicht)] <- os$dicht[which(os$open > os$dicht)] + lubridate::days(1)
-os$duration <- os$dicht - os$open
-os$jaar <- lubridate::year(os$open)
-os$datum <- as.Date(os$open)
-os$glasaal <- NA
-os$glasaal[which(os$site == "AKL")] = mean(c(1351, 976, 5093, 935, 82, 1461, 704, 200))
-os$glasaal[which(os$site == "LK")] = mean(c(1351, 976, 5093, 935, 82, 1461, 704, 200)) #metingen van AKL gebruikt
-os$glasaal[which(os$site == "Ijzer")] = mean(c(1200, 3242)) #tussen min en max
-os$glasaal[which(os$site == "NE")] = mean(c(8, 56,31,1,2167,9,26,309,3750,17,3827,21,69,88,2014,40,300,12,39,9,60))
-os$glasaal[which(os$site == "KGO")] = 964.2
-```
 
 ```{r}
 os.summary <- os %>% 
@@ -199,25 +123,8 @@ write.csv(tos.summary,"./data/spuibeheer/intern/as_summary_2024.csv")
 
 \pagebreak
 
-```{r}
-files <- list.files(path="./data/debiet/",pattern = ".csv")
-for (i in 1:length(files)){
-  path<-paste0("./data/debiet/",files[i])
-  file_name<-gsub(".csv","",files[i])
-  temp<-read.csv(path,sep=';',skip=8)[,1:2]
-  colnames(temp)<-c("date","value")
-  temp$loc.debiet<-str_split_1(file_name,"_")[1]
-  temp$site.debiet<-str_split_1(file_name,"_")[2]
-  temp$debiet<-as.numeric(sub(",", ".", temp$value, fixed = TRUE))
-  if (i==1){debiet=temp} else {debiet=rbind(debiet,temp)}
-}
-
-debiet$date=substr(gsub("T", " ", as.character(debiet$date)),1,19)
-debiet$date_brussels = as.POSIXct(debiet$date,format='%Y-%m-%d %H:%M:%S',tz="Europe/Brussels")
-debiet$datum.debiet = debiet$date_brussels; attr(debiet$datum.debiet, "tzone") <- "GMT"
-debiet <- debiet %>% dplyr::select(-date, -date_brussels, -value)
-
-remove(files,path,file_name,temp)
+```{r warning=FALSE, message=FALSE, include=FALSE}
+source("./code/not_functions/combine_debiet.R")
 ```
 
 ```{r eval=FALSE, tijdsreeksen, fig.height=10, fig.width=10, fig.cap="Overzicht van metingen van afvoer (m³/s) voor relevante meetstations doorheen de tijd"}
@@ -235,76 +142,8 @@ ggplot(debiet, aes(x = datum.debiet, y = debiet)) +
 
 CTD werden geplaatst op deze locaties: [link](https://rpubs.com/spbruneel-INBO/1170130).
 
-```{r message=FALSE, error=FALSE, warning=FALSE, include=FALSE}
-path="./data/ctd/"
-jaren<-list.files(path=path)
-counter=0
-for (i in jaren){
-  dir.name1<-paste0(path,i,"/")
-  gebied<-list.files(path=dir.name1)
-  for (j in gebied){
-    dir.name2<-paste0(dir.name1,j,"/")
-    dagen<-list.files(path=dir.name2)
-    for (k in dagen){
-      dir.name3<-paste0(dir.name2,k,"/")
-      files<-list.files(path=dir.name3)
-      for (l in files){
-        dir.name4<-paste0(dir.name3,l)
-        counter=counter+1
-        if("try-error" %in% class(try(read.csv(dir.name4)))){
-          ctd.temp<-read.csv(dir.name4,skip=1)[,c(2:4)]
-          colnames(ctd.temp)<-c("datum.ctd","temperatuur","geleidbaarheid")
-          ctd.temp$datum.ctd<-parse_date_time(ctd.temp$datum.ctd, c("mdy HMS p"))
-          ctd.temp$sensor<-"small header"
-        } else{
-          ctd.temp<-read.csv(dir.name4,skip=65,sep=";",header=FALSE)
-          ctd.temp<-ctd.temp[-nrow(ctd.temp),]
-          colnames(ctd.temp)<-c("datum.ctd","druk","temperatuur","geleidbaarheid")
-          ctd.temp<-as.data.frame(lapply(ctd.temp, function(y) gsub(",", ".", y)))
-          ctd.temp$datum.ctd<-parse_date_time(ctd.temp$datum.ctd, c("ymd HMS"))
-          ctd.temp$sensor<-"large header"
-        }
-        ctd.temp$site<-j
-        ctd.temp$retrieval<-k
-        ctd.temp$filename<-tolower(l)
-        if (counter==1){ctd=ctd.temp} else{ctd=smartbind(ctd,ctd.temp)}
-      }
-    }
-  }
-}
-remove(ctd.temp)
-```
-
-```{r}
-ctd$datum.ctd<-as.POSIXct(ctd$datum.ctd,format='%Y-%m-%d %H:%M:%S')
-ctd[c("druk","temperatuur","geleidbaarheid")] <- sapply(ctd[c("druk","temperatuur","geleidbaarheid")],as.numeric)
-ctd <- ctd %>% distinct()
-ctd <- ctd %>% mutate(loc.ctd= case_when(str_detect(filename, 'akl ramskapelle|akl rampskapelle') ~ 'akl ramskapelle',
-                                   str_detect(filename, 'lk ramskapelle|lk rampskapelle') ~ 'lk ramskapelle',
-                                   str_detect(filename, 'akl moerkerke') ~ 'akl moerkerke',
-                                   str_detect(filename, 'sk zeebrugge|schipdonkkanaal_zeebrugge') ~ 'sk zeebrugge',
-                                   str_detect(filename, 'blinker moerkerke') ~ 'blinker moerkerke',
-                                   str_detect(filename, 'diksmuide') ~ 'diksmuide',
-                                   str_detect(filename, 'schoorbakkebrug') ~ 'schoorbakkebrug',
-                                   str_detect(filename, 'tervate') ~ 'tervate',
-                                   str_detect(filename, 'uniebrug') ~ 'uniebrug',
-                                   str_detect(filename, 'yserstar') ~ 'yserstar',
-                                   str_detect(filename, 'nieuwpoort-plassendale|nieuwpoort_plassendal') ~ 'nieuwpoort-plassendale',
-                                   str_detect(filename, 'brugge') ~ 'brugge',
-                                   str_detect(filename, 'plassendale') ~ 'plassendale',
-                                   str_detect(filename, 'sas slijkens') ~ 'sas slijkens',
-                                   str_detect(filename, 'oude_veurne_vaart') ~ 'oude veurne vaart',
-                                   str_detect(filename, 'blauwe sluis') ~ 'blauwe sluis',
-                                   str_detect(filename, 'maertensas') ~ 'maertensas',
-                                   str_detect(filename, 'clemensheule') ~ 'clemensheule'
-                                   ))
-```
-
-```{r}
-link.ctd.debiet<-read.csv("./data/link_debiet_ctd.csv",sep=";")
-ctd<-left_join(ctd,link.ctd.debiet,by="loc.ctd")
-ctd$datum.debiet<-round_date(ctd$datum.ctd, unit="15 mins")
-ctd <- left_join(ctd,debiet, by=c("loc.debiet","datum.debiet"),relationship = "many-to-many")
+```{r warning=FALSE, message=FALSE, include=FALSE}
+source("./code/not_functions/combine_ctd.R")
 ```
 
 ```{r eval=FALSE}
