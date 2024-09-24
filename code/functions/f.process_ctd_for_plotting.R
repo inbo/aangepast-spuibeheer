@@ -1,11 +1,13 @@
 #process_ctd_for_plotting
 process_ctd_for_plotting<-function(date.min,date.max){
-  ctd.long <- ctd %>% pivot_longer(cols=where(is.numeric),names_to="parameter",values_to="value")
+  ctd.long <- ctd %>% 
+    pivot_longer(cols=where(is.numeric),names_to="parameter",values_to="value") %>%
+    dplyr::filter(is.na(value)==FALSE & datum.ctd>=date.min-lubridate::days(30) & datum.ctd<=date.max+lubridate::days(30))
   k=0
   p.list<-list()
   for (i in unique(ctd$loc.ctd)){
     k=k+1
-    p.list[[k]]<-ggplot(ctd.long %>% dplyr::filter(loc.ctd==i & datum.ctd>=date.min-lubridate::days(30) & datum.ctd<=date.max+lubridate::days(30)), aes(x = datum.ctd, y = value)) + 
+    p.list[[k]]<-ggplot(ctd.long %>% dplyr::filter(loc.ctd==i), aes(x = datum.ctd, y = value)) + 
       geom_line() + geom_smooth() +
       annotate("rect", xmin = date.min, xmax = date.max, ymin = -Inf, ymax = Inf, fill = "orange", alpha = 0.3) +
       xlab("Datum") + ylab("Waarde") +
