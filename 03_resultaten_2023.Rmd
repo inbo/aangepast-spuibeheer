@@ -1,5 +1,9 @@
 # Resultaten
 
+```{r}
+knitr::opts_chunk$set(fig.width=10, fig.height=10) 
+```
+
 ```{r include=FALSE}
 source("./code/not_functions/libraries.R")
 source("./code/functions/f.read_excel_allsheets.R")
