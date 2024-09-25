@@ -1,4 +1,4 @@
-book_filename: "as-2024.Rmd"
+book_filename: "as.Rmd"
 output_dir: "./output"
 delete_merged_file: TRUE
 language:
