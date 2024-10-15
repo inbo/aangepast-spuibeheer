@@ -1,0 +1,1 @@
+seq_date <- function(x) seq(min(x,na.rm=TRUE), max(x,na.rm=TRUE), by = "30 min")

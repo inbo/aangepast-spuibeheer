@@ -1,5 +1,9 @@
 #process_ctd_for_plotting
 process_ctd_for_plotting<-function(date.min,date.max){
+  ctd$datum.ctd<-round_date(ctd$datum.ctd, unit="30 mins")
+  x <- do.call("rbind", by(ctd, ctd$loc.ctd, with, data.frame(loc.ctd = loc.ctd[1], datum.ctd = seq_date(datum.ctd))))
+  ctd <- left_join(x,ctd,by=c("loc.ctd","datum.ctd"))
+  ctd$group_plot <- as.character(grouping_breaking_line(ctd$filename))
   ctd.long <- ctd %>% 
     rename("debiet (m³/s)"="debiet", "geleidbaarheid (mS/cm)"="geleidbaarheid", "druk (cm water)"="druk", "temperatuur (°C)"="temperatuur") %>% 
     pivot_longer(cols=where(is.numeric),names_to="parameter",values_to="value") %>%
@@ -12,7 +16,7 @@ process_ctd_for_plotting<-function(date.min,date.max){
     os.plot<-os[which(os$site==unique(ctd.long.plot$site) & os$jaar==unique(lubridate::year(ctd.long.plot$datum.ctd))),]
     p.list[[k]]<-ggplot(ctd.long.plot, aes(x = datum.ctd, y = value)) + 
       geom_rect(data=os.plot, inherit.aes=FALSE, aes(xmin=open, xmax=dicht, ymin=-Inf, ymax=Inf), color="green", alpha=0.3, size=0.2) +
-      geom_line() +
+      geom_line(aes(group=group_plot)) +
       annotate("rect", xmin = date.min, xmax = date.max, ymin = -Inf, ymax = Inf, fill = "orange", alpha = 0.3) +
       xlab("Datum") + ylab("Waarde") +
       facet_wrap(~ parameter,scales="free_y") + 

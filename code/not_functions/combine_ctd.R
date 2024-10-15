@@ -1,4 +1,6 @@
 #combine_ctd
+source("./code/functions/f.seq_date.R")
+source("./code/functions/f.grouping_breaking_line.R")
 path="./data/ctd/"
 jaren<-list.files(path=path)
 counter=0
@@ -64,3 +66,4 @@ link.ctd.debiet<-read.csv("./data/link_debiet_ctd.csv",sep=";")
 ctd<-left_join(ctd,link.ctd.debiet,by="loc.ctd")
 ctd$datum.debiet<-round_date(ctd$datum.ctd, unit="15 mins")
 ctd <- left_join(ctd,debiet, by=c("loc.debiet","datum.debiet"),relationship = "many-to-many")
+ctd <- ctd[which(is.na(ctd$datum.ctd)==FALSE),]
