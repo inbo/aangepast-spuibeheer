@@ -98,6 +98,8 @@ write.csv(tos.summary,"./data/spuibeheer/intern/as_summary_2023.csv")
 if (RUN==TRUE){
   source("./code/not_functions/combine_debiet.R")
   save.image(file = "./Rdata/variables_debiet.RData")
+  source("./code/not_functions/combine_neerslag.R")
+  save.image(file = "./Rdata/variables_neerslag.RData")
 }
 if (RUN==FALSE){
   load("./Rdata/variables_debiet.RData")
