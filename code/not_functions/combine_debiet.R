@@ -13,7 +13,7 @@ for (i in 1:length(files)){
 
 debiet$date=substr(gsub("T", " ", as.character(debiet$date)),1,19)
 debiet$date_brussels = as.POSIXct(debiet$date,format='%Y-%m-%d %H:%M:%S',tz="Europe/Brussels")
-debiet$datum.debiet = debiet$date_brussels; attr(debiet$datum.debiet, "tzone") <- "GMT"
+debiet$datum.debiet = debiet$date_brussels; #attr(debiet$datum.debiet, "tzone") <- "GMT"
 debiet <- debiet %>% dplyr::select(-date, -date_brussels, -value)
 
 remove(files,path,file_name,temp)
