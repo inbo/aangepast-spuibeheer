@@ -1,6 +1,4 @@
 #combine_ctd
-source("./code/functions/f.seq_date.R")
-source("./code/functions/f.grouping_breaking_line.R")
 path="./data/ctd/"
 jaren<-list.files(path=path)
 counter=0
@@ -18,7 +16,10 @@ for (i in jaren){
         counter=counter+1
         if("try-error" %in% class(try(read.csv(dir.name4)))){
           ctd.temp<-read.csv(dir.name4,skip=1)[,c(2:4)]
-          colnames(ctd.temp)<-c("datum.ctd","temperatuur","geleidbaarheid")
+          if (grepl("mS", colnames(ctd.temp)[2], fixed = TRUE) == FALSE){
+            ctd.temp[,2]<-ctd.temp[,2]/1000
+          }
+          colnames(ctd.temp)<-c("datum.ctd","geleidbaarheid","temperatuur")
           ctd.temp$datum.ctd<-parse_date_time(ctd.temp$datum.ctd, c("mdy HMS p"))
           ctd.temp$sensor<-"small header"
         } else{
@@ -62,8 +63,15 @@ ctd <- ctd %>% mutate(loc.ctd= case_when(str_detect(filename, 'akl ramskapelle|a
                                          str_detect(filename, 'clemensheule') ~ 'clemensheule'
 ))
 
-link.ctd.debiet<-read.csv("./data/link_debiet_ctd.csv",sep=";")
-ctd<-left_join(ctd,link.ctd.debiet,by="loc.ctd")
-ctd$datum.debiet<-round_date(ctd$datum.ctd, unit="15 mins")
-ctd <- left_join(ctd,debiet, by=c("loc.debiet","datum.debiet"),relationship = "many-to-many")
+source("./code/functions/f.seq_date.R")
+source("./code/functions/f.grouping_breaking_line.R")
+ctd$datum.ctd<-round_date(ctd$datum.ctd, unit="30 mins")
+x <- do.call("rbind", by(ctd, ctd$loc.ctd, with, data.frame(loc.ctd = loc.ctd[1], datum.ctd = seq_date(datum.ctd))))
+ctd <- left_join(x,ctd,by=c("loc.ctd","datum.ctd"))
+ctd$group_plot <- as.character(grouping_breaking_line(ctd$filename))
+
+link_ctd_debiet_neerslag<-read.csv("./data/link_ctd_debiet_neerslag.csv",sep=";")
+ctd<-left_join(ctd,link_ctd_debiet_neerslag,by="loc.ctd")
 ctd <- ctd[which(is.na(ctd$datum.ctd)==FALSE),]
+ctd <- ctd %>% left_join(debiet, join_by(loc.debiet, closest(datum.ctd >= datum.debiet)))
+ctd <- ctd %>% left_join(neerslag, join_by(loc.neerslag, closest(datum.ctd >= datum.neerslag)))
