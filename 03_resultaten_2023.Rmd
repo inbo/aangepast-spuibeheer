@@ -7,19 +7,26 @@ knitr::opts_chunk$set(fig.width=10, fig.height=10)
 ```{r include=FALSE}
 source("./code/not_functions/libraries.R")
 source("./code/functions/f.read_excel_allsheets.R")
-source("./code/functions/f.clean_ijzer_and_va.R")
-source("./code/functions/f.clean_KGO.R")
-source("./code/functions/f.clean_AKLLK.R")
 ```
 
 ## Aangepast spuibeheer ter hoogte van de zout-zoetovergangen aan de Belgische kust – effect op de intrek van glasaal
 
 ```{r warning=FALSE, message=FALSE, include=FALSE}
-source("./code/not_functions/combine_as_NE.R")
-source("./code/not_functions/combine_as_data.R")
+RUN=FALSE
+if (RUN==TRUE){
+  source("./code/functions/f.clean_ijzer_and_va.R")
+  source("./code/functions/f.clean_KGO.R")
+  source("./code/functions/f.clean_AKLLK.R")
+  source("./code/not_functions/combine_as_NE.R")
+  source("./code/not_functions/combine_as_data.R")
+  save.image(file = "./Rdata/variables_as.RData")
+}
+if (RUN==FALSE){
+  load("./Rdata/variables_as.RData")
+}
 ```
 
-Op basis van de tijdregistratie van het **aangepast spuibeheer (AS)** van 2023 en 2024 in combinatie met eerder verkregen inzichten in het aantal glasaal dat gebruik maakt van het AS om stroomopwaarts te migreren, kan een inschatting gemaakt worden van het aantal glasalen dat in 2023 en 2024 stroomopwaarts heeft kunnen trekken door de spuiopeningen. Voor het inschatten van het aantal glasalen dat per getijdencyclus stroomopwaarts migreert via de spuisluizen bij AS wordt gebruik gemaakt van volgende studies: De **Ijzer** thv Ganzepoot [@mouton2010; @mouton2013], het **Leopoldkanaal (LK)** thv de voorhaven van Zeebrugge[@buysse2015], het **Afleidingskanaal van de Leie (AKL)** thv de voorhaven van Zeebrugge [@buysse2015], Het **kanaal Gent-Oostende (KGO)** thv Sas Slijkens [@buysse2012] en de **Noordede (NE)** thv Maertensas [@vandamme2020]. Voor het perskanaal **Veurne-Ambacht (VA)** is jaarlijks het effectief aantal ingetrokken glasalen beschikbaar via de gegevens van de twee glasaal goten die opgesteld staan bij het pompgemaal VA [@vandamme2020].
+Op basis van de tijdregistratie van het **aangepast spuibeheer (AS)** van 2023 in combinatie met eerder verkregen inzichten in het aantal glasaal dat gebruik maakt van het AS om stroomopwaarts te migreren, kan een inschatting gemaakt worden van het aantal glasalen dat in 2023 stroomopwaarts heeft kunnen trekken door de spuiopeningen. Voor het inschatten van het aantal glasalen dat per getijdencyclus stroomopwaarts migreert via de spuisluizen bij AS wordt gebruik gemaakt van volgende studies: De **Ijzer** thv Ganzepoot [@mouton2010; @mouton2013], het **Leopoldkanaal (LK)** thv de voorhaven van Zeebrugge[@buysse2015], het **Afleidingskanaal van de Leie (AKL)** thv de voorhaven van Zeebrugge [@buysse2015], Het **kanaal Gent-Oostende (KGO)** thv Sas Slijkens [@buysse2012] en de **Noordede (NE)** thv Maertensas [@vandamme2020]. Voor het perskanaal **Veurne-Ambacht (VA)** is jaarlijks het effectief aantal ingetrokken glasalen beschikbaar via de gegevens van de twee glasaal goten die opgesteld staan bij het pompgemaal VA [@vandamme2020].
 
 De berekening van het totaal aantal glasalen dat in een bepaald jaar door de spuiopeningen kan passeren tijdens de periode dat AS toegepast wordt, gebeurt door het gemiddeld aantal glasalen dat passeert per AS event te vermenigvuldigen met het aantal AS events per migratieseizoen (met uitzondering van VA waar het totaal aantal optrekkende glasalen in de glasaalgoten in het betreffende jaar wordt weergegeven).
 
@@ -88,7 +95,13 @@ write.csv(tos.summary,"./data/spuibeheer/intern/as_summary_2023.csv")
 \pagebreak
 
 ```{r warning=FALSE, message=FALSE, include=FALSE}
-source("./code/not_functions/combine_debiet.R")
+if (RUN==TRUE){
+  source("./code/not_functions/combine_debiet.R")
+  save.image(file = "./Rdata/variables_debiet.RData")
+}
+if (RUN==FALSE){
+  load("./Rdata/variables_debiet.RData")
+}
 ```
 
 ```{r tijdsreeksen, eval=FALSE, fig.height=10, fig.width=10, fig.cap="Overzicht van metingen van afvoer (m³/s) voor relevante meetstations doorheen de tijd"}
@@ -107,7 +120,13 @@ ggplot(debiet[which(lubridate::year(debiet$datum.debiet)==2023),], aes(x = datum
 CTD werden geplaatst op deze locaties: [link](https://rpubs.com/spbruneel-INBO/1170130).
 
 ```{r warning=FALSE, message=FALSE, include=FALSE}
-source("./code/not_functions/combine_ctd.R")
+if (RUN==TRUE){
+  source("./code/not_functions/combine_ctd.R")
+  save.image(file = "./Rdata/variables_ctd.RData")
+}
+if (RUN==FALSE){
+  load("./Rdata/variables_ctd.RData")
+}
 ```
 
 ```{r eval=FALSE}
