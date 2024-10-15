@@ -154,3 +154,5 @@ os<-df_list %>%
   mutate(site="NE")
 if (file.exists("./data/spuibeheer/intern/")==FALSE){dir.create("./data/spuibeheer/intern/")}
 write.csv(os,"./data/spuibeheer/intern/os_NE_2023_cleaned.csv")
+
+remove(afwaarts_peil,opwaarts_peil,schuifstand13,schuifstand14,seq,df,df_list,df_long,g,x)
