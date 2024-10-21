@@ -13,7 +13,8 @@ for (i in 1:length(files)){
 
 neerslag$date=substr(gsub("T", " ", as.character(neerslag$date)),1,19)
 neerslag$date_brussels = as.POSIXct(neerslag$date,format='%Y-%m-%d %H:%M:%S',tz="Europe/Brussels")
-neerslag$datum.neerslag = neerslag$date_brussels; #attr(neerslag$datum.neerslag, "tzone") <- "GMT"
+neerslag$datum.neerslag = neerslag$date_brussels; attr(neerslag$datum.neerslag, "tzone") <- "GMT"
 neerslag <- neerslag %>% dplyr::select(-date, -date_brussels, -value, -site.neerslag)
+neerslag<-neerslag[!duplicated(neerslag[,c("loc.neerslag","datum.neerslag")]), ]
 
 remove(files,path,file_name,temp)
