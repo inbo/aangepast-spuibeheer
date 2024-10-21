@@ -31,6 +31,8 @@ library(tools)
 library(kableExtra)
 library(sessioninfo)
 
+library(WaveletComp)
+
 # package_info(
 #   pkgs = "loaded",
 #   include_base = FALSE,
