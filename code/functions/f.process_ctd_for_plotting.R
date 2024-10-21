@@ -4,7 +4,7 @@ process_ctd_for_plotting<-function(date.min,date.max){
     dplyr::select(-druk) %>% 
     rename("debiet (m³/s)"="debiet", "geleidbaarheid (mS/cm)"="geleidbaarheid", "temperatuur (°C)"="temperatuur", "neerslag (mm)" = "neerslag") %>% 
     pivot_longer(cols=where(is.numeric),names_to="parameter",values_to="value") %>%
-    dplyr::filter(datum.ctd>=date.min-lubridate::days(30) & datum.ctd<=date.max+lubridate::days(30))
+    dplyr::filter(datum.ctd>=date.min-lubridate::days(50) & datum.ctd<=date.max+lubridate::days(90))
   k=0
   p.list<-list()
   for (i in unique(ctd$loc.ctd)){
@@ -16,9 +16,10 @@ process_ctd_for_plotting<-function(date.min,date.max){
       geom_line(aes(group=group_plot)) +
       annotate("rect", xmin = date.min, xmax = date.max, ymin = -Inf, ymax = Inf, fill = "orange", alpha = 0.3) +
       xlab("Datum") + ylab("Waarde") +
-      facet_wrap(~ parameter,scales="free_y") + 
+      facet_wrap(~ parameter,scales="free_y",ncol=1) + 
       theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1, size=15), axis.text.y = element_text(size=15), axis.title = element_text(size = 20), title = element_text(size = 30), strip.text = element_text(size=20)) +
-      scale_x_datetime(date_labels = "%d-%m-%Y", date_breaks = "1 month") + ggtitle(i)
+      scale_x_datetime(date_labels = "%d-%m-%Y", date_breaks = "1 month") + ggtitle(i) + 
+      geom_hline(data = data.frame(yint=0.87,parameter="geleidbaarheid (mS/cm)"), aes(yintercept = yint), linetype = "dotted", colour="red")
   }
   names(p.list)=unique(ctd$loc.ctd)
   return(p.list)
