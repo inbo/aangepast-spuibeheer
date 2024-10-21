@@ -8,7 +8,8 @@ clean_ijzer_and_va<-function(file,skip,datum,tijd,opmerking,site){
   data$datum<-zoo::na.locf(data$datum)
   data$tijd <- format(data$tijd,"%H:%M:%S")
   data$datum <- format(data$datum,"%y-%m-%d")
-  data$tijd <- parse_date_time(paste(data$datum,data$tijd), c("ymd HMS"))
+  data$tijd <- parse_date_time(paste(data$datum,data$tijd), c("ymd HMS"), tz="Europe/Brussels")
+  attr(data$tijd, "tzone") <- "GMT"
   data$datum<-NULL
   data$opmerking<-tolower((data$opmerking))
   data$opmerking[which(data$opmerking %in% c("omgekeerd spuien",
