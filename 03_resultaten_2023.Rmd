@@ -1,7 +1,7 @@
 # Resultaten
 
 ```{r}
-knitr::opts_chunk$set(fig.width=10, fig.height=10) 
+knitr::opts_chunk$set(fig.width=10, fig.height=12) 
 ```
 
 ```{r include=FALSE}
@@ -9,7 +9,7 @@ source("./code/not_functions/libraries.R")
 source("./code/functions/f.read_excel_allsheets.R")
 ```
 
-## Aangepast spuibeheer ter hoogte van de zout-zoetovergangen aan de Belgische kust – effect op de intrek van glasaal
+## Aangepast spuibeheer ter hoogte van de zout-zoetovergangen aan de Belgische kust en ingeschat effect op de intrek van glasaal
 
 ```{r warning=FALSE, message=FALSE, include=FALSE}
 RUN=FALSE
@@ -25,34 +25,6 @@ if (RUN==FALSE){
   load("./Rdata/variables_as.RData")
 }
 ```
-
-Op basis van de tijdregistratie van het **aangepast spuibeheer (AS)** van 2023 in combinatie met eerder verkregen inzichten in het aantal glasaal dat gebruik maakt van het AS om stroomopwaarts te migreren, kan een inschatting gemaakt worden van het aantal glasalen dat in 2023 stroomopwaarts heeft kunnen trekken door de spuiopeningen. Voor het inschatten van het aantal glasalen dat per getijdencyclus stroomopwaarts migreert via de spuisluizen bij AS wordt gebruik gemaakt van volgende studies: De **Ijzer** thv Ganzepoot [@mouton2010; @mouton2013], het **Leopoldkanaal (LK)** thv de voorhaven van Zeebrugge[@buysse2015], het **Afleidingskanaal van de Leie (AKL)** thv de voorhaven van Zeebrugge [@buysse2015], Het **kanaal Gent-Oostende (KGO)** thv Sas Slijkens [@buysse2012] en de **Noordede (NE)** thv Maertensas [@vandamme2020]. Voor het perskanaal **Veurne-Ambacht (VA)** is jaarlijks het effectief aantal ingetrokken glasalen beschikbaar via de gegevens van de twee glasaal goten die opgesteld staan bij het pompgemaal VA [@vandamme2020].
-
-De berekening van het totaal aantal glasalen dat in een bepaald jaar door de spuiopeningen kan passeren tijdens de periode dat AS toegepast wordt, gebeurt door het gemiddeld aantal glasalen dat passeert per AS event te vermenigvuldigen met het aantal AS events per migratieseizoen (met uitzondering van VA waar het totaal aantal optrekkende glasalen in de glasaalgoten in het betreffende jaar wordt weergegeven).
-
-De berekening van het gemiddeld aantal intrekkende glasalen per AS event gebeurde voor KGO, LK, AKL en NE door het gemiddeld aantal intrekkende dieren te berekenen over de verschillende bemonsteringsmomenten van de spuisluis tijdens het glasaalmigratieseizoen van 2012 (KGO), 2014 (LK & AKL), en 2019 (NE). Voor berekening van het aantal intrekkende glasalen per AS event aan de Ijzer werd gebruik gemaakt van het gemiddelde van de bemonsteringsdata uit twee onderzoeksjaren (2010 en 2013), waarbij alle data gebruikt werden waarbij één of twee spuien 20 cm geopend werden.
-
-Door de beperkte data en grote onzekerheden mbt het aantal glasaal dat zich aanmeldt thv de gesloten spuien (zowel wat betreft het verschil tussen de jaren alsook de schommelingen binnen 1 migratieseizoen), laten de resultaten van de studies van de Ijzer, LK, AKL, KGO en NE niet toe om een meer geavanceerde inschatting te maken op basis van variabelen zoals:
-
--   Het aantal geopende binnenschuiven
-
--   Het aantal geopende buitenschuiven
-
--   De opening van de schuiven
-
--   De duur van het AS event
-
--   Het debiet
-
--   Het waterpeil
-
--   De watertemperatuur
-
-```{r}
-# De meest recente studie van de Ijzer [@mouton2013] was relatief uitgebreid en beschouwde meerdere variabelen maar concludeerde ook hier dat de hoeveelheid glasalen die zich aanmeldt te variabel is om de hoeveelheid glasalen die passeert eenduidig in te schatten. Het belang van het aantal dieren voor de schuiven kwam ook tot uiting bij de analyse van het effect dat het aantal open schuiven heeft: Op het eerste zicht bleek er geen effect te zijn van het aantal open schuiven, maar wanneer een onderscheid werd gemaakt tussen AS events met een grote versus kleine densiteit aan glasaal, bleek dat meer schuiven een significant effect had op het aantal glasalen dat passeert. Een meer informatief model zou daarom ofwel het aandeel glasalen dat succesvol passeert als respons moeten gebruiken of het aantal dieren voor de sluis meenemen als interactiefactor. De benodigde data is daarvoor echter niet voorhanden, noch is er een model beschikbaar dat inschat wat het aantal dieren zou zijn dat zich aanmeldt voor de schuiven op basis van beschikbare omgevingsdata zoals windrichting, neerslag en debiet. Voor het gemiddeld aantal glasaal per event werd gebruik gemaakt van het gemiddelde van de bemonsteringen in 2010 (1 schuif open op 10 cm, lineair geëxtrapoleerd naar 2 schuiven open op 20 cm) [@mouton2010] en 2013 (gemiddeld aantal bij 2 schuiven open op 20 cm) [@mouton2013].
-```
-
-Door bovengemelde beperkingen blijft de huidige inschatting bijzonder ruw en dient deze met de nodige voorzichtigheid geïnterpreteerd te worden.
 
 De inschattingen geven aan dat in **2023 550.392 glasalen** voordeel hebben ondervonden van het aangepast spuibeheer tijdens hun stroomopwaartse migratie.
 
@@ -95,14 +67,19 @@ write.csv(tos.summary,"./data/spuibeheer/intern/as_summary_2023.csv")
 \pagebreak
 
 ```{r warning=FALSE, message=FALSE, include=FALSE}
+RUN=FALSE
 if (RUN==TRUE){
   source("./code/not_functions/combine_debiet.R")
-  save.image(file = "./Rdata/variables_debiet.RData")
+  save(debiet, file = "./Rdata/variables_debiet.RData")
   source("./code/not_functions/combine_neerslag.R")
-  save.image(file = "./Rdata/variables_neerslag.RData")
+  save(neerslag, file = "./Rdata/variables_neerslag.RData")
+  source("./code/not_functions/combine_conductiviteit.R")
+  save(conductiviteit, file = "./Rdata/variables_conductiviteit.RData")
 }
 if (RUN==FALSE){
   load("./Rdata/variables_debiet.RData")
+  load("./Rdata/variables_neerslag.RData")
+  load("./Rdata/variables_conductiviteit.RData")
 }
 ```
 
@@ -122,9 +99,10 @@ ggplot(debiet[which(lubridate::year(debiet$datum.debiet)==2023),], aes(x = datum
 CTD werden geplaatst op deze locaties: [link](https://rpubs.com/spbruneel-INBO/1170130).
 
 ```{r warning=FALSE, message=FALSE, include=FALSE}
+RUN=FALSE
 if (RUN==TRUE){
   source("./code/not_functions/combine_ctd.R")
-  save.image(file = "./Rdata/variables_ctd.RData")
+  save(ctd,file = "./Rdata/variables_ctd.RData")
 }
 if (RUN==FALSE){
   load("./Rdata/variables_ctd.RData")
@@ -180,34 +158,68 @@ for (i in unique(ctd$loc.ctd)){
 
 ```{r warning=FALSE, message=FALSE, include=FALSE}
 source("./code/functions/f.process_ctd_for_plotting.R")
-p.list<-process_ctd_for_plotting(date.min=as.POSIXct("2023-03-01 00:00:00"), date.max=as.POSIXct("2023-05-15 00:00:00"))
+p.list<-process_ctd_for_plotting(date.min=as.POSIXct("2023-03-01 00:00:00", tz="GMT"), date.max=as.POSIXct("2023-05-15 00:00:00", tz="GMT"))
+
+source("./code/functions/f.process_conductiviteit_series_for_plotting.R")
+cond.list<-process_conductiviteit_series_for_plotting(date.min=as.POSIXct("2023-03-01 00:00:00", tz="GMT"), date.max=as.POSIXct("2023-05-15 00:00:00", tz="GMT"))
+
+source("./code/functions/f.process_ctd_series_for_plotting.R")
+ctd.list<-process_ctd_series_for_plotting(date.min=as.POSIXct("2023-03-01 00:00:00", tz="GMT"), date.max=as.POSIXct("2023-05-15 00:00:00", tz="GMT"))
 ```
 
-### Afleidingskanaal van de Leie
+### Uitwateringscomplex Zeebrugge
 
-```{r plotaklm, fig.cap="Verloop van de conductiviteit in het afleidingskanaal van de Leie (AKL) ter hoogte van Moerkerke en debiet ter hoogte van Zomergem in 2023"}
-p.list$`akl moerkerke`
-```
+#### Afleidingskanaal van de Leie
+
+In 2023 werd er, net als in 2022, in het AKL maar op 3 dagen aan aangepast spuibeheer gedaan. In totaal stonden de sluizen hierdoor maar 38 uur open (in 2022 was dit echter wel maar 19 uur).
+
+##### Ramskapelle (5.5 km stroomopwaarts spuiconstructie)
+
+Wegens het beperkt aantal uren spuibeheer op het AKL in 2023, heeft het alternatief spuibeheer geen invloed gehad op de conductiviteit dit jaar thv Ramskapelle. In de zomer en het najaar, worden hogere waarden voor het zoutgehalte geobserveerd.
 
 ```{r plotaklr, fig.cap="Verloop van de conductiviteit in het afleidingskanaal van de Leie (AKL) ter hoogte van Ramskapelle en debiet ter hoogte van Zomergem in 2023"}
 p.list$`akl ramskapelle`
 ```
 
-### Leopoldskanaal
+##### Moerkerke (13 km stroomopwaarts spuiconstructie)
+
+In Moerkerke blijft het zoutgehalte onder de limietgrans van 0.87 mS/cm, met uitzondering van één smalle piek tijdens de studieperiode die echter niet gelinkt lijkt met het aangepast spuibeheer.
+
+```{r plotaklm, fig.cap="Verloop van de conductiviteit in het afleidingskanaal van de Leie (AKL) ter hoogte van Moerkerke en debiet ter hoogte van Zomergem in 2023"}
+p.list$`akl moerkerke`
+```
+
+#### Leopoldskanaal
+
+Steendam et al. (2019, intern rapport) stelden in het rapport ‘Opvolging van de palingstand in het Leopoldkanaal als evaluatie van het aangepast sluisbeheer in functie van een verbeterde glasaalmigratie (2018-2019)’ dat de kansen om de palingdensiteit in het LK significanter op te krikken sterk onderbenut bleven omdat het aangepast sluisbeheer in Zeebrugge (LK en AKL) veel beperkter werd toegepast in vergelijking met de andere waterlopen onder beheer van DVW (Kanaal Gent-Oostende, IJzer). Daarom werd in 2021 door DVW een poging gedaan om het aangepast spuibeheer in het LK op te krikken door de schuiven ook met afgaand tij open te laten staan. Via deze beheermaatregel kon er twee maal per 24 u aangepast gespuid worden. Er werd voor het eerst glasaal binnen gelaten in het LK op 3 maart. De schuiven stonden vanaf 3 maart tot en met 9 maart doorlopend open. Dit veroorzaakte hoge zoutwaarden waardoor het alternatief spuibeheer vanaf 10 maart tot en met 18 maart tijdelijk stilgelegd werd. Vanaf 19 maart werden de schuiven enkel nog overdag geopend – net zoals de voorbijgaande jaren. In 2022 en 2023 werd er terug gespuid volgens de oude manier met enkel de schotten open overdag. In totaal werd er in 2023, 132 uur aangepast gespuid wat vergelijkbaar is met het beheer van 2022 (136 uur). Wat in dagen ongeveer hetzelfde is als voor 2022 maar in uren is er meer dan een halvering door het terug toepassen van het oude systeem met enkel overdag spuien. Dit jaar werd er voor het eerst glasaal binnengelaten op 1 maart (2 maart in 2022).
+
+##### Zeebrugge (1.5 km stroomopwaarts spuiconstructie)
+
+Net stroomopwaarts van de spuischuiven resulteert de toepassing van het alternatief spuibeheer in een over het algemeen sterk verhoogde maar tevens zeer variabel zoutgehalte. De conductiviteit daalt echter snel terug na het beëindigen van het alternatief spuibeheer. De droge zomer leidde tot een verminderede afvoer en veroorzaakte, net als in 2022, een tweede verhoging in de zomer en het najaar.
 
 ```{r plotlkz, fig.cap="Verloop van de conductiviteit in het Leopoldskanaal (LK) ter hoogte van Zeebrugge en debiet ter hoogte van Damme in 2023"}
 p.list$`sk zeebrugge`
 ```
 
-```{r plotlkm, fig.cap="Verloop van de conductiviteit in het Leopoldskanaal (LK) ter hoogte van Moerkerke en debiet ter hoogte van Damme in 2023"}
-p.list$`blinker moerkerke`
-```
+##### Ramskapelle (5.5 km stroomopwaarts spuiconstructie)
+
+Terwijl in 2022 in Ramskapelle hetzelfde patroon als in Zeebrugge werd waargenomen (i.e., een sterke stijging van het zoutgehalte bij de start van het alternatief spuibeheer en een snelle daling net boven de zoetwatergrens bij stopzetting van het alternatief spuibeheer), blijft in 2023 de stijging van het zoutgehalte beperkt tijdens het aangepast spuibeheer. De meer uitgesproken stijging in de zomer wordt echter wel teruggevonden.
 
 ```{r plotlkr, fig.cap="Verloop van de conductiviteit in het Leopoldskanaal (LK) ter hoogte van Ramskapelle en debiet ter hoogte van Damme in 2023"}
 p.list$`lk ramskapelle`
 ```
 
+##### Moerkerke (13 km stroomopwaarts spuiconstructie)
+
+Door problemen met de logger is er geen data voorhanden tijdens de periode van het aangepast spuibeheer.
+
+```{r plotlkm, fig.cap="Verloop van de conductiviteit in het Leopoldskanaal (LK) ter hoogte van Moerkerke en debiet ter hoogte van Damme in 2023"}
+p.list$`blinker moerkerke`
+```
+
 ### Kanaal Gent-Oostende
+
+#### Sas Slijkens (0.9 km stroomopwaarts spuiconstructie)
 
 ```{r plotkgoss, fig.cap="Verloop van de conductiviteit in het kanaal Gent-Oostende (KGO) ter hoogte van sas Slijkens en debiet ter hoogte van Oostkamp in 2023"}
 p.list$`sas slijkens`
@@ -241,6 +253,14 @@ p.list$tervate
 
 ```{r plotijzerd, fig.cap="Verloop van de conductiviteit in de Ijzer ter hoogte van Diskmuide en debiet ter hoogte van Keiem in 2023"}
 p.list$diksmuide
+```
+
+```{r plotctdijzer}
+ctd.list$Ijzer
+```
+
+```{r plotcondijzer}
+cond.list$Ijzer
 ```
 
 ### Kanaal Nieuwpoort-Plasendale
