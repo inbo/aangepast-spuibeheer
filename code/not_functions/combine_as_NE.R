@@ -11,10 +11,14 @@ for (i in 1:length(files)){
   else{df=rbind(df,data)}
 }
 
-df$Opwaartse.Peilmeting.Time<-as.POSIXct(df$Opwaartse.Peilmeting.Time,format="%d/%m/%Y %H:%M:%S")
-df$Afwaartse.Peilmeting.Time<-as.POSIXct(df$Afwaartse.Peilmeting.Time,format="%d/%m/%Y %H:%M:%S")
-df$Schuifstand.Schuif.13.Time<-as.POSIXct(df$Schuifstand.Schuif.13.Time,format="%d/%m/%Y %H:%M:%S")
-df$Schuifstand.Schuif.14.Time<-as.POSIXct(df$Schuifstand.Schuif.14.Time,format="%d/%m/%Y %H:%M:%S")
+df$Opwaartse.Peilmeting.Time<-as.POSIXct(df$Opwaartse.Peilmeting.Time,format="%d/%m/%Y %H:%M:%S", tz="Europe/Brussels")
+attr(df$Opwaartse.Peilmeting.Time, "tzone") <- "GMT"
+df$Afwaartse.Peilmeting.Time<-as.POSIXct(df$Afwaartse.Peilmeting.Time,format="%d/%m/%Y %H:%M:%S", tz="Europe/Brussels")
+attr(df$Afwaartse.Peilmeting.Time, "tzone") <- "GMT"
+df$Schuifstand.Schuif.13.Time<-as.POSIXct(df$Schuifstand.Schuif.13.Time,format="%d/%m/%Y %H:%M:%S", tz="Europe/Brussels")
+attr(df$Schuifstand.Schuif.13.Time, "tzone") <- "GMT"
+df$Schuifstand.Schuif.14.Time<-as.POSIXct(df$Schuifstand.Schuif.14.Time,format="%d/%m/%Y %H:%M:%S", tz="Europe/Brussels")
+attr(df$Schuifstand.Schuif.14.Time, "tzone") <- "GMT"
 
 remove(data) #Verwijder vars die niet meer gebruikt worden
 
