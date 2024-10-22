@@ -71,7 +71,7 @@ ctd$datum.ctd<-round_date(ctd$datum.ctd, unit="30 mins")
 x <- do.call("rbind", by(ctd, ctd$loc.ctd, with, data.frame(loc.ctd = loc.ctd[1], datum.ctd = seq_date(datum.ctd,"30 mins"))))
 ctd <- left_join(x,ctd,by=c("loc.ctd","datum.ctd"))
 ctd$group_plot <- as.character(grouping_breaking_line(ctd$filename))
-x <- ctd %>% group_by(loc.ctd) %>% fill(site)
+ctd <- ctd %>% group_by(loc.ctd) %>% fill(site)
 
 link_ctd_debiet_neerslag<-read.csv("./data/link_ctd_debiet_neerslag.csv",sep=";")
 ctd<-left_join(ctd,link_ctd_debiet_neerslag,by="loc.ctd")

@@ -30,6 +30,7 @@ conductiviteit$datum.conductiviteit<-round_date(conductiviteit$datum.conductivit
 x <- do.call("rbind", by(conductiviteit, conductiviteit$loc.conductiviteit, with, data.frame(loc.conductiviteit = loc.conductiviteit[1], datum.conductiviteit = seq_date(datum.conductiviteit,"1 day"))))
 conductiviteit <- left_join(x,conductiviteit,by=c("loc.conductiviteit","datum.conductiviteit"))
 conductiviteit$group_plot <- as.character(grouping_breaking_line(conductiviteit$conductiviteit))
+conductiviteit <- conductiviteit %>% group_by(loc.conductiviteit) %>% fill(site.conductiviteit)
 
 link_conductiviteit_debiet_neerslag<-read.csv("./data/link_conductiviteit_debiet_neerslag.csv",sep=";")
 conductiviteit<-left_join(conductiviteit,link_conductiviteit_debiet_neerslag,by="loc.conductiviteit")
