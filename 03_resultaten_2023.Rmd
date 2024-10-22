@@ -109,53 +109,6 @@ if (RUN==FALSE){
 }
 ```
 
-```{r eval=FALSE}
-k=0
-for (i in unique(ctd$loc.ctd)){
-  k=k+1
-  ctd.temp=ctd[which(ctd$loc.ctd==i),]
-  max_cond <- max(ctd.temp$geleidbaarheid,na.rm=TRUE)
-  min_cond <- min(ctd.temp$geleidbaarheid,na.rm=TRUE)
-  
-  cond_df <- ctd.temp %>%
-    dplyr::select(geleidbaarheid, datum.ctd) %>%
-    rename("value_raw" = geleidbaarheid) %>%
-    mutate(meting = "conductiviteit",na.rm=TRUE) %>%
-    mutate(value = (value_raw - min_cond) / ((max_cond - min_cond)  / 5),na.rm=TRUE)
-  
-  debiet_df <- ctd.temp %>%
-    dplyr::select(debiet, datum.ctd) %>%
-    rename("value" = debiet) %>%
-    mutate(meting = "debiet")
-  
-  df<-bind_rows(cond_df, debiet_df) %>%
-    mutate(meting = factor(meting, levels = c("debiet", "conductiviteit"))) 
-  
-  g<-ggplot(df) +
-      annotate("rect", xmin = as.POSIXct("2023-03-01 00:00:00"),
-                    xmax = as.POSIXct("2023-05-26 00:00:00"),
-                    ymin = -Inf, ymax = Inf,
-                fill = "orange", alpha = 0.3) +
-      geom_line(aes(x = datum.ctd, y = value, colour = meting)) +
-      scale_y_continuous(name = "Debiet (m³/s)",
-                         sec.axis = sec_axis(~ . * ((max_cond - min_cond) / 5)
-                                             + min_cond,
-                                             name = "Waterhoogte (mTAW)")) +
-      scale_color_manual(breaks = c("debiet", "conductiviteit"),
-                         values = c("debiet" = "lightcyan3",
-                                    "conductiviteit" = "red")) +
-  
-      labs(title = "Waterhoogte en conductiviteit Maertensas 2022", x = "",
-           colour = "") +
-      theme_bw() +
-      theme(
-        legend.position='top', 
-        legend.justification='left',
-        legend.direction='horizontal'
-      )
-}
-```
-
 ```{r warning=FALSE, message=FALSE, include=FALSE}
 source("./code/functions/f.process_ctd_for_plotting.R")
 p.list<-process_ctd_for_plotting(date.min=as.POSIXct("2023-03-01 00:00:00", tz="GMT"), date.max=as.POSIXct("2023-05-15 00:00:00", tz="GMT"))
