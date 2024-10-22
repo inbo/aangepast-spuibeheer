@@ -11,7 +11,7 @@ process_conductiviteit_series_for_plotting<-function(date.min,date.max){
     os.plot<-os[which(os$site==unique(conductiviteit.plot$site.conductiviteit) & os$jaar==unique(lubridate::year(conductiviteit.plot$datum.conductiviteit))),] 
     p.list[[k]]<-ggplot(conductiviteit.plot, aes(x = datum.conductiviteit, y = `geleidbaarheid (mS/cm)`)) + 
       geom_rect(data=os.plot, inherit.aes=FALSE, aes(xmin=open, xmax=dicht, ymin=-Inf, ymax=Inf), color="green", alpha=0.3, size=0.2) +
-      geom_line(aes(group=group_plot)) +
+      geom_line(aes(group=group_plot)) + geom_smooth(aes(group=group_plot),colour="black",method = loess,alpha = 0.3,size=0.5) +
       annotate("rect", xmin = date.min, xmax = date.max, ymin = -Inf, ymax = Inf, fill = "orange", alpha = 0.3) +
       xlab("Datum") + ylab("Waarde") +
       facet_wrap(~ loc.conductiviteit, ncol=2) + 

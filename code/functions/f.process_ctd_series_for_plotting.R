@@ -11,7 +11,7 @@ process_ctd_series_for_plotting<-function(date.min,date.max){
     os.plot<-os[which(os$site==unique(ctd.plot$site) & os$jaar==unique(lubridate::year(ctd.plot$datum.ctd))),]
     p.list[[k]]<-ggplot(ctd.plot, aes(x = datum.ctd, y = `geleidbaarheid (mS/cm)`)) + 
       geom_rect(data=os.plot, inherit.aes=FALSE, aes(xmin=open, xmax=dicht, ymin=-Inf, ymax=Inf), color="green", alpha=0.3, size=0.2) +
-      geom_line(aes(group=group_plot)) +
+      geom_line(aes(group=group_plot)) + geom_smooth(aes(group=group_plot),colour="black",method = loess,alpha = 0.3,size=0.5) +
       annotate("rect", xmin = date.min, xmax = date.max, ymin = -Inf, ymax = Inf, fill = "orange", alpha = 0.3) +
       xlab("Datum") + ylab("Waarde") +
       facet_wrap(~ loc.ctd, ncol=2) + 
