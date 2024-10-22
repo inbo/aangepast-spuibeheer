@@ -235,6 +235,14 @@ p.list$brugge
 
 ### Ijzer
 
+```{r plotctdijzer}
+ctd.list$Ijzer
+```
+
+```{r plotcondijzer}
+cond.list$Ijzer
+```
+
 ```{r plotijzery, fig.cap="Verloop van de conductiviteit in de Ijzer ter hoogte van de Yserstar en debiet ter hoogte van Keiem in 2023"}
 p.list$yserstar
 ```
@@ -253,14 +261,6 @@ p.list$tervate
 
 ```{r plotijzerd, fig.cap="Verloop van de conductiviteit in de Ijzer ter hoogte van Diskmuide en debiet ter hoogte van Keiem in 2023"}
 p.list$diksmuide
-```
-
-```{r plotctdijzer}
-ctd.list$Ijzer
-```
-
-```{r plotcondijzer}
-cond.list$Ijzer
 ```
 
 ### Kanaal Nieuwpoort-Plasendale
