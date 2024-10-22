@@ -8,10 +8,12 @@ process_ctd_series_for_plotting<-function(date.min,date.max){
   for (i in unique(ctd$site)){
     k=k+1
     ctd.plot <- ctd %>% dplyr::filter(site==i) %>% mutate(loc.ctd=paste(distance,loc.ctd))
+    ctd.plot.daily <- ctd.plot %>% mutate(date=as.POSIXct(paste(as.Date(datum.ctd),"12:00:00"),tz="GMT")) %>% group_by(date,loc.ctd) %>% 
+      summarise(across(where(is.numeric), mean, na.rm=TRUE))
     os.plot<-os[which(os$site==unique(ctd.plot$site) & os$jaar==unique(lubridate::year(ctd.plot$datum.ctd))),]
     p.list[[k]]<-ggplot(ctd.plot, aes(x = datum.ctd, y = `geleidbaarheid (mS/cm)`)) + 
       geom_rect(data=os.plot, inherit.aes=FALSE, aes(xmin=open, xmax=dicht, ymin=-Inf, ymax=Inf), color="green", alpha=0.3, size=0.2) +
-      geom_line(aes(group=group_plot)) + geom_smooth(aes(group=group_plot),colour="black",method = loess,alpha = 0.3,size=0.5) +
+      geom_line(aes(group=group_plot)) + geom_point(data=ctd.plot.daily,aes(x=date,y=`geleidbaarheid (mS/cm)`),color="black",shape=1,size=0.8) +
       annotate("rect", xmin = date.min, xmax = date.max, ymin = -Inf, ymax = Inf, fill = "orange", alpha = 0.3) +
       xlab("Datum") + ylab("Waarde") +
       facet_wrap(~ loc.ctd, ncol=2) + 
