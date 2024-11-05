@@ -15,7 +15,12 @@ Ijzer2024 <- clean_ijzer_and_va(file = "./data/spuibeheer/extern/verwerkt_in_exc
                                 tijd = 2,
                                 opmerking = 14,
                                 site = "Ijzer")
-
+VA2022 <- clean_ijzer_and_va(file = "./data/spuibeheer/extern/verwerkt_in_excel/os_VA_2022.xlsx",
+                             skip = 6,
+                             datum = 1,
+                             tijd = 2,
+                             opmerking = 8,
+                             site = "VA")
 VA2023 <- clean_ijzer_and_va(file = "./data/spuibeheer/extern/verwerkt_in_excel/os_VA_2023.xlsx",
                              skip = 6,
                              datum = 1,
