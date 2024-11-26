@@ -99,7 +99,7 @@ ggplot(debiet[which(lubridate::year(debiet$datum.debiet)==2023),], aes(x = datum
 CTD werden geplaatst op deze locaties: [link](https://rpubs.com/spbruneel-INBO/1170130).
 
 ```{r warning=FALSE, message=FALSE, include=FALSE}
-RUN=FALSE
+RUN=TRUE
 if (RUN==TRUE){
   source("./code/not_functions/combine_ctd.R")
   save(ctd,file = "./Rdata/variables_ctd.RData")
@@ -130,15 +130,11 @@ In 2023 werd er, net als in 2022, in het AKL maar op drie dagen aan aangepast sp
 ctd.list$AKL
 ```
 
-##### Ramskapelle (5.5 km stroomopwaarts spuiconstructie)
-
-```{r plotaklr, fig.cap="Verloop van de conductiviteit in het afleidingskanaal van de Leie (AKL) ter hoogte van Ramskapelle en debiet ter hoogte van Zomergem in 2023"}
+```{r plotaklr, fig.cap="Verloop van de conductiviteit in het afleidingskanaal van de Leie (AKL) ter hoogte van Ramskapelle (5.5 km stroomopwaarts spuiconstructie) en debiet ter hoogte van Zomergem in 2023"}
 p.list$`akl ramskapelle`
 ```
 
-##### Moerkerke (13 km stroomopwaarts spuiconstructie)
-
-```{r plotaklm, fig.cap="Verloop van de conductiviteit in het afleidingskanaal van de Leie (AKL) ter hoogte van Moerkerke en debiet ter hoogte van Zomergem in 2023"}
+```{r plotaklm, fig.cap="Verloop van de conductiviteit in het afleidingskanaal van de Leie (AKL) ter hoogte van Moerkerke (13 km stroomopwaarts spuiconstructie) en debiet ter hoogte van Zomergem in 2023"}
 p.list$`akl moerkerke`
 ```
 
@@ -146,7 +142,7 @@ p.list$`akl moerkerke`
 
 In totaal werd er in 2023, 132 uur aangepast gespuid wat vergelijkbaar is met het beheer van 2022 (136 uur). Wat in dagen ongeveer hetzelfde is als voor 2022 maar in uren is er meer dan een halvering door het terug toepassen van het oude systeem met enkel overdag spuien. Dit jaar werd er voor het eerst glasaal binnengelaten op 1 maart (2 maart in 2022).
 
-Net stroomopwaarts van de spuischuiven ter hoogte van Zeebrugge resulteert de toepassing van het alternatief spuibeheer in een over het algemeen sterk verhoogde maar tevens zeer variabel zoutgehalte. De conductiviteit daalt echter snel terug na het beëindigen van het alternatief spuibeheer. De droge zomer leidde tot een verminderde afvoer en veroorzaakte, net als in 2022, een tweede verhoging in de zomer en het najaar. Wanneer het daggemiddelde van de conductiviteit wordt vergelijken met de metingen per kwartier, blijkt wel dat de variabiliteit in de periode van het aangepast spuibeheer veel groter is dan tijdens de zomer. Ter hoogte van Ramskapelle en verder stroomopwaarts lijkt, net als voor het AKL, de conductiviteit weinig tot niet beinvloedt door het aangepast spuibeheer.
+Net stroomopwaarts van de spuischuiven ter hoogte van Zeebrugge resulteert de toepassing van het alternatief spuibeheer in een over het algemeen sterk verhoogde maar tevens zeer variabel zoutgehalte. De conductiviteit daalt echter snel terug na het beëindigen van het alternatief spuibeheer. De droge zomer leidde tot een verminderde afvoer en veroorzaakte, net als in 2022, een tweede verhoging in de zomer en het najaar. Wanneer het daggemiddelde van de conductiviteit wordt vergelijken met de metingen per kwartier, blijkt wel dat de variabiliteit in de periode van het aangepast spuibeheer veel groter is dan tijdens de zomer. Ter hoogte van Ramskapelle en verder stroomopwaarts lijkt, net als voor het AKL, de conductiviteit weinig tot niet beïnvloedt door het aangepast spuibeheer.
 
 Terwijl in 2022 in Ramskapelle hetzelfde patroon als in Zeebrugge werd waargenomen (i.e., een sterke stijging van het zoutgehalte bij de start van het alternatief spuibeheer en een snelle daling net boven de zoetwatergrens bij stopzetting van het alternatief spuibeheer), blijft in 2023 de stijging van het zoutgehalte beperkt tijdens het aangepast spuibeheer. De meer uitgesproken stijging in de zomer wordt echter wel teruggevonden.
 
@@ -156,47 +152,35 @@ Voor Moerkerke en Oostkamp (Brugge) was er door problemen met de logger geen dat
 ctd.list$LK
 ```
 
-##### Zeebrugge (1.5 km stroomopwaarts spuiconstructie)
-
-```{r plotlkz, fig.cap="Verloop van de conductiviteit in het Leopoldskanaal (LK) ter hoogte van Zeebrugge en debiet ter hoogte van Damme in 2023"}
+```{r plotlkz, fig.cap="Verloop van de conductiviteit in het Leopoldskanaal (LK) ter hoogte van Zeebrugge (1.5 km stroomopwaarts spuiconstructie) en debiet ter hoogte van Damme in 2023"}
 p.list$`sk zeebrugge`
 ```
 
-##### Ramskapelle (5.5 km stroomopwaarts spuiconstructie)
-
-```{r plotlkr, fig.cap="Verloop van de conductiviteit in het Leopoldskanaal (LK) ter hoogte van Ramskapelle en debiet ter hoogte van Damme in 2023"}
+```{r plotlkr, fig.cap="Verloop van de conductiviteit in het Leopoldskanaal (LK) ter hoogte van Ramskapelle (5.5 km stroomopwaarts spuiconstructie) en debiet ter hoogte van Damme in 2023"}
 p.list$`lk ramskapelle`
 ```
 
-##### Moerkerke (13 km stroomopwaarts spuiconstructie)
-
-```{r plotlkm, fig.cap="Verloop van de conductiviteit in het Leopoldskanaal (LK) ter hoogte van Moerkerke en debiet ter hoogte van Damme in 2023"}
+```{r plotlkm, fig.cap="Verloop van de conductiviteit in het Leopoldskanaal (LK) ter hoogte van Moerkerke (13 km stroomopwaarts spuiconstructie) en debiet ter hoogte van Damme in 2023"}
 p.list$`blinker moerkerke`
 ```
 
 ### Kanaal Gent-Oostende
 
-In het KGO werd er glasaal binnen gelaten vanaf 6 maart tot 5 mei. Het aangepast spuibeheer duurde in totaal 7685 minuten wat slechts iets meer is dan de helft van de duur van vorig jaar (14700 minuten). Net als vorig jaar doen er zich ter hoogte van Sas Slijkens al pieken voor nog voor de aanvang van het aangepast spuibeheer. Pieken tijdens het aangepast spuibheer lijken wel overeen te komen met momenten van intensiever aangepast spuibeheer, maar dit kan niet sluitend gelinkt worden aan het aangepast spuibeheer. Ter hoogte van Plassendale en Brugge lijkt de link tussen conductiviteit en aangepast spuibeheer afwezig.
+In het KGO werd er glasaal binnen gelaten vanaf 6 maart tot 5 mei. Het aangepast spuibeheer duurde in totaal 7685 minuten wat slechts iets meer is dan de helft van de duur van vorig jaar (14700 minuten). Net als vorig jaar doen er zich ter hoogte van Sas Slijkens al pieken voor nog voor de aanvang van het aangepast spuibeheer. Pieken tijdens het aangepast spuibeheer lijken wel overeen te komen met momenten van intensiever aangepast spuibeheer, maar dit kan niet sluitend gelinkt worden aan het aangepast spuibeheer. Ter hoogte van Plassendale en Brugge lijkt de link tussen conductiviteit en aangepast spuibeheer afwezig.
 
 ```{r plotctdkgo, fig.cap="Verloop van de conductiviteit in het KGO (INBO metingen elke 15 minuten)"}
 ctd.list$KGO
 ```
 
-#### Sas Slijkens (0.9 km stroomopwaarts spuiconstructie)
-
-```{r plotkgoss, fig.cap="Verloop van de conductiviteit in het kanaal Gent-Oostende (KGO) ter hoogte van sas Slijkens en debiet ter hoogte van Oostkamp in 2023"}
+```{r plotkgoss, fig.cap="Verloop van de conductiviteit in het kanaal Gent-Oostende (KGO) ter hoogte van sas Slijkens (0.9 km stroomopwaarts spuiconstructie) en debiet ter hoogte van Oostkamp in 2023"}
 p.list$`sas slijkens`
 ```
 
-#### Plassendale (7.0 km stroomopwaarts spuiconstructie)
-
-```{r plotkgop, fig.cap="Verloop van de conductiviteit in het kanaal Gent-Oostende (KGO) ter hoogte van Plassendale en debiet ter hoogte van Oostkamp in 2023"}
+```{r plotkgop, fig.cap="Verloop van de conductiviteit in het kanaal Gent-Oostende (KGO) ter hoogte van Plassendale (7.0 km stroomopwaarts spuiconstructie) en debiet ter hoogte van Oostkamp in 2023"}
 p.list$plassendale
 ```
 
-#### Oostkamp (13.3 km stroomopwaarts spuiconstructie)
-
-```{r plotkgob, fig.cap="Verloop van de conductiviteit in het kanaal Gent-Oostende (KGO) ter hoogte van Oostkamp (Brugge) en debiet ter hoogte van Oostkamp in 2023"}
+```{r plotkgob, fig.cap="Verloop van de conductiviteit in het kanaal Gent-Oostende (KGO) ter hoogte van Oostkamp (13.3 km stroomopwaarts spuiconstructie) en debiet ter hoogte van Oostkamp in 2023"}
 p.list$brugge
 ```
 
@@ -208,41 +192,31 @@ In de Ijzer is er net als voor het KGO een **sterke variabiliteit dicht bij de s
 ctd.list$Ijzer
 ```
 
-```{r plotcondijzer, fig.cap="Verloop van de conductiviteit in de Ijzer (VMM metingen elke 24 uur, telkens om 23h lokale tijd)"}
+```{r plotcondijzer, include=FALSE, fig.cap="Verloop van de conductiviteit in de Ijzer (VMM metingen elke 24 uur, telkens om 23h lokale tijd)"}
 cond.list$Ijzer
 ```
 
-#### Ysermondesteiger (0,2 km stroomopwaarts spuiconstructie)
-
-```{r plotijzery, fig.cap="Verloop van de conductiviteit in de Ijzer ter hoogte van de Yserstar en debiet ter hoogte van Keiem in 2023"}
+```{r plotijzery, fig.cap="Verloop van de conductiviteit in de Ijzer ter hoogte van de Ijzermondesteiger (0,2 km stroomopwaarts spuiconstructie) en debiet ter hoogte van Keiem in 2023"}
 p.list$yserstar
 ```
 
-#### Uniebrug (3,3 km stroomopwaarts spuiconstructie)
-
-```{r plotijzeru, fig.cap="Verloop van de conductiviteit in de Ijzer ter hoogte van de Uniebrug en debiet ter hoogte van Keiem in 2023"}
+```{r plotijzeru, fig.cap="Verloop van de conductiviteit in de Ijzer ter hoogte van de Uniebrug (3,3 km stroomopwaarts spuiconstructie) en debiet ter hoogte van Keiem in 2023"}
 p.list$uniebrug
 ```
 
-#### Schoorbakkebrug (7,3 km stroomopwaarts spuiconstructie)
-
-```{r plotijzers, fig.cap="Verloop van de conductiviteit in de Ijzer ter hoogte van de Schoorbakkebrug en debiet ter hoogte van Keiem in 2023"}
+```{r plotijzers, fig.cap="Verloop van de conductiviteit in de Ijzer ter hoogte van de Schoorbakkebrug (7,3 km stroomopwaarts spuiconstructie) en debiet ter hoogte van Keiem in 2023"}
 p.list$schoorbakkebrug
 ```
 
-#### Tervatebrug (10,6 km stroomopwaarts spuiconstructie)
-
-```{r plotijzert, fig.cap="Verloop van de conductiviteit in de Ijzer ter hoogte van Tervate en debiet ter hoogte van Keiem in 2023"}
+```{r plotijzert, fig.cap="Verloop van de conductiviteit in de Ijzer ter hoogte van Tervate (10,6 km stroomopwaarts spuiconstructie) en debiet ter hoogte van Keiem in 2023"}
 p.list$tervate
 ```
 
-#### Diksmuide (17 km stroomopwaarts spuiconstructie)
-
-```{r plotijzerd, fig.cap="Verloop van de conductiviteit in de Ijzer ter hoogte van Diskmuide en debiet ter hoogte van Keiem in 2023"}
+```{r plotijzerd, fig.cap="Verloop van de conductiviteit in de Ijzer ter hoogte van Diskmuide (17 km stroomopwaarts spuiconstructie) en debiet ter hoogte van Keiem in 2023"}
 p.list$diksmuide
 ```
 
-### Kanaal Nieuwpoort-Plasendale
+### Kanaal Nieuwpoort-Plassendale
 
 ```{r plotknp, fig.cap="Verloop van de conductiviteit in het kanaal Nieuwpoort-Plassendale ter hoogte van Nieuwpoort-Plassendale en debiet ter hoogte van Keiem in 2023"}
 p.list$`nieuwpoort-plassendale`
@@ -256,26 +230,32 @@ p.list$`oude veurne vaart`
 
 ### Noordede
 
-Het aangepast spuibeheer in de Noordede onderscheidt zich van het aangepast spuibeheer op andere sites op vlak van frequentie en duur per AS event. In totale duur situeert de Noordede zich tussen Veurne Ambacht en het Leopoldskanaal, maar het heeft wel het hoogste aantal AS events doordat het ook de meest korte events heeft. Dit lijkt een positief effect te hebben op de zoutintrusie. Ter hoogte van de spuischuiven is er inderdaad opnieuwe een sterke variabiliteit, maar de waarden verschillen maar beperkt van de periode ervoor en erna. Verder stroomopwaarts lijkt in de periode van aangepast spuibeheer de conductivitiet zelfs lager dan de periode ervoor en erna.
+Het aangepast spuibeheer in de Noordede onderscheidt zich van het aangepast spuibeheer op andere sites op vlak van frequentie en duur per AS event. In totale duur situeert de Noordede zich tussen Veurne Ambacht en het Leopoldskanaal, maar het heeft wel het hoogste aantal AS events doordat het ook de meest korte events heeft. Dit lijkt een positief effect te hebben op de zoutintrusie. Ter hoogte van de spuischuiven is er inderdaad opnieuw een sterke variabiliteit, maar de waarden verschillen maar beperkt van de periode ervoor en erna. Verder stroomopwaarts lijkt in de periode van aangepast spuibeheer de conductiviteit zelfs lager dan de periode ervoor en erna.
 
-```{r plotctdne, fig.cap="Verloop van de conductiviteit in de NE (INBO metingen elke 15 minuten)"}
+```{r plotctdne, fig.cap="Verloop van de actuele conductiviteit in de NE (INBO metingen elke 15 minuten)"}
 ctd.list$NE
+jpeg(filename="./figures/NE-inbo.jpeg")
+ctd.list$NE
+dev.off()
 ```
 
-#### Maertensas (1,0 km stroomopwaarts spuiconstructie)
-
-```{r plotnem, fig.cap="Verloop van de conductiviteit in de Noordede (NE) ter hoogte van de Maertensas en debiet ter hoogte van Oostkamp in 2023"}
+```{r plotnem, fig.cap="Verloop van de actuele conductiviteit en temperatuur in de Noordede (NE) ter hoogte van de Maertensas (1,0 km stroomopwaarts spuiconstructie), debiet ter hoogte van Oostkamp en neerslag ter hoogte van Klemskerke in 2023"}
 p.list$maertensas
+jpeg(filename="./figures/maertensas.jpeg")
+p.list$maertensas
+dev.off()
 ```
 
-#### Blauwe sluis (3,0 km stroomopwaarts spuiconstructie)
-
-```{r plotnebs, fig.cap="Verloop van de conductiviteit in de Noordede (NE) ter hoogte van de blauwe sluis en debiet ter hoogte van Oostkamp in 2023"}
+```{r plotnebs, fig.cap="Verloop van de actuele conductiviteit en temperatuur in de Noordede (NE) ter hoogte van de blauwe sluis (3,0 km stroomopwaarts spuiconstructie), debiet ter hoogte van Oostkamp en neerslag ter hoogte van Klemskerke in 2023"}
 p.list$`blauwe sluis`
+jpeg(filename="./figures/blauwesluis.jpeg")
+p.list$`blauwe sluis`
+dev.off()
 ```
 
-#### Clemensheule (4,0 km stroomopwaarts spuiconstructie)
-
-```{r plotnec, fig.cap="Verloop van de conductiviteit in de Noordede (NE) ter hoogte van Clemensheule en debiet ter hoogte van Oostkamp in 2023"}
+```{r plotnec, fig.cap="Verloop van de actuele conductiviteit en temperatuur in de Noordede (NE) ter hoogte van Clemensheule (4,0 km stroomopwaarts spuiconstructie), debiet ter hoogte van Oostkamp en neerslag ter hoogte van Klemskerke in 2023"}
 p.list$clemensheule
+jpeg(filename="./figures/clemensheule.jpeg")
+p.list$clemensheule
+dev.off()
 ```
