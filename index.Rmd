@@ -74,10 +74,13 @@ rightsholder: Instituut voor Natuur- en Bosonderzoek (INBO)
 bibliography: references.bib
 link-citations: TRUE
 site: bookdown::bookdown_site
+always_allow_html: TRUE
+#rmd_files: ["index.Rmd", "000_abstract.Rmd", "001_resume.Rmd", "01_inleiding.Rmd", "02_materiaal_en_methoden.Rmd", "./resultaten/2023/03_resultaten_2023.Rmd", "zzz_references_and_appendix.Rmd"]
 output:
   INBOmd::gitbook: default
   INBOmd::pdf_report: default
   INBOmd::epub_book: default
+  bookdown::word_document2: default
 # Don't run the format below.
 # Only required for RStudio to recognise the project as a bookdown project.
 # Hence don't use 'Build all formats'.
