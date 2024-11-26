@@ -30,7 +30,7 @@ library(units)
 library(tools)
 library(kableExtra)
 library(sessioninfo)
-
+library(wql)
 library(WaveletComp)
 
 # package_info(
