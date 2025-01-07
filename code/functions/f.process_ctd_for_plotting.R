@@ -1,10 +1,16 @@
 #process_ctd_for_plotting
 process_ctd_for_plotting<-function(date.min,date.max){
   ctd.long <- ctd %>% 
-    dplyr::select(-druk,-geleidbaarheid) %>% 
-    rename("debiet (m³/s)"="debiet", "temperatuur (°C)"="temperatuur", "neerslag (mm)" = "neerslag", "saliniteit (psu)" = "saliniteit") %>% 
+    dplyr::select(-druk) %>% 
+    rename("debiet (m³/s)"="debiet", "temperatuur (°C)"="temperatuur", "neerslag (mm)" = "neerslag", "saliniteit (psu)" = "saliniteit", "spec. geleidbaarheid (mS/cm)" = "spgeleidbaarheid","act. geleidbaarheid (mS/cm)" = "geleidbaarheid") %>% 
     pivot_longer(cols=where(is.numeric),names_to="parameter",values_to="value") %>%
     dplyr::filter(datum.ctd>=date.min-lubridate::days(50) & datum.ctd<=date.max+lubridate::days(90))
+  ctd.long$parameter<-factor(ctd.long$parameter, levels = c("act. geleidbaarheid (mS/cm)",
+                                                            "spec. geleidbaarheid (mS/cm)",
+                                                            "saliniteit (psu)",
+                                                            "debiet (m³/s)",
+                                                            "temperatuur (°C)",
+                                                            "neerslag (mm)"))
   k=0
   p.list<-list()
   for (i in unique(ctd$loc.ctd)){

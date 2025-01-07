@@ -1,7 +1,7 @@
 #process_ctd_series_for_plotting
 process_ctd_series_for_plotting<-function(date.min,date.max){
   ctd <- ctd %>% 
-    rename("debiet (m³/s)"="debiet", "geleidbaarheid (mS/cm)"="geleidbaarheid", "neerslag (mm)" = "neerslag", "saliniteit (psu)" = "saliniteit") %>% 
+    rename("debiet (m³/s)"="debiet", "geleidbaarheid (mS/cm)"="geleidbaarheid", "neerslag (mm)" = "neerslag", "saliniteit (psu)" = "saliniteit", "spec. geleidbaarheid (mS/cm)" = "spgeleidbaarheid") %>% 
     dplyr::filter(datum.ctd>=date.min-lubridate::days(50) & datum.ctd<=date.max+lubridate::days(90))
   k=0
   p.list<-list()
@@ -11,11 +11,11 @@ process_ctd_series_for_plotting<-function(date.min,date.max){
     ctd.plot.daily <- ctd.plot %>% mutate(date=as.POSIXct(paste(as.Date(datum.ctd),"12:00:00"),tz="GMT")) %>% group_by(date,loc.ctd) %>% 
       summarise(across(where(is.numeric), mean, na.rm=TRUE))
     os.plot<-os[which(os$site==unique(ctd.plot$site) & os$jaar==unique(lubridate::year(ctd.plot$datum.ctd))),]
-    p.list[[k]]<-ggplot(ctd.plot, aes(x = datum.ctd, y = `saliniteit (psu)`)) + 
+    p.list[[k]]<-ggplot(ctd.plot, aes(x = datum.ctd, y = `spec. geleidbaarheid (mS/cm)`)) + 
       geom_rect(data=os.plot, inherit.aes=FALSE, aes(xmin=open, xmax=dicht, ymin=-Inf, ymax=Inf), color="green", alpha=0.3, size=0.2) +
-      geom_line(aes(group=group_plot)) + geom_point(data=ctd.plot.daily,aes(x=date,y=`saliniteit (psu)`),color="black",shape=1,size=0.8) +
+      geom_line(aes(group=group_plot)) + geom_point(data=ctd.plot.daily,aes(x=date,y=`spec. geleidbaarheid (mS/cm)`),color="black",shape=1,size=0.8) +
       annotate("rect", xmin = date.min, xmax = date.max, ymin = -Inf, ymax = Inf, fill = "orange", alpha = 0.3) +
-      xlab("Datum") + ylab("Waarde") +
+      xlab("Datum") + ylab("spec. geleidbaarheid (mS/cm)") +
       facet_wrap(~ loc.ctd, ncol=2) + 
       theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1, size=15), axis.text.y = element_text(size=15), axis.title = element_text(size = 20), title = element_text(size = 30), strip.text = element_text(size=15)) +
       scale_x_datetime(date_labels = "%d-%m-%Y", date_breaks = "1 month") + ggtitle(i)
