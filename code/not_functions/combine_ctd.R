@@ -73,6 +73,7 @@ ctd <- left_join(x,ctd,by=c("loc.ctd","datum.ctd"))
 ctd$group_plot <- as.character(grouping_breaking_line(ctd$filename))
 ctd <- ctd %>% group_by(loc.ctd) %>% fill(site)
 ctd$saliniteit <- ec2pss(ctd$geleidbaarheid,ctd$temperatuur)
+ctd$spgeleidbaarheid<-f.sp.conductance(ctd$geleidbaarheid,ctd$temperatuur)
 
 link_ctd_debiet_neerslag<-read.csv("./data/link_ctd_debiet_neerslag.csv",sep=";")
 ctd<-left_join(ctd,link_ctd_debiet_neerslag,by="loc.ctd")
