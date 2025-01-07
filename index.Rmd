@@ -1,7 +1,13 @@
 ---
-title: "Opvolging van de zoutintrusie in de Ijzer, het kanaal Gent-Oostende, het Leopoldkanaal en het afleidingskanaal van de Leie"
+title: "Opvolging van de zoutintrusie in de Ijzer, het kanaal Gent-Oostende, het Leopoldkanaal, het afleidingskanaal van de Leie en de Noordede"
 subtitle: Aangepast spuibeheer in 2023 in functie van glasaalmigratie
 author:
+  - name:
+      given: "Stijn"
+      family: "Bruneel"
+    email: "stijn.bruneel@inbo.be"
+    orcid: "0000-0002-8226-8080"
+    affiliation: "Instituut voor Natuur- en Bosonderzoek (INBO)"
   - name:
       given: "Lore"
       family: "Vandamme"
@@ -9,12 +15,6 @@ author:
     orcid: "0009-0000-0500-9547"
     affiliation: "Instituut voor Natuur- en Bosonderzoek (INBO)"
     corresponding: true
-  - name:
-      given: "Stijn"
-      family: "Bruneel"
-    email: "stijn.bruneel@inbo.be"
-    orcid: "0000-0002-8226-8080"
-    affiliation: "Instituut voor Natuur- en Bosonderzoek (INBO)"
   - name:
       given: "David"
       family: "Buysse"
@@ -26,6 +26,18 @@ author:
       family: "Broos"
     email: "sarah.broos@inbo.be"
     orcid: "0000-0001-9742-6224"
+    affiliation: "Instituut voor Natuur- en Bosonderzoek (INBO)"
+  - name:
+      given: "Pieterjan"
+      family: "Verhelst"
+    email: "pieterjan.verhelst@inbo.be"
+    orcid: "0000-0002-2610-6941"
+    affiliation: "Instituut voor Natuur- en Bosonderzoek (INBO)"
+  - name:
+      given: "Ine"
+      family: "Pauwels"
+    email: "ine.pauwels@inbo.be"
+    orcid: "0000-0002-2856-8787"
     affiliation: "Instituut voor Natuur- en Bosonderzoek (INBO)"
   - name:
       given: "Simon"
@@ -40,16 +52,22 @@ author:
     orcid: "?"
     affiliation: "Instituut voor Natuur- en Bosonderzoek (INBO)"
   - name:
-      given: "Sebastien"
-      family: "Pieters"
-    email: "sebastien.pieters@inbo.be"
-    orcid: "?"
-    affiliation: "Instituut voor Natuur- en Bosonderzoek (INBO)"
-  - name:
       given: "Nico"
       family: "Demaerteleire"
     email: "nico.demaerteleire@inbo.be"
     orcid: "?"
+    affiliation: "Instituut voor Natuur- en Bosonderzoek (INBO)"
+  - name:
+      given: "Mylan"
+      family: "Lyssens"
+    email: "mylan.lyssens@inbo.be"
+    orcid: "?"
+    affiliation: "Instituut voor Natuur- en Bosonderzoek (INBO)"
+  - name:
+      given: "Johan"
+      family: "Coeck"
+    email: "johan.coeck@inbo.be"
+    orcid: "0000-0003-2732-7428"
     affiliation: "Instituut voor Natuur- en Bosonderzoek (INBO)"
 reviewer:
   - name:
@@ -94,13 +112,6 @@ De tekst voor het optionele dankwoord.
 # Voorwoord {.unnumbered}
 
 De tekst voor het optionele voorwoord.
-
-# Samenvatting {.unnumbered}
-
-<!-- description: start -->
-
-
-<!-- description: end -->
 
 # Aanbevelingen voor beheer en/of beleid {.unnumbered}
 
