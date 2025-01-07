@@ -32,7 +32,7 @@ include_graphics(path = "./media/AKL_LK.png")
 
 ### Conductiviteitsmetingen
 
-Conductiviteitsmetingen werden uitgevoerd met CTD Divers (SWS Technology) en/of ‘HOBO U24 Fresh Water Conductivity Data Logger’. Aangezien zout water een hogere densiteit heeft, en dus zwaarder is dan zoet water, werden de divers in een metalen kooi een tiental centimeter boven de bodem bevestigd (Figuur 5). Op basis van debietsgegevens (afkomstig van het Hydrologisch Informatie Centrum) kon de relatie tussen afvoer en conductiviteit opgevolgd worden.
+Conductiviteitsmetingen werden uitgevoerd met CTD Divers (SWS Technology) en/of ‘HOBO U24 Fresh Water Conductivity Data Logger’. Aangezien zout water een hogere densiteit heeft, en dus zwaarder is dan zoet water, werden de divers in een metalen kooi een tiental centimeter boven de bodem bevestigd (Figuur 5). CTD-divers werden geplaatst op deze locaties: [link](https://rpubs.com/spbruneel-INBO/1170130). Op basis van debietsgegevens (afkomstig van het Hydrologisch Informatie Centrum) kon de relatie tussen afvoer en conductiviteit opgevolgd worden.
 
 ```{r CTD, fig.cap = "Monitoringsconstructie voor het opvolgen van de  conductiviteit (links) met behulp van HOBO U24 Fresh Water Conductivity Data Logger.", fig.show = "hold", out.width = "50%", fig.align = "default"}
 include_graphics(path = c("./media/CTD1.jpg","./media/CTD2.jpg"))
