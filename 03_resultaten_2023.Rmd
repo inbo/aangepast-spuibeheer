@@ -26,7 +26,7 @@ if (RUN==FALSE){
 }
 ```
 
-De inschattingen geven aan dat in **2023 550.392 glasalen** voordeel hebben ondervonden van het aangepast spuibeheer tijdens hun stroomopwaartse migratie.
+De inschattingen geven aan dat in **2023, 550.392 glasalen** voordeel hebben ondervonden van het aangepast spuibeheer tijdens hun stroomopwaartse migratie.
 
 ```{r}
 os.summary <- os %>% 
@@ -48,19 +48,19 @@ os.summary$start <- format(strptime(as.character(as.Date(os.summary$start)), "%Y
 os.summary$stop <- format(strptime(as.character(as.Date(os.summary$stop)), "%Y-%m-%d"), "%d-%m-%Y")
 tos.summary <- as.data.frame(t(os.summary[,-1]))
 colnames(tos.summary) <- os.summary$site
-rownames(tos.summary) = c("start as", 
-                       "stop as", 
+rownames(tos.summary) = c("start AS", 
+                       "stop AS", 
                        "periode (dagen)", 
-                       "# dagen effectief as", 
-                       "# events as tijdens periode", 
-                       "# events as per dag", 
-                       "mediaan duur event as (min)", 
-                       "mediaan duur as per dag (min)", 
-                       "totale duur as periode (min)", 
-                       "verwachte # glasaal per as event", 
+                       "# dagen effectief AS", 
+                       "# events AS tijdens periode", 
+                       "# events AS per dag", 
+                       "mediaan duur event AS (min)", 
+                       "mediaan duur AS per dag (min)", 
+                       "totale duur AS periode (min)", 
+                       "verwachte # glasaal per AS event", 
                        "verwachte # glasaal periode")
 
-tos.summary %>% kable(caption = "2023 beleidstabel voor het aangepast spuibeheer (as) in het afleidingskanaal van de Leie (AKL), Ijzer, kanaal Gent-Oostende (KGO), Leopoldskanaal (LK), Noordede (NE) en Veurne-Ambacht (VA) met inschatting van het aantal glasaal dat de betreffende sluizen kon passeren dankzij as. * Het verwachte aantal glasaal voor de studieperiode in VA geeft het totaal van 2023 weer en is niet dus gelinkt aan het aantal as events.") %>% kable_styling(latex_options = "scale_down")
+tos.summary %>% kable(caption = "2023 beleidstabel voor het aangepast spuibeheer (AS) in het afleidingskanaal van de Leie (AKL), Ijzer, kanaal Gent-Oostende (KGO), Leopoldskanaal (LK), Noordede (NE) en Veurne-Ambacht (VA) met inschatting van het aantal glasaal dat de betreffende sluizen kon passeren dankzij AS. * Het verwachte aantal glasaal voor de studieperiode in VA geeft het totaal van 2023 weer en is niet dus gelinkt aan het aantal as events.") %>% kable_styling(latex_options = "scale_down")
 write.csv(tos.summary,"./data/spuibeheer/intern/as_summary_2023.csv")
 ```
 
@@ -123,9 +123,9 @@ ctd.list<-process_ctd_series_for_plotting(date.min=as.POSIXct("2023-03-01 00:00:
 
 #### Afleidingskanaal van de Leie
 
-In 2023 werd er, net als in 2022, in het AKL maar op drie dagen aan aangepast spuibeheer gedaan. In totaal stonden de sluizen hierdoor maar 38 uur open (in 2022 was dit echter wel maar 19 uur). Wegens het beperkt aantal uren spuibeheer op het AKL in 2023, kan het alternatief spuibeheer geen wezenlijke invloed hebben op de saliniteit dit jaar thv Ramskapelle. In de zomer en het najaar, worden hogere waarden voor het zoutgehalte geobserveerd.
+In 2023 werd er in het AKL maar op zes dagen aan aangepast spuibeheer gedaan. Dit is een verdubbeling van het aantal dagen in 2022 maar nog steeds veel minder dan de 29 dagen in 2021. In totaal stonden de sluizen 38 uur open (in 2022 was dit echter wel maar 19 uur en in 2021 was dit 464 uur). Wegens het beperkt aantal uren spuibeheer op het AKL in 2023, kan het **aangepast spuibeheer geen wezenlijke invloed hebben op de geleidbaarheid dit jaar** thv Ramskapelle en Moerkerke. Ondanks het feit dat de limietwaarde één maal in Moerkerke en meerdere malen in Ramskapelle werd overschreden tijdens de periode van aangepast spuibeheer, leken deze overschrijdingen niet per se te volgen op momenten van aangepast spuibeheer. In de zomer en het najaar, worden hogere waarden voor de geleidbaarheid geobserveerd waarbij de limietwaarde meerdere keren wordt overschreden (Fig. \@ref(fig:plotctdakl)). Linken met debiet of neerslag lijken er niet te zijn (Fig. \@ref(fig:plotaklr) en \@ref(fig:plotaklm)).
 
-```{r plotctdakl, fig.height=5, fig.cap="Verloop van de specifieke geleidbaarheid (mS/cm) in het AKL (INBO metingen elke 15 minuten)"}
+```{r plotctdakl, fig.height=5, fig.cap="Verloop van de specifieke geleidbaarheid (mS/cm) in het AKL (INBO metingen elke 15 minuten). De daggemiddelden worden weergegeven als zwarte punten op het midden van de dag."}
 ctd.list$AKL
 ```
 
@@ -139,15 +139,15 @@ p.list$`akl moerkerke`
 
 #### Leopoldskanaal
 
-In totaal werd er in 2023, 132 uur aangepast gespuid wat vergelijkbaar is met het beheer van 2022 (136 uur). Wat in dagen ongeveer hetzelfde is als voor 2022 maar in uren is er meer dan een halvering door het terug toepassen van het oude systeem met enkel overdag spuien. Dit jaar werd er voor het eerst glasaal binnengelaten op 1 maart (2 maart in 2022).
+In totaal werd er in 2023, 132 uur aangepast gespuid wat vergelijkbaar is met het beheer van 2022 (136 uur). Wat in dagen ongeveer hetzelfde is als voor 2021 maar in uren is er meer dan een halvering door het terug toepassen van het oude systeem met enkel overdag spuien. Dit jaar werd er voor het eerst glasaal binnengelaten op 1 maart (2 maart in 2022).
 
-Net stroomopwaarts van de spuischuiven ter hoogte van Zeebrugge resulteert de toepassing van het alternatief spuibeheer in een over het algemeen sterk verhoogde maar tevens zeer variabel zoutgehalte. De geleidbaarheid daalt echter snel terug na het beëindigen van het alternatief spuibeheer. De droge zomer leidde tot een verminderde afvoer en veroorzaakte, net als in 2022, een tweede verhoging in de zomer en het najaar. Wanneer het daggemiddelde van de geleidbaarheid wordt vergelijken met de metingen per kwartier, blijkt wel dat de variabiliteit in de periode van het aangepast spuibeheer veel groter is dan tijdens de zomer. Ter hoogte van Ramskapelle en verder stroomopwaarts lijkt, net als voor het AKL, de geleidbaarheid weinig tot niet beïnvloedt door het aangepast spuibeheer.
+Net stroomopwaarts van de spuischuiven ter hoogte van **Zeebrugge resulteert de toepassing van het alternatief spuibeheer in een over het algemeen sterk verhoogde maar tevens zeer variabel zoutgehalte** (Fig. \@ref(fig:plotctdlk) en \@ref(fig:plotlkz)). De geleidbaarheid daalt echter snel terug na het beëindigen van het alternatief spuibeheer. De droge zomer leidde tot een verminderde afvoer en veroorzaakte, net als in 2022, een tweede verhoging in de zomer en het najaar. Wanneer het daggemiddelde van de geleidbaarheid wordt vergelijken met de metingen per kwartier, blijkt wel dat de variabiliteit in de periode van het aangepast spuibeheer veel groter is dan tijdens de zomer. **Ter hoogte van Ramskapelle en verder stroomopwaarts lijkt, net als voor het AKL, de geleidbaarheid weinig tot niet beïnvloedt door het aangepast spuibeheer** (Fig. \@ref(fig:plotctdlk) en \@ref(fig:plotlkr)).
 
-Terwijl in 2022 in Ramskapelle hetzelfde patroon als in Zeebrugge werd waargenomen (i.e., een sterke stijging van het zoutgehalte bij de start van het alternatief spuibeheer en een snelle daling net boven de zoetwatergrens bij stopzetting van het alternatief spuibeheer), blijft in 2023 de stijging van het zoutgehalte beperkt tijdens het aangepast spuibeheer. De meer uitgesproken stijging in de zomer wordt echter wel teruggevonden.
+Terwijl in 2021 en 2022 in Ramskapelle hetzelfde patroon als in Zeebrugge werd waargenomen (i.e., een sterke stijging van het zoutgehalte bij de start van het alternatief spuibeheer en een snelle daling net boven de zoetwatergrens bij stopzetting van het alternatief spuibeheer), blijft in 2023 de stijging van het zoutgehalte beperkt tijdens het aangepast spuibeheer. Dit is onverwacht omdat in 2022 een gelijkaardig aangepast spuibeheer is uitgevoerd. Er kan gesteld worden dat in 2021 en 2022 de effecten van het aangepast spuibeheer voelbaar waren tot in Ramskapelle, maar in 2023 bleken deze effecten beperkt tot Zeebrugge. Wat hiervan de oorzaak kan zijn is niet duidelijk. De afvoer en neerslag lijken op het eerste zicht niet beduidend verschillend voor de drie jaren. De meer uitgesproken stijging in de zomer wordt echter wel teruggevonden voor zowel 2021, 2022 als 2023. Een eenmalige piek in geleidbaarheid tijdens de periode van aangepast spuibeheer lijkt veroorzaakt door een plotse binnenstroom van zout water (i.e. negatieve debietswaarde) dat niet als aangepast spuibeheer werd aangeduid door de waterbeheerder (Fig. \@ref(fig:plotlkr)).
 
-Voor Moerkerke en Oostkamp (Brugge) was er door problemen met de logger geen data voorhanden tijdens de periode van het aangepast spuibeheer.
+Voor Moerkerke en Oostkamp (Brugge) was er door problemen met de logger geen data voorhanden tijdens de periode van het aangepast spuibeheer (Fig. \@ref(fig:plotlkm)).
 
-```{r plotctdlk, fig.cap="Verloop van de specifieke geleidbaarheid (mS/cm) in het LK (INBO metingen elke 15 minuten)"}
+```{r plotctdlk, fig.cap="Verloop van de specifieke geleidbaarheid (mS/cm) in het LK (INBO metingen elke 15 minuten). De daggemiddelden worden weergegeven als zwarte punten op het midden van de dag."}
 ctd.list$LK
 ```
 
@@ -165,9 +165,9 @@ p.list$`blinker moerkerke`
 
 ### Kanaal Gent-Oostende
 
-In het KGO werd er glasaal binnen gelaten vanaf 6 maart tot 5 mei. Het aangepast spuibeheer duurde in totaal 7685 minuten wat slechts iets meer is dan de helft van de duur van vorig jaar (14700 minuten). Net als vorig jaar doen er zich ter hoogte van Sas Slijkens al pieken voor nog voor de aanvang van het aangepast spuibeheer. Pieken tijdens het aangepast spuibeheer lijken wel overeen te komen met momenten van intensiever aangepast spuibeheer, maar dit kan niet sluitend gelinkt worden aan het aangepast spuibeheer. Ter hoogte van Plassendale en Brugge lijkt de link tussen conductiviteit en aangepast spuibeheer afwezig.
+In het KGO werd er glasaal binnen gelaten vanaf 6 maart tot 5 mei. Het aangepast spuibeheer duurde in totaal 7685 minuten wat slechts iets meer is dan de helft van de duur van 2022 (14700 minuten). In 2021 werd er echter slecht 3240 minuten aangepast spuibeheer uitgevoerd. Net als in 2022 doen er zich ter hoogte van Sas Slijkens al pieken voor nog voor de aanvang van het aangepast spuibeheer (Fig. \@ref(fig:plotctdkgo) en \@ref(fig:plotkgoss)). Pieken tijdens het aangepast spuibeheer lijken wel overeen te komen met momenten van intensiever aangepast spuibeheer, maar dit kan niet sluitend gelinkt worden aan het aangepast spuibeheer. Ter hoogte van Plassendale (Fig. \@ref(fig:plotkgop)) en Brugge (Fig. \@ref(fig:plotkgob)) lijken dezelfde trends zich min of meer voor te doen maar met veel minder uitgesproken pieken. Het feit dat de pieken in geleidbaarheid optreden nog voordat de periode van aangepast spuibeheer begint, gecombineerd met het terugkeren deze pieken tot relatief diep in het binnenland, suggereert dat er **geen verband is tussen de waargenomen geleidbaarheid en het aangepaste spuibeheer in het KGO.**
 
-```{r plotctdkgo, fig.cap="Verloop van de specifieke geleidbaarheid (mS/cm) in het KGO (INBO metingen elke 15 minuten)"}
+```{r plotctdkgo, fig.cap="Verloop van de specifieke geleidbaarheid (mS/cm) in het KGO (INBO metingen elke 15 minuten). De daggemiddelden worden weergegeven als zwarte punten op het midden van de dag."}
 ctd.list$KGO
 ```
 
@@ -185,9 +185,9 @@ p.list$brugge
 
 ### Ijzer
 
-In de Ijzer is er net als voor het KGO een **sterke variabiliteit dicht bij de spuischuiven**. De hoge waarden komen duidelijk **overeen met de periodes van het aangepast spuibeheer**. Er waren twee momenten waarop er minder aan aangepast spuibeheer werd gedaan en op deze momenten lijkt er zich een daling van de geleidbaarheid voor te doen. De twee laatste pieken tijdens het AS lijken **ook nog ter hoogte van de Uniebrug voelbaar**, maar ter hoogte van de Schoorbakkebrug blijft enig effect door het aangepast spuibeheer uit. Het effect van de **zomerse droogte blijft wel ver stroomopwaarts voelbaar.**
+In 2023 werd er in totaal 536 uren aangepast spuibeheer toegepast in de Ijzer. Dit is meer dan in 2021 (489 uren) en 2022 (276 uren). In de Ijzer is er net als voor het KGO een **sterke variabiliteit dicht bij de spuischuiven** (Fig. \@ref(fig:plotctdijzer) en \@ref(fig:plotijzery)). De hoge waarden komen duidelijk **overeen met de periodes van het aangepast spuibeheer**. Bovendien ligt de geleidbaarheid aanzienlijk hoger dan in 2021 en 2022 wat hoogstwaarschijnlijk het gevolg is van het lagere aantal uren aangepast spuibeheer dat er werd uitgevoerd toen. In 2023 werd de brakwatergrens van 20 mS/cm meermaals overschreden, wat in 2021 en 2022 niet het geval was. In 2023 waren er twee momenten waarop er minder aan aangepast spuibeheer werd gedaan en op deze momenten lijkt er zich een daling van de geleidbaarheid voor te doen. De twee laatste pieken tijdens het AS lijken **ook nog ter hoogte van de Uniebrug voelbaar** (Fig. \@ref(fig:plotijzeru)), maar ter hoogte van de Schoorbakkebrug (Fig. \@ref(fig:plotijzers)) en Tervate (Fig. \@ref(fig:plotijzert)) blijft enig effect door het aangepast spuibeheer uit. De laatste piek ter hoogte van de Uniebrug zet zich wel aanzienlijk later in dan de her-aanvatting van het aangepast spuibeheer (waarmee de piek ter hoogte van de spuischuiven wel direct overeenkomt) (Fig. \@ref(fig:plotijzeru)). Waar ter hoogte van de spuischuiven het effect van het aangepast spuibeheer dus direct meetbaar is (Fig. \@ref(fig:plotijzery)), blijkt dit verder landinwaarts pas na een zekere tijd meetbaar (Fig. \@ref(fig:plotijzeru)). Het effect van de **zomerse droogte blijft wel ver stroomopwaarts voelbaar.** Inderdaad, de geleidbaarheid in de zomer lijkt sterk gelinkt aan de hoeveelheid neerslag. De zomers van 2021 en 2023 waren immers eerder nat terwijl die van 2022 zeer droog was en dit lijkt zich ook de vertalen in de relatief hoge geleidbaarheid in de zomer van 2022.
 
-```{r plotctdijzer, fig.cap="Verloop van de specifieke geleidbaarheid (mS/cm) in de Ijzer (INBO metingen elke 15 minuten)"}
+```{r plotctdijzer, fig.cap="Verloop van de specifieke geleidbaarheid (mS/cm) in de Ijzer (INBO metingen elke 15 minuten). De daggemiddelden worden weergegeven als zwarte punten op het midden van de dag."}
 ctd.list$Ijzer
 ```
 
@@ -215,23 +215,23 @@ p.list$tervate
 p.list$diksmuide
 ```
 
-### Kanaal Nieuwpoort-Plassendale
+<!-- ### Kanaal Nieuwpoort-Plassendale -->
 
-```{r plotknp, fig.cap="Verloop van de actuele geleidbaarheid (mS/cm), specifieke geleidbaarheid (mS/cm), saliniteit (psu) en temperatuur (°C) in het kanaal Nieuwpoort-Plassendale ter hoogte van Nieuwpoort-Plassendale, debiet ter hoogte van Keiem en neerslag (mm) ter hoogte van Klemskerke in 2023."}
+```{r eval=FALSE, plotknp, fig.cap="Verloop van de actuele geleidbaarheid (mS/cm), specifieke geleidbaarheid (mS/cm), saliniteit (psu) en temperatuur (°C) in het kanaal Nieuwpoort-Plassendale ter hoogte van Nieuwpoort-Plassendale, debiet ter hoogte van Keiem en neerslag (mm) ter hoogte van Klemskerke in 2023."}
 p.list$`nieuwpoort-plassendale`
 ```
 
-### Kanaal Nieuwpoort-Duinkerke
+<!-- ### Kanaal Nieuwpoort-Duinkerke -->
 
-```{r plotknd, fig.cap="Verloop van de actuele geleidbaarheid (mS/cm), specifieke geleidbaarheid (mS/cm), saliniteit (psu) en temperatuur (°C) in het kanaal Nieuwpoort-Duinkerke ter hoogte van de oude Veurne vaart, debiet ter hoogte van Veurne en neerslag (mm) ter hoogte van Sint-Joris in 2023."}
+```{r eval=FALSE, plotknd, fig.cap="Verloop van de actuele geleidbaarheid (mS/cm), specifieke geleidbaarheid (mS/cm), saliniteit (psu) en temperatuur (°C) in het kanaal Nieuwpoort-Duinkerke ter hoogte van de oude Veurne vaart, debiet ter hoogte van Veurne en neerslag (mm) ter hoogte van Sint-Joris in 2023."}
 p.list$`oude veurne vaart`
 ```
 
 ### Noordede
 
-Het aangepast spuibeheer in de Noordede onderscheidt zich van het aangepast spuibeheer op andere sites op vlak van frequentie en duur per AS event. In totale duur situeert de Noordede zich tussen Veurne Ambacht en het Leopoldskanaal, maar het heeft wel het hoogste aantal AS events doordat het ook de meest korte events heeft. Dit lijkt een positief effect te hebben op de zoutintrusie. Ter hoogte van de spuischuiven is er inderdaad opnieuw een sterke variabiliteit, maar de waarden verschillen maar beperkt van de periode ervoor en erna. Verder stroomopwaarts lijkt in de periode van aangepast spuibeheer de geleidbaarheid zelfs lager dan de periode ervoor en erna.
+Het aangepast spuibeheer in de Noordede onderscheidt zich van het aangepast spuibeheer op andere sites op vlak van frequentie en duur per AS event. In totale duur situeert de Noordede zich tussen Veurne Ambacht en het Leopoldskanaal, maar het heeft wel het **hoogste aantal aangepast-spuibeheer-events doordat het ook de meest korte events heeft. Dit lijkt een positief effect te hebben op de zoutintrusie.** Ter hoogte van de spuischuiven is er inderdaad opnieuw een sterke variabiliteit, maar de waarden verschillen maar beperkt van de periode ervoor en erna (Fig. \@ref(fig:plotctdne) en \@ref(fig:plotnem)). Verder stroomopwaarts lijkt in de periode van aangepast spuibeheer de geleidbaarheid zelfs lager dan de periode ervoor en erna (Fig. \@ref(fig:plotnebs) en \@ref(fig:plotnec)).
 
-```{r plotctdne, fig.cap="Verloop van de specifieke geleidbaarheid in de NE (INBO metingen elke 15 minuten)"}
+```{r plotctdne, fig.cap="Verloop van de specifieke geleidbaarheid in de NE (INBO metingen elke 15 minuten). De daggemiddelden worden weergegeven als zwarte punten op het midden van de dag."}
 ctd.list$NE
 ```
 
