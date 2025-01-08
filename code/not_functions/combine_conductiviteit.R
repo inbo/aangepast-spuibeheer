@@ -32,7 +32,7 @@ conductiviteit <- left_join(x,conductiviteit,by=c("loc.conductiviteit","datum.co
 conductiviteit$group_plot <- as.character(grouping_breaking_line(conductiviteit$conductiviteit))
 conductiviteit <- conductiviteit %>% group_by(loc.conductiviteit) %>% fill(site.conductiviteit)
 
-link_conductiviteit_debiet_neerslag<-read.csv("./data/link_conductiviteit_debiet_neerslag.csv",sep=";")
+link_conductiviteit_debiet_neerslag<-read.csv("./data/metadata/link_conductiviteit_debiet_neerslag.csv",sep=";")
 conductiviteit<-left_join(conductiviteit,link_conductiviteit_debiet_neerslag,by="loc.conductiviteit")
 conductiviteit <- conductiviteit %>% left_join(debiet, join_by(loc.debiet, closest(datum.conductiviteit >= datum.debiet)))
 conductiviteit <- conductiviteit %>% left_join(neerslag, join_by(loc.neerslag, closest(datum.conductiviteit >= datum.neerslag)))
