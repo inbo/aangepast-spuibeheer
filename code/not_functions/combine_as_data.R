@@ -1,10 +1,17 @@
 #combine_as_data
 
-#AKLLK2022 <- clean_AKLLK("./data/spuibeheer/extern/verwerkt_in_excel/os_AKL&LK_2022.xlsx")
+AKLLK2021 <- clean_AKLLK("./data/spuibeheer/extern/verwerkt_in_excel/os_AKL&LK_2021.xlsx")
+AKLLK2022 <- clean_AKLLK("./data/spuibeheer/extern/verwerkt_in_excel/os_AKL&LK_2022.xlsx")
 AKLLK2023 <- clean_AKLLK("./data/spuibeheer/extern/verwerkt_in_excel/os_AKL&LK_2023.xlsx")
 AKLLK2024 <- clean_AKLLK("./data/spuibeheer/extern/verwerkt_in_excel/os_AKL&LK_2024.xlsx")
 
-Ijzer2023 <- clean_ijzer_and_va(file = "./data/spuibeheer/extern/verwerkt_in_excel/os_Ijzer_2023.xlsx",
+Ijzer2021 <- clean_ijzer_and_va(file = "./data/spuibeheer/extern/verwerkt_in_excel/os_Ijzer_2021.xlsx",
+                                    skip = 7,
+                                    datum = 1,
+                                    tijd = 2,
+                                    opmerking = 14,
+                                    site = "Ijzer")
+Ijzer20222023 <- clean_ijzer_and_va(file = "./data/spuibeheer/extern/verwerkt_in_excel/os_Ijzer_2022_2023.xlsx",
                                 skip = 7,
                                 datum = 1,
                                 tijd = 2,
@@ -16,13 +23,13 @@ Ijzer2024 <- clean_ijzer_and_va(file = "./data/spuibeheer/extern/verwerkt_in_exc
                                 tijd = 2,
                                 opmerking = 14,
                                 site = "Ijzer")
-VA2022 <- clean_ijzer_and_va(file = "./data/spuibeheer/extern/verwerkt_in_excel/os_VA_2022.xlsx",
-                             skip = 6,
-                             datum = 1,
-                             tijd = 2,
-                             opmerking = 8,
-                             site = "VA")
-VA2023 <- clean_ijzer_and_va(file = "./data/spuibeheer/extern/verwerkt_in_excel/os_VA_2023.xlsx",
+VA2021 <- clean_ijzer_and_va(file = "./data/spuibeheer/extern/verwerkt_in_excel/os_VA_2021.xlsx",
+                                 skip = 6,
+                                 datum = 1,
+                                 tijd = 2,
+                                 opmerking = 8,
+                                 site = "VA")
+VA20222023 <- clean_ijzer_and_va(file = "./data/spuibeheer/extern/verwerkt_in_excel/os_VA_2022_2023.xlsx",
                              skip = 6,
                              datum = 1,
                              tijd = 2,
@@ -35,14 +42,14 @@ VA2024 <- clean_ijzer_and_va(file = "./data/spuibeheer/extern/verwerkt_in_excel/
                              opmerking = 8,
                              site = "VA")
 
-#KGO2021 <- clean_KGO("./data/spuibeheer/extern/verwerkt_in_excel/os_KGO_2021.xlsx")
+KGO2021 <- clean_KGO("./data/spuibeheer/extern/verwerkt_in_excel/os_KGO_2021.xlsx")
 KGO2023 <- clean_KGO("./data/spuibeheer/extern/verwerkt_in_excel/os_KGO_2023.xlsx")
 KGO2024 <- clean_KGO("./data/spuibeheer/extern/verwerkt_in_excel/os_KGO_2024.xlsx")
 
 NE <- read.csv("./data/spuibeheer/intern/os_NE_2023_cleaned.csv")[,c(2:4)]
 
-os <- rbind(AKLLK2023, AKLLK2024, Ijzer2023, Ijzer2024, KGO2023, KGO2024, NE, VA2023, VA2024)
-remove(AKLLK2023, AKLLK2024, Ijzer2023, Ijzer2024, KGO2023, KGO2024, NE, VA2023, VA2024)
+os <- rbind(AKLLK2021, AKLLK2022, AKLLK2023, AKLLK2024, Ijzer2021, Ijzer20222023, Ijzer2024, KGO2021, KGO2023, KGO2024, NE, VA2021, VA20222023, VA2024)
+remove(AKLLK2021, AKLLK2022, AKLLK2023, AKLLK2024, Ijzer2021, Ijzer20222023, Ijzer2024, KGO2021, KGO2023, KGO2024, NE, VA2021, VA20222023, VA2024)
 
 os$dicht[which(os$open > os$dicht)] <- os$dicht[which(os$open > os$dicht)] + lubridate::days(1)
 os$duration <- os$dicht - os$open
