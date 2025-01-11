@@ -11,7 +11,7 @@ clean_AKLLK <- function(file){
   AKLLK <- rbind(AKL,LK)
   AKLLK$open[which(grepl("[0-9]" , AKLLK$open) == FALSE)] = NA
   AKLLK$dicht[which(grepl("[0-9]" , AKLLK$dicht) == FALSE)] = NA
-  AKLLK <- AKLLK[-which(is.na(AKLLK$open) == TRUE | is.na(AKLLK$dicht) == TRUE),]
+  AKLLK <- AKLLK[-which(is.na(AKLLK$open) == TRUE & is.na(AKLLK$dicht) == TRUE),]
   AKLLK$open <- str_replace(AKLLK$open,"u",":")
   AKLLK$dicht <- str_replace(AKLLK$dicht,"u",":")
   AKLLK$open <- parse_date_time(paste(AKLLK$datum,AKLLK$open), c("ymd HM", "ymd H"), tz="Europe/Brussels")
@@ -19,5 +19,7 @@ clean_AKLLK <- function(file){
   AKLLK$dicht <- parse_date_time(paste(AKLLK$datum,AKLLK$dicht), c("ymd HM", "ymd H"), tz="Europe/Brussels")
   attr(AKLLK$dicht, "tzone") <- "GMT"
   AKLLK$datum <- NULL
+  AKLLK$dicht[which(is.na(AKLLK$dicht)==TRUE)]=AKLLK$dicht[which(is.na(AKLLK$dicht)==TRUE)+1]
+  AKLLK <- AKLLK[-which(is.na(AKLLK$open) == TRUE),]
   return(AKLLK)
 }
