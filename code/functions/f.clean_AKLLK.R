@@ -20,6 +20,6 @@ clean_AKLLK <- function(file){
   attr(AKLLK$dicht, "tzone") <- "GMT"
   AKLLK$datum <- NULL
   AKLLK$dicht[which(is.na(AKLLK$dicht)==TRUE)]=AKLLK$dicht[which(is.na(AKLLK$dicht)==TRUE)+1]
-  AKLLK <- AKLLK[-which(is.na(AKLLK$open) == TRUE),]
+  if(any(is.na(AKLLK))==TRUE){AKLLK <- AKLLK[-which(is.na(AKLLK$open) == TRUE),]}
   return(AKLLK)
 }
