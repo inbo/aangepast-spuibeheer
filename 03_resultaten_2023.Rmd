@@ -30,7 +30,7 @@ De inschattingen geven aan dat in **2023, 550.392 glasalen** voordeel hebben ond
 
 ```{r}
 os.summary <- os %>% 
-  dplyr::filter(jaar == 2023 & datum < as.POSIXct("2023-05-15 12:00:00", tz = "Europe/Brussels")) %>% 
+  dplyr::filter(jaar == 2023 & datum < as.POSIXct("2023-05-15 12:00:00", tz = "Europe/Brussels") & datum > as.POSIXct("2023-02-27 00:00:00", tz = "Europe/Brussels")) %>% 
   group_by(site) %>%
   summarize(start = as.Date(min(open)),
             stop = as.Date(max(dicht)),
@@ -62,6 +62,20 @@ rownames(tos.summary) = c("start AS",
 
 tos.summary %>% kable(caption = "2023 beleidstabel voor het aangepast spuibeheer (AS) in het afleidingskanaal van de Leie (AKL), Ijzer, kanaal Gent-Oostende (KGO), Leopoldskanaal (LK), Noordede (NE) en Veurne-Ambacht (VA) met inschatting van het aantal glasaal dat de betreffende sluizen kon passeren dankzij AS. * Het verwachte aantal glasaal voor de studieperiode in VA geeft het totaal van 2023 weer en is niet dus gelinkt aan het aantal as events.") %>% kable_styling(latex_options = "scale_down")
 write.csv(tos.summary,"./data/spuibeheer/intern/as_summary_2023.csv")
+```
+
+```{r}
+os %>% 
+  dplyr::group_by(site,jaar) %>%
+  summarize(sum=sum(duration)) %>%
+  ggplot(aes(x=jaar,y=sum/60,group=site)) + geom_point(aes(colour=site)) + geom_line(aes(colour=site)) + theme_bw() + theme(text = element_text(size = 12, family = "serif"), axis.text.x = element_text(angle=45, hjust = 0.5, vjust = 0.5, family = "serif"), strip.background = element_rect(colour = "black", fill = "white"), legend.position = "bottom") + ylab("Totale tijd (uren)") 
+```
+
+```{r}
+os %>% 
+  dplyr::group_by(site,jaar) %>%
+  summarize(count=n()) %>%
+  ggplot(aes(x=jaar,y=count,group=site)) + geom_point(aes(colour=site)) + geom_line(aes(colour=site)) + theme_bw() + theme(text = element_text(size = 12, family = "serif"), axis.text.x = element_text(angle=45, hjust = 0.5, vjust = 0.5, family = "serif"), strip.background = element_rect(colour = "black", fill = "white"), legend.position = "bottom") + ylab("Aangepast spuibeheer events") 
 ```
 
 \pagebreak
