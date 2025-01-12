@@ -1,10 +1,17 @@
 #combine_as_data
 
+AKLLK2020 <- clean_AKLLK("./data/spuibeheer/extern/verwerkt_in_excel/os_AKL&LK_2020.xlsx")
 AKLLK2021 <- clean_AKLLK("./data/spuibeheer/extern/verwerkt_in_excel/os_AKL&LK_2021.xlsx")
 AKLLK2022 <- clean_AKLLK("./data/spuibeheer/extern/verwerkt_in_excel/os_AKL&LK_2022.xlsx")
 AKLLK2023 <- clean_AKLLK("./data/spuibeheer/extern/verwerkt_in_excel/os_AKL&LK_2023.xlsx")
 AKLLK2024 <- clean_AKLLK("./data/spuibeheer/extern/verwerkt_in_excel/os_AKL&LK_2024.xlsx")
 
+Ijzer2020 <- clean_ijzer_and_va(file = "./data/spuibeheer/extern/verwerkt_in_excel/os_Ijzer_2020.xlsx",
+                                skip = 7,
+                                datum = 1,
+                                tijd = 2,
+                                opmerking = 14,
+                                site = "Ijzer")
 Ijzer2021 <- clean_ijzer_and_va(file = "./data/spuibeheer/extern/verwerkt_in_excel/os_Ijzer_2021.xlsx",
                                     skip = 7,
                                     datum = 1,
@@ -23,6 +30,12 @@ Ijzer2024 <- clean_ijzer_and_va(file = "./data/spuibeheer/extern/verwerkt_in_exc
                                 tijd = 2,
                                 opmerking = 14,
                                 site = "Ijzer")
+VA2020 <- clean_ijzer_and_va(file = "./data/spuibeheer/extern/verwerkt_in_excel/os_VA_2020.xlsx",
+                             skip = 6,
+                             datum = 1,
+                             tijd = 2,
+                             opmerking = 8,
+                             site = "VA")
 VA2021 <- clean_ijzer_and_va(file = "./data/spuibeheer/extern/verwerkt_in_excel/os_VA_2021.xlsx",
                                  skip = 6,
                                  datum = 1,
@@ -42,6 +55,7 @@ VA2024 <- clean_ijzer_and_va(file = "./data/spuibeheer/extern/verwerkt_in_excel/
                              opmerking = 8,
                              site = "VA")
 
+KGO2020 <- clean_KGO("./data/spuibeheer/extern/verwerkt_in_excel/os_KGO_2020.xlsx")
 KGO2021 <- clean_KGO("./data/spuibeheer/extern/verwerkt_in_excel/os_KGO_2021.xlsx")
 KGO2023 <- clean_KGO("./data/spuibeheer/extern/verwerkt_in_excel/os_KGO_2023.xlsx")
 KGO2024 <- clean_KGO("./data/spuibeheer/extern/verwerkt_in_excel/os_KGO_2024.xlsx")

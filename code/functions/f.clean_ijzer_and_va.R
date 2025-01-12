@@ -15,7 +15,8 @@ clean_ijzer_and_va<-function(file,skip,datum,tijd,opmerking,site){
   data$opmerking[which(data$opmerking %in% c("omgekeerd spuien",
                                                "omgekeerd spuibeheer",
                                                "omgekeerd spuibeheer opgestart in opdracht van tim wolff",
-                                               "en start omgekeerd spuibeheer"))]="open"
+                                               "en start omgekeerd spuibeheer",
+                                               "begin omgekeerd spuibeheer"))]="open"
   data$opmerking[which(data$opmerking %in% c("einde omgekeerd spuien",
                                                "einde os iov dré maes",
                                                "einde omgekeerd spuibeheer",
