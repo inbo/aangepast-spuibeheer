@@ -64,14 +64,14 @@ tos.summary %>% kable(caption = "2023 beleidstabel voor het aangepast spuibeheer
 write.csv(tos.summary,"./data/spuibeheer/intern/as_summary_2023.csv")
 ```
 
-```{r}
+```{r fig.height=5, fig.cap="Totale duur aangepast spuibeheer (uren) per jaar en waterlichaam."}
 os %>% 
   dplyr::group_by(site,jaar) %>%
   summarize(sum=sum(duration)) %>%
-  ggplot(aes(x=jaar,y=sum/60,group=site)) + geom_point(aes(colour=site)) + geom_line(aes(colour=site)) + theme_bw() + theme(text = element_text(size = 12, family = "serif"), axis.text.x = element_text(angle=45, hjust = 0.5, vjust = 0.5, family = "serif"), strip.background = element_rect(colour = "black", fill = "white"), legend.position = "bottom") + ylab("Totale tijd (uren)") 
+  ggplot(aes(x=jaar,y=sum/60,group=site)) + geom_point(aes(colour=site)) + geom_line(aes(colour=site)) + theme_bw() + theme(text = element_text(size = 12, family = "serif"), axis.text.x = element_text(angle=45, hjust = 0.5, vjust = 0.5, family = "serif"), strip.background = element_rect(colour = "black", fill = "white"), legend.position = "bottom") + ylab("Totale duur aangepast spuibeheer (uren)") 
 ```
 
-```{r}
+```{r fig.height=5, fig.cap="Aantal events aangepast spuibeheer per jaar en waterlichaam."}
 os %>% 
   dplyr::group_by(site,jaar) %>%
   summarize(count=n()) %>%
@@ -185,6 +185,10 @@ In het KGO werd er glasaal binnen gelaten vanaf 6 maart tot 5 mei. Het aangepast
 ctd.list$KGO
 ```
 
+```{r plotcondkgo, fig.cap="Verloop van de actuele geleidbaarheid (mS/cm) in het KGO (VMM metingen elke 24 uur, telkens om 23h lokale tijd). De groene balken geven de periodes van aangepast spuibeheer weer."}
+cond.list$KGO
+```
+
 ```{r plotkgoss, fig.cap="Verloop van de actuele geleidbaarheid (mS/cm), specifieke geleidbaarheid (mS/cm), saliniteit (psu) en temperatuur (°C) in het kanaal Gent-Oostende (KGO) ter hoogte van sas Slijkens (0.9 km stroomopwaarts spuiconstructie), debiet ter hoogte van Oostkamp en neerslag (mm) ter hoogte van Klemskerke in 2023. De groene balken geven de periodes van aangepast spuibeheer weer."}
 p.list$`sas slijkens`
 ```
@@ -205,7 +209,7 @@ In 2023 werd er in totaal 536 uren aangepast spuibeheer toegepast in de Ijzer. D
 ctd.list$Ijzer
 ```
 
-```{r plotcondijzer, include=FALSE, fig.cap="Verloop van de specifieke geleidbaarheid (mS/cm) in de Ijzer (VMM metingen elke 24 uur, telkens om 23h lokale tijd). De groene balken geven de periodes van aangepast spuibeheer weer."}
+```{r plotcondijzer, fig.cap="Verloop van de actuele geleidbaarheid (mS/cm) in de Ijzer (VMM metingen elke 24 uur, telkens om 23h lokale tijd). De groene balken geven de periodes van aangepast spuibeheer weer."}
 cond.list$Ijzer
 ```
 
@@ -247,6 +251,10 @@ Het aangepast spuibeheer in de Noordede onderscheidt zich van het aangepast spui
 
 ```{r plotctdne, fig.cap="Verloop van de specifieke geleidbaarheid in de NE (INBO metingen elke 15 minuten). De daggemiddelden worden weergegeven als zwarte punten op het midden van de dag. De groene balken geven de periodes van aangepast spuibeheer weer."}
 ctd.list$NE
+```
+
+```{r plotcondne, fig.cap="Verloop van de actuele geleidbaarheid (mS/cm) in de NE (VMM metingen elke 24 uur, telkens om 23h lokale tijd). De groene balken geven de periodes van aangepast spuibeheer weer."}
+cond.list$NE
 ```
 
 ```{r plotnem, fig.cap="Verloop van de actuele geleidbaarheid (mS/cm), specifieke geleidbaarheid (mS/cm), saliniteit (psu) en temperatuur (°C) in de Noordede (NE) ter hoogte van de Maertensas (1,0 km stroomopwaarts spuiconstructie), debiet ter hoogte van Oostkamp en neerslag (mm) ter hoogte van Klemskerke in 2023. De groene balken geven de periodes van aangepast spuibeheer weer."}
