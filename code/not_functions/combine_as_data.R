@@ -62,8 +62,8 @@ KGO2024 <- clean_KGO("./data/spuibeheer/extern/verwerkt_in_excel/os_KGO_2024.xls
 
 NE <- read.csv("./data/spuibeheer/intern/os_NE_2023_cleaned.csv")[,c(2:4)]
 
-os <- rbind(AKLLK2021, AKLLK2022, AKLLK2023, AKLLK2024, Ijzer2021, Ijzer20222023, Ijzer2024, KGO2021, KGO2023, KGO2024, NE, VA2021, VA20222023, VA2024)
-remove(AKLLK2021, AKLLK2022, AKLLK2023, AKLLK2024, Ijzer2021, Ijzer20222023, Ijzer2024, KGO2021, KGO2023, KGO2024, NE, VA2021, VA20222023, VA2024)
+os <- rbind(AKLLK2020, AKLLK2021, AKLLK2022, AKLLK2023, AKLLK2024, Ijzer2020, Ijzer2021, Ijzer20222023, Ijzer2024, KGO2020, KGO2021, KGO2023, KGO2024, NE, VA2020, VA2021, VA20222023, VA2024)
+remove(AKLLK2020, AKLLK2021, AKLLK2022, AKLLK2023, AKLLK2024, Ijzer2020, Ijzer2021, Ijzer20222023, Ijzer2024, KGO2020, KGO2021, KGO2023, KGO2024, NE, VA2020, VA2021, VA20222023, VA2024)
 
 os$dicht[which(os$open > os$dicht)] <- os$dicht[which(os$open > os$dicht)] + lubridate::days(1)
 os$duration <- os$dicht - os$open
