@@ -6,7 +6,7 @@ f.sp.conductance <- function(conductivity, temperature, alpha=0.02){
     return("Lengths do not match!")
   }
   
-  specific_conductance <- conductivity/(1 + alpha * (temperature - 25))
+  specific_conductance <- conductivity/(1 + alpha * (temperature - 20))
 
   return(specific_conductance)
 }
