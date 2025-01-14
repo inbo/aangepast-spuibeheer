@@ -26,8 +26,8 @@ conductiviteit<-conductiviteit[!duplicated(conductiviteit[,c("loc.conductiviteit
 
 source("./code/functions/f.seq_date.R")
 source("./code/functions/f.grouping_breaking_line.R")
-conductiviteit$datum.conductiviteit<-round_date(conductiviteit$datum.conductiviteit, unit="1 day")
-x <- do.call("rbind", by(conductiviteit, conductiviteit$loc.conductiviteit, with, data.frame(loc.conductiviteit = loc.conductiviteit[1], datum.conductiviteit = seq_date(datum.conductiviteit,"1 day"))))
+conductiviteit$datum.conductiviteit<-round_date(conductiviteit$datum.conductiviteit, unit="15 mins")
+x <- do.call("rbind", by(conductiviteit, conductiviteit$loc.conductiviteit, with, data.frame(loc.conductiviteit = loc.conductiviteit[1], datum.conductiviteit = seq_date(datum.conductiviteit,"15 mins"))))
 conductiviteit <- left_join(x,conductiviteit,by=c("loc.conductiviteit","datum.conductiviteit"))
 conductiviteit$group_plot <- as.character(grouping_breaking_line(conductiviteit$conductiviteit))
 conductiviteit <- conductiviteit %>% group_by(loc.conductiviteit) %>% fill(site.conductiviteit)
