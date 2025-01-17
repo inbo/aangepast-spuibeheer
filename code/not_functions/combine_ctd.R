@@ -20,16 +20,15 @@ for (i in jaren){
             ctd.temp[,2]<-ctd.temp[,2]/1000
           }
           colnames(ctd.temp)<-c("datum.ctd","geleidbaarheid","temperatuur")
-          ctd.temp$datum.ctd<-parse_date_time(ctd.temp$datum.ctd, c("mdy HMS p"), tz="Europe/Brussels")
           ctd.temp$sensor<-"small header"
         } else{
           ctd.temp<-read.csv(dir.name4,skip=65,sep=";",header=FALSE)
           ctd.temp<-ctd.temp[-nrow(ctd.temp),]
           colnames(ctd.temp)<-c("datum.ctd","druk","temperatuur","geleidbaarheid")
           ctd.temp<-as.data.frame(lapply(ctd.temp, function(y) gsub(",", ".", y)))
-          ctd.temp$datum.ctd<-parse_date_time(ctd.temp$datum.ctd, c("ymd HMS"), tz="Europe/Brussels")
           ctd.temp$sensor<-"large header"
         }
+        ctd.temp$datum.ctd<-parse_date_time(ctd.temp$datum.ctd,c("%d/%m/%y %H:%M:%S", "%d/%m/%Y %H:%M:%S", "%m/%d/%y %I:%M:%S %p", "%Y/%m/%d %H:%M:%S"), tz="Etc/GMT-1")#corresponds with UTC/GMT+1
         ctd.temp$site<-j
         ctd.temp$retrieval<-k
         ctd.temp$filename<-tolower(l)
