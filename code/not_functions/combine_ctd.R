@@ -48,7 +48,7 @@ ctd <- ctd %>% distinct()
 ctd <- ctd %>% mutate(loc.ctd= case_when(str_detect(filename, 'akl ramskapelle|akl rampskapelle') ~ 'akl ramskapelle',
                                          str_detect(filename, 'lk ramskapelle|lk rampskapelle') ~ 'lk ramskapelle',
                                          str_detect(filename, 'akl moerkerke') ~ 'akl moerkerke',
-                                         str_detect(filename, 'sk zeebrugge|schipdonkkanaal_zeebrugge') ~ 'sk zeebrugge',
+                                         str_detect(filename, 'zeebrugge') ~ 'sk zeebrugge',
                                          str_detect(filename, 'blinker moerkerke') ~ 'blinker moerkerke',
                                          str_detect(filename, 'diksmuide') ~ 'diksmuide',
                                          str_detect(filename, 'schoorbakkebrug') ~ 'schoorbakkebrug',
@@ -57,7 +57,7 @@ ctd <- ctd %>% mutate(loc.ctd= case_when(str_detect(filename, 'akl ramskapelle|a
                                          str_detect(filename, 'yserstar') ~ 'yserstar',
                                          str_detect(filename, 'nieuwpoort-plassendale|nieuwpoort_plassendal') ~ 'nieuwpoort-plassendale',
                                          str_detect(filename, 'brugge') ~ 'brugge',
-                                         str_detect(filename, 'plassendale') ~ 'plassendale',
+                                         str_detect(filename, 'plassendal') ~ 'plassendale',
                                          str_detect(filename, 'sas slijkens') ~ 'sas slijkens',
                                          str_detect(filename, 'oude_veurne_vaart') ~ 'oude veurne vaart',
                                          str_detect(filename, 'blauwe sluis') ~ 'blauwe sluis',
@@ -79,5 +79,5 @@ link_ctd_debiet_neerslag<-read.csv("./data/metadata/link_ctd_debiet_neerslag.csv
 ctd<-left_join(ctd,link_ctd_debiet_neerslag,by="loc.ctd")
 ctd <- ctd %>% left_join(debiet, join_by(loc.debiet, closest(datum.ctd >= datum.debiet)))
 ctd <- ctd %>% left_join(neerslag, join_by(loc.neerslag, closest(datum.ctd >= datum.neerslag)))
-write.csv(ctd,"./data/intern/ctd.csv")
-write.csv(ctd %>% dplyr::filter(site == "ND"),"./data/intern/ctd_ND.txt")
+#write.csv(ctd,"./data/intern/ctd.csv")
+#write.csv(ctd %>% dplyr::filter(site == "ND"),"./data/intern/ctd_ND.txt")
