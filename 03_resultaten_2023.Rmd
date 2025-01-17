@@ -64,14 +64,18 @@ tos.summary %>% kable(caption = "2023 beleidstabel voor het aangepast spuibeheer
 write.csv(tos.summary,"./data/spuibeheer/intern/as_summary_2023.csv")
 ```
 
-```{r fig.height=5, fig.cap="Totale duur aangepast spuibeheer (uren) per jaar en waterlichaam."}
+Doorheen de tijd observeren we een sterk variatie tussen en binnen waterlopen, zowel op het vlak van totale duur aangepast spuibeheer (Fig. \@ref(fig:duuras)) als het aantal events aangepast spuibeheer (Fig. \@ref(fig:eventas)).
+
+In het AKL observeerden we een sterke piek van in 2021 in de totale duur, maar niet in aantal events. Dit is het gevolg van het langdurig aansluitend openstaan van de schuiven in 2021 (dus niet enkel op de momenten relevant voor aangepast spuibeheer). Aangepast spuibeheer blijft het minst toegepast in het AKL. Een gelijkaardige patroon observeerden we in het LK waarbij de piek in totale duur eveneens het gevolg was van een aantal momenten dat de schuiven open bleven. Aangepast spuibeheer wordt wel minstens dubbel zo intensief uitgevoerd in het LK versus het AKL. In het KGO zien we een stijging vanaf 2021 in zowel aantal events als totale duur van het aangepast spuibeheer. In 2023 ligt het aantal events aanzienlijk hoger dan in het LK maar de totale duur is gelijkaardig. Events duren inderdaad aanzienlijk langer in het LK dan in het KGO. Met uitzondering van een dip in 2022 zien we voor de Ijzer een stijging in zowel de totale duur als het aantal events aangepast spuibeheer. In 2023 blijft het aantal events in de Ijzer lager dan in VA, maar de totale duur is wel groter doordat events langer duren.
+
+```{r duuras, fig.height=5, fig.cap="Totale duur aangepast spuibeheer (uren) per jaar en waterlichaam."}
 os %>% 
   dplyr::group_by(site,jaar) %>%
   summarize(sum=sum(duration)) %>%
   ggplot(aes(x=jaar,y=sum/60,group=site)) + geom_point(aes(colour=site)) + geom_line(aes(colour=site)) + theme_bw() + theme(text = element_text(size = 12, family = "serif"), axis.text.x = element_text(angle=45, hjust = 0.5, vjust = 0.5, family = "serif"), strip.background = element_rect(colour = "black", fill = "white"), legend.position = "bottom") + ylab("Totale duur aangepast spuibeheer (uren)") 
 ```
 
-```{r fig.height=5, fig.cap="Aantal events aangepast spuibeheer per jaar en waterlichaam."}
+```{r eventas, fig.height=5, fig.cap="Aantal events aangepast spuibeheer per jaar en waterlichaam."}
 os %>% 
   dplyr::group_by(site,jaar) %>%
   summarize(count=n()) %>%
@@ -139,7 +143,7 @@ ctd.list<-process_ctd_series_for_plotting(date.min=as.POSIXct("2023-03-01 00:00:
 
 In 2023 werd er in het AKL maar op zes dagen aan aangepast spuibeheer gedaan. Dit is een verdubbeling van het aantal dagen in 2022 maar nog steeds veel minder dan de 29 dagen in 2021. In totaal stonden de sluizen 38 uur open (in 2022 was dit echter wel maar 19 uur en in 2021 was dit 464 uur). Wegens het beperkt aantal uren spuibeheer op het AKL in 2023, kan het **aangepast spuibeheer geen wezenlijke invloed hebben op de geleidbaarheid dit jaar** thv Ramskapelle en Moerkerke. Ondanks het feit dat de limietwaarde één maal in Moerkerke en meerdere malen in Ramskapelle werd overschreden tijdens de periode van aangepast spuibeheer, leken deze overschrijdingen niet per se te volgen op momenten van aangepast spuibeheer. In de zomer en het najaar, worden hogere waarden voor de geleidbaarheid geobserveerd waarbij de limietwaarde meerdere keren wordt overschreden (Fig. \@ref(fig:plotctdakl)). Linken met debiet of neerslag lijken er niet te zijn (Fig. \@ref(fig:plotaklr) en \@ref(fig:plotaklm)).
 
-```{r plotctdakl, fig.height=5, fig.cap="Verloop van de specifieke geleidbaarheid (mS/cm) in het AKL. De daggemiddelden worden weergegeven als zwarte punten op het midden van de dag. De groene balken geven de periodes van aangepast spuibeheer weer."}
+```{r plotctdakl, fig.cap="Verloop van de specifieke geleidbaarheid (mS/cm) in het AKL. De daggemiddelden worden weergegeven als zwarte punten op het midden van de dag. De groene balken geven de periodes van aangepast spuibeheer weer."}
 ctd.list$AKL
 ```
 
