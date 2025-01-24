@@ -272,3 +272,86 @@ p.list$`blauwe sluis`
 ```{r plotnec, fig.cap="Verloop van de actuele geleidbaarheid (mS/cm), specifieke geleidbaarheid bij 20°C (mS/cm), saliniteit (psu) en temperatuur (°C) in de Noordede (NE) ter hoogte van Clemensheule (4,0 km stroomopwaarts spuiconstructie), debiet ter hoogte van Oostkamp en neerslag (mm) ter hoogte van Klemskerke in 2023. De groene balken geven de periodes van aangepast spuibeheer weer."}
 p.list$clemensheule
 ```
+
+## Modellering
+
+```{r}
+daily_os <- os %>%
+  mutate(month_day = format(dicht, "%m-%d"),
+         datum=as.Date(dicht)) %>%
+  dplyr::filter((month_day >= "03-01" & month_day <= "05-15")) %>%
+  dplyr::select(site, duration, jaar, datum) %>%
+  group_by(site, jaar, datum) %>%
+  dplyr::summarize(events = n(),
+                   duration=as.numeric(sum(duration))) %>%
+  ungroup() 
+
+missing_start_and_stop<-anti_join(unique(os[,c("jaar","site")]) %>%
+  mutate(start="03-01",
+         stop="05-15") %>%
+  pivot_longer(!c(jaar,site),names_to = "type",values_to = "datum") %>%
+  dplyr::select(-type) %>%
+  mutate(datum = as.Date(paste0(jaar,"-",datum)),
+         jaar=as.numeric(jaar),
+         site=as.character(site)), 
+  daily_os %>% dplyr::select(site,jaar,datum)) %>%
+  mutate(events = 0,
+         duration = 0)
+
+daily_os <- rbind(daily_os,missing_start_and_stop) %>%
+  group_by(site, jaar) %>%
+  complete(datum = seq.Date(min(datum), max(datum), by = "day")) %>%
+  replace(is.na(.), 0) %>%
+  ungroup()
+
+weekly_os <- daily_os %>%
+  group_by(site, jaar) %>%
+  mutate(week = lubridate::week(datum)) %>%
+  group_by(site, jaar, week) %>%
+  summarize(events = sum(events),
+            duration = sum(duration))
+
+monthly_os <- daily_os %>%
+  group_by(site, jaar) %>%
+  mutate(month = lubridate::month(datum)) %>%
+  group_by(site, jaar, month) %>%
+  summarize(events = sum(events),
+            duration = sum(duration))
+
+yearly_os <- daily_os %>%
+  group_by(site, jaar) %>%
+  summarize(events = sum(events),
+            duration = sum(duration))
+
+remove(missing_start_and_stop)
+```
+
+```{r}
+ctd.daily <- ctd %>%
+  dplyr::select(site, loc.ctd, datum.ctd, spgeleidbaarheid, distance, debiet, neerslag) %>%
+  mutate(dag = lubridate::day(datum.ctd),
+         week = lubridate::week(datum.ctd),
+         maand = lubridate::month(datum.ctd),
+         jaar = lubridate::year(datum.ctd),
+         distance = as.numeric(gsub("km", "", distance))) %>%
+  group_by(site, loc.ctd, jaar, maand, week, dag)  %>%
+  summarise_at(vars(spgeleidbaarheid, distance, debiet, neerslag), 
+               funs(ifelse(sum(!is.na(.))/n() >= 0.9, mean(., na.rm = TRUE), NA))) %>%
+  ungroup()
+
+ctd.weekly <- ctd.daily %>%
+  group_by(site, loc.ctd, jaar, maand, week)  %>%
+  summarise_at(vars(spgeleidbaarheid, distance, debiet, neerslag), 
+               funs(ifelse(sum(!is.na(.))/n() >= 0.9, mean(., na.rm = TRUE), NA)))
+
+ctd.monthly <- ctd.daily %>%
+  group_by(site, loc.ctd, jaar, maand)  %>%
+  summarise_at(vars(spgeleidbaarheid, distance, debiet, neerslag), 
+               funs(ifelse(sum(!is.na(.))/n() >= 0.9, mean(., na.rm = TRUE), NA)))
+
+ctd.yearly <- ctd.daily %>%
+  group_by(site, loc.ctd, jaar)  %>%
+  summarise_at(vars(spgeleidbaarheid, distance, debiet, neerslag), 
+               funs(ifelse(sum(!is.na(.))/n() >= 0.9, mean(., na.rm = TRUE), NA)))
+  
+```
