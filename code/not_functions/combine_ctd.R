@@ -79,5 +79,5 @@ link_ctd_debiet_neerslag<-read.csv("./data/metadata/link_ctd_debiet_neerslag.csv
 ctd<-left_join(ctd,link_ctd_debiet_neerslag,by="loc.ctd")
 ctd <- ctd %>% left_join(debiet, join_by(loc.debiet, closest(datum.ctd >= datum.debiet)))
 ctd <- ctd %>% left_join(neerslag, join_by(loc.neerslag, closest(datum.ctd >= datum.neerslag)))
-#write.csv(ctd,"./data/intern/ctd.csv")
-#write.csv(ctd %>% dplyr::filter(site == "ND"),"./data/intern/ctd_ND.txt")
+write.csv(ctd,"./data/intern/ctd.csv")
+write.csv(ctd %>% dplyr::filter(site == "ND"),"./data/intern/ctd_ND.txt")
