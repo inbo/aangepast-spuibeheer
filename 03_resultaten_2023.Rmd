@@ -313,8 +313,8 @@ weekly_os <- daily_os %>%
 
 monthly_os <- daily_os %>%
   group_by(site, jaar) %>%
-  mutate(month = lubridate::month(datum)) %>%
-  group_by(site, jaar, month) %>%
+  mutate(maand = lubridate::month(datum)) %>%
+  group_by(site, jaar, maand) %>%
   summarize(events = sum(events),
             duration = sum(duration))
 
@@ -328,13 +328,17 @@ remove(missing_start_and_stop)
 
 ```{r}
 ctd.daily <- ctd %>%
-  dplyr::select(site, loc.ctd, datum.ctd, spgeleidbaarheid, distance, debiet, neerslag) %>%
-  mutate(dag = lubridate::day(datum.ctd),
-         week = lubridate::week(datum.ctd),
-         maand = lubridate::month(datum.ctd),
-         jaar = lubridate::year(datum.ctd),
-         distance = as.numeric(gsub("km", "", distance))) %>%
-  group_by(site, loc.ctd, jaar, maand, week, dag)  %>%
+  rename(datum = datum.ctd) %>%
+  dplyr::select(site, loc.ctd, datum, spgeleidbaarheid, distance, debiet, neerslag) %>%
+  mutate(dag = lubridate::day(datum),
+         week = lubridate::week(datum),
+         maand = lubridate::month(datum),
+         jaar = lubridate::year(datum),
+         distance = as.numeric(gsub("km", "", distance)),
+         month_day = format(datum, "%m-%d"),
+         datum=as.Date(datum)) %>%
+  dplyr::filter((month_day >= "03-01" & month_day <= "05-15")) %>%
+  group_by(site, loc.ctd, jaar, maand, week, dag, datum)  %>%
   summarise_at(vars(spgeleidbaarheid, distance, debiet, neerslag), 
                funs(ifelse(sum(!is.na(.))/n() >= 0.9, mean(., na.rm = TRUE), NA))) %>%
   ungroup()
@@ -355,3 +359,76 @@ ctd.yearly <- ctd.daily %>%
                funs(ifelse(sum(!is.na(.))/n() >= 0.9, mean(., na.rm = TRUE), NA)))
   
 ```
+
+```{r}
+cond.daily <- conductiviteit %>%
+  rename(site = site.conductiviteit, loc.ctd = loc.conductiviteit, datum = datum.conductiviteit, spgeleidbaarheid = conductiviteit) %>%
+  dplyr::select(site, loc.ctd, datum, spgeleidbaarheid, distance, debiet, neerslag) %>%
+  mutate(dag = lubridate::day(datum),
+         week = lubridate::week(datum),
+         maand = lubridate::month(datum),
+         jaar = lubridate::year(datum),
+         distance = as.numeric(gsub("km", "", distance)),
+         month_day = format(datum, "%m-%d"),
+         datum=as.Date(datum)) %>%
+  dplyr::filter((month_day >= "03-01" & month_day <= "05-15")) %>%
+  group_by(site, loc.ctd, jaar, maand, week, dag, datum)  %>%
+  summarise_at(vars(spgeleidbaarheid, distance, debiet, neerslag), 
+               funs(ifelse(sum(!is.na(.))/n() >= 0.9, mean(., na.rm = TRUE), NA))) %>%
+  ungroup()
+
+cond.weekly <- cond.daily %>%
+  group_by(site, loc.ctd, jaar, maand, week)  %>%
+  summarise_at(vars(spgeleidbaarheid, distance, debiet, neerslag), 
+               funs(ifelse(sum(!is.na(.))/n() >= 0.9, mean(., na.rm = TRUE), NA)))
+
+cond.monthly <- cond.daily %>%
+  group_by(site, loc.ctd, jaar, maand)  %>%
+  summarise_at(vars(spgeleidbaarheid, distance, debiet, neerslag), 
+               funs(ifelse(sum(!is.na(.))/n() >= 0.9, mean(., na.rm = TRUE), NA)))
+
+cond.yearly <- cond.daily %>%
+  group_by(site, loc.ctd, jaar)  %>%
+  summarise_at(vars(spgeleidbaarheid, distance, debiet, neerslag), 
+               funs(ifelse(sum(!is.na(.))/n() >= 0.9, mean(., na.rm = TRUE), NA)))
+```
+
+
+```{r}
+omgeving.daily<-rbind(ctd.daily,cond.daily)
+
+omgeving.weekly<-rbind(ctd.weekly,cond.weekly)
+
+omgeving.monthly<-rbind(ctd.monthly,cond.monthly)
+
+omgeving.yearly<-rbind(ctd.yearly,cond.yearly)
+
+remove(ctd.daily,ctd.weekly,ctd.monthly,ctd.yearly,cond.daily,cond.weekly,cond.monthly,cond.yearly)
+```
+
+```{r}
+omgeving.as.daily<-left_join(omgeving.daily,daily_os,by=c("site","jaar","datum"))
+
+omgeving.as.weekly<-left_join(omgeving.weekly,weekly_os,by=c("site","jaar","week"))
+
+omgeving.as.monthly<-left_join(omgeving.monthly,monthly_os,by=c("site","jaar","maand"))
+
+omgeving.as.yearly<-left_join(omgeving.yearly,yearly_os,by=c("site","jaar"))
+
+remove(omgeving.daily,omgeving.weekly,omgeving.monthly,omgeving.yearly,daily_os,weekly_os,monthly_os,yearly_os)
+```
+
+```{r}
+model.daily<-lm(spgeleidbaarheid ~ events + duration + distance + debiet + neerslag, data=omgeving.as.daily)
+summary(model.daily)
+
+model.weekly<-lm(spgeleidbaarheid ~ events + duration + distance + debiet + neerslag, data=omgeving.as.weekly)
+summary(model.weekly)
+
+model.monthly<-lm(spgeleidbaarheid ~ events + duration + distance + debiet + neerslag, data=omgeving.as.monthly)
+summary(model.monthly)
+
+model.yearly<-lm(spgeleidbaarheid ~ events + duration + distance + debiet + neerslag, data=omgeving.as.yearly)
+summary(model.yearly)
+```
+
