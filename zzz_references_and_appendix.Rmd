@@ -3,3 +3,109 @@
 # set appendix = FALSE, when the report has no appendix
 INBOmd::references(appendix = TRUE)
 ```
+
+# Appendix
+
+## Tijdsreeksen
+
+```{r langcond, fig.height=10, fig.cap="Specifieke geleidbaarheid (mS/cm) in functie van de tijd voor de verschillende sites en over verschillende afstanden tot de spuischuiven."}
+omgeving.as.yearly %>% 
+  dplyr::filter(site %in% c("AKL","Ijzer","KGO","LK","NE")) %>%
+  ggplot(aes(x=jaar, y=spgeleidbaarheid, group=distance)) + geom_line(aes(colour=distance)) + geom_point(aes(colour=distance)) + facet_wrap(facets = ~ site, scales="free_y") + theme_bw() + ylab("gemiddelde spec. geleidbaarheid (mS/cm)")
+```
+
+```{r langp, fig.height=5, fig.cap="Neerslag (mm) in functie van de tijd voor de verschillende sites."}
+omgeving.as.yearly %>% 
+  dplyr::filter(site %in% c("AKL","Ijzer","KGO","LK","NE")) %>%
+  ggplot(aes(x=jaar, y=neerslag, group=site)) + geom_line(aes(colour=site)) + geom_point(aes(colour=site)) + theme_bw() + ylab("gemiddelde neerslag (mm)")
+```
+
+```{r langq, fig.height=5, fig.cap="Afvoer (m³/s) in functie van de tijd voor de verschillende sites."}
+omgeving.as.yearly %>% 
+  dplyr::filter(site %in% c("AKL","Ijzer","KGO","LK","NE")) %>%
+  ggplot(aes(x=jaar, y=debiet, group=site)) + geom_line(aes(colour=site)) + geom_point(aes(colour=site)) + theme_bw() + ylab("afvoer m³/s")
+```
+
+```{r langaas, fig.height=5, fig.cap="Aantal events aangepast spuibeheer (AS) in functie van de tijd voor de verschillende sites."}
+omgeving.as.yearly %>% 
+  dplyr::filter(site %in% c("AKL","Ijzer","KGO","LK","NE")) %>%
+  ggplot(aes(x=jaar, y=events, group=site)) + geom_line(aes(colour=site)) + geom_point(aes(colour=site)) + theme_bw() + ylab("aantal events AS")
+```
+
+```{r langdas, fig.height=5, fig.cap="Duur aangepast spuibeheer (AS) in functie van de tijd voor de verschillende sites."}
+omgeving.as.yearly %>% 
+  dplyr::filter(site %in% c("AKL","Ijzer","KGO","LK","NE")) %>%
+  ggplot(aes(x=jaar, y=duration, group=site)) + geom_line(aes(colour=site)) + geom_point(aes(colour=site)) + theme_bw() + ylab("duur AS")
+```
+
+## Eerdere jaren 
+
+### 2020
+
+```{r}
+ctd.app<-process_ctd_series_for_plotting(date.min=as.POSIXct("2020-03-01 00:00:00", tz="GMT"), date.max=as.POSIXct("2020-05-15 00:00:00", tz="GMT"))
+```
+
+```{r}
+ctd.app$AKL
+```
+
+```{r}
+ctd.app$LK
+```
+
+```{r}
+ctd.app$KGO
+```
+
+```{r}
+ctd.app$Ijzer
+```
+
+### 2021
+
+```{r}
+ctd.app<-process_ctd_series_for_plotting(date.min=as.POSIXct("2021-03-01 00:00:00", tz="GMT"), date.max=as.POSIXct("2021-05-15 00:00:00", tz="GMT"))
+```
+
+```{r}
+ctd.app$AKL
+```
+
+```{r}
+ctd.app$LK
+```
+
+```{r}
+ctd.app$KGO
+```
+
+```{r}
+ctd.app$Ijzer
+```
+
+### 2022
+
+```{r}
+ctd.app<-process_ctd_series_for_plotting(date.min=as.POSIXct("2022-03-01 00:00:00", tz="GMT"), date.max=as.POSIXct("2022-05-15 00:00:00", tz="GMT"))
+```
+
+```{r}
+ctd.app$AKL
+```
+
+```{r}
+ctd.app$LK
+```
+
+```{r}
+ctd.app$KGO
+```
+
+```{r}
+ctd.app$Ijzer
+```
+
+```{r}
+ctd.app$NE
+```
