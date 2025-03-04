@@ -76,4 +76,6 @@ os$glasaal[which(os$site == "Ijzer")] = mean(c(1200, 3242)) #tussen min en max
 os$glasaal[which(os$site == "NE")] = mean(c(8, 56,31,1,2167,9,26,309,3750,17,3827,21,69,88,2014,40,300,12,39,9,60))
 os$glasaal[which(os$site == "KGO")] = 964.2
 
+os$open<-format(as.POSIXct(os$open, tz="GMT"), format="%Y-%m-%d %H:%M:%S")
+os$dicht<-format(as.POSIXct(os$dicht, tz="GMT"), format="%Y-%m-%d %H:%M:%S")
 write.csv(os, "./data/spuibeheer/intern/os_cleaned.csv")
