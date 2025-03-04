@@ -429,3 +429,17 @@ model.yearly<-stepAIC(lm(spgeleidbaarheid ~ events + duration + distance + debie
 summary(model.yearly)
 ```
 
+```{r}
+gamm_model <- gamm(spgeleidbaarheid ~ 
+                     events + 
+                     duration + 
+                     distance + 
+                     debiet +
+                     neerslag +
+                     s(week, bs = "cc", k = 3) +  # Cyclic smooth for seasonality
+                     s(jaar, bs = "tp", k = 3),
+                     random = list(site = ~1),
+                    correlation = corAR1(form = ~ week | site),  # AR(1) structure per site
+                   data = omgeving.as.weekly, method = "REML")
+```
+
