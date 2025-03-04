@@ -14,15 +14,13 @@ source("./code/functions/f.read_excel_allsheets.R")
 ```{r warning=FALSE, message=FALSE, include=FALSE}
 RUN=FALSE
 if (RUN==TRUE){
-  source("./code/functions/f.clean_ijzer_and_va.R")
-  source("./code/functions/f.clean_KGO.R")
-  source("./code/functions/f.clean_AKLLK.R")
-  source("./code/not_functions/combine_as_NE.R")
-  source("./code/not_functions/combine_as_data.R")
-  save.image(file = "./Rdata/variables_as.RData")
+  source("./code/not_functions/combine_all.R")
 }
 if (RUN==FALSE){
-  load("./Rdata/variables_as.RData")
+  os <- read.csv("./data/spuibeheer/intern/os_cleaned.csv") %>% 
+    dplyr::mutate(open = as.POSIXct(open, format = "%Y-%m-%d %H:%M:%S", tz = "GMT"),
+                  dicht = as.POSIXct(dicht, format = "%Y-%m-%d %H:%M:%S", tz = "GMT")) %>%
+    dplyr::select(-X)
 }
 ```
 
@@ -34,13 +32,13 @@ os.summary <- os %>%
   group_by(site) %>%
   summarize(start = as.Date(min(open)),
             stop = as.Date(max(dicht)),
-            periode = as.numeric(round(stop - start)),
+            periode = round(stop - start),
             aantal.dagen.effectief.os = n_distinct(datum),
             events = n(),
             events.per.dag = round(events/aantal.dagen.effectief.os, digits = 2),
-            mediaan.duur.per.event = as.numeric(round(median(duration))),
+            mediaan.duur.per.event = round(median(duration)),
             mediaan.duur.per.dag = round(mediaan.duur.per.event * events.per.dag),
-            totale.duur.os = round(as.numeric(sum(duration))),
+            totale.duur.os = round(sum(duration)),
             glasaal.per.event = round(mean(glasaal)),
             glasaal.totaal = round(sum(glasaal)))
 os.summary$glasaal.totaal[which(os.summary$site == "VA")] = "75690*"
