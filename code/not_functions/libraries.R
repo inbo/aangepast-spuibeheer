@@ -33,6 +33,8 @@ library(sessioninfo)
 library(wql)
 library(WaveletComp)
 
+library(MASS)
+
 # package_info(
 #   pkgs = "loaded",
 #   include_base = FALSE,
