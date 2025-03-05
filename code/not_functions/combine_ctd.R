@@ -82,5 +82,8 @@ ctd <- ctd %>% left_join(neerslag, join_by(loc.neerslag, closest(datum.ctd >= da
 
 ctd <- ctd %>% dplyr::filter(!(loc.ctd == "sk zeebrugge" & site == "AKL" & lubridate::year(datum.ctd) == 2021)) # not thrustworthy measurements
 
+ctd$datum.ctd<-format(as.POSIXct(ctd$datum.ctd, tz="GMT"), format="%Y-%m-%d %H:%M:%S")
+ctd$datum.debiet<-format(as.POSIXct(ctd$datum.debiet, tz="GMT"), format="%Y-%m-%d %H:%M:%S")
+ctd$datum.neerslag<-format(as.POSIXct(ctd$datum.neerslag, tz="GMT"), format="%Y-%m-%d %H:%M:%S")
+
 write.csv(ctd,"./data/intern/ctd.csv")
-write.csv(ctd %>% dplyr::filter(site == "ND"),"./data/intern/ctd_ND.txt")

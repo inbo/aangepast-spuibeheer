@@ -17,4 +17,8 @@ debiet$datum.debiet = debiet$date_brussels; attr(debiet$datum.debiet, "tzone") <
 debiet <- debiet %>% dplyr::select(-date, -date_brussels, -value)
 debiet<-debiet[!duplicated(debiet[,c("loc.debiet","datum.debiet")]), ]
 
+debiet$datum.debiet<-format(as.POSIXct(debiet$datum.debiet, tz="GMT"), format="%Y-%m-%d %H:%M:%S")
+
+write.csv(debiet,"./data/intern/debiet.csv")
+
 remove(files,path,file_name,temp)

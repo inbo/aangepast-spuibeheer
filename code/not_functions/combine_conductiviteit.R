@@ -37,4 +37,10 @@ conductiviteit<-left_join(conductiviteit,link_conductiviteit_debiet_neerslag,by=
 conductiviteit <- conductiviteit %>% left_join(debiet, join_by(loc.debiet, closest(datum.conductiviteit >= datum.debiet)))
 conductiviteit <- conductiviteit %>% left_join(neerslag, join_by(loc.neerslag, closest(datum.conductiviteit >= datum.neerslag)))
 
+conductiviteit$datum.conductiviteit<-format(as.POSIXct(conductiviteit$datum.conductiviteit, tz="GMT"), format="%Y-%m-%d %H:%M:%S")
+conductiviteit$datum.debiet<-format(as.POSIXct(conductiviteit$datum.debiet, tz="GMT"), format="%Y-%m-%d %H:%M:%S")
+conductiviteit$datum.neerslag<-format(as.POSIXct(conductiviteit$datum.neerslag, tz="GMT"), format="%Y-%m-%d %H:%M:%S")
+
+write.csv(conductiviteit,"./data/intern/ctd_vmm.csv")
+
 remove(files,path,file_name,temp,counter)

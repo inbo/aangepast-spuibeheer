@@ -7,3 +7,10 @@ source("./code/functions/f.clean_AKLLK.R")
 source("./code/not_functions/combine_as_NE.R")
 source("./code/not_functions/combine_as_data.R")
 
+source("./code/not_functions/combine_debiet.R")
+source("./code/not_functions/combine_neerslag.R")
+
+source("./code/not_functions/combine_conductiviteit.R")
+
+source("./code/functions/f.sp.conductance.R")
+source("./code/not_functions/combine_ctd.R")

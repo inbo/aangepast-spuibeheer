@@ -1,6 +1,9 @@
 ---
 title: "Opvolging van de zoutintrusie in de Ijzer, het kanaal Gent-Oostende, het Leopoldkanaal, het afleidingskanaal van de Leie en de Noordede"
 subtitle: Aangepast spuibeheer in 2023 in functie van glasaalmigratie
+header-includes:
+   - \usepackage{lineno}
+   - \linenumbers
 author:
   - name:
       given: "Stijn"
@@ -8,13 +11,13 @@ author:
     email: "stijn.bruneel@inbo.be"
     orcid: "0000-0002-8226-8080"
     affiliation: "Instituut voor Natuur- en Bosonderzoek (INBO)"
+    corresponding: true
   - name:
       given: "Lore"
       family: "Vandamme"
     email: "lore.vandamme@inbo.be"
     orcid: "0009-0000-0500-9547"
     affiliation: "Instituut voor Natuur- en Bosonderzoek (INBO)"
-    corresponding: true
   - name:
       given: "David"
       family: "Buysse"
@@ -27,18 +30,30 @@ author:
     email: "sarah.broos@inbo.be"
     orcid: "0000-0001-9742-6224"
     affiliation: "Instituut voor Natuur- en Bosonderzoek (INBO)"
-  - name:
-      given: "Pieterjan"
-      family: "Verhelst"
-    email: "pieterjan.verhelst@inbo.be"
-    orcid: "0000-0002-2610-6941"
-    affiliation: "Instituut voor Natuur- en Bosonderzoek (INBO)"
-  - name:
-      given: "Ine"
-      family: "Pauwels"
-    email: "ine.pauwels@inbo.be"
-    orcid: "0000-0002-2856-8787"
-    affiliation: "Instituut voor Natuur- en Bosonderzoek (INBO)"
+  # - name:
+  #     given: "Pieterjan"
+  #     family: "Verhelst"
+  #   email: "pieterjan.verhelst@inbo.be"
+  #   orcid: "0000-0002-2610-6941"
+  #   affiliation: "Instituut voor Natuur- en Bosonderzoek (INBO)"
+  # - name:
+  #     given: "Ine"
+  #     family: "Pauwels"
+  #   email: "ine.pauwels@inbo.be"
+  #   orcid: "0000-0002-2856-8787"
+  #   affiliation: "Instituut voor Natuur- en Bosonderzoek (INBO)"
+  # - name:
+  #     given: "Isaac"
+  #     family: "Vermeulen"
+  #   email: "isaac.vermeulen@inbo.be"
+  #   orcid: "0009-0001-3035-9810"
+  #   affiliation: "Instituut voor Natuur- en Bosonderzoek (INBO)"
+  # - name:
+  #     given: "Kaat"
+  #     family: "Thienpont"
+  #   email: "kaat.thienpont@inbo.be"
+  #   orcid: "0009-0006-6176-4743"
+  #   affiliation: "Instituut voor Natuur- en Bosonderzoek (INBO)"
   - name:
       given: "Simon"
       family: "Plaetinck"
@@ -53,16 +68,16 @@ author:
     affiliation: "Instituut voor Natuur- en Bosonderzoek (INBO)"
   - name:
       given: "Nico"
-      family: "Demaerteleire"
+      family: "De Maerteleire"
     email: "nico.demaerteleire@inbo.be"
-    orcid: "?"
+    orcid: "0009-0004-9436-8937"
     affiliation: "Instituut voor Natuur- en Bosonderzoek (INBO)"
-  - name:
-      given: "Mylan"
-      family: "Lyssens"
-    email: "mylan.lyssens@inbo.be"
-    orcid: "?"
-    affiliation: "Instituut voor Natuur- en Bosonderzoek (INBO)"
+  # - name:
+  #     given: "Mylan"
+  #     family: "Lyssens"
+  #   email: "mylan.lyssens@inbo.be"
+  #   orcid: "0009-0004-0438-8097"
+  #   affiliation: "Instituut voor Natuur- en Bosonderzoek (INBO)"
   - name:
       given: "Johan"
       family: "Coeck"
@@ -107,13 +122,7 @@ output:
 
 # Dankwoord {.unnumbered}
 
-De tekst voor het optionele dankwoord.
-
-# Voorwoord {.unnumbered}
-
-De tekst voor het optionele voorwoord.
-
-# Aanbevelingen voor beheer en/of beleid {.unnumbered}
+We bedanken de operatoren van de spuischuiven voor het voorzien van de data van het aangepast spuibeheer.
 
 ```{r setup, include = FALSE}
 library(knitr)

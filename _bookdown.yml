@@ -1,6 +1,7 @@
 book_filename: "as.Rmd"
 output_dir: "./output"
 delete_merged_file: TRUE
+#rmd_subdir: yes
 language:
   label:
     fig:    'Figuur '
@@ -14,4 +15,5 @@ language:
     ex:     'Voorbeeld '
     proof:  'Bewijs. '
     remark: 'Opmerking. '
-rmd.files: ["index.Rmd", "000_abstract.Rmd", "001_resume.Rmd", "01_inleiding.Rmd", "02_materiaal_en_methoden.Rmd", "03_resultaten_2024.Rmd", "zzz_references_and_appendix.Rmd"]
+#rmd_files: ["index.Rmd", "000_abstract.Rmd", "001_resume.Rmd", "01_inleiding.Rmd", "02_materiaal_en_methoden.Rmd", "./resultaten/2023/03_resultaten_2023.Rmd", "zzz_references_and_appendix.Rmd"]
+edit: https://github.com/AquaticManagementINBO/aangepast-spuibeheer/edit/main/%s

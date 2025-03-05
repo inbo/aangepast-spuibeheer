@@ -57,6 +57,7 @@ VA2024 <- clean_ijzer_and_va(file = "./data/spuibeheer/extern/verwerkt_in_excel/
 
 KGO2020 <- clean_KGO("./data/spuibeheer/extern/verwerkt_in_excel/os_KGO_2020.xlsx")
 KGO2021 <- clean_KGO("./data/spuibeheer/extern/verwerkt_in_excel/os_KGO_2021.xlsx")
+KGO2022 <- clean_KGO("./data/spuibeheer/extern/verwerkt_in_excel/os_KGO_2022.xlsx")
 KGO2023 <- clean_KGO("./data/spuibeheer/extern/verwerkt_in_excel/os_KGO_2023.xlsx")
 KGO2024 <- clean_KGO("./data/spuibeheer/extern/verwerkt_in_excel/os_KGO_2024.xlsx")
 
