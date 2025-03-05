@@ -8,6 +8,10 @@ INBOmd::references(appendix = TRUE)
 
 ## Tijdsreeksen
 
+```{r}
+source("./code/not_functions/model_vb.R")
+```
+
 ```{r langcond, fig.height=10, fig.cap="Specifieke geleidbaarheid (mS/cm) in functie van de tijd voor de verschillende sites en over verschillende afstanden tot de spuischuiven."}
 omgeving.as.yearly %>% 
   dplyr::filter(site %in% c("AKL","Ijzer","KGO","LK","NE")) %>%

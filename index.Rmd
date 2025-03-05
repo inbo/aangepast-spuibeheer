@@ -86,10 +86,10 @@ author:
     affiliation: "Instituut voor Natuur- en Bosonderzoek (INBO)"
 reviewer:
   - name:
-      given: "Stijn"
-      family: "Bruneel"
-    email: "stijn.bruneel@inbo.be"
-    orcid: "0000-0002-8226-8080"
+      given: "Isaac"
+      family: "Vermeulen"
+    email: "isaac.vermeulen@inbo.be"
+    orcid: "0009-0001-3035-9810"
     affiliation: "Instituut voor Natuur- en Bosonderzoek (INBO)"
 lang: nl
 style: INBO
