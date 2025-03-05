@@ -113,3 +113,55 @@ ctd.app$Ijzer
 ```{r}
 ctd.app$NE
 ```
+
+### 2023
+
+```{r}
+ctd.app<-process_ctd_series_for_plotting(date.min=as.POSIXct("2023-03-01 00:00:00", tz="GMT"), date.max=as.POSIXct("2023-05-15 00:00:00", tz="GMT"))
+```
+
+```{r}
+ctd.app$AKL
+```
+
+```{r}
+ctd.app$LK
+```
+
+```{r}
+ctd.app$KGO
+```
+
+```{r}
+ctd.app$Ijzer
+```
+
+```{r}
+ctd.app$NE
+```
+
+### 2024
+
+```{r}
+ctd.app<-process_ctd_series_for_plotting(date.min=as.POSIXct("2024-03-01 00:00:00", tz="GMT"), date.max=as.POSIXct("2024-05-15 00:00:00", tz="GMT"))
+```
+
+```{r}
+ctd.app$AKL
+```
+
+```{r}
+ctd.app$LK
+```
+
+```{r}
+ctd.app$KGO
+```
+
+```{r}
+ctd.app$Ijzer
+```
+
+```{r}
+ctd.app$NE
+```
