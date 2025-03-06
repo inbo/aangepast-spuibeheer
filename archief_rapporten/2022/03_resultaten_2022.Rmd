@@ -57,7 +57,7 @@ os.summary <- os %>%
             totale.duur.os = round(sum(duration)),
             glasaal.per.event = round(mean(glasaal)),
             glasaal.totaal = round(sum(glasaal)))
-os.summary$glasaal.totaal[which(os.summary$site == "VA")] = "?*"
+os.summary$glasaal.totaal[which(os.summary$site == "VA")] = "40730*"
 os.summary$start <- format(strptime(as.character(as.Date(os.summary$start)), "%Y-%m-%d"), "%d-%m-%Y")
 os.summary$stop <- format(strptime(as.character(as.Date(os.summary$stop)), "%Y-%m-%d"), "%d-%m-%Y")
 tos.summary <- as.data.frame(t(os.summary[,-1]))
@@ -82,21 +82,19 @@ Doorheen de tijd observeren we een sterke variatie tussen en binnen waterlopen, 
 
 In het AKL observeerden we een sterke piek in 2021 in de totale duur, maar niet in aantal events. Dit is het gevolg van het langdurig aansluitend openstaan van de schuiven in 2021 (dus niet enkel op de momenten relevant voor aangepast spuibeheer). Aangepast spuibeheer blijft het minst toegepast in het AKL. Een gelijkaardig patroon observeerden we in het LK waarbij de piek in totale duur eveneens het gevolg was van een aantal momenten dat de schuiven open bleven. Aangepast spuibeheer wordt wel minstens dubbel zo intensief uitgevoerd in het LK versus het AKL. In het KGO zien we een stijging vanaf 2021 in zowel aantal events als totale duur van het aangepast spuibeheer. In 2022 ligt het aantal events aanzienlijk hoger dan in het LK maar de totale duur is gelijkaardig. Events duren inderdaad aanzienlijk langer in het LK dan in het KGO. Met uitzondering van een dip in 2022 zien we voor de Ijzer een stijging in zowel de totale duur als het aantal events aangepast spuibeheer. In 2022 blijft het aantal events in de Ijzer lager dan in VA, maar de totale duur is wel groter doordat events langer duren.
 
-```{r duuras, fig.height=5, fig.cap="Totale duur aangepast spuibeheer (uren) per jaar en waterlichaam."}
+```{r duuras, fig.height=5, fig.cap="Totale duur aangepast spuibeheer (uren) per jaar en waterlichaam in het afleidingskanaal van de Leie (AKL), Ijzer, kanaal Gent-Oostende (KGO), Leopoldkanaal (LK), Noordede (NE) en Veurne-Ambacht (VA)."}
 os %>% 
   dplyr::group_by(site,jaar) %>%
   summarize(sum=sum(duration)) %>%
   ggplot(aes(x=jaar,y=sum/60,group=site)) + geom_point(aes(colour=site)) + geom_line(aes(colour=site)) + theme_bw() + theme(text = element_text(size = 12, family = "serif"), axis.text.x = element_text(angle=45, hjust = 0.5, vjust = 0.5, family = "serif"), strip.background = element_rect(colour = "black", fill = "white"), legend.position = "bottom") + ylab("Totale duur aangepast spuibeheer (uren)") 
 ```
 
-```{r eventas, fig.height=5, fig.cap="Aantal events aangepast spuibeheer per jaar en waterlichaam."}
+```{r eventas, fig.height=5, fig.cap="Aantal events aangepast spuibeheer per jaar en waterlichaam in het afleidingskanaal van de Leie (AKL), Ijzer, kanaal Gent-Oostende (KGO), Leopoldkanaal (LK), Noordede (NE) en Veurne-Ambacht (VA)."}
 os %>% 
   dplyr::group_by(site,jaar) %>%
   summarize(count=n()) %>%
   ggplot(aes(x=jaar,y=count,group=site)) + geom_point(aes(colour=site)) + geom_line(aes(colour=site)) + theme_bw() + theme(text = element_text(size = 12, family = "serif"), axis.text.x = element_text(angle=45, hjust = 0.5, vjust = 0.5, family = "serif"), strip.background = element_rect(colour = "black", fill = "white"), legend.position = "bottom") + ylab("Aangepast spuibeheer events") 
 ```
-
-\pagebreak
 
 ```{r tijdsreeksen, eval=FALSE, fig.height=10, fig.width=10, fig.cap="Overzicht van metingen van afvoer (m³/s) voor relevante meetstations doorheen de tijd"}
 ggplot(debiet[which(lubridate::year(debiet$datum.debiet)==2022),], aes(x = datum.debiet, y = debiet)) + 
@@ -115,9 +113,6 @@ ggplot(debiet[which(lubridate::year(debiet$datum.debiet)==2022),], aes(x = datum
 source("./code/functions/f.process_ctd_for_plotting.R")
 p.list<-process_ctd_for_plotting(date.min=as.POSIXct("2022-03-01 00:00:00", tz="GMT"), date.max=as.POSIXct("2022-05-15 00:00:00", tz="GMT"))
 
-source("./code/functions/f.process_conductiviteit_series_for_plotting.R")
-cond.list<-process_conductiviteit_series_for_plotting(date.min=as.POSIXct("2022-03-01 00:00:00", tz="GMT"), date.max=as.POSIXct("2022-05-15 00:00:00", tz="GMT"))
-
 source("./code/functions/f.process_ctd_series_for_plotting.R")
 ctd.list<-process_ctd_series_for_plotting(date.min=as.POSIXct("2022-03-01 00:00:00", tz="GMT"), date.max=as.POSIXct("2022-05-15 00:00:00", tz="GMT"))
 ```
@@ -126,9 +121,9 @@ ctd.list<-process_ctd_series_for_plotting(date.min=as.POSIXct("2022-03-01 00:00:
 
 #### Afleidingskanaal van de Leie
 
-In 2022 werd er in het AKL maar op 3 dagen aan aangepast spuibeheer gedaan. In totaal stonden de sluizen hierdoor maar 18:50 open. Een forse vermindering met het jaar voordien. De reden voor deze vermindering is voornamelijk te wijten aan werkzaamheden in de spuikokers. Ter hoogte van Zeebrugge werd op de drie dagen dat er spuibeheer was een kleine verhoging in geleidbaarheid waargenomen (Fig. \@ref(fig:plotctdakl)). Deze is telkens na enkele uren weer verdwenen. De plotse pieken en verhoging in waardes later op het jaar zijn dan ook niet te wijten aan het alternatief spuibeheer. Ter hoogte van ramskapelle bleek wegens het beperkt aantal uren spuibeheer op het AKL dit jaar, het aangepast spuibeheer geen invloed te hebben op de conductiviteit dit jaar (Fig. \@ref(fig:plotaklr)). Toch wordt de limietwaarde van 0,87 mS/cm overschreden in de zomer en het najaar. Deze overschrijdingen kunnen niet gelinkt worden aan het aangepast spuibeheer. Ter hoogte van Moerkerke bleek wegens het beperkt aantal uren spuibeheer op het AKL dit jaar, het aangepast spuibeheer geen invloed te hebben op de geleidbaarheid dit jaar (Fig. \@ref(fig:plotaklm)). De periode met een conductiviteit van 0 mS/cm lag de logger op kant.
+In 2022 werd er in het AKL maar op 3 dagen aan aangepast spuibeheer gedaan. In totaal stonden de sluizen hierdoor maar 19 uur open. Een forse vermindering met het jaar voordien. De reden voor deze vermindering is voornamelijk te wijten aan werkzaamheden in de spuikokers. Ter hoogte van Zeebrugge werd op de drie dagen dat er spuibeheer was een kleine verhoging in geleidbaarheid waargenomen (Fig. \@ref(fig:plotctdakl)). Deze is telkens na enkele uren weer verdwenen. De plotse pieken en verhoging in waardes later op het jaar zijn dan ook niet te wijten aan het aangepast spuibeheer. Ter hoogte van Ramskapelle bleek wegens het beperkt aantal uren spuibeheer op het AKL dit jaar, het aangepast spuibeheer geen invloed te hebben op de conductiviteit dit jaar (Fig. \@ref(fig:plotaklr)). Toch wordt de limietwaarde van 0,87 mS/cm overschreden in de zomer en het najaar. Deze overschrijdingen kunnen niet gelinkt worden aan het aangepast spuibeheer. Ter hoogte van Moerkerke bleek wegens het beperkt aantal uren spuibeheer op het AKL dit jaar, het aangepast spuibeheer geen invloed te hebben op de geleidbaarheid dit jaar (Fig. \@ref(fig:plotaklm)). De periode met een conductiviteit van 0 mS/cm lag de logger op kant.
 
-```{r plotctdakl, fig.cap="Verloop van de specifieke geleidbaarheid (mS/cm) in het AKL. De daggemiddelden worden weergegeven als zwarte punten op het midden van de dag. De groene balken geven de periodes van aangepast spuibeheer weer.", fig.height=5}
+```{r plotctdakl, fig.cap="Verloop van de specifieke geleidbaarheid (mS/cm) in het AKL. De daggemiddelden worden weergegeven als zwarte punten op het midden van de dag. De groene balken geven de periodes van aangepast spuibeheer weer."}
 ctd.list$AKL
 ```
 
@@ -142,11 +137,11 @@ p.list$`akl moerkerke`
 
 #### Leopoldkanaal
 
-Steendam et al. (2019, intern rapport) stelden in het rapport ‘Opvolging van de palingstand in het Leopoldkanaal als evaluatie van het aangepast sluisbeheer in functie van een verbeterde glasaalmigratie (2018-2019)’ dat de kansen om de palingdensiteit in het LK significant op te krikken sterk onderbenut bleven omdat het aangepast sluisbeheer in Zeebrugge (LK en AKL) veel beperkter werd toegepast in vergelijking met de andere waterlopen onder beheer van DVW (Kanaal Gent-Oostende, IJzer). Daarom werd in 2021 door DVW een poging gedaan om het aangepast spuibeheer in het LK op te krikken door de schuiven ook met afgaand tij open te laten staan. Via deze beheermaatregel kon er twee maal per 24 u aangepast gespuid worden. Er werd voor het eerst glasaal binnen gelaten in het LK op 3 maart. De schuiven stonden vanaf 3 maart tot en met 9 maart doorlopend open. Dit veroorzaakte hoge zoutwaarden waardoor het alternatief spuibeheer vanaf 10 maart tot en met 18 maart tijdelijk stilgelegd werd. Vanaf 19 maart werden de schuiven enkel nog overdag geopend – net zoals de voorbijgaande jaren. In 2022 werd er terug gespuid volgens de oude manier met enkel de schotten open overdag. In totaal werden er 23 dagen en 135:55 uur gespuid. Wat in aantal dagen ongeveer hetzelfde is als vorig jaar maar in totale uren is er meer dan een halvering door het terug toepassen van het oude systeem met enkel overdag spuien. Dit jaar werd er voor het eerst glasaal binnengelaten op 2 maart.
+Steendam et al. (2019, intern rapport) stelden in het rapport ‘Opvolging van de palingstand in het Leopoldkanaal als evaluatie van het aangepast sluisbeheer in functie van een verbeterde glasaalmigratie (2018-2019)’ dat de kansen om de palingdensiteit in het LK significant op te krikken sterk onderbenut bleven omdat het aangepast sluisbeheer in Zeebrugge (LK en AKL) veel beperkter werd toegepast in vergelijking met de andere waterlopen onder beheer van DVW (Kanaal Gent-Oostende, IJzer). Daarom werd in 2021 door DVW een poging gedaan om het aangepast spuibeheer in het LK op te krikken door de schuiven ook met afgaand tij open te laten staan. Via deze beheermaatregel kon er twee maal per 24 u aangepast gespuid worden. Er werd voor het eerst glasaal binnen gelaten in het LK op 3 maart. De schuiven stonden vanaf 3 maart tot en met 9 maart doorlopend open. Dit veroorzaakte hoge zoutwaarden waardoor het aangepast spuibeheer vanaf 10 maart tot en met 18 maart tijdelijk stilgelegd werd. Vanaf 19 maart werden de schuiven enkel nog overdag geopend – net zoals de voorbijgaande jaren. In 2022 werd er terug gespuid volgens de oude manier met enkel de schotten open overdag. In totaal werden er 23 dagen en 136 uur gespuid. Wat in aantal dagen ongeveer hetzelfde is als vorig jaar maar in totale uren is er meer dan een halvering door het terug toepassen van het oude systeem met enkel overdag spuien. Dit jaar werd er voor het eerst glasaal binnengelaten op 2 maart.
 
-Net stroomopwaarts van de spuischuiven resulteert de toepassing van het alternatief spuibeheer logischerwijze in verhoogde zoutgehalte met een snelle stijging (Fig. \@ref(fig:plotctdlk) en Fig. \@ref(fig:plotlkz)). De conductiviteit daalt echter snel terug naar de zoetwatergrens na het beëindigen van het alternatief spuibeheer (Figuur 20). De droge zomer leidde tot een verminderde afvoer en zorgde in tegenstelling tot  vorig jaar terug tot een tweede verhoging in de zomer en het najaar. De plotse stijging rond begin oktober is te wijten aan een kapotte logger. Deze is vervangen op 18 november en vanaf dan zijn de waardes terug correct. 
+Net stroomopwaarts van de spuischuiven resulteert de toepassing van het aangepast spuibeheer logischerwijze in verhoogde zoutgehalte met een snelle stijging (Fig. \@ref(fig:plotctdlk) en Fig. \@ref(fig:plotlkz)). De conductiviteit daalt echter snel terug naar de zoetwatergrens na het beëindigen van het aangepast spuibeheer (Figuur 20). De droge zomer leidde tot een verminderde afvoer en zorgde in tegenstelling tot  vorig jaar terug tot een tweede verhoging in de zomer en het najaar. De plotse stijging rond begin oktober is te wijten aan een kapotte logger. Deze is vervangen op 18 november en vanaf dan zijn de waardes terug correct. 
 
-In Ramskapelle wordt hetzelfde patroon als in Zeebrugge waargenomen, namelijk een stijging van de conductiviteit bij de start van het alternatief spuibeheer en een snelle daling net boven de zoetwatergrens bij stopzetting van het alternatief spuibeheer (Fig. \@ref(fig:plotlkr)). Ook hier ziet men in de zomer een verhoging van de conductiviteit wegens de beperkte afvoer.
+In Ramskapelle wordt hetzelfde patroon als in Zeebrugge waargenomen, namelijk een stijging van de conductiviteit bij de start van het aangepast spuibeheer en een snelle daling net boven de zoetwatergrens bij stopzetting van het aangepast spuibeheer (Fig. \@ref(fig:plotlkr)). Ook hier ziet men in de zomer een verhoging van de conductiviteit wegens de beperkte afvoer.
 
 In 2022 werd er tijdens het spuibeheer en lichte stijging van de conductiviteit gemeten, met een piek van 1.60 mS/cm (Fig. \@ref(fig:plotlkm)). In de zomer is ook hier een hoge piek waar te nemen met een maximum van 5.30 mS/cm. In de periode van 22 september tot 18 november lag de logger op kant en zijn er geen metingen.
 
@@ -168,16 +163,10 @@ p.list$`lk moerkerke`
 
 ### Kanaal Gent-Oostende
 
-In het KGO werd er glasaal binnen gelaten vanaf 28 februari tot 15 mei. In
-tegenstelling tot vorig jaar (54 uur), werd er terug een lang spuibeheer toegepast
-in het KGO dit jaar (246 uur in totaal). Al voor de periode van het alternatief spuibeheer in 2022 stijgt het zoutgehalte ter hoogte van Sas Slijkens tot waarden boven de zoetwatergrens (Fig. \@ref(fig:plotctdkgo) en Fig. \@ref(fig:plotkgoss)). Bij de start van het spuibeheer zijn we een stijging van de conductiviteit met een piek van 15,3 mS/cm tijdens het spuibeheer. Na het spuibeheer blijft de conductiviteit hoog, met nog een piek tot 22.68 mS/cm in augustus welke niet aan het spuibeheer kan gelinkt worden. Omdat het zoutgehalte al stijgt voor de start van het spuibeheer, en de hoogste zoutconcentraties pas geruime tijd na het spuibeheer te zien zijn kunnen deze niet gelinkt worden aan dit alternatieve beheer. In tegenstelling tot vorig jaar was er ter hoogte van Plassendale dit jaar terug een verhoging van de conductiviteitswaarden gemeten tijdens het alternatief spuibeheer (Fig. \@ref(fig:plotkgop)). Mogelijks komt dit omdat er dit jaar terug meer uren alternatief spuibeheer zijn toegepast. Na het alternatief spuibeheer is er terug een daling van de conductiviteit. De hoogste waardes van de conductiviteit (6.04 mS/cm) liggen ook hier net zoals in Sas Slijkens pas geruime tijd na het spuibeheer. Hierdoor kunnen deze hogere zoutconcentraties niet gelinkt worden aan het alternatief beheer. In Oostkamp werd hetzelfde patroon geobsvereerd als in Plassendale (Fig. \@ref(fig:plotkgob)).
+In het KGO werd er glasaal binnen gelaten vanaf 28 februari tot 15 mei. In tegenstelling tot vorig jaar (54 uur), werd er terug een lang spuibeheer toegepast in het KGO dit jaar (247.5 uur in totaal). Al voor de periode van het aangepast spuibeheer in 2022 stijgt het zoutgehalte ter hoogte van Sas Slijkens tot waarden boven de zoetwatergrens (Fig. \@ref(fig:plotctdkgo) en Fig. \@ref(fig:plotkgoss)). Bij de start van het spuibeheer zijn we een stijging van de conductiviteit met een piek van 15,3 mS/cm tijdens het spuibeheer. Na het spuibeheer blijft de conductiviteit hoog, met nog een piek tot 22.68 mS/cm in augustus welke niet aan het spuibeheer kan gelinkt worden. Omdat het zoutgehalte al stijgt voor de start van het spuibeheer, en de hoogste zoutconcentraties pas geruime tijd na het spuibeheer te zien zijn kunnen deze niet gelinkt worden aan dit alternatieve beheer. In tegenstelling tot vorig jaar was er ter hoogte van Plassendale dit jaar terug een verhoging van de conductiviteitswaarden gemeten tijdens het aangepast spuibeheer (Fig. \@ref(fig:plotkgop)). Mogelijk komt dit omdat er dit jaar terug meer uren aangepast spuibeheer zijn toegepast. Na het aangepast spuibeheer is er terug een daling van de conductiviteit. De hoogste waardes van de conductiviteit (6.04 mS/cm) liggen ook hier net zoals in Sas Slijkens pas geruime tijd na het spuibeheer. Hierdoor kunnen deze hogere zoutconcentraties niet gelinkt worden aan het alternatief beheer. In Oostkamp werd hetzelfde patroon geobserveerd als in Plassendale (Fig. \@ref(fig:plotkgob)).
 
 ```{r plotctdkgo, fig.cap="Verloop van de specifieke geleidbaarheid bij 20°C (mS/cm) in het KGO. De daggemiddelden worden weergegeven als zwarte punten op het midden van de dag. De groene balken geven de periodes van aangepast spuibeheer weer."}
 ctd.list$KGO
-```
-
-```{r plotcondkgo, fig.cap="Verloop van de VMM-metingen van de specifieke geleidbaarheid bij 20°C (mS/cm) in het KGO. De groene balken geven de periodes van aangepast spuibeheer weer."}
-cond.list$KGO
 ```
 
 ```{r plotkgoss, fig.cap="Verloop van de actuele geleidbaarheid (mS/cm), specifieke geleidbaarheid bij 20°C (mS/cm), saliniteit (psu) en temperatuur (°C) in het kanaal Gent-Oostende (KGO) ter hoogte van sas Slijkens (0.9 km stroomopwaarts spuiconstructie), debiet ter hoogte van Oostkamp en neerslag (mm) ter hoogte van Klemskerke in 2022. De groene balken geven de periodes van aangepast spuibeheer weer."}
@@ -194,24 +183,20 @@ p.list$brugge
 
 ### Ijzer
 
-Gelet op de klimaatsverandering en gezien de kans op verzilting het grootst blijkt te zijn op de IJzer werd vanaf maart 2020 het netwerk van CTD-divers uitgebreid, zodat de landinwaarts trekkende zoutlens beter gemonitord kon worden. De conductiviteit werd op vijf verschillende punten gemeten, namelijk: Ijzermondesteiger (0,2 km), Uniebrug (3,3 km), Schoorbakkebrug (7,3 km), Tervatebrug (10,6 km) en Diksmuide (17 km). In 2022 werd er in totaal 276 uren alternatief spuibeheer toegepast in de IJzer. In vergelijking met vorig jaar (489 uren) is dit een sterke daling. Het alternatief spuibeheer op de IJzer werd uitgevoerd tussen 1 en 29 maart, en van 22 april tot 3 mei.
+Gelet op de klimaatsverandering en gezien de kans op verzilting het grootst blijkt te zijn op de IJzer werd vanaf maart 2020 het netwerk van CTD-divers uitgebreid, zodat de landinwaarts trekkende zoutlens beter gemonitord kon worden. De conductiviteit werd op vijf verschillende punten gemeten, namelijk: de Ijzermondesteiger of Yzerstar (0,2 km), Uniebrug (3,3 km), Schoorbakkebrug (7,3 km), Tervatebrug (10,6 km) en Diksmuide (17 km). In 2022 werd er in totaal 277 uren aangepast spuibeheer toegepast in de IJzer. In vergelijking met vorig jaar (489 uren) is dit een sterke daling. Het aangepast spuibeheer op de IJzer werd uitgevoerd tussen 1 en 29 maart, en van 22 april tot 3 mei.
 
-Het toepassen van alternatief spuibeheer tussen 1 maart en 3 mei 2022 resulteerde in een verhoging van de conductiviteit met een maximum van 13,08 mS/cm net stroomopwaarts van de spuisluizen van de Ganzepoot (Fig. \@ref(fig:plotctdijzer) en Fig. \@ref(fig:plotijzery)). Net zoals vorig jaar (2021) werd de brakwatergrens nooit overschreden. Vanaf eind maart zien we een sterke daling, dit komt doordat het spuibeheer tijdelijk stopgezet is tussen 30 maart en 21 april. Vanaf de heropstart op 22 april zien we terug een sterke stijging. In tegenstelling tot vorig jaar (2021), toen er een natte zomer was, blijft de conductiviteit nu wel op een verhoogde waarde na het stopzetten van het alternatieve spuibeheer. Dit is vermoedelijk het gevolg van een droge zomer waardoor er maar weinig water werd afgevoerd. Vanaf september begint de conductiviteit terug te dalen. Dit heeft vermoedelijk te maken met dat het een nat najaar was waardoor er terug afvoer was.
+Het toepassen van aangepast spuibeheer tussen 1 maart en 3 mei 2022 resulteerde in een verhoging van de conductiviteit met een maximum van 13,08 mS/cm net stroomopwaarts van de spuisluizen van de Ganzepoot (Fig. \@ref(fig:plotctdijzer) en Fig. \@ref(fig:plotijzery)). Net zoals vorig jaar (2021) werd de brakwatergrens nooit overschreden. Vanaf eind maart zien we een sterke daling, dit komt doordat het spuibeheer tijdelijk stopgezet is tussen 30 maart en 21 april. Vanaf de heropstart op 22 april zien we terug een sterke stijging. In tegenstelling tot vorig jaar (2021), toen er een natte zomer was, blijft de conductiviteit nu wel op een verhoogde waarde na het stopzetten van het alternatieve spuibeheer. Dit is vermoedelijk het gevolg van een droge zomer waardoor er maar weinig water werd afgevoerd. Vanaf september begint de conductiviteit terug te dalen. Dit heeft vermoedelijk te maken met dat het een nat najaar was waardoor er terug afvoer was.
 
-Ter hoogte van de Uniebrug werd vanaf de start van het alternatief spuibeheer begint de conductiviteit te stijgen tot een maximumwaarde van 13,51 mS/cm (Fig. \@ref(fig:plotijzeru)). Aan de Uniebrug is net zoals aan de Ijzermondesteiger een eerste daling te zien tijdens de tijdelijke stopzetting van het spuibeheer tussen 30 maart en 21 april. Na het definitief stopzetten van het spuibeheer blijven ook hier de waardes op een verhoogd niveau. In tegenstelling tot vorig jaar zijn de waardes van de Uniebrug vrij gelijkaardig aan deze van de Ijzermondesteiger. Dit heeft vermoedelijk te maken met de droge zomer waardoor er geen afvoer was, en de conductiviteit niet kon dalen.
+Ter hoogte van de Uniebrug werd vanaf de start van het aangepast spuibeheer begint de conductiviteit te stijgen tot een maximumwaarde van 13,51 mS/cm (Fig. \@ref(fig:plotijzeru)). Aan de Uniebrug is net zoals aan de Ijzermondesteiger een eerste daling te zien tijdens de tijdelijke stopzetting van het spuibeheer tussen 30 maart en 21 april. Na het definitief stopzetten van het spuibeheer blijven ook hier de waardes op een verhoogd niveau. In tegenstelling tot vorig jaar zijn de waardes van de Uniebrug vrij gelijkaardig aan deze van de Ijzermondesteiger. Dit heeft vermoedelijk te maken met de droge zomer waardoor er geen afvoer was, en de conductiviteit niet kon dalen.
 
 Ter hoogte van de Schoorbakkebrug was er tijdens de onderzoeksperiode een stijging in de conductiviteitswaarden waar te nemen (Fig. \@ref(fig:plotijzers)). Na de periode van het spuibeheer is er eerst een daling te zien tot onder de 1 mS/cm. Maar tijdens de droge zomer wanneer er  weinig tot geen afvoer is, is er terug een stijging te zien tot 10,12 mS/cm. Pas in het najaar als er terug afvoer is dalen de waardes.
 
-De conductiviteitswaarden in Tervate volgde hetzelfde verloop als de situatie ter hoogte van de Schoorbakkebrug; tijdens van de toepassing van het alternatief spuibeheer steeg de conductiviteit tot 5.19 mS/cm (Fig. \@ref(fig:plotijzert)). Ook hier daalde de conductiviteit snel terug tot onder 1 mS/cm na het stopzetten van het alternatief spuibeheer. Maar net zoals aan de Schoorbakkebrug stijgt de conductiviteit terug in de zomer.
+De conductiviteitswaarden in Tervate volgde hetzelfde verloop als de situatie ter hoogte van de Schoorbakkebrug; tijdens van de toepassing van het aangepast spuibeheer steeg de conductiviteit tot 5.19 mS/cm (Fig. \@ref(fig:plotijzert)). Ook hier daalde de conductiviteit snel terug tot onder 1 mS/cm na het stopzetten van het aangepast spuibeheer. Maar net zoals aan de Schoorbakkebrug stijgt de conductiviteit terug in de zomer.
 
-3 dagen na de start van het spuibeheer is de conductiviteitslogger kapot gegaan (Fig. \@ref(fig:plotijzerd)). Pas vanaf 30/08/2022 zijn er terug bruikbare waardes. Daardoor is het onmogelijk om over deze periode iets te schrijven. Op 30/08/2022 werd een waarde van 7.61 mS/cm geregistreerd. Deze waarde ligt beduidend hoger dan vorig jaar. Wat vermoedelijk het gevolg is van de droge zomer met weinig afvoer. Vanaf hier zien we ook een zelfde verloop van de conductiviteitswaarden als in Tervatebrug.
+3 dagen na de start van het spuibeheer is de conductiviteitslogger ter hoogte van Diksmuide kapot gegaan (Fig. \@ref(fig:plotijzerd)). Pas vanaf 30/08/2022 zijn er terug bruikbare waardes. Daardoor is het onmogelijk om over deze periode iets te schrijven. Op 30/08/2022 werd een waarde van 7.61 mS/cm geregistreerd. Deze waarde ligt beduidend hoger dan vorig jaar. Wat vermoedelijk het gevolg is van de droge zomer met weinig afvoer. Vanaf hier zien we ook een zelfde verloop van de conductiviteitswaarden als in Tervatebrug.
 
 ```{r plotctdijzer, fig.cap="Verloop van de specifieke geleidbaarheid bij 20°C (mS/cm) in de Ijzer. De daggemiddelden worden weergegeven als zwarte punten op het midden van de dag. De groene balken geven de periodes van aangepast spuibeheer weer."}
 ctd.list$Ijzer
-```
-
-```{r plotcondijzer, fig.cap="Verloop van de VMM-metingen van de specifieke geleidbaarheid bij 20°C (mS/cm) in de Ijzer. De groene balken geven de periodes van aangepast spuibeheer weer."}
-cond.list$Ijzer
 ```
 
 ```{r plotijzery, fig.cap="Verloop van de actuele geleidbaarheid (mS/cm), specifieke geleidbaarheid bij 20°C (mS/cm), saliniteit (psu) en temperatuur (°C) in de Ijzer ter hoogte van de Ijzermondesteiger (0,2 km stroomopwaarts spuiconstructie), debiet ter hoogte van Keiem en neerslag (mm) ter hoogte van Sint-Joris in 2022. De groene balken geven de periodes van aangepast spuibeheer weer."}
@@ -232,16 +217,4 @@ p.list$tervate
 
 ```{r plotijzerd, fig.cap="Verloop van de actuele geleidbaarheid (mS/cm), specifieke geleidbaarheid bij 20°C (mS/cm), saliniteit (psu) en temperatuur (°C) in de Ijzer ter hoogte van Diskmuide (17 km stroomopwaarts spuiconstructie), debiet ter hoogte van Keiem en neerslag (mm) ter hoogte van Sint-Joris in 2022. De groene balken geven de periodes van aangepast spuibeheer weer."}
 p.list$diksmuide
-```
-
-<!-- ### Kanaal Nieuwpoort-Plassendale -->
-
-```{r eval=FALSE, plotknp, fig.cap="Verloop van de actuele geleidbaarheid (mS/cm), specifieke geleidbaarheid (mS/cm), saliniteit (psu) en temperatuur (°C) in het kanaal Nieuwpoort-Plassendale ter hoogte van Nieuwpoort-Plassendale, debiet ter hoogte van Keiem en neerslag (mm) ter hoogte van Klemskerke in 2022. De groene balken geven de periodes van aangepast spuibeheer weer."}
-p.list$`nieuwpoort-plassendale`
-```
-
-<!-- ### Kanaal Nieuwpoort-Duinkerke -->
-
-```{r eval=FALSE, plotknd, fig.cap="Verloop van de actuele geleidbaarheid (mS/cm), specifieke geleidbaarheid (mS/cm), saliniteit (psu) en temperatuur (°C) in het kanaal Nieuwpoort-Duinkerke ter hoogte van de oude Veurne vaart, debiet ter hoogte van Veurne en neerslag (mm) ter hoogte van Sint-Joris in 2022. De groene balken geven de periodes van aangepast spuibeheer weer."}
-p.list$`oude veurne vaart`
 ```
