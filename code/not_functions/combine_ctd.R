@@ -15,7 +15,8 @@ for (i in jaren){
         dir.name4<-paste0(dir.name3,l)
         counter=counter+1
         if("try-error" %in% class(try(read.csv(dir.name4)))){
-          ctd.temp<-read.csv(dir.name4,skip=1)[,c(2:4)]
+          if (l %in% c("Yserstar_17 11 23.csv","Yserstar_26082022.csv")){ctd.temp<-read.csv(dir.name4,skip=1)[,c(2,4,5)]}
+            else{ctd.temp<-read.csv(dir.name4,skip=1)[,c(2:4)]}
           if (grepl("mS", colnames(ctd.temp)[2], fixed = TRUE) == FALSE){
             ctd.temp[,2]<-ctd.temp[,2]/1000
           }
@@ -55,6 +56,7 @@ ctd <- ctd %>% mutate(loc.ctd= case_when(str_detect(filename, 'akl ramskapelle|a
                                          str_detect(filename, 'tervate') ~ 'tervate',
                                          str_detect(filename, 'uniebrug') ~ 'uniebrug',
                                          str_detect(filename, 'yserstar') ~ 'yserstar',
+                                         str_detect(filename, 'ysermonde') ~ 'yserstar',
                                          str_detect(filename, 'nieuwpoort-plassendale|nieuwpoort_plassendal') ~ 'nieuwpoort-plassendale',
                                          str_detect(filename, 'brugge') ~ 'brugge',
                                          str_detect(filename, 'plassendal') ~ 'plassendale',
