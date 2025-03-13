@@ -12,18 +12,18 @@ author:
     orcid: "0000-0001-9742-6224"
     affiliation: "Instituut voor Natuur- en Bosonderzoek (INBO)"
   - name:
+      given: "Lore"
+      family: "Vandamme"
+    email: "lore.vandamme@inbo.be"
+    orcid: "0009-0000-0500-9547"
+    affiliation: "Instituut voor Natuur- en Bosonderzoek (INBO)"
+  - name:
       given: "Stijn"
       family: "Bruneel"
     email: "stijn.bruneel@inbo.be"
     orcid: "0000-0002-8226-8080"
     affiliation: "Instituut voor Natuur- en Bosonderzoek (INBO)"
     corresponding: true
-  - name:
-      given: "Lore"
-      family: "Vandamme"
-    email: "lore.vandamme@inbo.be"
-    orcid: "0009-0000-0500-9547"
-    affiliation: "Instituut voor Natuur- en Bosonderzoek (INBO)"
   - name:
       given: "David"
       family: "Buysse"

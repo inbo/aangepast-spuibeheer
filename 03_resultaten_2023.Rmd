@@ -84,14 +84,14 @@ Doorheen de tijd observeren we een sterke variatie tussen en binnen waterlopen, 
 
 In het AKL observeerden we een sterke piek in 2021 in de totale duur, maar niet in aantal events. Dit is het gevolg van het langdurig aansluitend openstaan van de schuiven in 2021 (dus niet enkel op de momenten relevant voor aangepast spuibeheer). Aangepast spuibeheer blijft het minst toegepast in het AKL. Een gelijkaardig patroon observeerden we in het LK waarbij de piek in totale duur eveneens het gevolg was van een aantal momenten dat de schuiven open bleven. Aangepast spuibeheer wordt wel minstens dubbel zo intensief uitgevoerd in het LK versus het AKL. In het KGO zien we een stijging vanaf 2021 in zowel aantal events als totale duur van het aangepast spuibeheer. In 2023 ligt het aantal events aanzienlijk hoger dan in het LK maar de totale duur is gelijkaardig. Events duren inderdaad aanzienlijk langer in het LK dan in het KGO. Met uitzondering van een dip in 2022 zien we voor de Ijzer een stijging in zowel de totale duur als het aantal events aangepast spuibeheer. In 2023 blijft het aantal events in de Ijzer lager dan in VA, maar de totale duur is wel groter doordat events langer duren.
 
-```{r duuras, fig.height=5, fig.cap="Totale duur aangepast spuibeheer (uren) per jaar en waterlichaam."}
+```{r duuras, fig.height=5, fig.cap="Totale duur aangepast spuibeheer (uren) per jaar en waterlichaam (het afleidingskanaal van de Leie (AKL), Ijzer, kanaal Gent-Oostende (KGO), Leopoldkanaal (LK), Noordede (NE) en Veurne-Ambacht (VA))"}
 os %>% 
   dplyr::group_by(site,jaar) %>%
   summarize(sum=sum(duration)) %>%
   ggplot(aes(x=jaar,y=sum/60,group=site)) + geom_point(aes(colour=site)) + geom_line(aes(colour=site)) + theme_bw() + theme(text = element_text(size = 12, family = "serif"), axis.text.x = element_text(angle=45, hjust = 0.5, vjust = 0.5, family = "serif"), strip.background = element_rect(colour = "black", fill = "white"), legend.position = "bottom") + ylab("Totale duur aangepast spuibeheer (uren)") 
 ```
 
-```{r eventas, fig.height=5, fig.cap="Aantal events aangepast spuibeheer per jaar en waterlichaam."}
+```{r eventas, fig.height=5, fig.cap="Aantal events aangepast spuibeheer per jaar en waterlichaam (het afleidingskanaal van de Leie (AKL), Ijzer, kanaal Gent-Oostende (KGO), Leopoldkanaal (LK), Noordede (NE) en Veurne-Ambacht (VA))."}
 os %>% 
   dplyr::group_by(site,jaar) %>%
   summarize(count=n()) %>%
@@ -130,15 +130,15 @@ ctd.list<-process_ctd_series_for_plotting(date.min=as.POSIXct("2023-03-01 00:00:
 
 In 2023 werd er in het AKL maar op zes dagen aan aangepast spuibeheer gedaan. Dit is een verdubbeling van het aantal dagen in 2022 maar nog steeds veel minder dan de 29 dagen in 2021. In totaal stonden de sluizen 38 uur open (in 2022 was dit echter wel maar 19 uur en in 2021 was dit 464 uur). Wegens het beperkt aantal uren spuibeheer op het AKL in 2023, kan het **aangepast spuibeheer geen wezenlijke invloed hebben op de geleidbaarheid dit jaar** thv Ramskapelle en Moerkerke. Ondanks het feit dat de limietwaarde één maal in Moerkerke en meerdere malen in Ramskapelle werd overschreden tijdens de periode van aangepast spuibeheer, leken deze overschrijdingen niet per se te volgen op momenten van aangepast spuibeheer. In de zomer en het najaar worden hogere waarden voor de geleidbaarheid geobserveerd waarbij de limietwaarde meerdere keren wordt overschreden (Fig. \@ref(fig:plotctdakl)). Linken met debiet of neerslag lijken er niet te zijn (Fig. \@ref(fig:plotaklr)).
 
-```{r plotctdakl, fig.cap="Verloop van de specifieke geleidbaarheid (mS/cm) in het AKL. De daggemiddelden worden weergegeven als zwarte punten op het midden van de dag. De groene balken geven de periodes van aangepast spuibeheer weer.", fig.height=5}
+```{r plotctdakl, fig.cap="Verloop van de specifieke geleidbaarheid (mS/cm) in het afleidingskanaal van de Leie (AKL). De daggemiddelden worden weergegeven als zwarte punten op het midden van de dag. De groene balken geven de periodes van aangepast spuibeheer weer.", fig.height=5}
 ctd.list$AKL
 ```
 
-```{r plotaklr, fig.cap="Verloop van de actuele geleidbaarheid (mS/cm), specifieke geleidbaarheid bij 20°C (mS/cm), saliniteit (psu) en temperatuur (°C) in het afleidingskanaal van de Leie (AKL) ter hoogte van Ramskapelle (5.5 km stroomopwaarts spuiconstructie), debiet ter hoogte van Zomergem en neerslag ter hoogte van Dudzele in 2023. De groene balken geven de periodes van aangepast spuibeheer weer."}
+```{r plotaklr, fig.cap="Verloop van de actuele geleidbaarheid (mS/cm), specifieke geleidbaarheid bij 20°C (mS/cm), saliniteit (psu) en temperatuur (°C) in het afleidingskanaal van de Leie (AKL) ter hoogte van Ramskapelle (5.5 km stroomopwaarts spuiconstructie), debiet (m³/s) ter hoogte van Zomergem en neerslag (mm) ter hoogte van Dudzele in 2023. De groene balken geven de periodes van aangepast spuibeheer weer."}
 p.list$`akl ramskapelle`
 ```
 
-```{r plotaklm, eval=FALSE, fig.cap="Verloop van de actuele geleidbaarheid (mS/cm), specifieke geleidbaarheid bij 20°C (mS/cm), saliniteit (psu) en temperatuur (°C) in het afleidingskanaal van de Leie (AKL) ter hoogte van Moerkerke (13 km stroomopwaarts spuiconstructie), debiet ter hoogte van Zomergem en neerslag ter hoogte van Dudzele in 2023. De groene balken geven de periodes van aangepast spuibeheer weer."}
+```{r plotaklm, eval=FALSE, fig.cap="Verloop van de actuele geleidbaarheid (mS/cm), specifieke geleidbaarheid bij 20°C (mS/cm), saliniteit (psu) en temperatuur (°C) in het afleidingskanaal van de Leie (AKL) ter hoogte van Moerkerke (13 km stroomopwaarts spuiconstructie), debiet (m³/s) ter hoogte van Zomergem en neerslag (mm) ter hoogte van Dudzele in 2023. De groene balken geven de periodes van aangepast spuibeheer weer."}
 p.list$`akl moerkerke`
 ```
 
@@ -152,19 +152,19 @@ Terwijl in 2021 en 2022 in Ramskapelle hetzelfde patroon als in Zeebrugge werd w
 
 Voor Moerkerke en Oostkamp (Brugge) was er door problemen met de logger geen data voorhanden tijdens de periode van het aangepast spuibeheer.
 
-```{r plotctdlk, fig.cap="Verloop van de specifieke geleidbaarheid bij 20°C (mS/cm) in het LK. De daggemiddelden worden weergegeven als zwarte punten op het midden van de dag. De groene balken geven de periodes van aangepast spuibeheer weer."}
+```{r plotctdlk, fig.cap="Verloop van de specifieke geleidbaarheid bij 20°C (mS/cm) in het Leopoldkanaal (LK). De daggemiddelden worden weergegeven als zwarte punten op het midden van de dag. De groene balken geven de periodes van aangepast spuibeheer weer."}
 ctd.list$LK
 ```
 
-```{r plotlkz, fig.cap="Verloop van de actuele geleidbaarheid (mS/cm), specifieke geleidbaarheid bij 20°C (mS/cm), saliniteit (psu) en temperatuur (°C) in het Leopoldkanaal (LK) ter hoogte van Zeebrugge (1.5 km stroomopwaarts spuiconstructie), debiet ter hoogte van Damme en neerslag (mm) ter hoogte van Dudzele in 2023. De groene balken geven de periodes van aangepast spuibeheer weer."}
+```{r plotlkz, fig.cap="Verloop van de actuele geleidbaarheid (mS/cm), specifieke geleidbaarheid bij 20°C (mS/cm), saliniteit (psu) en temperatuur (°C) in het Leopoldkanaal (LK) ter hoogte van Zeebrugge (1.5 km stroomopwaarts spuiconstructie), debiet (m³/s) ter hoogte van Damme en neerslag (mm) ter hoogte van Dudzele in 2023. De groene balken geven de periodes van aangepast spuibeheer weer."}
 p.list$`sk zeebrugge`
 ```
 
-```{r plotlkr, fig.cap="Verloop van de actuele geleidbaarheid (mS/cm), specifieke geleidbaarheid bij 20°C (mS/cm), saliniteit (psu) en temperatuur (°C) in het Leopoldkanaal (LK) ter hoogte van Ramskapelle (5.5 km stroomopwaarts spuiconstructie), debiet ter hoogte van Damme en neerslag (mm) ter hoogte van Dudzele in 2023. De groene balken geven de periodes van aangepast spuibeheer weer."}
+```{r plotlkr, fig.cap="Verloop van de actuele geleidbaarheid (mS/cm), specifieke geleidbaarheid bij 20°C (mS/cm), saliniteit (psu) en temperatuur (°C) in het Leopoldkanaal (LK) ter hoogte van Ramskapelle (5.5 km stroomopwaarts spuiconstructie), debiet (m³/s) ter hoogte van Damme en neerslag (mm) ter hoogte van Dudzele in 2023. De groene balken geven de periodes van aangepast spuibeheer weer."}
 p.list$`lk ramskapelle`
 ```
 
-```{r plotlkm, fig.cap="Verloop van de actuele geleidbaarheid (mS/cm), specifieke geleidbaarheid bij 20°C (mS/cm), saliniteit (psu) en temperatuur (°C) in het Leopoldkanaal (LK) ter hoogte van Moerkerke (13 km stroomopwaarts spuiconstructie), debiet ter hoogte van Damme en neerslag (mm) ter hoogte van Dudzele in 2023. De groene balken geven de periodes van aangepast spuibeheer weer."}
+```{r plotlkm, fig.cap="Verloop van de actuele geleidbaarheid (mS/cm), specifieke geleidbaarheid bij 20°C (mS/cm), saliniteit (psu) en temperatuur (°C) in het Leopoldkanaal (LK) ter hoogte van Moerkerke (13 km stroomopwaarts spuiconstructie), debiet (m³/s) ter hoogte van Damme en neerslag (mm) ter hoogte van Dudzele in 2023. De groene balken geven de periodes van aangepast spuibeheer weer."}
 p.list$`blinker moerkerke`
 ```
 
@@ -172,23 +172,23 @@ p.list$`blinker moerkerke`
 
 In het KGO werd er glasaal binnen gelaten vanaf 6 maart tot 5 mei. Het aangepast spuibeheer duurde in totaal 7685 minuten wat slechts iets meer is dan de helft van de duur van 2022 (14700 minuten). In 2021 werd er echter slechts 3240 minuten aangepast spuibeheer uitgevoerd. Net als in 2022 doen er zich ter hoogte van Sas Slijkens al pieken voor nog voor de aanvang van het aangepast spuibeheer (Fig. \@ref(fig:plotctdkgo) en \@ref(fig:plotkgoss)). Pieken tijdens het aangepast spuibeheer lijken wel overeen te komen met momenten van intensiever aangepast spuibeheer, maar dit kan niet sluitend gelinkt worden aan het aangepast spuibeheer. Ter hoogte van Plassendale (Fig. \@ref(fig:plotkgop)) en Brugge (Fig. \@ref(fig:plotkgob)) lijken dezelfde trends zich min of meer voor te doen maar met veel minder uitgesproken pieken. Het feit dat de pieken in geleidbaarheid optreden nog voordat de periode van aangepast spuibeheer begint, en dat deze pieken tot relatief diep in het binnenland worden waargenomen, suggereert dat er **geen verband is tussen de waargenomen geleidbaarheid en het aangepaste spuibeheer in het KGO.**
 
-```{r plotctdkgo, fig.cap="Verloop van de specifieke geleidbaarheid bij 20°C (mS/cm) in het KGO. De daggemiddelden worden weergegeven als zwarte punten op het midden van de dag. De groene balken geven de periodes van aangepast spuibeheer weer."}
+```{r plotctdkgo, fig.cap="Verloop van de specifieke geleidbaarheid bij 20°C (mS/cm) in het kanaal Gent-Oostende (KGO). De daggemiddelden worden weergegeven als zwarte punten op het midden van de dag. De groene balken geven de periodes van aangepast spuibeheer weer."}
 ctd.list$KGO
 ```
 
-```{r plotcondkgo, fig.cap="Verloop van de VMM-metingen van de specifieke geleidbaarheid bij 20°C (mS/cm) in het KGO. De groene balken geven de periodes van aangepast spuibeheer weer."}
+```{r plotcondkgo, fig.cap="Verloop van de VMM-metingen van de specifieke geleidbaarheid bij 20°C (mS/cm) in het kanaal Gent-Oostende (KGO). De groene balken geven de periodes van aangepast spuibeheer weer."}
 cond.list$KGO
 ```
 
-```{r plotkgoss, fig.cap="Verloop van de actuele geleidbaarheid (mS/cm), specifieke geleidbaarheid bij 20°C (mS/cm), saliniteit (psu) en temperatuur (°C) in het kanaal Gent-Oostende (KGO) ter hoogte van sas Slijkens (0.9 km stroomopwaarts spuiconstructie), debiet ter hoogte van Oostkamp en neerslag (mm) ter hoogte van Klemskerke in 2023. De groene balken geven de periodes van aangepast spuibeheer weer."}
+```{r plotkgoss, fig.cap="Verloop van de actuele geleidbaarheid (mS/cm), specifieke geleidbaarheid bij 20°C (mS/cm), saliniteit (psu) en temperatuur (°C) in het kanaal Gent-Oostende (KGO) ter hoogte van sas Slijkens (0.9 km stroomopwaarts spuiconstructie), debiet (m³/s) ter hoogte van Oostkamp en neerslag (mm) ter hoogte van Klemskerke in 2023. De groene balken geven de periodes van aangepast spuibeheer weer."}
 p.list$`sas slijkens`
 ```
 
-```{r plotkgop, fig.cap="Verloop van de actuele geleidbaarheid (mS/cm), specifieke geleidbaarheid bij 20°C (mS/cm), saliniteit (psu) en temperatuur (°C) in het kanaal Gent-Oostende (KGO) ter hoogte van Plassendale (7.0 km stroomopwaarts spuiconstructie), debiet ter hoogte van Oostkamp en neerslag (mm) ter hoogte van Klemskerke in 2023. De groene balken geven de periodes van aangepast spuibeheer weer."}
+```{r plotkgop, fig.cap="Verloop van de actuele geleidbaarheid (mS/cm), specifieke geleidbaarheid bij 20°C (mS/cm), saliniteit (psu) en temperatuur (°C) in het kanaal Gent-Oostende (KGO) ter hoogte van Plassendale (7.0 km stroomopwaarts spuiconstructie), debiet (m³/s) ter hoogte van Oostkamp en neerslag (mm) ter hoogte van Klemskerke in 2023. De groene balken geven de periodes van aangepast spuibeheer weer."}
 p.list$plassendale
 ```
 
-```{r plotkgob, fig.cap="Verloop van de actuele geleidbaarheid (mS/cm), specifieke geleidbaarheid bij 20°C (mS/cm), saliniteit (psu) en temperatuur (°C) in het kanaal Gent-Oostende (KGO) ter hoogte van Oostkamp (13.3 km stroomopwaarts spuiconstructie), debiet ter hoogte van Oostkamp en neerslag (mm) ter hoogte van Klemskerke in 2023. De groene balken geven de periodes van aangepast spuibeheer weer."}
+```{r plotkgob, fig.cap="Verloop van de actuele geleidbaarheid (mS/cm), specifieke geleidbaarheid bij 20°C (mS/cm), saliniteit (psu) en temperatuur (°C) in het kanaal Gent-Oostende (KGO) ter hoogte van Oostkamp (13.3 km stroomopwaarts spuiconstructie), debiet (m³/s) ter hoogte van Oostkamp en neerslag (mm) ter hoogte van Klemskerke in 2023. De groene balken geven de periodes van aangepast spuibeheer weer."}
 p.list$brugge
 ```
 
@@ -204,35 +204,35 @@ ctd.list$Ijzer
 cond.list$Ijzer
 ```
 
-```{r plotijzery, fig.cap="Verloop van de actuele geleidbaarheid (mS/cm), specifieke geleidbaarheid bij 20°C (mS/cm), saliniteit (psu) en temperatuur (°C) in de Ijzer ter hoogte van de Ijzermondesteiger (0,2 km stroomopwaarts spuiconstructie), debiet ter hoogte van Keiem en neerslag (mm) ter hoogte van Sint-Joris in 2023. De groene balken geven de periodes van aangepast spuibeheer weer."}
+```{r plotijzery, fig.cap="Verloop van de actuele geleidbaarheid (mS/cm), specifieke geleidbaarheid bij 20°C (mS/cm), saliniteit (psu) en temperatuur (°C) in de Ijzer ter hoogte van de Ijzermondesteiger (0,2 km stroomopwaarts spuiconstructie), debiet (m³/s) ter hoogte van Keiem en neerslag (mm) ter hoogte van Sint-Joris in 2023. De groene balken geven de periodes van aangepast spuibeheer weer."}
 p.list$yserstar
 ```
 
-```{r plotijzeru, fig.cap="Verloop van de actuele geleidbaarheid (mS/cm), specifieke geleidbaarheid bij 20°C (mS/cm), saliniteit (psu) en temperatuur (°C) in de Ijzer ter hoogte van de Uniebrug (3,3 km stroomopwaarts spuiconstructie), debiet ter hoogte van Keiem en neerslag (mm) ter hoogte van Sint-Joris in 2023. De groene balken geven de periodes van aangepast spuibeheer weer."}
+```{r plotijzeru, fig.cap="Verloop van de actuele geleidbaarheid (mS/cm), specifieke geleidbaarheid bij 20°C (mS/cm), saliniteit (psu) en temperatuur (°C) in de Ijzer ter hoogte van de Uniebrug (3,3 km stroomopwaarts spuiconstructie), debiet (m³/s) ter hoogte van Keiem en neerslag (mm) ter hoogte van Sint-Joris in 2023. De groene balken geven de periodes van aangepast spuibeheer weer."}
 p.list$uniebrug
 ```
 
-```{r plotijzers, fig.cap="Verloop van de actuele geleidbaarheid (mS/cm), specifieke geleidbaarheid bij 20°C (mS/cm), saliniteit (psu) en temperatuur (°C) in de Ijzer ter hoogte van de Schoorbakkebrug (7,3 km stroomopwaarts spuiconstructie), debiet ter hoogte van Keiem en neerslag (mm) ter hoogte van Sint-Joris in 2023. De groene balken geven de periodes van aangepast spuibeheer weer."}
+```{r plotijzers, fig.cap="Verloop van de actuele geleidbaarheid (mS/cm), specifieke geleidbaarheid bij 20°C (mS/cm), saliniteit (psu) en temperatuur (°C) in de Ijzer ter hoogte van de Schoorbakkebrug (7,3 km stroomopwaarts spuiconstructie), debiet (m³/s) ter hoogte van Keiem en neerslag (mm) ter hoogte van Sint-Joris in 2023. De groene balken geven de periodes van aangepast spuibeheer weer."}
 p.list$schoorbakkebrug
 ```
 
-```{r plotijzert, fig.cap="Verloop van de actuele geleidbaarheid (mS/cm), specifieke geleidbaarheid bij 20°C (mS/cm), saliniteit (psu) en temperatuur (°C) in de Ijzer ter hoogte van Tervate (10,6 km stroomopwaarts spuiconstructie), debiet ter hoogte van Keiem en neerslag (mm) ter hoogte van Sint-Joris in 2023. De groene balken geven de periodes van aangepast spuibeheer weer."}
+```{r plotijzert, fig.cap="Verloop van de actuele geleidbaarheid (mS/cm), specifieke geleidbaarheid bij 20°C (mS/cm), saliniteit (psu) en temperatuur (°C) in de Ijzer ter hoogte van Tervate (10,6 km stroomopwaarts spuiconstructie), debiet (m³/s) ter hoogte van Keiem en neerslag (mm) ter hoogte van Sint-Joris in 2023. De groene balken geven de periodes van aangepast spuibeheer weer."}
 p.list$tervate
 ```
 
-```{r plotijzerd, fig.cap="Verloop van de actuele geleidbaarheid (mS/cm), specifieke geleidbaarheid bij 20°C (mS/cm), saliniteit (psu) en temperatuur (°C) in de Ijzer ter hoogte van Diskmuide (17 km stroomopwaarts spuiconstructie), debiet ter hoogte van Keiem en neerslag (mm) ter hoogte van Sint-Joris in 2023. De groene balken geven de periodes van aangepast spuibeheer weer."}
+```{r plotijzerd, fig.cap="Verloop van de actuele geleidbaarheid (mS/cm), specifieke geleidbaarheid bij 20°C (mS/cm), saliniteit (psu) en temperatuur (°C) in de Ijzer ter hoogte van Diskmuide (17 km stroomopwaarts spuiconstructie), debiet (m³/s) ter hoogte van Keiem en neerslag (mm) ter hoogte van Sint-Joris in 2023. De groene balken geven de periodes van aangepast spuibeheer weer."}
 p.list$diksmuide
 ```
 
 <!-- ### Kanaal Nieuwpoort-Plassendale -->
 
-```{r eval=FALSE, plotknp, fig.cap="Verloop van de actuele geleidbaarheid (mS/cm), specifieke geleidbaarheid (mS/cm), saliniteit (psu) en temperatuur (°C) in het kanaal Nieuwpoort-Plassendale ter hoogte van Nieuwpoort-Plassendale, debiet ter hoogte van Keiem en neerslag (mm) ter hoogte van Klemskerke in 2023. De groene balken geven de periodes van aangepast spuibeheer weer."}
+```{r eval=FALSE, plotknp, fig.cap="Verloop van de actuele geleidbaarheid (mS/cm), specifieke geleidbaarheid (mS/cm), saliniteit (psu) en temperatuur (°C) in het kanaal Nieuwpoort-Plassendale ter hoogte van Nieuwpoort-Plassendale, debiet (m³/s) ter hoogte van Keiem en neerslag (mm) ter hoogte van Klemskerke in 2023. De groene balken geven de periodes van aangepast spuibeheer weer."}
 p.list$`nieuwpoort-plassendale`
 ```
 
 <!-- ### Kanaal Nieuwpoort-Duinkerke -->
 
-```{r eval=FALSE, plotknd, fig.cap="Verloop van de actuele geleidbaarheid (mS/cm), specifieke geleidbaarheid (mS/cm), saliniteit (psu) en temperatuur (°C) in het kanaal Nieuwpoort-Duinkerke ter hoogte van de oude Veurne vaart, debiet ter hoogte van Veurne en neerslag (mm) ter hoogte van Sint-Joris in 2023. De groene balken geven de periodes van aangepast spuibeheer weer."}
+```{r eval=FALSE, plotknd, fig.cap="Verloop van de actuele geleidbaarheid (mS/cm), specifieke geleidbaarheid (mS/cm), saliniteit (psu) en temperatuur (°C) in het kanaal Nieuwpoort-Duinkerke ter hoogte van de oude Veurne vaart, debiet (m³/s) ter hoogte van Veurne en neerslag (mm) ter hoogte van Sint-Joris in 2023. De groene balken geven de periodes van aangepast spuibeheer weer."}
 p.list$`oude veurne vaart`
 ```
 
@@ -240,23 +240,23 @@ p.list$`oude veurne vaart`
 
 Het aangepast spuibeheer in de Noordede onderscheidt zich van het aangepast spuibeheer op andere sites op vlak van frequentie en duur per AS event. In totale duur situeert de Noordede zich tussen Veurne Ambacht en het Leopoldkanaal, maar het heeft wel het **hoogste aantal aangepast-spuibeheer-events doordat het ook de meest korte events heeft. Dit lijkt de zoutintrusie te beperken.** Ter hoogte van de spuischuiven is er inderdaad opnieuw een sterke variabiliteit, maar de waarden verschillen maar beperkt van de periode ervoor en erna (Fig. \@ref(fig:plotctdne) en \@ref(fig:plotnem)). Verder stroomopwaarts lijkt in de periode van aangepast spuibeheer de geleidbaarheid zelfs lager dan de periode ervoor en erna (Fig. \@ref(fig:plotnebs) en \@ref(fig:plotnec)).
 
-```{r plotctdne, fig.cap="Verloop van de specifieke geleidbaarheid bij 20°C (mS/cm) in de NE. De daggemiddelden worden weergegeven als zwarte punten op het midden van de dag. De groene balken geven de periodes van aangepast spuibeheer weer."}
+```{r plotctdne, fig.cap="Verloop van de specifieke geleidbaarheid bij 20°C (mS/cm) in de Noordede (NE). De daggemiddelden worden weergegeven als zwarte punten op het midden van de dag. De groene balken geven de periodes van aangepast spuibeheer weer."}
 ctd.list$NE
 ```
 
-```{r plotcondne, fig.cap="Verloop van de VMM-metingen van de specifieke geleidbaarheid bij 20°C (mS/cm) in de NE. De groene balken geven de periodes van aangepast spuibeheer weer."}
+```{r plotcondne, fig.cap="Verloop van de VMM-metingen van de specifieke geleidbaarheid bij 20°C (mS/cm) in de Noordede (NE). De groene balken geven de periodes van aangepast spuibeheer weer."}
 cond.list$NE
 ```
 
-```{r plotnem, fig.cap="Verloop van de actuele geleidbaarheid (mS/cm), specifieke geleidbaarheid bij 20°C (mS/cm), saliniteit (psu) en temperatuur (°C) in de Noordede (NE) ter hoogte van de Maertensas (1,0 km stroomopwaarts spuiconstructie), debiet ter hoogte van Oostkamp en neerslag (mm) ter hoogte van Klemskerke in 2023. De groene balken geven de periodes van aangepast spuibeheer weer."}
+```{r plotnem, fig.cap="Verloop van de actuele geleidbaarheid (mS/cm), specifieke geleidbaarheid bij 20°C (mS/cm), saliniteit (psu) en temperatuur (°C) in de Noordede (NE) ter hoogte van de Maertensas (1,0 km stroomopwaarts spuiconstructie), debiet (m³/s) ter hoogte van Oostkamp en neerslag (mm) ter hoogte van Klemskerke in 2023. De groene balken geven de periodes van aangepast spuibeheer weer."}
 p.list$maertensas
 ```
 
-```{r plotnebs, fig.cap="Verloop van de actuele geleidbaarheid (mS/cm), specifieke geleidbaarheid bij 20°C (mS/cm), saliniteit (psu) en temperatuur (°C) in de Noordede (NE) ter hoogte van de blauwe sluis (3,0 km stroomopwaarts spuiconstructie), debiet ter hoogte van Oostkamp en neerslag (mm) ter hoogte van Klemskerke in 2023. De groene balken geven de periodes van aangepast spuibeheer weer."}
+```{r plotnebs, fig.cap="Verloop van de actuele geleidbaarheid (mS/cm), specifieke geleidbaarheid bij 20°C (mS/cm), saliniteit (psu) en temperatuur (°C) in de Noordede (NE) ter hoogte van de blauwe sluis (3,0 km stroomopwaarts spuiconstructie), debiet (m³/s) ter hoogte van Oostkamp en neerslag (mm) ter hoogte van Klemskerke in 2023. De groene balken geven de periodes van aangepast spuibeheer weer."}
 p.list$`blauwe sluis`
 ```
 
-```{r plotnec, fig.cap="Verloop van de actuele geleidbaarheid (mS/cm), specifieke geleidbaarheid bij 20°C (mS/cm), saliniteit (psu) en temperatuur (°C) in de Noordede (NE) ter hoogte van Clemensheule (4,0 km stroomopwaarts spuiconstructie), debiet ter hoogte van Oostkamp en neerslag (mm) ter hoogte van Klemskerke in 2023. De groene balken geven de periodes van aangepast spuibeheer weer."}
+```{r plotnec, fig.cap="Verloop van de actuele geleidbaarheid (mS/cm), specifieke geleidbaarheid bij 20°C (mS/cm), saliniteit (psu) en temperatuur (°C) in de Noordede (NE) ter hoogte van Clemensheule (4,0 km stroomopwaarts spuiconstructie), debiet (m³/s) ter hoogte van Oostkamp en neerslag (mm) ter hoogte van Klemskerke in 2023. De groene balken geven de periodes van aangepast spuibeheer weer."}
 p.list$clemensheule
 ```
 
