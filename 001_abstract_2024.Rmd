@@ -1,0 +1,13 @@
+\benglish
+
+# English abstract {.unnumbered}
+
+The European eel (*Anguilla anguilla* L.) has been in sharp decline for decades and is now among Europe’s most endangered fish. Limited upstream migration of glass eels is a key bottleneck. In Flanders, key entry points include the Ijzer estuary (Nieuwpoort), the ‘Sas Slijkens’ lock (Ghent-Ostend Canal, KGO), and the Zeebrugge outflow complex (Afleidingskanaal van de Leie, AKL, and Leopoldkanaal, LK).
+
+Previous research showed that opening sluice gates ajar during rising tide effectively enhances eel migration without risking polder salinisation. However, even without alternative sluice management in 2015, elevated conductivity was recorded, likely due to site-specific management or natural salinisation, especially during dry periods. From 2016, alternative sluice operations were implemented, with results reported annually. In 2023, this approach was applied from 1 March to 15 May, with variations depending on target water levels and site staffing.
+
+Salt intrusion was most pronounced in the Ijzer Basin, where adapted sluicing strongly correlated with conductivity peaks. This intensive management enabled an estimated 250,000 glass eels to migrate—far more than in other waterways. In AKL, sporadic sluice operation had no discernible effect on conductivity, allowing by estimate just 3% of the Yser’s eel numbers to migrate. In KGO and LK, more frequent sluicing led to moderate conductivity increases near the sluices but without inland effects. In the Noordede, despite a longer sluicing duration than in KGO and LK, no significant conductivity impact was observed, likely due to a strategy of shorter, more frequent openings.
+
+This highlights the importance of site-specific sluice management. Frequent, well-timed sluice openings can enhance eel migration while minimizing salt intrusion, balancing ecological and hydrological goals.
+
+\eenglish
