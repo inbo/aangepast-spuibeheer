@@ -11,7 +11,7 @@ source("./code/functions/f.read_excel_allsheets.R")
 
 ## Aangepast spuibeheer ter hoogte van de zout-zoetovergangen aan de Belgische kust en ingeschat effect op de intrek van glasaal
 
-```{r warning=FALSE, message=FALSE, include=FALSE}
+```{r warning=FALSE, message=FALSE, include=FALSE, cache=TRUE}
 RUN=FALSE
 if (RUN==TRUE){
   source("./code/not_functions/combine_all.R")
@@ -82,7 +82,7 @@ write.csv(tos.summary,"./data/spuibeheer/intern/as_summary_2024.csv")
 
 Doorheen de tijd observeren we een sterke variatie tussen en binnen waterlopen, zowel op het vlak van totale duur aangepast spuibeheer (Fig. \@ref(fig:duuras)) als het aantal events aangepast spuibeheer (Fig. \@ref(fig:eventas)).
 
-In het AKL observeerden we een sterke piek in 2021 in de totale duur, maar niet in aantal events. Dit is het gevolg van het langdurig aansluitend openstaan van de schuiven in 2021 (dus niet enkel op de momenten relevant voor aangepast spuibeheer). Aangepast spuibeheer blijft het minst toegepast in het AKL. Een gelijkaardig patroon observeerden we in het LK waarbij de piek in totale duur eveneens het gevolg was van een aantal momenten dat de schuiven open bleven. Aangepast spuibeheer wordt wel minstens dubbel zo intensief uitgevoerd in het LK versus het AKL. In het KGO zien we een stijging vanaf 2021 in zowel aantal events als totale duur van het aangepast spuibeheer. In 2023 ligt het aantal events aanzienlijk hoger dan in het LK maar de totale duur is gelijkaardig. Events duren inderdaad aanzienlijk langer in het LK dan in het KGO. Met uitzondering van een dip in 2022 zien we voor de Ijzer een stijging in zowel de totale duur als het aantal events aangepast spuibeheer. In 2023 blijft het aantal events in de Ijzer lager dan in VA, maar de totale duur is wel groter doordat events langer duren.
+In het AKL observeerden we een sterke piek in 2021 in de totale duur, maar niet in aantal events. Dit is het gevolg van het langdurig aansluitend openstaan van de schuiven in 2021 (dus niet enkel op de momenten relevant voor aangepast spuibeheer). Aangepast spuibeheer blijft het minst toegepast in het AKL en varieert weinig doorheen de tijd. Een gelijkaardig patroon observeerden we in het LK waarbij de piek van 2021 in totale duur eveneens het gevolg was van een aantal momenten dat de schuiven open bleven. Aangepast spuibeheer wordt minstens dubbel zo intensief uitgevoerd in het LK versus het AKL, maar in het LK observeren we wel een lichte daling van zowel duur en events terwijl we in het AKL eerder een lichte stijging observeren van zowel duur en events. In het KGO zien we een stijging vanaf 2021 in zowel aantal events als totale duur van het aangepast spuibeheer. In 2024 ligt zowel het aantal events ald e duur aanzienlijk hoger dan in het LK. Met uitzondering van een dip in 2022 zien we voor de Ijzer een stijging in zowel de totale duur als het aantal events aangepast spuibeheer. In 2024 is het aantal events voor de Ijzer en VA gelijk, maar de totale duur is wel groter doordat events langer duren.
 
 ```{r duuras, fig.height=5, fig.cap="Totale duur aangepast spuibeheer (uren) per jaar en waterlichaam (het afleidingskanaal van de Leie (AKL), Ijzer, kanaal Gent-Oostende (KGO), Leopoldkanaal (LK), Noordede (NE) en Veurne-Ambacht (VA))"}
 os %>% 
@@ -128,7 +128,7 @@ ctd.list<-process_ctd_series_for_plotting(date.min=as.POSIXct("2024-03-01 00:00:
 
 #### Afleidingskanaal van de Leie
 
-In 2023 werd er in het AKL maar op zes dagen aan aangepast spuibeheer gedaan. Dit is een verdubbeling van het aantal dagen in 2022 maar nog steeds veel minder dan de 29 dagen in 2021. In totaal stonden de sluizen 38 uur open (in 2022 was dit echter wel maar 19 uur en in 2021 was dit 464 uur). Wegens het beperkt aantal uren spuibeheer op het AKL in 2023, kan het **aangepast spuibeheer geen wezenlijke invloed hebben op de geleidbaarheid dit jaar** thv Ramskapelle en Moerkerke. Ondanks het feit dat de limietwaarde één maal in Moerkerke en meerdere malen in Ramskapelle werd overschreden tijdens de periode van aangepast spuibeheer, leken deze overschrijdingen niet per se te volgen op momenten van aangepast spuibeheer. In de zomer en het najaar worden hogere waarden voor de geleidbaarheid geobserveerd waarbij de limietwaarde meerdere keren wordt overschreden (Fig. \@ref(fig:plotctdakl)). Linken met debiet of neerslag lijken er niet te zijn (Fig. \@ref(fig:plotaklr)).
+In 2024 werd er in het AKL maar op zeven dagen aan aangepast spuibeheer gedaan. Dit is een verdubbeling van het aantal dagen in 2022 en één dag meer dan in 2022 maar nog steeds veel minder dan de 29 dagen in 2021. In totaal stonden de sluizen 39 uur open (in 2023, 2022 en 2021 waren de sluizen 38, 19 en 464 uur open). Wegens het beperkt aantal uren spuibeheer op het AKL in 2024, kan het **aangepast spuibeheer geen wezenlijke invloed hebben op de geleidbaarheid dit jaar** thv Ramskapelle en Moerkerke. Ondanks het feit dat de limietwaarde (0.87 mS/cm) meerdere malen in Ramskapelle werd overschreden tijdens de periode van aangepast spuibeheer, leken deze overschrijdingen niet per se te volgen op momenten van aangepast spuibeheer. In Moerkerke werd de limietwaarde nooit overschreden. In de zomer en het najaar worden hogere waarden voor de geleidbaarheid geobserveerd waarbij de limietwaarde meerdere keren wordt overschreden voor zowel Moerkerke als Ramskapelle (Fig. \@ref(fig:plotctdakl)). Linken met debiet of neerslag lijken er niet te zijn (Fig. \@ref(fig:plotaklr)).
 
 ```{r plotctdakl, fig.cap="Verloop van de specifieke geleidbaarheid (mS/cm) in het afleidingskanaal van de Leie (AKL). De daggemiddelden worden weergegeven als zwarte punten op het midden van de dag. De groene balken geven de periodes van aangepast spuibeheer weer.", fig.height=5}
 ctd.list$AKL
@@ -138,7 +138,7 @@ ctd.list$AKL
 p.list$`akl ramskapelle`
 ```
 
-```{r plotaklm, eval=FALSE, fig.cap="Verloop van de actuele geleidbaarheid (mS/cm), specifieke geleidbaarheid bij 20°C (mS/cm), saliniteit (psu) en temperatuur (°C) in het afleidingskanaal van de Leie (AKL) ter hoogte van Moerkerke (13 km stroomopwaarts spuiconstructie), debiet (m³/s) ter hoogte van Zomergem en neerslag (mm) ter hoogte van Dudzele in 2023. De groene balken geven de periodes van aangepast spuibeheer weer."}
+```{r plotaklm, fig.cap="Verloop van de actuele geleidbaarheid (mS/cm), specifieke geleidbaarheid bij 20°C (mS/cm), saliniteit (psu) en temperatuur (°C) in het afleidingskanaal van de Leie (AKL) ter hoogte van Moerkerke (13 km stroomopwaarts spuiconstructie), debiet (m³/s) ter hoogte van Zomergem en neerslag (mm) ter hoogte van Dudzele in 2023. De groene balken geven de periodes van aangepast spuibeheer weer."}
 p.list$`akl moerkerke`
 ```
 
