@@ -1,9 +1,12 @@
 #Aangepast spuibeheer verschillende resoluties 
 
+start = "01-01"
+stop = "12-31"
+
 daily_os <- os %>%
   mutate(month_day = format(dicht, "%m-%d"),
          datum=as.Date(dicht)) %>%
-  dplyr::filter((month_day >= "03-01" & month_day <= "05-15")) %>%
+  dplyr::filter((month_day >= start & month_day <= stop)) %>%
   dplyr::select(site, duration, jaar, datum) %>%
   group_by(site, jaar, datum) %>%
   dplyr::summarize(events = n(),
@@ -11,8 +14,8 @@ daily_os <- os %>%
   ungroup() 
 
 missing_start_and_stop<-anti_join(unique(os[,c("jaar","site")]) %>%
-                                    mutate(start="03-01",
-                                           stop="05-15") %>%
+                                    mutate(start=start,
+                                           stop=stop) %>%
                                     pivot_longer(!c(jaar,site),names_to = "type",values_to = "datum") %>%
                                     dplyr::select(-type) %>%
                                     mutate(datum = as.Date(paste0(jaar,"-",datum)),
@@ -61,7 +64,7 @@ ctd.daily <- ctd %>%
          distance = as.numeric(gsub("km", "", distance)),
          month_day = format(datum, "%m-%d"),
          datum=as.Date(datum)) %>%
-  dplyr::filter((month_day >= "03-01" & month_day <= "05-15")) %>%
+  dplyr::filter((month_day >= start & month_day <= stop)) %>%
   group_by(site, loc.ctd, jaar, maand, week, dag, datum)  %>%
   summarise_at(vars(spgeleidbaarheid, distance, debiet, neerslag), 
                funs(ifelse(sum(!is.na(.))/n() >= 0.9, mean(., na.rm = TRUE), NA))) %>%
@@ -94,7 +97,7 @@ cond.daily <- conductiviteit %>%
          distance = as.numeric(gsub("km", "", distance)),
          month_day = format(datum, "%m-%d"),
          datum=as.Date(datum)) %>%
-  dplyr::filter((month_day >= "03-01" & month_day <= "05-15")) %>%
+  dplyr::filter((month_day >= start & month_day <= stop)) %>%
   group_by(site, loc.ctd, jaar, maand, week, dag, datum)  %>%
   summarise_at(vars(spgeleidbaarheid, distance, debiet, neerslag), 
                funs(ifelse(sum(!is.na(.))/n() >= 0.9, mean(., na.rm = TRUE), NA))) %>%
