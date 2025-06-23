@@ -62,7 +62,20 @@ omgeving.as.yearly %>%
 
 ## Eerdere jaren
 
-### 2020
+### Tabellen
+
+```{r debiettabel}
+debiet %>% 
+  mutate(jaar=lubridate::year(datum.debiet)) %>% 
+  dplyr::filter(jaar>2019) %>%
+  group_by(site.debiet,jaar) %>%
+  summarize(min = min(debiet,na.rm=TRUE), max = max(debiet,na.rm=TRUE), mean = round(mean(debiet,na.rm=TRUE),digits=2)) %>% 
+  kable(caption="Minimum, maximum en gemiddelde debiet (m³/s) per waterloop en jaar.")
+```
+
+### Grafieken
+
+#### 2020
 
 ```{r}
 ctd.app<-process_ctd_series_for_plotting(date.min=as.POSIXct("2020-03-01 00:00:00", tz="GMT"), date.max=as.POSIXct("2020-05-15 00:00:00", tz="GMT"))
@@ -84,7 +97,7 @@ ctd.app$KGO
 ctd.app$Ijzer
 ```
 
-### 2021
+#### 2021
 
 ```{r}
 ctd.app<-process_ctd_series_for_plotting(date.min=as.POSIXct("2021-03-01 00:00:00", tz="GMT"), date.max=as.POSIXct("2021-05-15 00:00:00", tz="GMT"))
@@ -106,7 +119,7 @@ ctd.app$KGO
 ctd.app$Ijzer
 ```
 
-### 2022
+#### 2022
 
 ```{r}
 ctd.app<-process_ctd_series_for_plotting(date.min=as.POSIXct("2022-03-01 00:00:00", tz="GMT"), date.max=as.POSIXct("2022-05-15 00:00:00", tz="GMT"))
@@ -132,7 +145,7 @@ ctd.app$Ijzer
 ctd.app$NE
 ```
 
-### 2023
+#### 2023
 
 ```{r}
 ctd.app<-process_ctd_series_for_plotting(date.min=as.POSIXct("2023-03-01 00:00:00", tz="GMT"), date.max=as.POSIXct("2023-05-15 00:00:00", tz="GMT"))
@@ -158,7 +171,7 @@ ctd.app$Ijzer
 ctd.app$NE
 ```
 
-### 2024
+#### 2024
 
 ```{r}
 ctd.app<-process_ctd_series_for_plotting(date.min=as.POSIXct("2024-03-01 00:00:00", tz="GMT"), date.max=as.POSIXct("2024-05-15 00:00:00", tz="GMT"))
