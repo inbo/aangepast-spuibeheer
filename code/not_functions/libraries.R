@@ -34,6 +34,8 @@ library(wql)
 library(WaveletComp)
 
 library(MASS)
+library(slider)
+library(caretForecast)
 
 # package_info(
 #   pkgs = "loaded",
