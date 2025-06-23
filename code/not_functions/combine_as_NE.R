@@ -7,8 +7,13 @@ dir="./data/spuibeheer/extern/verwerkt_in_excel/NE/"
 files<-list.files(dir)
 for (i in 1:length(files)){
   data=read.csv(paste0(dir,files[i]),sep=";")
-  if (i==1){df=data}
-  else{df=rbind(df,data)}
+  if (i==1){
+    df=data
+  }
+  else{
+    common_cols <- base::intersect(names(df), names(data))
+    df=rbind(df,data %>% dplyr::select(all_of(common_cols)))
+  }
 }
 
 df$Opwaartse.Peilmeting.Time<-as.POSIXct(df$Opwaartse.Peilmeting.Time,format="%d/%m/%Y %H:%M:%S", tz="Europe/Brussels")
