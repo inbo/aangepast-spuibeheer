@@ -12,7 +12,7 @@ source("./code/functions/f.read_excel_allsheets.R")
 ## Aangepast spuibeheer ter hoogte van de zout-zoetovergangen aan de Belgische kust en ingeschat effect op de intrek van glasaal
 
 ```{r warning=FALSE, message=FALSE, include=FALSE, cache=TRUE}
-RUN=FALSE
+RUN=TRUE
 if (RUN==TRUE){
   source("./code/not_functions/combine_all.R")
 }
