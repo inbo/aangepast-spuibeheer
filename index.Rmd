@@ -1,6 +1,6 @@
 ---
 title: "Opvolging van de zoutintrusie in de Ijzer, het kanaal Gent-Oostende, het Leopoldkanaal, het afleidingskanaal van de Leie en de Noordede"
-subtitle: Aangepast spuibeheer in 2023 in functie van glasaalmigratie
+subtitle: Aangepast spuibeheer in 2025 in functie van glasaalmigratie
 header-includes:
    - \usepackage{lineno}
    - \linenumbers
@@ -99,7 +99,7 @@ client_logo: LogoDeVlaamseWaterweg
 floatbarrier: subsubsection
 lof: TRUE
 lot: TRUE
-keywords: "omgekeerd spuibeheer; glasaal; conductiviteit; debiet; migratie"
+keywords: "aangepast spuibeheer; glasaal; conductiviteit; debiet; migratie"
 community: "inbo"
 publication_type: report
 funder: Instituut voor Natuur- en Bosonderzoek (INBO)
