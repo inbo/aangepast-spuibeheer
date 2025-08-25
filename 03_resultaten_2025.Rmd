@@ -12,7 +12,7 @@ source("./code/functions/f.read_excel_allsheets.R")
 ## Aangepast spuibeheer ter hoogte van de zout-zoetovergangen aan de Belgische kust en ingeschat effect op de intrek van glasaal
 
 ```{r warning=FALSE, message=FALSE, include=FALSE, cache=TRUE}
-RUN=TRUE
+RUN=FALSE
 if (RUN==TRUE){
   source("./code/not_functions/combine_all.R")
 }
@@ -20,7 +20,8 @@ if (RUN==FALSE){
   os <- read.csv("./data/spuibeheer/intern/os_cleaned.csv") %>% 
     dplyr::mutate(open = as.POSIXct(open, format = "%Y-%m-%d %H:%M:%S", tz = "GMT"),
                   dicht = as.POSIXct(dicht, format = "%Y-%m-%d %H:%M:%S", tz = "GMT")) %>%
-    dplyr::select(-X)
+    dplyr::select(-X) %>%
+    dplyr::filter(duration<10000)
   
   debiet <- read.csv("./data/intern/debiet.csv") %>% 
     dplyr::mutate(datum.debiet = as.POSIXct(datum.debiet, format = "%Y-%m-%d %H:%M:%S", tz = "GMT")) %>%
