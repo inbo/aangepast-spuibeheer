@@ -62,17 +62,24 @@ VA2024 <- clean_ijzer_and_va(file = "./data/spuibeheer/extern/verwerkt_in_excel/
                              tijd = 2,
                              opmerking = 8,
                              site = "VA")
+VA2025 <- clean_ijzer_and_va(file = "./data/spuibeheer/extern/verwerkt_in_excel/os_VA_2025.xlsx",
+                             skip = 6,
+                             datum = 1,
+                             tijd = 2,
+                             opmerking = 8,
+                             site = "VA")
 
 KGO2020 <- clean_KGO("./data/spuibeheer/extern/verwerkt_in_excel/os_KGO_2020.xlsx")
 KGO2021 <- clean_KGO("./data/spuibeheer/extern/verwerkt_in_excel/os_KGO_2021.xlsx")
 KGO2022 <- clean_KGO("./data/spuibeheer/extern/verwerkt_in_excel/os_KGO_2022.xlsx")
 KGO2023 <- clean_KGO("./data/spuibeheer/extern/verwerkt_in_excel/os_KGO_2023.xlsx")
 KGO2024 <- clean_KGO("./data/spuibeheer/extern/verwerkt_in_excel/os_KGO_2024.xlsx")
+KGO2025 <- clean_KGO("./data/spuibeheer/extern/verwerkt_in_excel/os_KGO_2025.xlsx")
 
 NE <- read.csv("./data/spuibeheer/intern/os_NE_2023_cleaned.csv")[,c(2:4)]
 
-os <- rbind(AKLLK2020, AKLLK2021, AKLLK2022, AKLLK2023, AKLLK2024, Ijzer2020, Ijzer2021, Ijzer20222023, Ijzer2024, KGO2020, KGO2021, KGO2022, KGO2023, KGO2024, NE, VA2020, VA2021, VA20222023, VA2024)
-remove(AKLLK2020, AKLLK2021, AKLLK2022, AKLLK2023, AKLLK2024, Ijzer2020, Ijzer2021, Ijzer20222023, Ijzer2024, KGO2020, KGO2021, KGO2022, KGO2023, KGO2024, NE, VA2020, VA2021, VA20222023, VA2024)
+os <- rbind(AKLLK2020, AKLLK2021, AKLLK2022, AKLLK2023, AKLLK2024, AKLLK2025, Ijzer2020, Ijzer2021, Ijzer20222023, Ijzer2024, Ijzer2025, KGO2020, KGO2021, KGO2022, KGO2023, KGO2024, KGO2025, NE, VA2020, VA2021, VA20222023, VA2024, VA2025)
+remove(AKLLK2020, AKLLK2021, AKLLK2022, AKLLK2023, AKLLK2024, AKLLK2025, Ijzer2020, Ijzer2021, Ijzer20222023, Ijzer2024, Ijzer2025, KGO2020, KGO2021, KGO2022, KGO2023, KGO2024, KGO2025, NE, VA2020, VA2021, VA20222023, VA2024, VA2025)
 
 os$dicht[which(os$open > os$dicht)] <- os$dicht[which(os$open > os$dicht)] + lubridate::days(1)
 os$duration <- os$dicht - os$open
