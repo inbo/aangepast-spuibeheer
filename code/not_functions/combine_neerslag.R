@@ -1,4 +1,4 @@
-#combine_debiet
+#combine_neerslag
 files <- list.files(path="./data/neerslag/",pattern = ".csv")
 for (i in 1:length(files)){
   path<-paste0("./data/neerslag/",files[i])
