@@ -1,5 +1,30 @@
 #Aangepast spuibeheer verschillende resoluties 
 
+source("./code/not_functions/libraries.R")
+
+os <- read.csv("./data/spuibeheer/intern/os_cleaned.csv") %>% 
+  dplyr::mutate(open = as.POSIXct(open, format = "%Y-%m-%d %H:%M:%S", tz = "GMT"),
+                dicht = as.POSIXct(dicht, format = "%Y-%m-%d %H:%M:%S", tz = "GMT")) %>%
+  dplyr::select(-X)
+
+debiet <- read.csv("./data/intern/debiet.csv") %>% 
+  dplyr::mutate(datum.debiet = as.POSIXct(datum.debiet, format = "%Y-%m-%d %H:%M:%S", tz = "GMT")) %>%
+  dplyr::select(-X)
+
+conductiviteit <- read.csv("./data/intern/ctd_vmm.csv") %>% 
+  dplyr::mutate(datum.conductiviteit = as.POSIXct(datum.conductiviteit, format = "%Y-%m-%d %H:%M:%S", tz = "GMT"),
+                datum.neerslag = as.POSIXct(datum.neerslag, format = "%Y-%m-%d %H:%M:%S", tz = "GMT"),
+                datum.debiet = as.POSIXct(datum.debiet, format = "%Y-%m-%d %H:%M:%S", tz = "GMT"),
+                group_plot = as.factor(group_plot)) %>%
+  dplyr::select(-X)
+
+ctd <- read.csv("./data/intern/ctd.csv") %>% 
+  dplyr::mutate(datum.ctd = as.POSIXct(datum.ctd, format = "%Y-%m-%d %H:%M:%S", tz = "GMT"),
+                datum.neerslag = as.POSIXct(datum.neerslag, format = "%Y-%m-%d %H:%M:%S", tz = "GMT"),
+                datum.debiet = as.POSIXct(datum.debiet, format = "%Y-%m-%d %H:%M:%S", tz = "GMT"),
+                group_plot = as.factor(group_plot)) %>%
+  dplyr::select(-X)
+
 start = "01-01"
 stop = "12-31"
 
@@ -141,3 +166,22 @@ omgeving.as.monthly<-left_join(omgeving.monthly,monthly_os,by=c("site","jaar","m
 omgeving.as.yearly<-left_join(omgeving.yearly,yearly_os,by=c("site","jaar")) #%>% mutate_at(vars(-site,-loc.ctd,-jaar), scale)
 
 remove(omgeving.daily,omgeving.weekly,omgeving.monthly,omgeving.yearly,daily_os,weekly_os,monthly_os,yearly_os)
+
+# Add moving average vars
+
+omgeving.as.daily <- omgeving.as.daily %>%
+  mutate(
+    debiet_2 = slide_dbl(debiet, mean, .before = 2, .complete = TRUE),
+    debiet_4 = slide_dbl(debiet, mean, .before = 4, .complete = TRUE),
+    debiet_10 = slide_dbl(debiet, mean, .before = 10, .complete = TRUE),
+    debiet_100 = slide_dbl(debiet, mean, .before = 100, .complete = TRUE),
+    events_2 = slide_dbl(events, sum, .before = 2, .complete = TRUE),
+    events_4 = slide_dbl(events, sum, .before = 4, .complete = TRUE),
+    events_10 = slide_dbl(events, sum, .before = 10, .complete = TRUE),
+    events_100 = slide_dbl(events, sum, .before = 100, .complete = TRUE),
+    duration_2 = slide_dbl(events, sum, .before = 2, .complete = TRUE),
+    duration_4 = slide_dbl(events, sum, .before = 4, .complete = TRUE),
+    duration_10 = slide_dbl(events, sum, .before = 10, .complete = TRUE),
+    duration_100 = slide_dbl(events, sum, .before = 100, .complete = TRUE)
+  )
+
