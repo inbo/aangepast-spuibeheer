@@ -37,6 +37,13 @@ library(MASS)
 library(slider)
 library(caretForecast)
 
+library(ggspatial)
+library(ggrepel)
+library(mapview)
+library(leafpop)
+library(leafem)
+library(inbospatial)
+
 # package_info(
 #   pkgs = "loaded",
 #   include_base = FALSE,
