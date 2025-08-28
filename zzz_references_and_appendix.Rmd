@@ -48,13 +48,13 @@ omgeving.as.yearly %>%
   ggplot(aes(x=jaar, y=debiet, group=site)) + geom_line(aes(colour=site)) + geom_point(aes(colour=site)) + theme_bw() + ylab("afvoer m³/s")
 ```
 
-```{r langaas, fig.height=5, fig.cap="Aantal events aangepast spuibeheer (AS) in functie van de tijd voor de verschillende sites."}
+```{r eval=FALSE, langaas, fig.height=5, fig.cap="Aantal events aangepast spuibeheer (AS) in functie van de tijd voor de verschillende sites."}
 omgeving.as.yearly %>% 
   dplyr::filter(site %in% c("AKL","Ijzer","KGO","LK","NE")) %>%
   ggplot(aes(x=jaar, y=events, group=site)) + geom_line(aes(colour=site)) + geom_point(aes(colour=site)) + theme_bw() + ylab("aantal events AS")
 ```
 
-```{r langdas, fig.height=5, fig.cap="Duur aangepast spuibeheer (AS) in functie van de tijd voor de verschillende sites."}
+```{r eval=FALSE, langdas, fig.height=5, fig.cap="Duur aangepast spuibeheer (AS) in functie van de tijd voor de verschillende sites."}
 omgeving.as.yearly %>% 
   dplyr::filter(site %in% c("AKL","Ijzer","KGO","LK","NE")) %>%
   ggplot(aes(x=jaar, y=duration, group=site)) + geom_line(aes(colour=site)) + geom_point(aes(colour=site)) + theme_bw() + ylab("duur AS")
