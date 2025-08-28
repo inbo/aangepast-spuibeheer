@@ -1,0 +1,91 @@
+# This CITATION.cff file was generated with cffinit.
+# Visit https://bit.ly/cffinit to generate yours today!
+
+cff-version: 1.2.0
+title: aangepast-spuibeheer
+message: >-
+  If you use this software, please cite it using the
+  metadata from this file.
+type: software
+authors:
+  - given-names: Stijn
+    family-names: Bruneel
+    name-particle: Stijn
+    email: stijn.bruneel@inbo.be
+    affiliation: Research Institute for Nature and Forest
+    orcid: 'https://orcid.org/0000-0002-8226-8080'
+  - given-names: Lore
+    family-names: Vandamme
+    email: lore.vandamme@inbo.be
+    affiliation: Research Institute for Nature and Forest
+    orcid: 'https://orcid.org/0009-0000-0500-9547'
+  - given-names: Sarah
+    family-names: Broos
+    email: sarah.broos@inbo.be
+    orcid: 'https://orcid.org/0000-0001-9742-6224'
+    affiliation: Research Institute for Nature and Forest
+  - given-names: David
+    family-names: Buysse
+    email: david.buysse@inbo.be
+    affiliation: Research Institute for Nature and Forest
+    orcid: 'https://orcid.org/0000-0002-4437-5678'
+  - given-names: Simon
+    family-names: Plaetinck
+    email: simon.plaetinck@inbo.be
+    affiliation: Research Institute for Nature and Forest
+    orcid: 'https://orcid.org/0009-0002-5970-1517'
+  - given-names: Diederik
+    family-names: Rosseel
+    email: diederik.rosseel@inbo.be
+    affiliation: Research Institute for Nature and Forest
+  - given-names: Nico
+    family-names: De Maerteleire
+    email: nico.demaerteleire@inbo.be
+    affiliation: Research Institute for Nature and Forest
+    orcid: 'https://orcid.org/0009-0004-9436-8937'
+  - given-names: Mylan
+    family-names: Lyssens
+    email: mylan.lyssens@inbo.be
+    orcid: 'https://orcid.org/0009-0004-0438-8097'
+    affiliation: Research Institute for Nature and Forest
+  - given-names: Johan
+    family-names: Coeck
+    email: johan.coeck@inbo.be
+    affiliation: Research Institute for Nature and Forest
+    orcid: 'https://orcid.org/0000-0003-2732-7428'
+repository-code: >-
+  https://github.com/AquaticManagementINBO/aangepast-spuibeheer/tree/main
+abstract: >-
+  Timeseries of environmental and sluice operation data for
+  adjusted tidal barrier management (aangepast spuibeheer)
+  to promote upstream glass eel migration in Flanders
+  (Belgium). The European eel (Anguilla anguilla L.)
+  population has experienced a severe decline in recent
+  decades, with restricted upstream migration of glass eels
+  identified as a major contributing factor. In Flanders,
+  glass eel potential entries are located at the IJzer
+  (Nieuwpoort), the “Sas Slijkens” sluice complex
+  (Ghent-Ostend Canal), and the complex in Zeebrugge
+  (Afleidingskanaal van de Leie and Leopoldkanaal). To
+  facilitate migration, adjusted tidal barrier management -
+  slightly opening sluice gates during incoming tide - was
+  evaluated between 2016 and 2025. This dataset contains
+  monitoring results of electrical conductivity, discharge
+  and precipitation and sluice management practices at these
+  sites, providing insight into the effectiveness of
+  adjusted sluicing measures and the trade-off between eel
+  migration opportunities and salinization risks.
+keywords:
+  - glass eel
+  - sea sluices
+  - polders
+  - salt intrusion
+  - time series
+  - canals
+  - Ijzer
+  - Kanaal Gent-Oostende
+  - Afleidingskanaal van de Leie
+  - Leopoldkanaal
+  - Veurne-Ambacht
+  - Noordede
+license: MIT
