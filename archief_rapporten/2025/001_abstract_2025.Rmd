@@ -1,0 +1,17 @@
+\benglish
+
+# English abstract {.unnumbered}
+
+The European eel (*Anguilla anguilla* L.) has been experiencing a significant population decline in Europe for decades and is now among the most endangered fish species in the region. One of the main challenges for the population is the limited upstream migration of glass eels. In Flanders, the Yser Estuary in Nieuwpoort, the sluice complex "Sas Slijkens" at the mouth of the Ghent-Ostend Canal (KGO), and the drainage complex in Zeebrugge (at the mouth of the Diversion Canal of the Lys [AKL] and the Leopold Canal [LK]) serve as crucial entry routes for glass eels.
+
+Previous research has analyzed glass eel migration and evaluated potential mitigation measures at sluice structures in the Ganzepoot (Yser Estuary), Sas Slijkens (KGO), and the Zeebrugge drainage complex. Keeping sluice gates slightly open during incoming tides proved to be an effective and cost-efficient method to enhance upstream migration without the risk of saline intrusion into the polders due to seawater inflow.
+
+In 2015, no adjusted tidal barrage management was implemented at these locations. Nevertheless, elevated conductivity values were recorded, as reported in the internal report *"Monitoring of Salt Intrusion in the Yser, the Ghent-Ostend Canal, the Leopold Canal, and the Diversion Canal of the Lys: Baseline Measurement 2015"* by the Research Institute for Nature and Forest (INBO). These baseline measurements showed regularly increased conductivity, particularly near drainage structures and further upstream. The higher values were attributed to site-specific management practices or natural salinization, especially during dry periods with low discharge.
+
+From 2016 onward, adjusted tidal barrage management was introduced, with results documented in successive internal reports. In 2024, adjusted tidal barrage management continued from March 1 to May 15. The implementation of this management strategy varies significantly between watercourses, depending on differences in target water levels (m TAW), which influence the available time window for sluice operations. Additionally, some drainage structures, such as the Ganzepoot at the Yser, are permanently staffed, allowing management outside office hours, unlike the AKL and LK.
+
+Salt intrusion resulting from adjusted sluice management appears to occur primarily in the Yser basin, where peaks in conductivity generally coincide with periods of modified sluice operations. This can largely be explained by the intensive application of the measure in the Yser, which has resulted in the successful migration of an estimated 271,000 glass eels. In comparison, estimates for other watercourses show significantly lower numbers of migrating glass eels.
+
+In the Diversion Canal of the Lys (AKL), the sporadic application of sluice management in 2024 had no observable effect on conductivity. The estimated number of glass eels that migrated here is only 3% of the number migrating upstream in the Yser. In the Ghent-Ostend Canal (KGO) and the Leopold Canal (LK), this percentage is 30% and 8%, respectively. In these two canals, sluice management was applied more intensively than in the AKL, leading to increased conductivity near the sluice gates of the KGO and LK during periods of adjusted sluice operations. However, unlike in the Yser, these effects remained confined to the immediate vicinity of the sluices, with no increases observed further inland.
+
+\eenglish
