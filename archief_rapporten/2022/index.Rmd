@@ -1,10 +1,22 @@
 ---
-title: "Opvolging van de zoutintrusie in de Ijzer, het kanaal Gent-Oostende, het Leopoldkanaal, het afleidingskanaal van de Leie en de Noordede"
-subtitle: Aangepast spuibeheer in 2025 in functie van glasaalmigratie
+title: "Opvolging van de zoutintrusie in de Ijzer, het kanaal Gent-Oostende, het Leopoldkanaal en het afleidingskanaal van de Leie"
+subtitle: Aangepast spuibeheer in 2022 in functie van glasaalmigratie
 header-includes:
    - \usepackage{lineno}
    - \linenumbers
 author:
+  - name:
+      given: "Sarah"
+      family: "Broos"
+    email: "sarah.broos@inbo.be"
+    orcid: "0000-0001-9742-6224"
+    affiliation: "Instituut voor Natuur- en Bosonderzoek (INBO)"
+  - name:
+      given: "Lore"
+      family: "Vandamme"
+    email: "lore.vandamme@inbo.be"
+    orcid: "0009-0000-0500-9547"
+    affiliation: "Instituut voor Natuur- en Bosonderzoek (INBO)"
   - name:
       given: "Stijn"
       family: "Bruneel"
@@ -13,47 +25,11 @@ author:
     affiliation: "Instituut voor Natuur- en Bosonderzoek (INBO)"
     corresponding: true
   - name:
-      given: "Lore"
-      family: "Vandamme"
-    email: "lore.vandamme@inbo.be"
-    orcid: "0009-0000-0500-9547"
-    affiliation: "Instituut voor Natuur- en Bosonderzoek (INBO)"
-  - name:
       given: "David"
       family: "Buysse"
     email: "david.buysse@inbo.be"
     orcid: "0000-0002-4437-5678"
     affiliation: "Instituut voor Natuur- en Bosonderzoek (INBO)"
-  - name:
-      given: "Sarah"
-      family: "Broos"
-    email: "sarah.broos@inbo.be"
-    orcid: "0000-0001-9742-6224"
-    affiliation: "Instituut voor Natuur- en Bosonderzoek (INBO)"
-  # - name:
-  #     given: "Pieterjan"
-  #     family: "Verhelst"
-  #   email: "pieterjan.verhelst@inbo.be"
-  #   orcid: "0000-0002-2610-6941"
-  #   affiliation: "Instituut voor Natuur- en Bosonderzoek (INBO)"
-  # - name:
-  #     given: "Ine"
-  #     family: "Pauwels"
-  #   email: "ine.pauwels@inbo.be"
-  #   orcid: "0000-0002-2856-8787"
-  #   affiliation: "Instituut voor Natuur- en Bosonderzoek (INBO)"
-  # - name:
-  #     given: "Isaac"
-  #     family: "Vermeulen"
-  #   email: "isaac.vermeulen@inbo.be"
-  #   orcid: "0009-0001-3035-9810"
-  #   affiliation: "Instituut voor Natuur- en Bosonderzoek (INBO)"
-  # - name:
-  #     given: "Kaat"
-  #     family: "Thienpont"
-  #   email: "kaat.thienpont@inbo.be"
-  #   orcid: "0009-0006-6176-4743"
-  #   affiliation: "Instituut voor Natuur- en Bosonderzoek (INBO)"
   - name:
       given: "Simon"
       family: "Plaetinck"
@@ -72,12 +48,12 @@ author:
     email: "nico.demaerteleire@inbo.be"
     orcid: "0009-0004-9436-8937"
     affiliation: "Instituut voor Natuur- en Bosonderzoek (INBO)"
-  # - name:
-  #     given: "Mylan"
-  #     family: "Lyssens"
-  #   email: "mylan.lyssens@inbo.be"
-  #   orcid: "0009-0004-0438-8097"
-  #   affiliation: "Instituut voor Natuur- en Bosonderzoek (INBO)"
+  - name:
+      given: "Sébastien"
+      family: "Pieters"
+    email: "sebastien.pieters@inbo.be"
+    orcid: "?"
+    affiliation: "Instituut voor Natuur- en Bosonderzoek (INBO)"
   - name:
       given: "Johan"
       family: "Coeck"
@@ -91,6 +67,15 @@ reviewer:
     email: "isaac.vermeulen@inbo.be"
     orcid: "0009-0001-3035-9810"
     affiliation: "Instituut voor Natuur- en Bosonderzoek (INBO)"
+github-repo: https://github.com/inbo/aangepast-spuibeheer
+zenodo-repo: https://doi.org/10.5281/zenodo.17017617
+year: 2025
+doi: 10.21436/inbor.132570110
+reportnr: 50
+depotnr: D/2025/3241/307
+cover_photo: "DSCN2815.JPG"
+cover_description: "Optrekkende glasaal die het Kanaal Gent-oostende kan opzwemmen door het aangepast spuibeheer. Foto: David Buysse (INBO)"
+embargo: 2025-08-27
 lang: nl
 style: INBO
 client:
@@ -99,7 +84,7 @@ client_logo: LogoDeVlaamseWaterweg
 floatbarrier: subsubsection
 lof: TRUE
 lot: TRUE
-keywords: "aangepast spuibeheer; glasaal; conductiviteit; debiet; migratie"
+keywords: "omgekeerd spuibeheer; glasaal; conductiviteit; debiet; migratie"
 community: "inbo"
 publication_type: report
 funder: Instituut voor Natuur- en Bosonderzoek (INBO)
@@ -108,7 +93,6 @@ bibliography: references.bib
 link-citations: TRUE
 site: bookdown::bookdown_site
 always_allow_html: TRUE
-#rmd_files: ["index.Rmd", "000_abstract.Rmd", "001_resume.Rmd", "01_inleiding.Rmd", "02_materiaal_en_methoden.Rmd", "./resultaten/2023/03_resultaten_2023.Rmd", "zzz_references_and_appendix.Rmd"]
 output:
   INBOmd::gitbook: default
   INBOmd::pdf_report: default
