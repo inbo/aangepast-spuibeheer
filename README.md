@@ -17,7 +17,7 @@ Opvolging van het aangepast spuibeheer in combinatie met de zoutintrusie in de i
     * combine_debiet.R: samenbrengen debiet data
     * coordinaten_ctd.R: plot coordinaten ctd via f.map
     * libraries.R: gebruikte R packages
-* data
+* data (data is stored on [Zenodo](https://doi.org/10.5281/zenodo.15719728))
   * CTD (alle ctd data verdeeld per jaar, site en datum)
     * 2023
     * 2024
