@@ -16,4 +16,4 @@ language:
     proof:  'Bewijs. '
     remark: 'Opmerking. '
 #rmd_files: ["index.Rmd", "000_abstract.Rmd", "001_resume.Rmd", "01_inleiding.Rmd", "02_materiaal_en_methoden.Rmd", "./resultaten/2023/03_resultaten_2023.Rmd", "zzz_references_and_appendix.Rmd"]
-edit: https://github.com/AquaticManagementINBO/aangepast-spuibeheer/edit/main/%s
+edit: https://github.com/inbo/aangepast-spuibeheer/edit/main/%s
