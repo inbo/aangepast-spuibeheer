@@ -259,4 +259,3 @@ p.list$`blauwe sluis`
 ```{r plotnec, fig.cap="Verloop van de actuele geleidbaarheid (mS/cm), specifieke geleidbaarheid bij 20°C (mS/cm), saliniteit (psu) en temperatuur (°C) in de Noordede (NE) ter hoogte van Clemensheule (4,0 km stroomopwaarts spuiconstructie), debiet (m³/s) ter hoogte van Oostkamp en neerslag (mm) ter hoogte van Klemskerke in 2023. De groene balken geven de periodes van aangepast spuibeheer weer."}
 p.list$clemensheule
 ```
-
