@@ -43,6 +43,7 @@ library(mapview)
 library(leafpop)
 library(leafem)
 library(inbospatial)
+library(magrittr)
 
 # package_info(
 #   pkgs = "loaded",
