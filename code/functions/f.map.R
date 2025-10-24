@@ -17,7 +17,7 @@ f.map <- function(data,X,Y,crs,control.parameter,label.parameter,plot=FALSE){
     addTiles()%>%
     addCircleMarkers(data=coords_SP,radius=8,fillColor = ~beatCol(coords_SP@data[,control.parameter]),fillOpacity=0.8,weight=1,color='black',popup=Samples_text,label=coords_SP@data[,label.parameter],labelOptions = labelOptions(noHide = F),group=coords_SP@data[,control.parameter])%>%
     addLayersControl(overlayGroups = coords_SP@data[,control.parameter],options = layersControlOptions(collapsed = FALSE))
-  print(RangePlot)
+  
   if (plot==FALSE){return(coords_SP)} else{return(RangePlot)}
 }
 
