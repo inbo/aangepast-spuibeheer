@@ -72,12 +72,12 @@ author:
     email: "nico.demaerteleire@inbo.be"
     orcid: "0009-0004-9436-8937"
     affiliation: "Instituut voor Natuur- en Bosonderzoek (INBO)"
-  # - name:
-  #     given: "Mylan"
-  #     family: "Lyssens"
-  #   email: "mylan.lyssens@inbo.be"
-  #   orcid: "0009-0004-0438-8097"
-  #   affiliation: "Instituut voor Natuur- en Bosonderzoek (INBO)"
+  - name:
+      given: "Mylan"
+      family: "Lyssens"
+    email: "mylan.lyssens@inbo.be"
+    orcid: "0009-0004-0438-8097"
+    affiliation: "Instituut voor Natuur- en Bosonderzoek (INBO)"
   - name:
       given: "Johan"
       family: "Coeck"
