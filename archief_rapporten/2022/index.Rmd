@@ -1,9 +1,9 @@
 ---
 title: "Opvolging van de zoutintrusie in de Ijzer, het kanaal Gent-Oostende, het Leopoldkanaal en het afleidingskanaal van de Leie"
 subtitle: Aangepast spuibeheer in 2022 in functie van glasaalmigratie
-header-includes:
-   - \usepackage{lineno}
-   - \linenumbers
+# header-includes:
+#    - \usepackage{lineno}
+#    - \linenumbers
 author:
   - name:
       given: "Sarah"
