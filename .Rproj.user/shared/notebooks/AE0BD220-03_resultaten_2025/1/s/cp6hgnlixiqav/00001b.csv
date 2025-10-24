@@ -1,0 +1,1 @@
+"0","if (output==""html""){ggplotly(ctd.list$AKL)} else{ctd.list$AKL}"

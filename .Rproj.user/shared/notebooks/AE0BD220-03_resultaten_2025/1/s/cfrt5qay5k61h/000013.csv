@@ -1,0 +1,1 @@
+"0","if (output==""html""){ggplotly(cond.list$KGO)} else{cond.list$KGO}"

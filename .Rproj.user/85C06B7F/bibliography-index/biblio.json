@@ -1,0 +1,1296 @@
+{
+    "sources": [
+        {
+            "URL": "https://www.R-project.org/",
+            "author": [
+                {
+                    "literal": "R Core Team"
+                }
+            ],
+            "id": "R",
+            "issued": {
+                "date-parts": [
+                    [
+                        2019
+                    ]
+                ]
+            },
+            "publisher": "R Foundation for Statistical Computing",
+            "publisher-place": "Vienna, Austria",
+            "title": "R: A language and environment for statistical computing",
+            "title-short": "R",
+            "type": "book"
+        },
+        {
+            "author": [
+                {
+                    "family": "Buysse",
+                    "given": "David"
+                },
+                {
+                    "family": "Mouton",
+                    "given": "Ans"
+                },
+                {
+                    "family": "Gelaude",
+                    "given": "Emilie"
+                },
+                {
+                    "family": "Baeyens",
+                    "given": "Raf"
+                },
+                {
+                    "family": "Maerteleire",
+                    "given": "Nico De"
+                },
+                {
+                    "family": "Jacobs",
+                    "given": "Yves"
+                },
+                {
+                    "family": "Stevens",
+                    "given": "Maarten"
+                }
+            ],
+            "id": "buysse2012",
+            "issued": {
+                "date-parts": [
+                    [
+                        2012
+                    ]
+                ]
+            },
+            "language": "nl",
+            "title": "Glasaalmigratie ter hoogte van het sluizencomplex Sas Slijkens (Kanaal Gent-Oostende) in Oostende",
+            "type": "article-journal"
+        },
+        {
+            "author": [
+                {
+                    "family": "Buysse",
+                    "given": "David"
+                },
+                {
+                    "family": "Verreycken",
+                    "given": "Hugo"
+                },
+                {
+                    "family": "Maerteleire",
+                    "given": "Nico De"
+                },
+                {
+                    "family": "Gelaude",
+                    "given": "Emilie"
+                },
+                {
+                    "family": "Baeyens",
+                    "given": "Raf"
+                },
+                {
+                    "family": "Pieters",
+                    "given": "Sébastien"
+                },
+                {
+                    "family": "Mouton",
+                    "given": "Ans"
+                },
+                {
+                    "family": "Galle",
+                    "given": "Linde"
+                },
+                {
+                    "family": "De",
+                    "given": "Nico"
+                },
+                {
+                    "family": "Coeck",
+                    "given": "Johan"
+                }
+            ],
+            "id": "buysse2015",
+            "issued": {
+                "date-parts": [
+                    [
+                        2015
+                    ]
+                ]
+            },
+            "language": "nl",
+            "title": "Glasaalmigratie ter hoogte van het uitwateringscomplex in de haven van Zeebrugge",
+            "type": "report"
+        },
+        {
+            "DOI": "10.21436/inbor.28808440",
+            "URL": "https://pureportal.inbo.be/nl/publications/wetenschappelijke-onderbouwing-en-ondersteuning-van-het-visserijb",
+            "author": [
+                {
+                    "family": "Vandamme",
+                    "given": "Lore"
+                },
+                {
+                    "family": "Wichelen",
+                    "given": "Jeroen Van"
+                },
+                {
+                    "family": "Steendam",
+                    "given": "Charlotte"
+                },
+                {
+                    "family": "Brys",
+                    "given": "Rein"
+                },
+                {
+                    "family": "Pauwels",
+                    "given": "Ine"
+                },
+                {
+                    "family": "Auwerx",
+                    "given": "Johan"
+                },
+                {
+                    "family": "Buysse",
+                    "given": "David"
+                },
+                {
+                    "family": "Baeyens",
+                    "given": "Raf"
+                },
+                {
+                    "family": "Maerteleire",
+                    "given": "Nico De"
+                },
+                {
+                    "family": "Gelaude",
+                    "given": "Emilie"
+                },
+                {
+                    "family": "Pieters",
+                    "given": "Sébastien"
+                },
+                {
+                    "family": "Robberechts",
+                    "given": "Karen"
+                },
+                {
+                    "family": "Vermeersch",
+                    "given": "Sophie"
+                },
+                {
+                    "family": "Coeck",
+                    "given": "Johan"
+                }
+            ],
+            "id": "vandamme2020",
+            "issued": {
+                "date-parts": [
+                    [
+                        2020
+                    ]
+                ]
+            },
+            "language": "nederlands",
+            "note": "Publisher: Instituut voor Natuur- en Bosonderzoek",
+            "title": "Wetenschappelijke onderbouwing en ondersteuning van het visserijbeleid en het visstandbeheer: Onderzoeksprogramma visserij 2019. Eindrapport",
+            "title-short": "Wetenschappelijke onderbouwing en ondersteuning van het visserijbeleid en het visstandbeheer",
+            "type": "article-journal"
+        },
+        {
+            "URL": "https://pureportal.inbo.be/nl/publications/optimalisatie-van-glasaalmigratie-in-de-ganzepoot-ijzermonding-in",
+            "author": [
+                {
+                    "family": "Mouton",
+                    "given": "Ans"
+                },
+                {
+                    "family": "Gelaude",
+                    "given": "Emilie"
+                },
+                {
+                    "family": "Jacobs",
+                    "given": "Yves"
+                },
+                {
+                    "family": "Buysse",
+                    "given": "David"
+                },
+                {
+                    "family": "Stevens",
+                    "given": "Maarten"
+                },
+                {
+                    "dropping-particle": "den",
+                    "family": "Neucker",
+                    "given": "Tom Van"
+                },
+                {
+                    "family": "Martens",
+                    "given": "Seth"
+                },
+                {
+                    "family": "Baeyens",
+                    "given": "Raf"
+                },
+                {
+                    "family": "Coeck",
+                    "given": "Johan"
+                }
+            ],
+            "id": "mouton2010",
+            "issued": {
+                "date-parts": [
+                    [
+                        2010
+                    ]
+                ]
+            },
+            "language": "nederlands",
+            "note": "Publisher: Instituut voor Natuur- en Bosonderzoek",
+            "title": "Optimalisatie van glasaalmigratie in de ganzepoot (IJzermonding) in Nieuwpoort",
+            "type": "article-journal"
+        },
+        {
+            "author": [
+                {
+                    "family": "Mouton",
+                    "given": "Ans"
+                },
+                {
+                    "family": "Buysse",
+                    "given": "David"
+                },
+                {
+                    "family": "Van den Neucker",
+                    "given": "Tom"
+                },
+                {
+                    "family": "Gelaude",
+                    "given": "Emilie"
+                },
+                {
+                    "family": "Baeyens",
+                    "given": "Raf"
+                },
+                {
+                    "family": "De Maerteleire",
+                    "given": "Nico"
+                },
+                {
+                    "family": "Roberechts",
+                    "given": "Karen"
+                },
+                {
+                    "family": "Stevens",
+                    "given": "Maarten"
+                },
+                {
+                    "family": "Coeck",
+                    "given": "Johan"
+                }
+            ],
+            "id": "mouton2013",
+            "issued": {
+                "date-parts": [
+                    [
+                        2013
+                    ]
+                ]
+            },
+            "language": "nl",
+            "title": "Optimalisatie van omgekeerd spuibeheer voor glasaalmigratie vanuit de Ganzepoot te Nieuwpoort naar de IJzer",
+            "type": "article-journal"
+        },
+        {
+            "author": [
+                {
+                    "family": "Edeline",
+                    "given": "E."
+                },
+                {
+                    "family": "Dufour",
+                    "given": "S."
+                },
+                {
+                    "family": "Elie",
+                    "given": "P."
+                }
+            ],
+            "container-title": "Marine Ecology-Progress Series",
+            "id": "Edeline2005",
+            "issued": {
+                "date-parts": [
+                    [
+                        2005
+                    ]
+                ]
+            },
+            "page": "191-199",
+            "title": "Role of glass eel salinity preference in the control of habitat selection and growth plasticity in anguilla anguilla",
+            "type": "article-journal",
+            "volume": "304"
+        },
+        {
+            "author": [
+                {
+                    "family": "Edeline",
+                    "given": "E."
+                },
+                {
+                    "family": "Lambert",
+                    "given": "P."
+                },
+                {
+                    "family": "Rigaud",
+                    "given": "C."
+                },
+                {
+                    "family": "Elie",
+                    "given": "P."
+                }
+            ],
+            "container-title": "Journal of Experimental Marine Biology and Ecology",
+            "id": "Edeline2006",
+            "issued": {
+                "date-parts": [
+                    [
+                        2006
+                    ]
+                ]
+            },
+            "page": "217-225",
+            "title": "Effects of body condition and water temperature on anguilla anguilla glass eel migratory behavior",
+            "type": "article-journal",
+            "volume": "331"
+        },
+        {
+            "author": [
+                {
+                    "family": "Feunteun",
+                    "given": "E."
+                },
+                {
+                    "family": "Acou",
+                    "given": "A."
+                },
+                {
+                    "family": "Guillouet",
+                    "given": "J."
+                },
+                {
+                    "family": "Laffaille",
+                    "given": "P."
+                },
+                {
+                    "family": "Legault",
+                    "given": "A."
+                }
+            ],
+            "container-title": "Bulletin Francais de la Peche et de la Pisciculture",
+            "id": "Feunteun1998",
+            "issued": {
+                "date-parts": [
+                    [
+                        1998
+                    ]
+                ]
+            },
+            "page": "129-139",
+            "title": "Spatial distribution of an eel population (anguilla anguilla l) in a small coastal catchment of northern brittany (france). Consequences of hydraulic works",
+            "type": "article-journal",
+            "volume": "349"
+        },
+        {
+            "author": [
+                {
+                    "family": "Friedland",
+                    "given": "K. D."
+                },
+                {
+                    "family": "Miller",
+                    "given": "M. J."
+                },
+                {
+                    "family": "Knights",
+                    "given": "B."
+                }
+            ],
+            "container-title": "ICES Journal of Marine Science",
+            "id": "Friedland2007",
+            "issued": {
+                "date-parts": [
+                    [
+                        2007
+                    ]
+                ]
+            },
+            "page": "519-530",
+            "title": "Oceanic changes in the sargasso sea and declines in recruitment of the european eel",
+            "type": "article-journal",
+            "volume": "64"
+        },
+        {
+            "author": [
+                {
+                    "family": "Kettle",
+                    "given": "A. J."
+                },
+                {
+                    "family": "Bakker",
+                    "given": "D. C. E."
+                },
+                {
+                    "family": "Haines",
+                    "given": "K."
+                }
+            ],
+            "container-title": "Journal of Geophysical Research-Biogeosciences",
+            "id": "Kettle2008a",
+            "issued": {
+                "date-parts": [
+                    [
+                        2008
+                    ]
+                ]
+            },
+            "page": "G03004",
+            "title": "Impact of the north atlantic oscillation on the trans-atlantic migrations of the european eel (anguilla anguilla)",
+            "type": "article-journal",
+            "volume": "113"
+        },
+        {
+            "author": [
+                {
+                    "family": "Kettle",
+                    "given": "A. J."
+                },
+                {
+                    "family": "Bakker",
+                    "given": "D. C. E."
+                },
+                {
+                    "family": "Haines",
+                    "given": "K."
+                }
+            ],
+            "container-title": "Journal of Geophysical Research-Biogeosciences",
+            "id": "Kettle2008b",
+            "issued": {
+                "date-parts": [
+                    [
+                        2008
+                    ]
+                ]
+            },
+            "page": "237-244",
+            "title": "Impact of the north atlantic oscillation on the trans-atlantic migrations of the european eel (anguilla anguilla)",
+            "type": "article-journal",
+            "volume": "113"
+        },
+        {
+            "author": [
+                {
+                    "family": "Knights",
+                    "given": "B."
+                }
+            ],
+            "container-title": "Science of the Total Environment",
+            "id": "Knights2003",
+            "issued": {
+                "date-parts": [
+                    [
+                        2003
+                    ]
+                ]
+            },
+            "page": "237-244",
+            "title": "A review of the possible impacts of long-term oceanic and climate changes and fishing mortality on recruitment of anguillid eels of the northern hemisphere",
+            "type": "article-journal",
+            "volume": "310"
+        },
+        {
+            "author": [
+                {
+                    "family": "Laffaille",
+                    "given": "P."
+                },
+                {
+                    "family": "Caraguel",
+                    "given": "J. M."
+                },
+                {
+                    "family": "Legault",
+                    "given": "A."
+                }
+            ],
+            "container-title": "Estuarine Coastal and Shelf Science",
+            "id": "Laffaille2007",
+            "issued": {
+                "date-parts": [
+                    [
+                        2007
+                    ]
+                ]
+            },
+            "page": "81-90",
+            "title": "Temporal patterns in the upstream migration of european glass eels (anguilla anguilla) at the couesnon estuarine dam",
+            "type": "article-journal",
+            "volume": "73"
+        },
+        {
+            "author": [
+                {
+                    "family": "Mouton",
+                    "given": "A."
+                },
+                {
+                    "family": "Gelaude",
+                    "given": "E."
+                },
+                {
+                    "family": "Buysse",
+                    "given": "D."
+                },
+                {
+                    "family": "Stevens",
+                    "given": "M."
+                },
+                {
+                    "family": "Van den Neucker",
+                    "given": "T."
+                },
+                {
+                    "family": "Martens",
+                    "given": "S."
+                },
+                {
+                    "family": "Baeyens",
+                    "given": "R."
+                },
+                {
+                    "family": "Jacobs",
+                    "given": "Y."
+                },
+                {
+                    "family": "Coeck",
+                    "given": "J."
+                }
+            ],
+            "id": "Mouton2009",
+            "issued": {
+                "date-parts": [
+                    [
+                        2009
+                    ]
+                ]
+            },
+            "note": "Rapport INBO.R.2009.62, 33 pp.",
+            "publisher": "Instituut voor Natuur en Bosonderzoek",
+            "title": "Glasaalmigratie ter hoogte van het ganzepoot spuicomplex te nieuwpoort",
+            "type": "report"
+        },
+        {
+            "author": [
+                {
+                    "family": "Mouton",
+                    "given": "A."
+                },
+                {
+                    "family": "Gelaude",
+                    "given": "E."
+                },
+                {
+                    "family": "Jacobs",
+                    "given": "Y."
+                },
+                {
+                    "family": "Buysse",
+                    "given": "D."
+                },
+                {
+                    "family": "Stevens",
+                    "given": "M."
+                },
+                {
+                    "family": "Van den Neucker",
+                    "given": "T."
+                },
+                {
+                    "family": "Martens",
+                    "given": "S."
+                },
+                {
+                    "family": "Baeyens",
+                    "given": "R."
+                },
+                {
+                    "family": "Coeck",
+                    "given": "J."
+                }
+            ],
+            "id": "Mouton2011",
+            "issued": {
+                "date-parts": [
+                    [
+                        2011
+                    ]
+                ]
+            },
+            "note": "Rapport INBO.R.2010.69, 33 pp.",
+            "publisher": "Instituut voor Natuur en Bosonderzoek",
+            "title": "Optimalisatie van glasaalmigratie in de ganzepoot (IJzermonding) in nieuwpoort",
+            "type": "report"
+        },
+        {
+            "author": [
+                {
+                    "family": "Mouton",
+                    "given": "A."
+                },
+                {
+                    "family": "Gelaude",
+                    "given": "E."
+                },
+                {
+                    "family": "Jacobs",
+                    "given": "Y."
+                },
+                {
+                    "family": "Buysse",
+                    "given": "D."
+                },
+                {
+                    "family": "Stevens",
+                    "given": "M."
+                },
+                {
+                    "family": "Van den Neucker",
+                    "given": "T."
+                },
+                {
+                    "family": "Martens",
+                    "given": "S."
+                },
+                {
+                    "family": "Baeyens",
+                    "given": "R."
+                },
+                {
+                    "family": "Coeck",
+                    "given": "J."
+                }
+            ],
+            "id": "Mouton2012",
+            "issued": {
+                "date-parts": [
+                    [
+                        2012
+                    ]
+                ]
+            },
+            "note": "Rapport INBO.R.2012.7, 29 pp.",
+            "publisher": "Instituut voor Natuur en Bosonderzoek",
+            "title": "Opvolging effecten van aangepast spuibeheer op conductiviteit in de ganzepoot (IJzermonding) in nieuwpoort",
+            "type": "report"
+        },
+        {
+            "author": [
+                {
+                    "family": "Steendam",
+                    "given": "C."
+                },
+                {
+                    "family": "Buysse",
+                    "given": "D."
+                },
+                {
+                    "family": "Van Wichelen",
+                    "given": "J."
+                },
+                {
+                    "family": "Verschelde",
+                    "given": "P."
+                },
+                {
+                    "family": "De Maerteleire",
+                    "given": "N."
+                },
+                {
+                    "family": "Gelaude",
+                    "given": "E."
+                },
+                {
+                    "family": "Robberechts",
+                    "given": "K."
+                },
+                {
+                    "family": "Baeyens",
+                    "given": "R."
+                },
+                {
+                    "family": "Pieters",
+                    "given": "S."
+                },
+                {
+                    "family": "Verhelst",
+                    "given": "P."
+                },
+                {
+                    "family": "Pauwels",
+                    "given": "I."
+                },
+                {
+                    "family": "Vermeersch",
+                    "given": "S."
+                },
+                {
+                    "family": "Coeck",
+                    "given": "J."
+                }
+            ],
+            "id": "Steendam2019",
+            "issued": {
+                "date-parts": [
+                    [
+                        2019
+                    ]
+                ]
+            },
+            "note": "Intern rapport INBO, Brussel.",
+            "publisher": "Instituut voor Natuur- en Bosonderzoek",
+            "title": "Opvolging van de palingstand in het leopoldkanaal als evaluatie van het aangepast sluisbeheer in functie van een verbeterde glasaalmigratie (2018-2019)",
+            "type": "report"
+        },
+        {
+            "author": [
+                {
+                    "family": "White",
+                    "given": "E. M."
+                },
+                {
+                    "family": "Knights",
+                    "given": "B."
+                }
+            ],
+            "container-title": "Journal of Fish Biology",
+            "id": "White1997",
+            "issued": {
+                "date-parts": [
+                    [
+                        1997
+                    ]
+                ]
+            },
+            "page": "1104-1116",
+            "title": "Environmental factors affecting migration of the european eel in the rivers severn and avon, england",
+            "type": "article-journal",
+            "volume": "50"
+        },
+        {
+            "author": [
+                {
+                    "family": "Wilson",
+                    "given": "J. M."
+                },
+                {
+                    "family": "Antunes",
+                    "given": "J. C."
+                },
+                {
+                    "family": "Bouca",
+                    "given": "P. D."
+                },
+                {
+                    "family": "Coimbra",
+                    "given": "J."
+                }
+            ],
+            "container-title": "Canadian Journal of Fisheries and Aquatic Sciences",
+            "id": "Wilson2004",
+            "issued": {
+                "date-parts": [
+                    [
+                        2004
+                    ]
+                ]
+            },
+            "page": "432-442",
+            "title": "Osmoregulatory plasticity of the glass eel of anguilla anguilla: Freshwater entry and changes in branchial ion-transport protein expression",
+            "title-short": "Osmoregulatory plasticity of the glass eel of anguilla anguilla",
+            "type": "article-journal",
+            "volume": "61"
+        },
+        {
+            "author": [
+                {
+                    "family": "Wilson",
+                    "given": "J. M."
+                },
+                {
+                    "family": "Leitao",
+                    "given": "A."
+                },
+                {
+                    "family": "Goncalves",
+                    "given": "A. F."
+                },
+                {
+                    "family": "Ferreira",
+                    "given": "C."
+                },
+                {
+                    "family": "Reis-Santos",
+                    "given": "P."
+                },
+                {
+                    "family": "Fonseca",
+                    "given": "A. V."
+                },
+                {
+                    "dropping-particle": "da",
+                    "family": "Silva",
+                    "given": "J. M."
+                },
+                {
+                    "family": "Antunes",
+                    "given": "J. C."
+                },
+                {
+                    "family": "Pereira-Wilson",
+                    "given": "C."
+                },
+                {
+                    "family": "Coimbra",
+                    "given": "J."
+                }
+            ],
+            "container-title": "Marine Biology",
+            "id": "Wilson2007",
+            "issued": {
+                "date-parts": [
+                    [
+                        2007
+                    ]
+                ]
+            },
+            "page": "1633-1645",
+            "title": "Modulation of branchial ion transport protein expression by salinity in glass eels (anguilla anguilla l.)",
+            "type": "article-journal",
+            "volume": "151"
+        },
+        {
+            "DOI": "10.1051/kmae:1998045",
+            "URL": "https://www.kmae-journal.org/articles/kmae/abs/1998/02/kmae199834910/kmae199834910.html",
+            "author": [
+                {
+                    "family": "Dekker",
+                    "given": "W."
+                }
+            ],
+            "container-title": "Bulletin Français de la Pêche et de la Pisciculture",
+            "id": "dekker1998",
+            "issue": "349",
+            "issued": {
+                "date-parts": [
+                    [
+                        1998
+                    ]
+                ]
+            },
+            "language": "en",
+            "note": "Number: 349 Publisher: EDP Sciences",
+            "page": "199-214",
+            "title": "Long-term trends in the glasseels immigrating at Den Oever, The Netherlands",
+            "type": "article-journal"
+        },
+        {
+            "DOI": "10.1006/jmsc.1999.0562",
+            "URL": "https://doi.org/10.1006/jmsc.1999.0562",
+            "author": [
+                {
+                    "family": "Dekker",
+                    "given": "Willem"
+                }
+            ],
+            "container-title": "ICES Journal of Marine Science",
+            "id": "dekker2000",
+            "issue": "1",
+            "issued": {
+                "date-parts": [
+                    [
+                        2000,
+                        2,
+                        1
+                    ]
+                ]
+            },
+            "page": "109-121",
+            "title": "The fractal geometry of the european eel stock",
+            "type": "article-journal",
+            "volume": "57"
+        },
+        {
+            "DOI": "10.3354/meps07696",
+            "URL": "http://www.int-res.com/abstracts/meps/v373/p71-80/",
+            "author": [
+                {
+                    "family": "Bonhommeau",
+                    "given": "S"
+                },
+                {
+                    "family": "Chassot",
+                    "given": "E"
+                },
+                {
+                    "family": "Planque",
+                    "given": "B"
+                },
+                {
+                    "family": "Rivot",
+                    "given": "E"
+                },
+                {
+                    "family": "Knap",
+                    "given": "Ah"
+                },
+                {
+                    "family": "Le Pape",
+                    "given": "O"
+                }
+            ],
+            "container-title": "Marine Ecology Progress Series",
+            "id": "bonhommeau2008",
+            "issued": {
+                "date-parts": [
+                    [
+                        2008,
+                        12,
+                        23
+                    ]
+                ]
+            },
+            "language": "en",
+            "page": "71-80",
+            "title": "Impact of climate on eel populations of the Northern Hemisphere",
+            "type": "article-journal",
+            "volume": "373"
+        },
+        {
+            "DOI": "10.1051/kmae:2005004",
+            "author": [
+                {
+                    "family": "Briand",
+                    "given": "Cedric"
+                },
+                {
+                    "family": "FATIN",
+                    "given": "D."
+                },
+                {
+                    "family": "FONTENELLE",
+                    "given": "G."
+                },
+                {
+                    "family": "Feunteun",
+                    "given": "E."
+                }
+            ],
+            "container-title": "Bulletin Francais De La Peche Et De La Pisciculture - BULL FR PECHE PISCIC",
+            "id": "briand2005",
+            "issued": {
+                "date-parts": [
+                    [
+                        2005,
+                        9,
+                        1
+                    ]
+                ]
+            },
+            "page": "67-86",
+            "title": "Effect of re-opening of a migratory pathway for eel (anguilla anguilla, l.) at a watershed scale",
+            "type": "article-journal",
+            "volume": "378-379"
+        },
+        {
+            "DOI": "10.1093/icesjms/fsm105",
+            "URL": "https://doi.org/10.1093/icesjms/fsm105",
+            "author": [
+                {
+                    "family": "Bult",
+                    "given": "Tammo P."
+                },
+                {
+                    "family": "Dekker",
+                    "given": "Willem"
+                }
+            ],
+            "container-title": "ICES Journal of Marine Science",
+            "id": "bult2007",
+            "issue": "7",
+            "issued": {
+                "date-parts": [
+                    [
+                        2007,
+                        10,
+                        1
+                    ]
+                ]
+            },
+            "page": "1396-1401",
+            "title": "Experimental field study on the migratory behaviour of glass eels (anguilla anguilla) at the interface of fresh and salt water",
+            "type": "article-journal",
+            "volume": "64"
+        },
+        {
+            "DOI": "10.1016/j.physbeh.2007.05.013",
+            "URL": "https://www.sciencedirect.com/science/article/pii/S0031938407001928",
+            "author": [
+                {
+                    "family": "Du Colombier",
+                    "given": "S."
+                },
+                {
+                    "family": "Bolliet",
+                    "given": "V."
+                },
+                {
+                    "family": "Lambert",
+                    "given": "P."
+                },
+                {
+                    "family": "Bardonnet",
+                    "given": "A."
+                }
+            ],
+            "container-title": "Physiology & Behavior",
+            "id": "ducolombier2007",
+            "issue": "4",
+            "issued": {
+                "date-parts": [
+                    [
+                        2007,
+                        11,
+                        23
+                    ]
+                ]
+            },
+            "page": "684-690",
+            "title": "Energy and migratory behavior in glass eels (<i>Anguilla anguilla</i>)",
+            "type": "article-journal",
+            "volume": "92"
+        },
+        {
+            "DOI": "10.3354/dao056223",
+            "author": [
+                {
+                    "family": "Audenaert",
+                    "given": "V."
+                },
+                {
+                    "family": "Huyse",
+                    "given": "T."
+                },
+                {
+                    "family": "Goemans",
+                    "given": "G."
+                },
+                {
+                    "family": "Belpaire",
+                    "given": "C."
+                },
+                {
+                    "family": "Volckaert",
+                    "given": "F. a. M."
+                }
+            ],
+            "container-title": "Diseases of Aquatic Organisms",
+            "id": "audenaert2003",
+            "issue": "3",
+            "issued": {
+                "date-parts": [
+                    [
+                        2003,
+                        10,
+                        24
+                    ]
+                ]
+            },
+            "language": "eng",
+            "note": "PMID: 14667034",
+            "page": "223-233",
+            "title": "Spatio-temporal dynamics of the parasitic nematode Anguillicola crassus in Flanders, Belgium",
+            "type": "article-journal",
+            "volume": "56"
+        },
+        {
+            "author": [
+                {
+                    "family": "Buysse",
+                    "given": "David"
+                },
+                {
+                    "family": "Verreycken",
+                    "given": "Hugo"
+                },
+                {
+                    "family": "Maerteleire",
+                    "given": "Nico De"
+                },
+                {
+                    "family": "Gelaude",
+                    "given": "Emilie"
+                },
+                {
+                    "family": "Baeyens",
+                    "given": "Raf"
+                },
+                {
+                    "family": "Pieters",
+                    "given": "Sébastien"
+                },
+                {
+                    "family": "Mouton",
+                    "given": "Ans"
+                },
+                {
+                    "family": "Galle",
+                    "given": "Linde"
+                },
+                {
+                    "family": "De",
+                    "given": "Nico"
+                },
+                {
+                    "family": "Coeck",
+                    "given": "Johan"
+                }
+            ],
+            "id": "buysse2015a",
+            "issued": {
+                "date-parts": [
+                    [
+                        2015
+                    ]
+                ]
+            },
+            "language": "nl",
+            "title": "Glasaalmigratie ter hoogte van het uitwateringscomplex in de haven van Zeebrugge",
+            "type": "report"
+        },
+        {
+            "author": [
+                {
+                    "family": "Buysse",
+                    "given": "David"
+                },
+                {
+                    "family": "Mouton",
+                    "given": "Ans"
+                },
+                {
+                    "family": "Gelaude",
+                    "given": "Emilie"
+                },
+                {
+                    "family": "Baeyens",
+                    "given": "Raf"
+                },
+                {
+                    "family": "Maerteleire",
+                    "given": "Nico De"
+                },
+                {
+                    "family": "Jacobs",
+                    "given": "Yves"
+                },
+                {
+                    "family": "Stevens",
+                    "given": "Maarten"
+                }
+            ],
+            "id": "buysse2012a",
+            "issued": {
+                "date-parts": [
+                    [
+                        2012
+                    ]
+                ]
+            },
+            "language": "nl",
+            "title": "Glasaalmigratie ter hoogte van het sluizencomplex Sas Slijkens (Kanaal Gent-Oostende) in Oostende",
+            "type": "article-journal"
+        },
+        {
+            "DOI": "10.21436/inbor.17042525",
+            "URL": "https://pureportal.inbo.be/portal/nl/publications/wetenschappelijke-onderbouwing-en-ondersteuning-van-het-visserijbeleid-en-het-visstandbeheer(575b8c87-bca0-4c4d-9d5c-4df2235cace4).html",
+            "author": [
+                {
+                    "family": "Vandamme",
+                    "given": "Lore"
+                },
+                {
+                    "family": "Verhelst",
+                    "given": "Pieterjan"
+                },
+                {
+                    "family": "Labrière",
+                    "given": "Arc’hantael"
+                },
+                {
+                    "family": "Buysse",
+                    "given": "David"
+                },
+                {
+                    "family": "Bruneel",
+                    "given": "Stijn"
+                },
+                {
+                    "family": "Broos",
+                    "given": "Sarah"
+                },
+                {
+                    "family": "Pauwels",
+                    "given": "Ine"
+                },
+                {
+                    "family": "Auwerx",
+                    "given": "Johan"
+                },
+                {
+                    "family": "Plaetinck",
+                    "given": "Simon"
+                },
+                {
+                    "family": "Rosseel",
+                    "given": "Diederik"
+                },
+                {
+                    "family": "De Maerteleire",
+                    "given": "Nico"
+                },
+                {
+                    "family": "Pieters",
+                    "given": "Sébastien"
+                },
+                {
+                    "family": "Coeck",
+                    "given": "Johan"
+                }
+            ],
+            "id": "vandamme2024",
+            "issued": {
+                "date-parts": [
+                    [
+                        2024
+                    ]
+                ]
+            },
+            "language": "nl",
+            "note": "DOI: 10.21436/inbor.17042525",
+            "title": "Wetenschappelijke onderbouwing en ondersteuning van het visserijbeleid en het visstandbeheer: Onderzoeksprogramma visserij 2023",
+            "title-short": "Wetenschappelijke onderbouwing en ondersteuning van het visserijbeleid en het visstandbeheer",
+            "type": "report"
+        }
+    ],
+    "project_biblios": [
+        "references.bib"
+    ]
+}

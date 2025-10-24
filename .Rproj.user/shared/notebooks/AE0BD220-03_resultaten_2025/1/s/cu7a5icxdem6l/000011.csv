@@ -1,0 +1,8 @@
+"0","if (output==""html""){"
+"0","  source('./code/functions/f.map.R')"
+"0","  file<-read.csv(""./data/metadata/coordinaten_ctd.csv"",sep="";"")"
+"0","  file[c('X', 'Y')] <- as.numeric(str_split_fixed(file$X..Y, ',', 2))"
+"0","  file$X..Y<-NULL"
+"0","  map_object <- f.map(file,""Y"",""X"",crs=""+init=epsg:4326"",""site"",""loc"",plot=TRUE)"
+"0","  map_object"
+"0","}"

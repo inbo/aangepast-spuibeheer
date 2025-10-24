@@ -1,0 +1,8 @@
+"0","source(""./code/functions/f.process_ctd_for_plotting.R"")"
+"0","p.list<-process_ctd_for_plotting(date.min=as.POSIXct(""2025-03-01 00:00:00"", tz=""GMT""), date.max=as.POSIXct(""2025-05-15 00:00:00"", tz=""GMT""))"
+"0",""
+"0","source(""./code/functions/f.process_conductiviteit_series_for_plotting.R"")"
+"0","cond.list<-process_conductiviteit_series_for_plotting(date.min=as.POSIXct(""2025-03-01 00:00:00"", tz=""GMT""), date.max=as.POSIXct(""2025-05-15 00:00:00"", tz=""GMT""))"
+"0",""
+"0","source(""./code/functions/f.process_ctd_series_for_plotting.R"")"
+"0","ctd.list<-process_ctd_series_for_plotting(date.min=as.POSIXct(""2025-03-01 00:00:00"", tz=""GMT""), date.max=as.POSIXct(""2025-05-15 00:00:00"", tz=""GMT""))"

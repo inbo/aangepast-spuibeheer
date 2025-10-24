@@ -1,0 +1,4 @@
+"0","os %>% "
+"0","  dplyr::group_by(site,jaar) %>%"
+"0","  summarize(count=n()) %>%"
+"0","  ggplot(aes(x=jaar,y=count,group=site)) + geom_point(aes(colour=site)) + geom_line(aes(colour=site)) + theme_bw() + theme(text = element_text(size = 12, family = ""serif""), axis.text.x = element_text(angle=45, hjust = 0.5, vjust = 0.5, family = ""serif""), strip.background = element_rect(colour = ""black"", fill = ""white""), legend.position = ""bottom"") + ylab(""Aangepast spuibeheer events"") "
