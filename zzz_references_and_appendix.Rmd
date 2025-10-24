@@ -8,21 +8,21 @@ INBOmd::references(appendix = TRUE)
 
 ## Instructies tijdelijk stopzetten aangepast spuibeheer
 
-+--------+---------------------------+-----------------+----------------------------------------------------------------------------------------------------------------------------------+
-| Site   | Stopzetten bij ...        | INBO ctd        | VMM ctd                                                                                                                          |
-+========+===========================+=================+==================================================================================================================================+
-| AKL    | Ramskapelle \> 0.87 mS/cm | akl ramskapelle |                                                                                                                                  |
-+--------+---------------------------+-----------------+----------------------------------------------------------------------------------------------------------------------------------+
-| LK     | Ramskapelle \> 2.80 mS/cm | lk ramskapelle  |                                                                                                                                  |
-+--------+---------------------------+-----------------+----------------------------------------------------------------------------------------------------------------------------------+
-| KGO    | Plassendale \> 2.46 mS/cm | plassendale     | IMM0005 Oudenburg Plassendale KanaalGentOostende                                                                                 |
-+--------+---------------------------+-----------------+----------------------------------------------------------------------------------------------------------------------------------+
-| Ijzer  | Tervate \> 2.66 mS/cm     | tervate         | Ijzer EC DWG Tervatebrug (BWO_DWG_CTD_Ijzer_IOW17)                                                                               |
-+--------+---------------------------+-----------------+----------------------------------------------------------------------------------------------------------------------------------+
-|        | Woumen \> 1.25 mS/cm      |                 | Koevaardeken EC DWG inname Blankaart (BWO_DWG_CTD_Koevaardeken_IOW24): maar precies geen data dus misschien ook dit alternatief: |
-|        |                           |                 |                                                                                                                                  |
-|        |                           |                 | Diksmuide/IJzer/MPS/WPC Blankaart (BWO_DWG_Exo_Ijzer_IOW3)                                                                       |
-+--------+---------------------------+-----------------+----------------------------------------------------------------------------------------------------------------------------------+
++-------+---------------------------+-----------------+----------------------------------------------------------------------------------------------------------------------------------+
+| Site  | Stopzetten bij ...        | INBO ctd        | VMM ctd                                                                                                                          |
++=======+===========================+=================+==================================================================================================================================+
+| AKL   | Ramskapelle \> 0.87 mS/cm | akl ramskapelle |                                                                                                                                  |
++-------+---------------------------+-----------------+----------------------------------------------------------------------------------------------------------------------------------+
+| LK    | Ramskapelle \> 2.80 mS/cm | lk ramskapelle  |                                                                                                                                  |
++-------+---------------------------+-----------------+----------------------------------------------------------------------------------------------------------------------------------+
+| KGO   | Plassendale \> 2.46 mS/cm | plassendale     | IMM0005 Oudenburg Plassendale KanaalGentOostende                                                                                 |
++-------+---------------------------+-----------------+----------------------------------------------------------------------------------------------------------------------------------+
+| Ijzer | Tervate \> 2.66 mS/cm     | tervate         | Ijzer EC DWG Tervatebrug (BWO_DWG_CTD_Ijzer_IOW17)                                                                               |
++-------+---------------------------+-----------------+----------------------------------------------------------------------------------------------------------------------------------+
+|       | Woumen \> 1.25 mS/cm      |                 | Koevaardeken EC DWG inname Blankaart (BWO_DWG_CTD_Koevaardeken_IOW24): maar precies geen data dus misschien ook dit alternatief: |
+|       |                           |                 |                                                                                                                                  |
+|       |                           |                 | Diksmuide/IJzer/MPS/WPC Blankaart (BWO_DWG_Exo_Ijzer_IOW3)                                                                       |
++-------+---------------------------+-----------------+----------------------------------------------------------------------------------------------------------------------------------+
 
 ## Tijdsreeksen
 
@@ -71,6 +71,111 @@ debiet %>%
   group_by(site.debiet,jaar) %>%
   summarize(min = min(debiet,na.rm=TRUE), max = max(debiet,na.rm=TRUE), mean = round(mean(debiet,na.rm=TRUE),digits=2)) %>% 
   kable(caption="Minimum, maximum en gemiddelde debiet (m³/s) per waterloop en jaar.")
+```
+
+```{r}
+os.summary <- os %>% 
+  dplyr::filter(jaar == 2022 & datum < as.POSIXct("2022-05-15 12:00:00", tz = "Europe/Brussels") & datum > as.POSIXct("2022-02-27 00:00:00", tz = "Europe/Brussels")) %>% 
+  group_by(site) %>%
+  summarize(start = as.Date(min(open)),
+            stop = as.Date(max(dicht)),
+            periode = round(stop - start),
+            aantal.dagen.effectief.os = n_distinct(datum),
+            events = n(),
+            events.per.dag = round(events/aantal.dagen.effectief.os, digits = 2),
+            mediaan.duur.per.event = round(median(duration)),
+            mediaan.duur.per.dag = round(mediaan.duur.per.event * events.per.dag),
+            totale.duur.os = round(sum(duration)),
+            glasaal.per.event = round(mean(glasaal)),
+            glasaal.totaal = round(sum(glasaal)))
+os.summary$glasaal.totaal[which(os.summary$site == "VA")] = "40730*"
+os.summary$start <- format(strptime(as.character(as.Date(os.summary$start)), "%Y-%m-%d"), "%d-%m-%Y")
+os.summary$stop <- format(strptime(as.character(as.Date(os.summary$stop)), "%Y-%m-%d"), "%d-%m-%Y")
+tos.summary <- as.data.frame(t(os.summary[,-1]))
+colnames(tos.summary) <- os.summary$site
+rownames(tos.summary) = c("start AS", 
+                       "stop AS", 
+                       "periode (dagen)", 
+                       "# dagen effectief AS", 
+                       "# events AS tijdens periode", 
+                       "# events AS per dag", 
+                       "mediaan duur event AS (min)", 
+                       "mediaan duur AS per dag (min)", 
+                       "totale duur AS periode (min)", 
+                       "verwachte # glasaal per AS event", 
+                       "verwachte # glasaal periode")
+
+tos.summary %>% kable(caption = "2022 beleidstabel voor het aangepast spuibeheer (AS) in het afleidingskanaal van de Leie (AKL), Ijzer, kanaal Gent-Oostende (KGO), Leopoldkanaal (LK), Noordede (NE) en Veurne-Ambacht (VA) met inschatting van het aantal glasaal dat de betreffende sluizen kon passeren dankzij AS. * Het verwachte aantal glasaal voor de studieperiode in VA geeft het totaal van 2022 weer en is dus niet gelinkt aan het aantal AS events.") %>% kable_styling(latex_options = "scale_down")
+```
+
+```{r}
+os.summary <- os %>% 
+  dplyr::filter(jaar == 2023 & datum < as.POSIXct("2023-05-15 12:00:00", tz = "Europe/Brussels") & datum > as.POSIXct("2023-02-27 00:00:00", tz = "Europe/Brussels")) %>% 
+  group_by(site) %>%
+  summarize(start = as.Date(min(open)),
+            stop = as.Date(max(dicht)),
+            periode = round(stop - start),
+            aantal.dagen.effectief.os = n_distinct(datum),
+            events = n(),
+            events.per.dag = round(events/aantal.dagen.effectief.os, digits = 2),
+            mediaan.duur.per.event = round(median(duration)),
+            mediaan.duur.per.dag = round(mediaan.duur.per.event * events.per.dag),
+            totale.duur.os = round(sum(duration)),
+            glasaal.per.event = round(mean(glasaal)),
+            glasaal.totaal = round(sum(glasaal)))
+os.summary$glasaal.totaal[which(os.summary$site == "VA")] = "75690*"
+os.summary$start <- format(strptime(as.character(as.Date(os.summary$start)), "%Y-%m-%d"), "%d-%m-%Y")
+os.summary$stop <- format(strptime(as.character(as.Date(os.summary$stop)), "%Y-%m-%d"), "%d-%m-%Y")
+tos.summary <- as.data.frame(t(os.summary[,-1]))
+colnames(tos.summary) <- os.summary$site
+rownames(tos.summary) = c("start AS", 
+                       "stop AS", 
+                       "periode (dagen)", 
+                       "# dagen effectief AS", 
+                       "# events AS tijdens periode", 
+                       "# events AS per dag", 
+                       "mediaan duur event AS (min)", 
+                       "mediaan duur AS per dag (min)", 
+                       "totale duur AS periode (min)", 
+                       "verwachte # glasaal per AS event", 
+                       "verwachte # glasaal periode")
+
+tos.summary %>% kable(caption = "2023 beleidstabel voor het aangepast spuibeheer (AS) in het afleidingskanaal van de Leie (AKL), Ijzer, kanaal Gent-Oostende (KGO), Leopoldkanaal (LK), Noordede (NE) en Veurne-Ambacht (VA) met inschatting van het aantal glasaal dat de betreffende sluizen kon passeren dankzij AS. * Het verwachte aantal glasaal voor de studieperiode in VA geeft het totaal van 2023 weer en is niet dus gelinkt aan het aantal as events.") %>% kable_styling(latex_options = "scale_down")
+```
+
+```{r}
+os.summary <- os %>% 
+  dplyr::filter(jaar == 2024 & datum < as.POSIXct("2024-05-15 12:00:00", tz = "Europe/Brussels") & datum > as.POSIXct("2024-02-27 00:00:00", tz = "Europe/Brussels")) %>% 
+  group_by(site) %>%
+  summarize(start = as.Date(min(open)),
+            stop = as.Date(max(dicht)),
+            periode = as.numeric(round(stop - start)),
+            aantal.dagen.effectief.os = n_distinct(datum),
+            events = n(),
+            events.per.dag = round(events/aantal.dagen.effectief.os, digits = 2),
+            mediaan.duur.per.event = round(median(duration)),
+            mediaan.duur.per.dag = round(mediaan.duur.per.event * events.per.dag),
+            totale.duur.os = round(sum(duration)),
+            glasaal.per.event = round(mean(glasaal)),
+            glasaal.totaal = round(sum(glasaal)))
+os.summary$glasaal.totaal[which(os.summary$site == "VA")] = "176649*"
+os.summary$start <- format(strptime(as.character(as.Date(os.summary$start)), "%Y-%m-%d"), "%d-%m-%Y")
+os.summary$stop <- format(strptime(as.character(as.Date(os.summary$stop)), "%Y-%m-%d"), "%d-%m-%Y")
+tos.summary <- as.data.frame(t(os.summary[,-1]))
+colnames(tos.summary) <- os.summary$site
+rownames(tos.summary) = c("start AS", 
+                       "stop AS", 
+                       "periode (dagen)", 
+                       "# dagen effectief AS", 
+                       "# events AS tijdens periode", 
+                       "# events AS per dag", 
+                       "mediaan duur event AS (min)", 
+                       "mediaan duur AS per dag (min)", 
+                       "totale duur AS periode (min)", 
+                       "verwachte # glasaal per AS event", 
+                       "verwachte # glasaal periode")
+
+tos.summary %>% kable(caption = "2024 beleidstabel voor het aangepast spuibeheer (AS) in het afleidingskanaal van de Leie (AKL), Ijzer, kanaal Gent-Oostende (KGO), Leopoldkanaal (LK), Noordede (NE) en Veurne-Ambacht (VA) met inschatting van het aantal glasaal dat de betreffende sluizen kon passeren dankzij AS. * Het verwachte aantal glasaal voor de studieperiode in VA geeft het totaal van 2024 weer en is niet dus gelinkt aan het aantal as events.") %>% kable_styling(latex_options = "scale_down")
 ```
 
 ### Grafieken
