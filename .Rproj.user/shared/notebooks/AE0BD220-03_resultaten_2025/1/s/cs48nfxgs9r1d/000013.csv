@@ -1,1 +1,0 @@
-"0","if (output==""html""){ggplotly(ctd.list$NE)} else{ctd.list$NE}"
