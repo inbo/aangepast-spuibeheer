@@ -1,5 +1,53 @@
 # Bespreking
 
-In 2024 werd er alternatief spuibeheer toegepast op enkele van de belangrijke intrekroutes voor glasaal in Vlaanderen, met name de IJzermonding in Nieuwpoort, het sluizencomplex “Sas Slijkens” aan de monding van het Kanaal Gent-Oostende, het uitwateringscomplex in de haven van Zeebrugge aan de monding van het Afleidingskanaal van de Leie (AKL) en van het Leopoldkanaal (LK) en de Maertensas aan de monding van de Noordede. Alternatief spuibeheer is één van de maatregelen die waterbeheerders kunnen nemen om stroomopwaartse migratie van glasaal ter hoogte van deze locaties opnieuw mogelijk te maken.
+In 2025 werd er alternatief spuibeheer toegepast op enkele van de belangrijke intrekroutes voor glasaal in Vlaanderen, met name de IJzermonding in Nieuwpoort, het sluizencomplex “Sas Slijkens” aan de monding van het Kanaal Gent-Oostende, het uitwateringscomplex in de haven van Zeebrugge aan de monding van het Afleidingskanaal van de Leie (AKL) en van het Leopoldkanaal (LK) en de Maertensas aan de monding van de Noordede. Aangepast spuibeheer is één van de maatregelen die waterbeheerders kunnen nemen om stroomopwaartse migratie van glasaal ter hoogte van deze locaties opnieuw mogelijk te maken.
 
-Zoutintrusie als gevolg van aangepast spuibeheer lijkt zich voornamelijk voor te doen in het Ijzerbekken waar de pieken in geleidbaarheid sterk overeenkomen met de momenten van aangepast spuibeheer. Belangrijk om hierbij te noteren is echter wel dat ter hoogte van de Ijzer het meest intensieve aangepast spuibeheer wordt uitgevoerd en dat daardoor ook ruw geschat 271.000 glasalen kunnen opzwemmen [@vandamme2024]. Inschattingen suggereren dat voor de andere kanalen een aanzienlijk lager aantal kan opzwemmen. In het Afleidingskanaal van de Leie bijvoorbeeld is er geen waarneembaar effect van het sporadische aangepast spuibeheer maar het ingeschat aantal glasalen dat binnentrekt in 2024 is slechts 3% van wat er de Ijzer op trekt. In het Kanaal Gent-Oostende en het Leopoldkanaal spreken we over percentages van 30 en 8% respectievelijk van wat de Ijzer opzwemt en deze meer intensieve vorm van aangepast spuibeheer lijkt te resulteren in een verhoogde geleidbaarheid ter hoogte van de spuischuiven. In tegenstelling tot de Ijzer, blijven meer inlandse verhogingen van de geleidbaarheid uit. Over het algemeen kan wel gesteld worden dat de zoutlenzen net stroomopwaarts van de spuiconstructies snel en gemakkelijk naar zee worden gespuid, een patroon dat in alle onderzochte waterlopen (IJzer, KGO, LK, AKL) werd waargenomen. In de Noordede werd er geen aanzienlijk effect waargenomen van aangepast spuibeheer op de geleidbaarheid.
+In de periode **2022 tot 2024**, lijkt zoutintrusie als gevolg van aangepast spuibeheer zich voornamelijk voor te doen in het Ijzerbekken waar de pieken in geleidbaarheid sterk overeenkomen met de momenten van aangepast spuibeheer. Belangrijk om hierbij te noteren is echter wel dat ter hoogte van de Ijzer het meest intensieve aangepast spuibeheer wordt uitgevoerd en dat daardoor ook ruw geschat 157.691 tot 271.000 glasalen konden opzwemmen [@vandamme2024]. Inschattingen suggereren dat voor de andere kanalen een aanzienlijk lager aantal kan opzwemmen. In het Afleidingskanaal van de Leie bijvoorbeeld is er geen waarneembaar effect van het sporadische aangepast spuibeheer, maar het ingeschat aantal glasalen dat binnentrekt in 2024 is slechts een fractie van wat er de Ijzer op trekt. In het Kanaal Gent-Oostende en het Leopoldkanaal spreken we over hogere aantallen en deze meer intensieve vorm van aangepast spuibeheer lijkt te resulteren in een verhoogde geleidbaarheid ter hoogte van de spuischuiven. In tegenstelling tot de Ijzer, blijven meer inlandse verhogingen van de geleidbaarheid uit. Over het algemeen kan wel gesteld worden dat de zoutlenzen net stroomopwaarts van de spuiconstructies snel en gemakkelijk naar zee worden gespuid, een patroon dat in alle onderzochte waterlopen (IJzer, KGO, LK, AKL) werd waargenomen. In de Noordede werd er geen aanzienlijk effect waargenomen van aangepast spuibeheer op de geleidbaarheid. **2025**, was een uitzonderlijk jaar omwille van de vroegtijdige stopzetting van het aangepast spuibeheer in de Ijzer, het Afleidingskanaal van de Leie en het Leopoldkanaal. Aangepast spuibeheer werd niet afgebroken in het Kanaal Gent-Oostende waardoor het ingeschatte aantal passerende glasalen 87 % was van wat naar schatting de Ijzer kon opzwemmen dat jaar. Ter vergelijking, in 2024 bedroeg dit slechts 30 %.
+
+Samengevat toont de vierjarige analyse van het aangepast spuibeheer (AS) aan de Belgische kust een wisselende, maar cruciale, rol in de ondersteuning van de stroomopwaartse migratie van glasaal. De piek in het ingeschatte aantal werd bereikt in **2024** met **671.014** glasalen, na een sterke stijging vanuit **2022** (**323.199** glasalen, exclusief de Noordede) en **2023** (**550.392** glasalen). De daling tot **315.794** glasalen in **2025** is een direct gevolg van het **sterk gereduceerd en vroegtijdig stopgezet AS** in dat jaar als reactie op de droogte. De resultaten per waterloop lichten de complexiteit van het beheer toe.
+
+## Uitwateringscomplex Zeebrugge: Afleidingskanaal van de Leie (AKL)
+
+Het AKL werd de gehele periode het **minst intensief toegepast**. De inzet bleef laag: **19 uur** in **2022**, **38 uur** in **2023**, en **39 uur** in **2024**.
+
+-   De jaren **2022, 2023 en 2024** kenmerkten zich door een **consistente bevinding**: het AS had door de beperkte duur **geen wezenlijke invloed op de geleidbaarheid** ter hoogte van Ramskapelle en Moerkerke gedurende de beheerperiode.
+
+-   Korte pieken die de limietwaarde van 0.87 mS/cm overschreden, werden sporadisch waargenomen, maar konden niet sluitend aan de momenten van AS worden gelinkt.
+
+-   In **2025** vond een kritieke ommezwaai plaats. Ondanks een vergelijkbare duur van **39 uur** over **acht dagen**, leek het AS nu wél tot een **verhoging van de geleidbaarheid t.h.v. Ramskapelle** te leiden. Eind maart overschreed een sterke stijging de limietwaarde en deze leek te volgen op een periode van AS. Het vermoeden is dat het **tekort aan bovenafvoer** de oorzaak was, waardoor het ingedrongen zout niet afgevoerd kon worden. Dit leidde tot de stopzetting van het AS op **28 maart 2025**.
+
+## Uitwateringscomplex Zeebrugge: Leopoldkanaal (LK)
+
+Het AS in het LK wordt minstens **dubbel zo intensief** uitgevoerd als in het AKL. De inzet vertoonde echter een dalende trend: **136 uur** in **2022**, **132 uur** in **2023**, **102 uur** in **2024**, en slechts **81 uur** in **2025**.
+
+-   **Consistente bevinding** in alle jaren is dat het AS nabij **Zeebrugge** een **sterk verhoogd zoutgehalte** veroorzaakte.
+
+-   De effecten landinwaarts varieerden: in **2022** was het effect tot in **Ramskapelle** zichtbaar. In **2023** en **2024** leek de geleidbaarheid in Ramskapelle echter **weinig tot niet beïnvloed**. In 2024 werd geen zomerse verhoging geobserveerd, ondanks een lagere neerslag dan in 2023, wat mogelijk wijst op een lagere hoeveelheid geaccumuleerd zout in het grondwater.
+
+-   In **2025** keerde het patroon van 2022 terug: de geleidbaarheid in **Ramskapelle** leek **relatief sterk beïnvloed** door het AS. Dit wees op een kritieke zoutintrusie die, in combinatie met het uitblijven van bovenafvoer, leidde tot de stopzetting van het AS op **28 maart 2025**.
+
+## Kanaal Gent-Oostende (KGO)
+
+Het KGO kende een wisselende inzet: **245 uur** in **2022**, **128 uur** in **2023**, **247 uur** in **2024** en **224 uur** in **2025**.
+
+-   In **2022 en 2023** was er **geen sluitend verband** tussen AS en geleidbaarheid, aangezien pieken in Sas Slijkens al *vóór* het AS optraden en tot diep in het binnenland (Plassendale, Brugge) werden waargenomen.
+
+-   In **2024** en **2025** leken pieken bij Sas Slijkens **wel overeen te komen** met momenten van intensiever AS, wat een lokaal verband suggereerde.
+
+-   De **consistente bevinding** was echter dat de effecten **landinwaarts (Plassendale, Brugge) uitblijven**, wat suggereert dat de wateren stroomopwaarts niet beïnvloed werden door het beheer.
+
+## De Ijzer
+
+De Ijzer is de waterloop waar de zoutintrusie het meest uitgesproken kan zijn. De inzet van AS steeg tot een piek van **589 uren** in **2024**, na **277 uren** in **2022** en **536 uren** in **2023**.
+
+-   **Consistente bevinding** in alle jaren: geleidbaarheid nabij de spuischuiven komt duidelijk **overeen met AS-periodes**.
+
+-   In **2023** en **2024** werd de **brakwatergrens van** 20 mS/cm meermaals overschreden.
+
+-   De impact van de **droge zomers** was duidelijk zichtbaar: In **2022** bleef de conductiviteit op een verhoogd niveau na het AS door de droogte.
+
+In **2025** was de totale duur met **217 uren** de **laagste** van de periode. Ondanks deze lage inzet lag de geleidbaarheid **aanzienlijk hoger** dan in 2021–2023, toegeschreven aan de **lage bovenafvoer**. De zoutpieken drongen bovendien **veel vroeger** landinwaarts door. Dit alles leidde tot de vroegtijdige stopzetting van het AS op **21 maart 2025**. Sommige pieken werden wel eerder stroomopwaarts dan stroomafwaarts gedetecteerd wat wijst op mogelijke vervuiling stroomopwaarts.
+
+## De Noordede (NE)
+
+Het beheer in de Noordede is uniek vanwege het **hoogste aantal AS-events met de meest korte duur**. Dit bleek een **consistente en effectieve methode om de zoutintrusie te beperken** nabij de spuischuiven in **2023 en 2024**. De geleidbaarheid stroomopwaarts bleef in deze jaren **niet beïnvloed**. In **2025** was er een sterke daling in de AS-duur.
