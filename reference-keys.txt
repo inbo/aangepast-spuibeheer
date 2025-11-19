@@ -44,9 +44,9 @@ fig:langcond
 fig:langp
 fig:langq
 tab:debiettabel
-tab:unnamed-chunk-12
 tab:unnamed-chunk-13
 tab:unnamed-chunk-14
+tab:unnamed-chunk-15
 inleiding
 materiaal-en-methoden
 studiegebied
