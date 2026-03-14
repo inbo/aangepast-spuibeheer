@@ -68,7 +68,7 @@ static.map("Kanaal Gent-Oostende")
 static.map(c("Afleidingskanaal van de Leie","Leopoldskanaal"))
 ```
 
-```{r mapctdne, message=FALSE, warning=FALSE, fig.cap="Locaties van de ctd-divers"}
+```{r mapctdne, eval=FALSE, message=FALSE, warning=FALSE, fig.cap="Locaties van de ctd-divers"}
 static.map(c("Noordede"))
 ```
 
@@ -86,7 +86,7 @@ De conductiviteitsmeetpunten liggen parallel naast elkaar in het Leopoldkanaal e
 
 #### Noordede
 
-Op de Noordede wordt de conductiviteit gemeten aan Maertensas, de Blauwe Sluis en Clemensheule die op 1.0, 3.0 en 4.0 km stroomopwaarts van de spuiconstructie liggen (Fig. \@ref(fig:mapctdne)).
+Op de Noordede wordt de conductiviteit gemeten aan Maertensas, de Blauwe Sluis en Clemensheule die op 1.0, 3.0 en 4.0 km stroomopwaarts van de spuiconstructie liggen.
 
 ### Overzicht aangepast spuibeheer
 

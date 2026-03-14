@@ -225,7 +225,7 @@ if (output=="html"){ggplotly(ctd.list$KGO)} else{ctd.list$KGO}
 ```
 
 ```{r plotcondkgo, fig.cap="Verloop van de VMM-metingen van de specifieke geleidbaarheid bij 20°C (mS/cm) in het kanaal Gent-Oostende (KGO). De groene balken geven de periodes van aangepast spuibeheer weer."}
-if (output=="html"){ggplotly(cond.list$KGO)} else{cond.list$KGO}
+cond.list$KGO
 ```
 
 ```{r plotkgoss, fig.cap="Verloop van de actuele geleidbaarheid (mS/cm), specifieke geleidbaarheid bij 20°C (mS/cm), saliniteit (psu) en temperatuur (°C) in het kanaal Gent-Oostende (KGO) ter hoogte van sas Slijkens (0.9 km stroomopwaarts spuiconstructie), debiet (m³/s) ter hoogte van Oostkamp en neerslag (mm) ter hoogte van Klemskerke in 2023. De groene balken geven de periodes van aangepast spuibeheer weer."}
@@ -242,7 +242,7 @@ p.list$brugge
 
 ### Ijzer
 
-Voor de Ijzer is er, met uitzondering van een duidelijke dip in **2022**, doorheen de periode een algemene stijging te zien in zowel de totale duur als het aantal *events* AS. De **hoogste duur** werd bereikt in **2024** met **589 uren** AS.
+Voor de Ijzer is er, met uitzondering van een duidelijke dip in **2022**, doorheen de periode een algemene stijging te zien in zowel de totale duur als het aantal *events* AS tot en met 2024. De **hoogste duur** werd bereikt in **2024** met **589 uren** AS.
 
 Gedurende de gehele periode **2022-2025** is het een **consistente bevinding** dat, ondanks de hoge variabiliteit, de hoge waarden voor de geleidbaarheid dicht bij de spuischuiven (Yzermondesteiger) duidelijk **overeenkomen met de periodes van het aangepast spuibeheer** (Fig. \@ref(fig:plotctdijzer) en \@ref(fig:plotijzery)).
 
@@ -261,7 +261,7 @@ if (output=="html"){ggplotly(ctd.list$Ijzer)} else{ctd.list$Ijzer}
 ```
 
 ```{r plotcondijzer, fig.cap="Verloop van de VMM-metingen van de specifieke geleidbaarheid bij 20°C (mS/cm) in de Ijzer. De groene balken geven de periodes van aangepast spuibeheer weer."}
-if (output=="html"){ggplotly(cond.list$Ijzer)} else{cond.list$Ijzer}
+cond.list$Ijzer
 ```
 
 ```{r plotijzery, fig.cap="Verloop van de actuele geleidbaarheid (mS/cm), specifieke geleidbaarheid bij 20°C (mS/cm), saliniteit (psu) en temperatuur (°C) in de Ijzer ter hoogte van de Ijzermondesteiger (0,2 km stroomopwaarts spuiconstructie), debiet (m³/s) ter hoogte van Keiem en neerslag (mm) ter hoogte van Sint-Joris in 2023. De groene balken geven de periodes van aangepast spuibeheer weer."}
@@ -313,7 +313,7 @@ if (output=="html"){ggplotly(ctd.list$NE)} else{ctd.list$NE}
 ```
 
 ```{r plotcondne, fig.cap="Verloop van de VMM-metingen van de specifieke geleidbaarheid bij 20°C (mS/cm) in de Noordede (NE). De groene balken geven de periodes van aangepast spuibeheer weer."}
-if (output=="html"){ggplotly(cond.list$NE)} else{cond.list$NE}
+cond.list$NE
 ```
 
 ```{r plotnem, fig.cap="Verloop van de actuele geleidbaarheid (mS/cm), specifieke geleidbaarheid bij 20°C (mS/cm), saliniteit (psu) en temperatuur (°C) in de Noordede (NE) ter hoogte van de Maertensas (1,0 km stroomopwaarts spuiconstructie), debiet (m³/s) ter hoogte van Oostkamp en neerslag (mm) ter hoogte van Klemskerke in 2023. De groene balken geven de periodes van aangepast spuibeheer weer."}
@@ -326,135 +326,4 @@ p.list$`blauwe sluis`
 
 ```{r plotnec, fig.cap="Verloop van de actuele geleidbaarheid (mS/cm), specifieke geleidbaarheid bij 20°C (mS/cm), saliniteit (psu) en temperatuur (°C) in de Noordede (NE) ter hoogte van Clemensheule (4,0 km stroomopwaarts spuiconstructie), debiet (m³/s) ter hoogte van Oostkamp en neerslag (mm) ter hoogte van Klemskerke in 2023. De groene balken geven de periodes van aangepast spuibeheer weer."}
 p.list$clemensheule
-```
-
-## Vergelijking INBO-sensoren en waterinfo-sensoren
-
-```{r}
-source("./code/functions/f.plot_compare_inbo_waterinfo.R")
-```
-
-### Afleidingskanaal van de Leie en Leopoldskanaal
-
-Er zijn geen waterinfo-sensoren beschikbaar. Er was ook niet afgesproken om waterinfo-sensoren te plaatsen in 2025 en de INBO-sensoren waren daarom van cruciaal belang.
-
-### Kanaal Gent-Oostende
-
-Het INBO-meetpunt aan Sas Slijkens, stroomopwaarts van de spuischuiven, is belangrijk om te meten hoeveel zout water binnenkomt. Momenteel is hier geen echt alternatief voor. Het meetpunt van Farys wordt gekenmerkt door verschillende moeilijkheden zoals hieronder opgelijst.
-
-Het INBO-meetpunt te Plassendale wordt gebruikt om te bepalen of aangepast spuibeheer stilgelegd dient te worden of opnieuw aangevat kan worden. Bij een specifieke conductiviteit van meer dan 2.46 mS/cm wordt het aangepast spuibeheer stilgelegd. Het VMM-meetpunt IMM0005 Oudenburg Plassendale KanaalGentOostende ligt 4 km stroomafwaarts van het INBO-meetpunt, maar trends zijn zeer vergelijkbaar tot en met de week van 21/4/2025. Dan is er een plotse daling van het VMM-meetpunt en een almaar grote verschil tussen de trends.
-
-Het VMM-meetpunt IMC_IOW35 Jabbeke VaartdijkNoord Kan Gent-Oostende is wellicht geen goed alternatief voor het INBO-meetpunt te Brugge. Te trends liggen heel ver uiteen. Het VMM-meetpunt heeft metingen die in de lijn liggen van het meetpunt te Sas Slijkens. Waarschijnlijk is dit omdat het VMM-meetpunt niet aan het KGO zelf ligt.
-
-+----------------------------------------------------+------------------------------+---------------------------------------------------------------------------+----------------------------------------------------------+
-| Code                                               | Alternatief voor INBO-sensor | Afstand tot bodem                                                         | Opmerkingen                                              |
-+====================================================+==============================+===========================================================================+==========================================================+
-| Meetpunt Farys Sas Slijkens                        | Sas Slijkens                 | Niet gekend                                                               | -   200 meter van huidige INBO sensor                    |
-|                                                    |                              |                                                                           |                                                          |
-|                                                    |                              |                                                                           | -   In intake-kelder, niet in kanaal                     |
-|                                                    |                              |                                                                           |                                                          |
-|                                                    |                              |                                                                           | -   Niet ontsloten                                       |
-|                                                    |                              |                                                                           |                                                          |
-|                                                    |                              |                                                                           | -   Op het eerste zicht verschillende trend INBO-sensor  |
-|                                                    |                              |                                                                           |                                                          |
-|                                                    |                              |                                                                           | -   Watergroep                                           |
-+----------------------------------------------------+------------------------------+---------------------------------------------------------------------------+----------------------------------------------------------+
-| IMM0005 Oudenburg Plassendale KanaalGentOostende   | Plassendale                  | Afstand tot bodem zou 10 cm zijn (maar waterinfo beschrijving zegt 50 cm) | -   4 km stroomafwaarts van INBO-sensor                  |
-|                                                    |                              |                                                                           |                                                          |
-| ![](images/clipboard-3473705803.png)               |                              |                                                                           | -   VMM                                                  |
-+----------------------------------------------------+------------------------------+---------------------------------------------------------------------------+----------------------------------------------------------+
-| IMC_IOW35 Jabbeke VaartdijkNoord Kan Gent-Oostende | Brugge                       | 10 cm                                                                     | -   4 km stroomafwaarts van INBO-sensor                  |
-|                                                    |                              |                                                                           |                                                          |
-| ![](images/clipboard-2381218879.png)               |                              |                                                                           | -   Niet duidelijk of wel degelijk in KGO                |
-|                                                    |                              |                                                                           |                                                          |
-|                                                    |                              |                                                                           | -   VMM                                                  |
-+----------------------------------------------------+------------------------------+---------------------------------------------------------------------------+----------------------------------------------------------+
-
-```{r}
-plot_compare_inbo_waterinfo("plassendale",
-                            "Oudenburg Kl Gent-Oostende EC Plassendale",
-                            as.POSIXct("2025-03-01 00:00:00", tz="GMT"),
-                            as.POSIXct("2025-05-15 00:00:00", tz="GMT"),
-                            "KGO",
-                            output)
-```
-
-```{r}
-plot_compare_inbo_waterinfo("brugge",
-                            "Jabbeke VaartDijkNoord KanGentOostende",
-                            as.POSIXct("2025-03-01 00:00:00", tz="GMT"),
-                            as.POSIXct("2025-05-15 00:00:00", tz="GMT"),
-                            "KGO",
-                            output)
-```
-
-### Ijzer
-
-In de Ijzer hangen er verschillende sensoren. De VMM-meetpunten die werden geïdentificeerd als mogelijke alternatieven voor de INBO-meetpunten ontbraken dit jaar of er waren problemen met de sensoren. Om die reden waren er geen VMM-sensor alternatieven beschikbaar dit jaar voor de INBO-meetpunten aan de Schoorbakkebrug, Tervate en Diksmuide.
-
-Het enige bruikbare VMM-meetpunt was Nieuwpoort Brugsesteenweg Uniebrug DIEP IMC_999031 aan de Uniebrug. INBO-metingen waren consistent hoger dan de VMM-metingen en de trends waren redelijk verschillend.
-
-+--------------------------------------------------------------------+------------------------------+-------------------+----------------------+
-| Code                                                               | Alternatief voor INBO-sensor | Afstand tot bodem | Opmerkingen          |
-+====================================================================+==============================+===================+======================+
-|                                                                    | Yserstar                     |                   |                      |
-+--------------------------------------------------------------------+------------------------------+-------------------+----------------------+
-| Nieuwpoort Brugsesteenweg Uniebrug DIEP IMC_999031                 | Uniebrug                     | 10 cm boven bodem | -   VMM              |
-|                                                                    |                              |                   |                      |
-| ![](images/clipboard-3154608119.png)                               |                              |                   |                      |
-+--------------------------------------------------------------------+------------------------------+-------------------+----------------------+
-| Loc-00016-42bis Diksmuide DIEP Schoorbakkebrug (spt-00030-94 diep) | Schoorbakkebrug              | 10 cm boven bodem | -   Niet beschikbaar |
-|                                                                    |                              |                   |                      |
-| ![](images/clipboard-1887330339.png)                               |                              |                   | -   Watergroep       |
-+--------------------------------------------------------------------+------------------------------+-------------------+----------------------+
-| ?                                                                  | Tervate                      |                   | -   Niet beschikbaar |
-|                                                                    |                              |                   |                      |
-| ![](images/clipboard-418485206.png)                                |                              |                   | -   VMM              |
-+--------------------------------------------------------------------+------------------------------+-------------------+----------------------+
-| Loc-00018-36 Diksmuide Beerstblote IJzer-SafHZV diepe sensor       | Diksmuide                    | 10 cm boven bodem | -   Niet beschikbaar |
-|                                                                    |                              |                   |                      |
-| ![](images/clipboard-2550416272.png)                               |                              |                   | -   Watergroep       |
-+--------------------------------------------------------------------+------------------------------+-------------------+----------------------+
-
-```{r}
-plot_compare_inbo_waterinfo("uniebrug",
-                            "Nieuwpoort Brugsesteenweg Uniebrug DIEP",
-                            as.POSIXct("2025-03-01 00:00:00", tz="GMT"),
-                            as.POSIXct("2025-05-15 00:00:00", tz="GMT"),
-                            "Ijzer",
-                            output)
-```
-
-### Noordede
-
-+-------------------------------------------+------------------------------+-------------------+----------------------------------------------+
-| Code                                      | Alternatief voor INBO-sensor | Afstand tot bodem | Opmerkingen                                  |
-+===========================================+==============================+===================+==============================================+
-| Bredene/Nukkerbrug/Noordede IMC_IOW31     | Maertensas                   | ?                 | -   300 meter stroomopwaarts van INBO-sensor |
-|                                           |                              |                   |                                              |
-| ![](images/clipboard-553722254.png)       |                              |                   | -   VMM                                      |
-+-------------------------------------------+------------------------------+-------------------+----------------------------------------------+
-| Bredene Sluizenstraat Noordede IMC_866000 | Blauwe sluis                 | ?                 | -   0 meter van INBO-sensor                  |
-|                                           |                              |                   |                                              |
-| ![](images/clipboard-1153693687.png)      |                              |                   | -   VMM                                      |
-+-------------------------------------------+------------------------------+-------------------+----------------------------------------------+
-|                                           | Clemensheule                 |                   |                                              |
-+-------------------------------------------+------------------------------+-------------------+----------------------------------------------+
-
-```{r}
-plot_compare_inbo_waterinfo("maertensas",
-                            "Bredene Nukkerbrug Noordede",
-                            as.POSIXct("2025-03-01 00:00:00", tz="GMT"),
-                            as.POSIXct("2025-05-15 00:00:00", tz="GMT"),
-                            "NE",
-                            output)
-```
-
-```{r}
-plot_compare_inbo_waterinfo("blauwe sluis",
-                            "Bredene Sluizenstraat Noordede",
-                            as.POSIXct("2025-03-01 00:00:00", tz="GMT"),
-                            as.POSIXct("2025-05-15 00:00:00", tz="GMT"),
-                            "NE",
-                            output)
 ```

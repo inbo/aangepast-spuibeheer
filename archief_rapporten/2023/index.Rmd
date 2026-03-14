@@ -1,9 +1,9 @@
 ---
 title: "Opvolging van de zoutintrusie in de Ijzer, het kanaal Gent-Oostende, het Leopoldkanaal, het afleidingskanaal van de Leie en de Noordede"
 subtitle: Aangepast spuibeheer in 2023 in functie van glasaalmigratie
-header-includes:
-   - \usepackage{lineno}
-   - \linenumbers
+# header-includes:
+#    - \usepackage{lineno}
+#    - \linenumbers
 author:
   - name:
       given: "Stijn"
@@ -91,6 +91,16 @@ reviewer:
     email: "isaac.vermeulen@inbo.be"
     orcid: "0009-0001-3035-9810"
     affiliation: "Instituut voor Natuur- en Bosonderzoek (INBO)"
+github-repo: https://github.com/inbo/aangepast-spuibeheer
+zenodo-repo: https://doi.org/10.5281/zenodo.17017617
+year: 2026
+doi: doi nvt
+reportnr: reportnr nvt
+depotnr: depotnr nvt
+cover: "media/DSCN2815.JPG"
+cover_description: "Optrekkende glasaal die het Kanaal Gent-oostende kan opzwemmen door het aangepast spuibeheer. Foto: David Buysse (INBO)"
+embargo: 2026-02-18
+public_report: FALSE
 lang: nl
 style: INBO
 client:
