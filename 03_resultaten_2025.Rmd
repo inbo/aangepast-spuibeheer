@@ -13,7 +13,7 @@ source("./code/functions/f.read_excel_allsheets.R")
 
 ```{r warning=FALSE, message=FALSE, include=FALSE, cache=TRUE}
 RUN=FALSE
-output="html"
+output="pdf"
 if (RUN==TRUE){
   source("./code/not_functions/combine_all.R")
 }
