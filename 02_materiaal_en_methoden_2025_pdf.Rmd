@@ -56,19 +56,19 @@ include_graphics(path = c("./media/CTD1.jpg","./media/CTD2.jpg"))
 static.map("all")
 ```
 
-```{r mapctdijzer, message=FALSE, warning=FALSE, fig.cap="Locaties van de ctd-divers"}
+```{r mapctdijzer, message=FALSE, warning=FALSE, fig.cap="Locaties van de ctd-divers in de Ijzer"}
 static.map("IJzer")
 ```
 
-```{r mapctdkgo, message=FALSE, warning=FALSE, fig.cap="Locaties van de ctd-divers"}
+```{r mapctdkgo, message=FALSE, warning=FALSE, fig.cap="Locaties van de ctd-divers in het kanaal Gent-Oostende"}
 static.map("Kanaal Gent-Oostende")
 ```
 
-```{r mapctdakllk, message=FALSE, warning=FALSE, fig.cap="Locaties van de ctd-divers"}
+```{r mapctdakllk, message=FALSE, warning=FALSE, fig.cap="Locaties van de ctd-divers in het Leopoldkanaal en het Afleidingskanaal van de Leie"}
 static.map(c("Afleidingskanaal van de Leie","Leopoldskanaal"))
 ```
 
-```{r mapctdne, eval=FALSE, message=FALSE, warning=FALSE, fig.cap="Locaties van de ctd-divers"}
+```{r mapctdne, eval=FALSE, message=FALSE, warning=FALSE, fig.cap="Locaties van de ctd-divers in de Noordede"}
 static.map(c("Noordede"))
 ```
 
