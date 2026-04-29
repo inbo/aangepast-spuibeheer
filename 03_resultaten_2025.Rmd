@@ -11,7 +11,7 @@ source("./code/functions/f.read_excel_allsheets.R")
 
 ## Aangepast spuibeheer ter hoogte van de zout-zoetovergangen aan de Belgische kust en ingeschat effect op de intrek van glasaal
 
-```{r warning=FALSE, message=FALSE, include=FALSE, cache=TRUE}
+```{r warning=FALSE, message=FALSE, include=FALSE}
 RUN=FALSE
 output="pdf"
 if (RUN==TRUE){
@@ -218,7 +218,7 @@ De situatie wijzigde licht in **2024**. De pieken in geleidbaarheid deden zich n
 
 In **2025** duurde het aangepast spuibeheer **224 uur**. Dit lag tussen de lage duur van 2023 en de hogere duur van 2022/2024.
 
-Net als in 2024 was de waarneming in **2025** dat pieken in geleidbaarheid overeenkwamen met momenten van intensiever AS t.h.v. Sas Slijkens, maar de effecten **bleven landinwaarts consistent uit** (Fig. \@ref(fig:plotctdkgo) en Fig. \@ref(fig:plotkgoss)). Het uitblijven van pieken in het binnenland suggereert dat er **wel een verband is** tussen de waargenomen geleidbaarheid en het aangepaste spuibeheer in het KGO t.h.v. Sas Slijkens, maar dat de wateren verder landinwaarts **niet beïnvloed** worden (Fig. \@ref(fig:plotkgop)).
+Net als in 2024 was de waarneming in **2025** dat pieken in geleidbaarheid overeenkwamen met momenten van intensiever AS t.h.v. Sas Slijkens, maar de effecten **bleven landinwaarts consistent uit** (Fig. \@ref(fig:plotctdkgo) en Fig. \@ref(fig:plotkgoss)). Het uitblijven van pieken in het binnenland suggereert dat er **wel een verband is** tussen de waargenomen geleidbaarheid en het aangepaste spuibeheer in het KGO t.h.v. Sas Slijkens, maar dat de wateren verder landinwaarts **niet beïnvloed** worden (Fig. \@ref(fig:plotkgop)). Eerder uitzonderlijk was dit jaar dat in de zomer de geleidbaarheid beduidend hoger was dan in de periode van aangepast spuibeheer.
 
 ```{r plotctdkgo, fig.cap="Verloop van de specifieke geleidbaarheid bij 20°C (mS/cm) in het kanaal Gent-Oostende (KGO). De daggemiddelden worden weergegeven als zwarte punten op het midden van de dag. De groene balken geven de periodes van aangepast spuibeheer weer.", fig.height=10}
 if (output=="html"){ggplotly(ctd.list$KGO)} else{ctd.list$KGO}
