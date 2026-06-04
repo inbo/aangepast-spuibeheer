@@ -3,7 +3,7 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-Dit repository bevat de code, data-preprocessor en R Markdown-bronbestanden voor het rapportageproject: **"Opvolging van het aangepast spuibeheer in combinatie met de zoutintrusie in de IJzer, het kanaal Gent-Oostende, het Leopoldkanaal en het afleidingskanaal van de Leie."**
+Dit repository bevat de code, data-preprocessor en R Markdown-bronbestanden voor de INBO-rapportage: **"Opvolging van het aangepast spuibeheer in combinatie met de zoutintrusie in de IJzer, het kanaal Gent-Oostende, het Leopoldkanaal en het afleidingskanaal van de Leie."**
 
 In samenwerking met De Vlaamse Waterweg.
 
