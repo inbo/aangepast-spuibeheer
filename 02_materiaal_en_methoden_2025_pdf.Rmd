@@ -22,7 +22,7 @@ include_graphics(path = "./media/ganzepoot.png")
 
 ### Sas Slijkens
 
-Het Kanaal Gent-Brugge wordt samen met het Kanaal Brugge-Oostende aangeduid als KGO. In Brugge staat het Kanaal Brugge-Oostende in verbinding met het Kanaal Gent-Brugge, de Damse Vaart en het Boudewijnkanaal van Brugge naar Zeebrugge. Tussen Oudenburg en Oostende sluit het Kanaal Brugge-Oostende aan met het Kanaal Plassendale-Nieuwpoort. Het KGO bevindt zich deels in het bekken van de Brugse Polders en deels in het bekken van de Gentse kanalen. Stroomopwaarts van Brugge, ter hoogte van Oostkamp, mondt onder andere de Rivierbeek uit in het KGO. ’Sas Slijkens’ is de benaming voor de sluizen of sassen die het Kanaal Brugge-Oostende met de voorhaven van Oostende en de Noordzee verbinden (Fig. \@ref(fig:sas)). Het Sas Slijkens bezit twee spuisluizen met dubbele schuiven van ongeveer 4 m breed. Er zijn tevens vier spuikokers en een gronddam aanwezig. Debietmetingen in het KGO tussen Brugge en Oostende werden tot in 2020 gemeten en geregistreerd in Varsenare (Bron: HIC, Hydrologisch Informatie Centrum). Vanaf 2021 wordt het debiet gemeten in Oostkamp. Het gemiddelde debiet in Oostkamp in 2025 was 8.56 m³/s, terwijl het debiet varieerde tussen -9.42 m³/s en 38.57 m³/s. Op het kanaal wordt in functie van de binnenscheepvaart getracht een constant peil na te streven van 3.94 mTAW.
+Het Kanaal Gent-Brugge wordt samen met het Kanaal Brugge-Oostende aangeduid als KGO. In Brugge staat het Kanaal Brugge-Oostende in verbinding met het Kanaal Gent-Brugge, de Damse Vaart en het Boudewijnkanaal van Brugge naar Zeebrugge. Tussen Oudenburg en Oostende sluit het Kanaal Brugge-Oostende aan met het Kanaal Plassendale-Nieuwpoort. Het KGO bevindt zich deels in het bekken van de Brugse Polders en deels in het bekken van de Gentse kanalen. ’Sas Slijkens’ is de benaming voor de sluizen of sassen die het Kanaal Brugge-Oostende met de voorhaven van Oostende en de Noordzee verbinden (Fig. \@ref(fig:sas)). Het Sas Slijkens bezit twee spuisluizen met dubbele schuiven van ongeveer 4 m breed. Er zijn tevens vier spuikokers en een gronddam aanwezig. Debietmetingen in het KGO tussen Brugge en Oostende werden tot in 2020 gemeten en geregistreerd in Varsenare (Bron: HIC, Hydrologisch Informatie Centrum). Vanaf 2021 wordt het debiet gemeten in Oostkamp. Het gemiddelde debiet in Oostkamp in 2025 was 8.56 m³/s, terwijl het debiet varieerde tussen -9.42 m³/s en 38.57 m³/s. Op het kanaal wordt in functie van de binnenscheepvaart getracht een constant peil na te streven van 3.94 mTAW.
 
 ```{r sas, fig.cap = "Situering van het KGO, de Ringvaart in Brugge, de Damse Vaart (DV), het Boudewijnkanaal (BZ) en het Kanaal Plassendale-Nieuwpoort (PN). De locatie van de spuiconstructie ‘Sas Slijkens’ is rood omcirkeld (rechts onderaan).", fig.show = "hold", out.width = "50%", fig.align = "center"}
 include_graphics(path = "./media/sas_slijkens.png")
@@ -46,7 +46,7 @@ De Blankenbergse Vaart en de Noordede zijn verbonden met elkaar en hebben een mi
 
 ### Conductiviteitsmetingen
 
-Conductiviteitsmetingen werden uitgevoerd met CTD Divers (SWS Technology) en/of ‘HOBO U24 Fresh Water Conductivity Data Logger’. Aangezien zout water een hogere densiteit heeft, en dus zwaarder is dan zoet water, werden de divers in een metalen kooi een tiental centimeter boven de bodem bevestigd (Figuur 5). CTD-divers werden geplaatst op deze locaties: ([link](https://inbo.github.io/as-loc/) en Fig. \@ref(fig:mapctdall)). Op basis van debietsgegevens (afkomstig van het Hydrologisch Informatie Centrum) kon de relatie tussen afvoer en conductiviteit opgevolgd worden.
+Conductiviteitsmetingen werden uitgevoerd met CTD Divers (SWS Technology) en/of ‘HOBO U24 Fresh Water Conductivity Data Logger’. Aangezien zout water een hogere densiteit heeft, en dus zwaarder is dan zoet water, werden de divers in een metalen kooi een tiental centimeter boven de bodem bevestigd. CTD-divers werden geplaatst op deze locaties: ([link](https://inbo.github.io/as-loc/) en Fig. \@ref(fig:mapctdall)). Op basis van debietsgegevens (afkomstig van het Hydrologisch Informatie Centrum) kon de relatie tussen afvoer en conductiviteit opgevolgd worden.
 
 ```{r CTD, fig.cap = "Monitoringsconstructie voor het opvolgen van de  conductiviteit (links) met behulp van HOBO U24 Fresh Water Conductivity Data Logger.", fig.show = "hold", out.width = "50%", fig.align = "default"}
 include_graphics(path = c("./media/CTD1.jpg","./media/CTD2.jpg"))
@@ -82,7 +82,7 @@ Het eerste conductiviteitsmeetpunt in het KGO bevond zich net stroomopwaarts van
 
 #### Leopoldkanaal en Afleidingskanaal van de Leie
 
-De conductiviteitsmeetpunten liggen parallel naast elkaar in het Leopoldkanaal en het Afleidingskanaal van de Leie (Fig. \@ref(fig:mapctdakllk)). Het eerste meetpunt bevond zich net stroomopwaarts van het uitwateringscomplex van Zeebrugge ter hoogte van de spoorwegbrug. Het tweede meetpunt lag ter hoogte van de N376-brug in Ramskapelle en het derde meetpunt was gelegen aan de Middelburgsesteenweg in Moerkerke. Deze drie meetpunten bevonden zich respectievelijk 1.5, 5.5 en 13.0 km stroomopwaarts het uitwateringscomplex van Zeebrugge. De grenswaarden van 2.80 mS/cm en 0.87 mS/cm werden, in samenspraak met DVW, vastgelegd op basis van een data-analyse van de voorafgaande nulmeting waar de geleidbaarheid in beide kanalen permanent werd gemonitord in Ramskapelle tussen 16 mei 2013 en 3 februari 2014. Tijdens deze nulmeting werd een gemiddelde geleidbaarheid gemeten van 1.78 mS/cm in het LK en 0.76 mS/cm in het AKL. Voor de vastlegging van de grenswaarden werd er een veiligheidsmarge van 10 % ingebouwd waardoor de grenswaarden op respectievelijk 0.87 mS/cm voor AKL en 2.80 mS/cm voor het LK bepaald werden (m.a.w. tijdens de nulmetingen werd in 10 % van de metingen een geleidbaarheid hoger dan 2.80 µS/cm en 0.87 µS/cm opgemeten respectievelijk in het LK en het AKL).
+De conductiviteitsmeetpunten liggen parallel naast elkaar in het Leopoldkanaal en het Afleidingskanaal van de Leie (Fig. \@ref(fig:mapctdakllk)). Het eerste meetpunt bevond zich net stroomopwaarts van het uitwateringscomplex van Zeebrugge ter hoogte van de spoorwegbrug. Het tweede meetpunt lag ter hoogte van de N376-brug in Ramskapelle en het derde meetpunt was gelegen aan de Middelburgsesteenweg in Moerkerke. Deze drie meetpunten bevonden zich respectievelijk 1.5, 5.5 en 13.0 km stroomopwaarts het uitwateringscomplex van Zeebrugge. De grenswaarden van 2.80 mS/cm en 0.87 mS/cm werden, in samenspraak met DVW, vastgelegd op basis van een data-analyse van de voorafgaande nulmeting waar de geleidbaarheid in beide kanalen permanent werd gemonitord in Ramskapelle tussen 16 mei 2013 en 3 februari 2014 . Tijdens deze nulmeting werd een gemiddelde geleidbaarheid gemeten van 1.78 mS/cm in het LK en 0.76 mS/cm in het AKL. Voor de vastlegging van de grenswaarden werd er een veiligheidsmarge van 10 % ingebouwd waardoor de grenswaarden op respectievelijk 0.87 mS/cm voor AKL en 2.80 mS/cm voor het LK bepaald werden (m.a.w. tijdens de nulmetingen werd in 10 % van de metingen een geleidbaarheid hoger dan 2.80 µS/cm en 0.87 µS/cm opgemeten respectievelijk in het LK en het AKL).
 
 #### Noordede
 
@@ -90,7 +90,7 @@ Op de Noordede wordt de conductiviteit gemeten aan Maertensas, de Blauwe Sluis e
 
 ### Overzicht aangepast spuibeheer
 
-In principe wordt er aangepast gespuid in functie van glasaalmigratie tussen 1 maart en 15 mei 2025 op de Ijzer, het Kanaal Gent-Oostende, het Leopoldkanaal, het Afleidingskanaal van de Leie en de Noordede. In praktijk kan en wordt er veel minder aangepast gespuid.
+Vanaf 2016 werd aangepast spuibeheer toegepast. In principe wordt er aangepast gespuid in functie van glasaalmigratie tussen 1 maart en 15 mei 2025 op de Ijzer, het Kanaal Gent-Oostende, het Leopoldkanaal, het Afleidingskanaal van de Leie en de Noordede. In praktijk kan en wordt er veel minder aangepast gespuid.
 
 Er is een groot verschil in toepassing van het alternatief spuibeheer per waterloop. Dit heeft o.a. te maken met het feit dat de verschillende waterlopen een verschillend streefpeil (mTAW) hebben waardoor ook het tijdsvenster voor het toepassen van alternatief spuibeheer verschillend is. Een andere reden is dat bepaalde belangrijke uitwateringsconstructies zoals aan de Ijzer (Ganzepoot) permanent bemand zijn door binnenvaartbegeleiders die het beheer ook buiten de normale kantooruren kunnen toepassen (inclusief ’s nachts), dit in tegenstelling tot de uitwateringsconstructies van het AKL en het LK. In 2021 werd geprobeerd om het aangepast spuibeheer in het LK op te krikken door de schuiven ook met afgaand tij open te laten staan. Via deze beheermaatregel kon er twee maal per 24 u aangepast gespuid worden. Dit veroorzaakte al snel hogere zoutwaarden waardoor het alternatief beheer tijdelijk moest stilgelegd worden. Naderhand werd het aangepast spuibeheer hervat volgens het oude protocol. Ook in 2025 werd het oude protocol gevolgd.
 
@@ -104,19 +104,19 @@ De berekening van het gemiddeld aantal intrekkende glasalen per AS event gebeurd
 
 Door de beperkte data en grote onzekerheden mbt het aantal glasaal dat zich aanmeldt thv de gesloten spuien (zowel wat betreft het verschil tussen de jaren alsook de schommelingen binnen 1 migratieseizoen), laten de resultaten van de studies van de Ijzer, LK, AKL, KGO en NE niet toe om een meer geavanceerde inschatting te maken op basis van variabelen zoals:
 
--   Het aantal geopende binnenschuiven
+- Het aantal geopende binnenschuiven
 
--   Het aantal geopende buitenschuiven
+- Het aantal geopende buitenschuiven
 
--   De opening van de schuiven
+- De opening van de schuiven
 
--   De duur van het AS event
+- De duur van het AS event
 
--   Het debiet
+- Het debiet
 
--   Het waterpeil
+- Het waterpeil
 
--   De watertemperatuur
+- De watertemperatuur
 
 *De meest recente studie van de Ijzer [@mouton2013] was relatief uitgebreid en beschouwde meerdere variabelen maar concludeerde ook hier dat de hoeveelheid glasalen die zich aanmeldt te variabel is om de hoeveelheid glasalen die passeert eenduidig in te schatten. Het belang van het aantal dieren voor de schuiven kwam ook tot uiting bij de analyse van het effect dat het aantal open schuiven heeft: Op het eerste zicht bleek er geen effect te zijn van het aantal open schuiven, maar wanneer een onderscheid werd gemaakt tussen AS events met een grote versus kleine densiteit aan glasaal, bleek dat meer schuiven een significant effect had op het aantal glasalen dat passeert. Een meer informatief model zou daarom ofwel het aandeel glasalen dat succesvol passeert als respons moeten gebruiken of het aantal dieren voor de sluis meenemen als interactiefactor. De benodigde data is daarvoor echter niet voorhanden, noch is er een model beschikbaar dat inschat wat het aantal dieren zou zijn dat zich aanmeldt voor de schuiven op basis van beschikbare omgevingsdata zoals windrichting, neerslag en debiet. Voor het gemiddeld aantal glasaal per event werd gebruik gemaakt van het gemiddelde van de bemonsteringen in 2010 (1 schuif open op 10 cm, lineair geëxtrapoleerd naar 2 schuiven open op 20 cm) [@mouton2010] en 2013 (gemiddeld aantal bij 2 schuiven open op 20 cm) [@mouton2013].*
 

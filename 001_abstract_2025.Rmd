@@ -2,6 +2,8 @@
 
 # English abstract {.unnumbered}
 
+<!-- description: start -->
+
 The European eel (*Anguilla anguilla L.*) has been facing a sharp population decline in Europe for decades and is now among the most endangered fish species on the continent. One of the main bottlenecks for the population is the limited upstream migration of glass eels. In Flanders, the Yser estuary in Nieuwpoort, the "Sas Slijkens" lock complex at the mouth of the Ghent-Ostend Canal (KGO), and the discharge complex in Zeebrugge (mouth of the Leie Diversion Canal, AKL, and the Leopold Canal, LK) form crucial entry routes for glass eels.
 
 Previous research analysed glass eel migration and evaluated potential mitigating measures at sluice structures in the Ganzepoot (Yser estuary), Sas Slijkens (KGO), and the Zeebrugge discharge complex. Leaving sluice gates ajar during high tide proved to be an effective and cost-efficient method to improve upstream migration without the risk of salinisation of the polders due to seawater intrusion.
@@ -17,5 +19,7 @@ In the Ghent-Ostend Canal (KGO) and the Leopold Canal (LK), the adjusted tidal b
 Generally, the salt lenses could be quickly and easily flushed out to sea during this period. However, the early cessation of management and the resulting estimated decline to 315,794 glass eels in 2025 was necessary because salt intrusion became critical early on due to the dry spring. This highlights the vulnerability of the management during drought periods and emphasises the importance of effective monitoring and swift action.
 
 In addition to continuing the monitoring, it is advised to conduct a more detailed analysis that allows for the optimization of the moments, frequency, and duration of the adjusted tidal barrier management in function of both the control of salt intrusion and the promotion of upstream fish migration.
+
+<!-- description: end -->
 
 \eenglish
