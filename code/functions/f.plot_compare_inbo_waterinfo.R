@@ -5,7 +5,7 @@ plot_compare_inbo_waterinfo<-function(loc.inbo,loc.waterinfo,date.min,date.max,c
   
   data=rbind(inbo,waterinfo) %>% dplyr::filter(date>=date.min & date<=date.max)
   
-  os.plot<-os[which(os$site=="KGO" & os$jaar==2025),]
+  os.plot<-os[which(os$site==canal & os$jaar==2025),]
   
   y_min <- min(data$value, na.rm = TRUE)
   y_max <- max(data$value, na.rm = TRUE)
