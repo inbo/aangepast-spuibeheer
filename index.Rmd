@@ -1,6 +1,7 @@
 ---
 title: Opvolging van de zoutintrusie in de Ijzer, het kanaal Gent-Oostende, het Leopoldkanaal, het afleidingskanaal van de Leie en de Noordede
 shorttitle: aangepast-spuibeheer
+shortauthor: Bruneel et al.
 subtitle: Aangepast spuibeheer van 2022 tot 2025 in functie van glasaalmigratie
 version: 1.0.0
 license: CC-BY-4.0
@@ -111,6 +112,7 @@ floatbarrier: subsubsection
 lof: TRUE
 lot: TRUE
 keywords: "aangepast spuibeheer; glasaal; conductiviteit; debiet; migratie"
+cover_description: "Spuibeheer in de Ganzepoot (Stijn Bruneel) en een glasaal op het droge (David Buysse)"
 community: "inbo"
 publisher: INBO
 publication_type: publication-report
