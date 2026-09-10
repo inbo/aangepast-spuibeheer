@@ -6,6 +6,7 @@ AKLLK2022 <- clean_AKLLK("./data/spuibeheer/extern/verwerkt_in_excel/os_AKL&LK_2
 AKLLK2023 <- clean_AKLLK("./data/spuibeheer/extern/verwerkt_in_excel/os_AKL&LK_2023.xlsx")
 AKLLK2024 <- clean_AKLLK("./data/spuibeheer/extern/verwerkt_in_excel/os_AKL&LK_2024.xlsx")
 AKLLK2025 <- clean_AKLLK("./data/spuibeheer/extern/verwerkt_in_excel/os_AKL&LK_2025.xlsx")
+AKLLK2026 <- clean_AKLLK("./data/spuibeheer/extern/verwerkt_in_excel/os_AKL&LK_2026.xlsx")
 
 Ijzer2020 <- clean_ijzer_and_va(file = "./data/spuibeheer/extern/verwerkt_in_excel/os_Ijzer_2020.xlsx",
                                 skip = 7,
@@ -32,6 +33,12 @@ Ijzer2024 <- clean_ijzer_and_va(file = "./data/spuibeheer/extern/verwerkt_in_exc
                                 opmerking = 14,
                                 site = "Ijzer")
 Ijzer2025 <- clean_ijzer_and_va(file = "./data/spuibeheer/extern/verwerkt_in_excel/os_Ijzer_2025.xlsx",
+                                skip = 7,
+                                datum = 1,
+                                tijd = 2,
+                                opmerking = 14,
+                                site = "Ijzer")
+Ijzer2026 <- clean_ijzer_and_va(file = "./data/spuibeheer/extern/verwerkt_in_excel/os_Ijzer_2026.xlsx",
                                 skip = 7,
                                 datum = 1,
                                 tijd = 2,
