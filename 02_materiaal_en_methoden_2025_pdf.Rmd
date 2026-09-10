@@ -8,6 +8,7 @@ knitr::opts_chunk$set(fig.width=10, fig.height=15)
 source("./code/not_functions/libraries.R")
 source("./code/functions/f.read_excel_allsheets.R")
 source("./code/functions/f.static.map.R")
+output="pdf"
 ```
 
 ## Studiegebied
@@ -16,7 +17,7 @@ source("./code/functions/f.static.map.R")
 
 Glasaalmigratie werd bestudeerd aan de monding van de 76 km lange Ijzer, een bevaarbare rivier in zuidwest Vlaanderen (Fig. \@ref(fig:ganzepoot)) met een debiet dat in 2025 varieerde tussen -10.79 m³/s en 50.03 m³/s (gemiddeld 5.54 m³/s). Het afvoerdebiet (hoge resolutie / waterinfo.be) van de Ijzer is beschikbaar van meetstation Keiem (ca. 4.5 km stroomopwaarts van de spuisluizen). Het Ijzerbekken heeft een oppervlakte van 1101 km² en bevindt zich voor 33 % in Frankrijk. Aan de Ijzermonding komen zes verschillende waterlopen samen in een kunstmatig bekken, de Ganzepoot, op ca. 4 km van de zee (Fig. \@ref(fig:ganzepoot)). Elke waterloop wordt afgesloten door drie tot acht spuistuwen om de instroom van zout water te vermijden bij hoogwater. Op die manier wordt de verzilting van de achterliggende landbouwgronden tegengegaan, het hinterland beschermd tegen overstromingen en zijn sommige waterlopen bevaarbaar. Bij laag tij worden de spuien geopend om overtollig polderwater af te voeren en deze worden opnieuw gesloten wanneer het zeewaterniveau het peil van de waterloop stroomopwaarts van het spuicomplex benadert. Het volume van de zoetwateruitstroom hangt af van de buffercapaciteit nodig om overstromingen te vermijden op basis van de voorspelde watertoevoer verder stroomopwaarts van het spuicomplex. Verschillende zoetwatervolumes worden dus gespuid ter hoogte van de zes riviermondingen in functie van de (voorspelde) neerslag.
 
-```{r ganzepoot, fig.cap = "Ligging van de spuiconstructies aan de Ganzepoot in de Ijzermonding", fig.show = "hold", out.width = "50%", fig.align = "center"}
+```{r ganzepoot, fig.cap = "Ligging van de spuiconstructies aan de Ganzepoot in de Ijzermonding", fig.show = "hold", out.width = "100%", fig.align = "center"}
 include_graphics(path = "./media/ganzepoot.png")
 ```
 
@@ -24,7 +25,7 @@ include_graphics(path = "./media/ganzepoot.png")
 
 Het Kanaal Gent-Brugge wordt samen met het Kanaal Brugge-Oostende aangeduid als KGO. In Brugge staat het Kanaal Brugge-Oostende in verbinding met het Kanaal Gent-Brugge, de Damse Vaart en het Boudewijnkanaal van Brugge naar Zeebrugge. Tussen Oudenburg en Oostende sluit het Kanaal Brugge-Oostende aan met het Kanaal Plassendale-Nieuwpoort. Het KGO bevindt zich deels in het bekken van de Brugse Polders en deels in het bekken van de Gentse kanalen. ’Sas Slijkens’ is de benaming voor de sluizen of sassen die het Kanaal Brugge-Oostende met de voorhaven van Oostende en de Noordzee verbinden (Fig. \@ref(fig:sas)). Het Sas Slijkens bezit twee spuisluizen met dubbele schuiven van ongeveer 4 m breed. Er zijn tevens vier spuikokers en een gronddam aanwezig. Debietmetingen in het KGO tussen Brugge en Oostende werden tot in 2020 gemeten en geregistreerd in Varsenare (Bron: HIC, Hydrologisch Informatie Centrum). Vanaf 2021 wordt het debiet gemeten in Oostkamp. Het gemiddelde debiet in Oostkamp in 2025 was 8.56 m³/s, terwijl het debiet varieerde tussen -9.42 m³/s en 38.57 m³/s. Op het kanaal wordt in functie van de binnenscheepvaart getracht een constant peil na te streven van 3.94 mTAW.
 
-```{r sas, fig.cap = "Situering van het KGO, de Ringvaart in Brugge, de Damse Vaart (DV), het Boudewijnkanaal (BZ) en het Kanaal Plassendale-Nieuwpoort (PN). De locatie van de spuiconstructie ‘Sas Slijkens’ is rood omcirkeld (rechts onderaan).", fig.show = "hold", out.width = "50%", fig.align = "center"}
+```{r sas, fig.cap = "Situering van het KGO, de Ringvaart in Brugge, de Damse Vaart (DV), het Boudewijnkanaal (BZ) en het Kanaal Plassendale-Nieuwpoort (PN). De locatie van de spuiconstructie ‘Sas Slijkens’ is rood omcirkeld (rechts onderaan).", fig.show = "hold", out.width = "100%", fig.align = "center"}
 include_graphics(path = "./media/sas_slijkens.png")
 ```
 
@@ -34,7 +35,7 @@ Het Leopoldkanaal (LK) en het Afleidingskanaal van de Leie (AKL, ook Schipdonkka
 
 Steendam et al. (2019, intern rapport) stelden in het rapport ‘Opvolging van de palingstand in het Leopoldkanaal als evaluatie van het aangepast spuibeheerbeheer in functie van een verbeterde glasaalmigratie (2018-2019)’ dat de kansen om de palingdensiteit in het LK significanter op te krikken sterk onderbenut bleven omdat het aangepast spuibeheerbeheer in Zeebrugge (LK en AKL) veel beperkter werd toegepast in vergelijking met de andere waterlopen onder beheer van DVW (Kanaal Gent-Oostende, Ijzer). Daarom werd in 2021 door DVW een poging gedaan om het aangepast spuibeheer in het LK op te krikken door de schuiven ook met afgaand tij open te laten staan. Via deze beheermaatregel kon er twee maal per 24 u aangepast gespuid worden. Er werd voor het eerst glasaal binnen gelaten in het LK op 3 maart. De schuiven stonden vanaf 3 maart tot en met 9 maart doorlopend open. Dit veroorzaakte hoge zoutwaarden waardoor het alternatief spuibeheer vanaf 10 maart tot en met 18 maart tijdelijk stilgelegd werd. Vanaf 19 maart werden de schuiven enkel nog overdag geopend – net zoals de voorbijgaande jaren. In 2022, 2023, 2024 en 2025 werd er terug gespuid volgens de oude manier met enkel de schotten open overdag.
 
-```{r AKLLK, fig.cap = "Situering van het Afleidingskanaal van de Leie (AKL) en het Leopoldkanaal (LK). Rood omcirkeld is de spuiconstructie van deze kanalen in Zeebrugge.", fig.show = "hold", out.width = "50%", fig.align = "center"}
+```{r AKLLK, fig.cap = "Situering van het Afleidingskanaal van de Leie (AKL) en het Leopoldkanaal (LK). Rood omcirkeld is de spuiconstructie van deze kanalen in Zeebrugge.", fig.show = "hold", out.width = "100%", fig.align = "center"}
 include_graphics(path = "./media/AKL_LK.png")
 ```
 
@@ -50,6 +51,17 @@ Conductiviteitsmetingen werden uitgevoerd met CTD Divers (SWS Technology) en/of 
 
 ```{r CTD, fig.cap = "Monitoringsconstructie voor het opvolgen van de  conductiviteit (links) met behulp van HOBO U24 Fresh Water Conductivity Data Logger.", fig.show = "hold", out.width = "50%", fig.align = "default"}
 include_graphics(path = c("./media/CTD1.jpg","./media/CTD2.jpg"))
+```
+
+```{r}
+if (output=="html"){
+  source('./code/functions/f.map.R')
+  file<-read.csv("./data/metadata/coordinaten_ctd.csv",sep=";")
+  file[c('X', 'Y')] <- as.numeric(str_split_fixed(file$X..Y, ',', 2))
+  file$X..Y<-NULL
+  map_object <- f.map(file,"Y","X",crs="+init=epsg:4326","site","loc",plot=TRUE)
+  map_object
+}
 ```
 
 ```{r mapctdall, message=FALSE, warning=FALSE, fig.cap="Locaties van de ctd-divers"}

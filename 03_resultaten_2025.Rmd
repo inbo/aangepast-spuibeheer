@@ -7,13 +7,13 @@ knitr::opts_chunk$set(fig.width=10, fig.height=15)
 ```{r include=FALSE}
 source("./code/not_functions/libraries.R")
 source("./code/functions/f.read_excel_allsheets.R")
+output="pdf"
 ```
 
 ## Aangepast spuibeheer ter hoogte van de zout-zoetovergangen aan de Belgische kust en ingeschat effect op de intrek van glasaal
 
 ```{r warning=FALSE, message=FALSE, include=FALSE}
 RUN=FALSE
-output="pdf"
 if (RUN==TRUE){
   source("./code/not_functions/combine_all.R")
 }

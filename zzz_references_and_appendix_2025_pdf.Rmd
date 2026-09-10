@@ -4,6 +4,12 @@
 INBOmd::references(appendix = TRUE)
 ```
 
+```{r include=FALSE}
+source("./code/not_functions/libraries.R")
+source("./code/functions/f.read_excel_allsheets.R")
+output="pdf"
+```
+
 # Appendix
 
 ## Instructies tijdelijk stopzetten aangepast spuibeheer
@@ -31,7 +37,6 @@ source("./code/functions/f.plot_compare_inbo_waterinfo.R")
 ```
 
 ```{r}
-output="html"
 if (output=="html"){
   source('./code/functions/f.map.R')
   file<-read.csv("./data/metadata/coordinaten_ctd.csv",sep=";")
@@ -509,3 +514,6 @@ ctd.app$Ijzer
 ```{r}
 ctd.app$NE
 ```
+
+::: {#refs}
+:::
