@@ -112,6 +112,8 @@ floatbarrier: subsubsection
 lof: TRUE
 lot: TRUE
 keywords: "aangepast spuibeheer; glasaal; conductiviteit; debiet; migratie"
+cover_photo: cover146906527
+cover: media/cover146906527.pdf
 cover_description: "Spuibeheer in de Ganzepoot (Stijn Bruneel) en een glasaal op het droge (David Buysse)"
 community: "inbo"
 publisher: INBO
