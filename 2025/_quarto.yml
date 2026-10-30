@@ -1,0 +1,189 @@
+project:
+  type: book
+  preview:
+    port: 4201
+    browser: true
+  render:
+    - "*.md"
+    - "*.qmd"
+    - "!LICENSE.md" #ignore LICENSE.md
+    - "!README.md" #ignore README.md
+  output-dir: output
+  post-render: ../_extensions/flandersqmd-book/filters/post_render.R
+
+execute:
+  echo: false
+  warning: false
+  message: false
+  freeze: auto
+
+lang: nl-BE # en-GB, fr-FR
+
+bibliography: references.bib
+
+format:
+  flandersqmd-book-html: default
+  flandersqmd-book-pdf: default
+
+flandersqmd:
+  license: CC-BY-4.0
+  entity: INBO
+  level: 2
+  title: Opvolging van de zoutintrusie in de Ijzer, het kanaal Gent-Oostende, het Leopoldkanaal, het afleidingskanaal van de Leie en de Noordede
+  subtitle: Aangepast spuibeheer van 2022 tot 2026 in functie van glasaalmigratie
+  shorttitle: aangepast-spuibeheer
+  author:
+  - name:
+      given: "Stijn"
+      family: "Bruneel"
+    email: "stijn.bruneel@inbo.be"
+    corresponding: true
+    orcid: "0000-0002-1825-0097"
+    affiliation: "Instituut voor Natuur- en Bosonderzoek (INBO)"
+  - name:
+      given: "Isaac"
+      family: "Vermeulen"
+    email: "isaac.vermeulen@inbo.be"
+    orcid: "0009-0001-3035-9810"
+    affiliation: "Instituut voor Natuur- en Bosonderzoek (INBO)"
+  - name:
+      given: "David"
+      family: "Buysse"
+    email: "david.buysse@inbo.be"
+    orcid: "0000-0002-4437-5678"
+    affiliation: "Instituut voor Natuur- en Bosonderzoek (INBO)"
+  - name:
+      given: "Nico"
+      family: "De Maerteleire"
+    email: "nico.demaerteleire@inbo.be"
+    orcid: "0009-0004-9436-8937"
+    affiliation: "Instituut voor Natuur- en Bosonderzoek (INBO)"
+  - name:
+      given: "Simon"
+      family: "Plaetinck"
+    email: "simon.plaetinck@inbo.be"
+    orcid: "0009-0002-5970-1517"
+    affiliation: "Instituut voor Natuur- en Bosonderzoek (INBO)"
+  - name:
+      given: "Mylan"
+      family: "Lyssens"
+    email: "mylan.lyssens@inbo.be"
+    orcid: "0009-0004-0438-8097"
+    affiliation: "Instituut voor Natuur- en Bosonderzoek (INBO)"
+  - name:
+      given: "Johan"
+      family: "Coeck"
+    email: "johan.coeck@inbo.be"
+    orcid: "0000-0003-2732-7428"
+    affiliation: "Instituut voor Natuur- en Bosonderzoek (INBO)"
+  reviewer:
+    - name:
+        given: First
+        family: Reviewer
+      email: reviewer@vlaanderen.be
+      orcid: 0000-0002-1825-0097
+      affiliation:
+        - Government of Flanders
+  rightsholder:
+    - name:
+        given: Research Institute for Nature and Forest (INBO)
+      email: info@inbo.be
+      ror: https://ror.org/00j54wy13
+  funder:
+    - name:
+        given: Agentschap voor Natuur en Bos
+      email: info@anb.be
+      ror: https://ror.org/00j54wy13
+  community: inbo
+  year: 2026
+  reportnr: 3.14
+  cover: ../media/cover146906527.pdf
+  publication_type: publication-report
+  publisher: INBO
+  keywords: Flandersqmd
+  coverphoto: 
+  coverdescription: Spuibeheer in de Ganzepoot (Stijn Bruneel) en een glasaal op het droge (David Buysse)
+  ordernr: optional order number
+  depotnr: optional depot number
+  watermark: VERSLAG
+  linenr: false
+  public_report: true
+  colophon: true
+  client:
+    - ANB
+    - VAC Brussel ‐ Herman Teirlinck
+    - Havenlaan 88 bus 73
+    - 1000 Brussel
+  clienturl: https://natuurenbos.be/
+  clientlogo: ../media/ANB_logo.png
+  # cooperation:
+  #   - INBO Brussel
+  #   - VAC Brussel ‐ Herman Teirlinck
+  #   - Havenlaan 88 bus 73
+  #   - 1000 Brussel
+  # cooperationurl: https://www.vlaanderen.be/inbo/en-gb
+  # cooperationlogo: ../media/logo.jpg
+  floatbarrier: section
+
+book:
+  downloads: pdf
+  open-graph: true
+  sidebar:
+    logo: ../media/cover.png
+  body-footer: '{{< footer >}}'
+  chapters:
+    - index.md
+    - 01_inleiding_2025.qmd
+    # - samenvatting.md
+    # - resume.md
+    # - recommendations.qmd
+    # - bespreking.qmd
+    # - part: Typography
+    #   chapters:
+    #     - headings.qmd
+    #     - fonts.qmd
+    #     - lists.qmd
+    #     - boxes.qmd
+    # - part: Other elements
+    #   chapters:
+    #     - crossreference.md
+    #     - static-figure.md
+    #     - static-table.md
+    #     - equations.md
+    #     - citations.md
+    #     - language.md
+    # - part: Code generated content
+    #   chapters:
+    #     - code.qmd
+    #     - code-figure.qmd
+    #     - code-table.qmd
+    - references.md
+  #appendices:
+    # - appendix-sop-palinggoot-vrijwilligers.qmd
+    # - appendix-sop-palinggoot-inbo.qmd
+    # - appendix-sop-kwabaal-pam.qmd
+    # - appendix-sop-beekforel-eitjes.qmd
+  navbar:
+    left:
+      - text: Cover
+        file: index.md
+      # - text: Typography
+      #   file: headings.qmd
+      # - text: Other elements
+      #   file: crossreference.md
+      # - text: Code
+      #   file: code.qmd
+      - text: Appendices
+        # file: appendix-sop-palinggoot-vrijwilligers.qmd
+    right:
+      - icon: mastodon
+        href: https://mastodon.online/&#64;inbo
+      - icon: facebook
+        href: https://www.facebook.com/INBOVlaanderen/
+      - icon: github
+        menu:
+          - text: Source Code
+            url:  https://github.com/inbo
+          - text: Report a Bug
+            url:  https://github.com/inbo
+    pinned: true
